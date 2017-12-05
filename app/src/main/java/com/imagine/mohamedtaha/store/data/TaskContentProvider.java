@@ -68,7 +68,7 @@ public class TaskContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-       final SQLiteDatabase database = mTaskDbHelper.getReadableDatabase();
+        SQLiteDatabase database = mTaskDbHelper.getReadableDatabase();
         int match = sUriMAtcher.match(uri);
         Cursor returnCursor;
         switch (match){
@@ -79,11 +79,13 @@ public class TaskContentProvider extends ContentProvider {
             case CATEGORY_WITH_ID:
                 //using selection and selectionArgs
                 //URI: content://<AUTHORITY>/tasks/#
-                String id = uri.getPathSegments().get(1);
+             //   String id = uri.getPathSegments().get(1);
                 //Selection id the _ID column = ? the selection args = the row ID from the URI
-                String mSelection = "_id?";
-                String [] mSelectionArgs = new String[]{id};
-                returnCursor = database.query(TaskEntry.TABLE_CATEGORIES,projection,mSelection,mSelectionArgs,
+             //   String mSelection = "_id?";
+                selection = TaskEntry._ID + "=?";
+                selectionArgs =new String[]{String.valueOf(ContentUris.parseId(uri))};
+              //  String [] mSelectionArgs = new String[]{id};
+                returnCursor = database.query(TaskEntry.TABLE_CATEGORIES,projection,selection,selectionArgs,
                         null,null,sortOrder);
                 break;
             default:
@@ -112,7 +114,7 @@ public class TaskContentProvider extends ContentProvider {
                 long id = database.insert(TaskEntry.TABLE_CATEGORIES,null,values);
                 if (id>0){
                     //success
-                    returnUri = ContentUris.withAppendedId(TaskContract.TaskEntry.CONTENT_URI, id);
+                    returnUri = ContentUris.withAppendedId(TaskEntry.CONTENT_URI, id);
                 }else {
                     throw new android.database.SQLException("Falid toinsert row into " + uri);
                 }
@@ -155,7 +157,54 @@ public class TaskContentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+       final int match = sUriMAtcher.match(uri);
+        switch (match){
+            case CATEGORY:
+                return updateCategory(uri, values, selection,selectionArgs);
+            case CATEGORY_WITH_ID:
+                selection = TaskEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateCategory(uri,values,selection,selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+
+        }
+    }
+    private int updateCategory(Uri uri,ContentValues contentValues,String selection, String[] selectionArgs){
+        //If the TaskEntry.KE_NAME_CATEGORY key is present,
+        //check that the name value is notnull
+        if (contentValues.containsKey(TaskEntry.KEY_NAME_CATEGORY)){
+            String nameCategory =contentValues.getAsString(TaskEntry.KEY_NAME_CATEGORY);
+            if (nameCategory == null){
+                throw new IllegalArgumentException(" Category reuires a name ");
+            }
+        }
+        //If the @Link Task.KEY_NATURAL_CATEGORY key is present,
+        //check that the gender value is valied.
+        if (contentValues.containsKey(TaskEntry.KEY_NATURAL_CATEGORY)){
+            String naturalCategory = contentValues.getAsString(TaskEntry.KEY_NATURAL_CATEGORY);
+
+        }
+        //If the @Link TaskEntry.KEY_NOTEs key is present,
+        //check that the weight value is valid.
+    //    if (contentValues.)
+
+
+        //If there are no values to update, then don't try to update the database
+        if (contentValues.size() == 0){
+            return 0;
+        }
+        //Otherwise ,get writeable database to update the data
+        SQLiteDatabase database = mTaskDbHelper.getWritableDatabase();
+        //PErform the update on the database and get the number of rows affected
+        int rowsUpdated = database.update(TaskEntry.TABLE_CATEGORIES, contentValues, selection,selectionArgs);
+        //If 1 or more rows were updated ,then notify all listeners that the data at the given URI has changed
+        if (rowsUpdated != 0){
+            getContext().getContentResolver().notifyChange(uri,null);
+        }
+        //Return the number of rows updated
+        return rowsUpdated;
+
     }
 }
 

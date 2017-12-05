@@ -1,5 +1,6 @@
 package com.imagine.mohamedtaha.store;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+                Intent intent = new Intent(MainActivity.this,EditDailyMovements.class);
+                startActivity(intent);    }
         });
+
+
     }
 
     @Override
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.add_data){
+            Intent intent = new Intent(MainActivity.this,ActivityForIncludeFragments.class);
+            startActivity(intent);
+
+        }if (id == R.id.add_stocking_warehouse){
+            Intent intent = new Intent(MainActivity.this,StockingWarehouse.class);
+            startActivity(intent);
+
         }
 
         return super.onOptionsItemSelected(item);
