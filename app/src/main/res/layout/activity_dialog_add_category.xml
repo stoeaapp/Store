@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.imagine.mohamedtaha.store.DialogAddCategory">
+    tools:context="com.imagine.mohamedtaha.store.dialog.DialogAddCategory">
     <TextView
         android:id="@+id/TVTitle"
         android:text="@string/title_add_category"

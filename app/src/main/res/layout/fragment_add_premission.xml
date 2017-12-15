@@ -7,17 +7,58 @@
 
     <ListView
         android:id="@+id/listViewAddPermission"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/ListViewAndRecycleView"
+        android:visibility="gone"
         />
+    <RelativeLayout
+        android:id="@+id/empty_view_permission"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/empty_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/emptyview"
+            android:scaleType="centerCrop"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/empty_text_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_image"
+            android:fontFamily="sans-serif-medium"
+            android:text="No text Now "
+            android:paddingTop="16dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/empty_subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_text_first"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:paddingTop="8dp"
+            android:text="@string/empty_view_subtitle_text"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#A2AAB0"/>
+
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_permission"
+        style="@style/FloatingButtonFragment"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_input_add"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarPermission"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabSize="mini"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

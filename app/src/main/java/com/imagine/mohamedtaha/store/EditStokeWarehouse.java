@@ -2,7 +2,9 @@ package com.imagine.mohamedtaha.store;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,14 +15,19 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
 public class EditStokeWarehouse extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private Spinner SPCodeCategory,SPCodeStore;
+    private MaterialBetterSpinner SPCodeCategory,SPCodeStore;
     private EditText ETFisrtBalance,EtNotes;
     private Button addStokeWarehouse;
+    private AdapterView.OnItemSelectedListener onItemSelectedListener;
+
+    ArrayList<String> IDCategory;
 
     String SpinnerCategory,SpinnerStore;
     TaskDbHelper dbHelper;
@@ -41,10 +48,28 @@ public class EditStokeWarehouse extends AppCompatActivity implements AdapterView
 
         dbHelper = new TaskDbHelper(this);
         setContentView(R.layout.edit_stoke_warehouse);
-        SPCodeCategory = (Spinner)findViewById(R.id.SPCodeCategory);
+        SPCodeCategory = (MaterialBetterSpinner) findViewById(R.id.SPCodeCategory);
         SPCodeCategory.setOnItemSelectedListener(this);
+        SPCodeCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(EditStokeWarehouse.this, "YOu Selecd :" + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                SpinnerCategory = parent.getItemAtPosition(position).toString();
+                idSpinnerCategory =parent.getItemIdAtPosition(position+1);
 
-        SPCodeStore = (Spinner)findViewById(R.id.SPCodeStore);
+            }
+        });
+
+        SPCodeStore = (MaterialBetterSpinner) findViewById(R.id.SPCodeStore);
+        SPCodeStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SpinnerStore = parent.getItemAtPosition(position).toString();
+                idSpinnerStore =parent.getItemIdAtPosition(position+1);
+
+            }
+        });
+
         loadSpinnerDataForCategory();
         loadSpinnerDataForStore();
 
@@ -79,26 +104,26 @@ public class EditStokeWarehouse extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
     public void loadSpinnerDataForCategory(){
-        ArrayList<String> IDCategory = dbHelper.getDataForSpinnerCategory();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,IDCategory);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        IDCategory = dbHelper.getDataForSpinnerCategory();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,IDCategory);
+       // arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SPCodeCategory.setAdapter(arrayAdapter);
     }
     public void loadSpinnerDataForStore(){
         ArrayList<String> IDStore = dbHelper.getDataForSpinnerStore();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,IDStore);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,IDStore);
+      //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SPCodeStore.setAdapter(arrayAdapter);
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        SpinnerCategory = parent.getItemAtPosition(position).toString();
-        SpinnerStore = parent.getItemAtPosition(position).toString();
+    //    SpinnerCategory = parent.getItemAtPosition(position).toString();
+     //   SpinnerStore = parent.getItemAtPosition(position).toString();
 
-        idSpinnerCategory =parent.getItemIdAtPosition(position+1);
-        idSpinnerStore =parent.getItemIdAtPosition(position+1);
+     //   idSpinnerCategory =parent.getItemIdAtPosition(position+1);
+     //   idSpinnerStore =parent.getItemIdAtPosition(position+1);
 
 
     }
@@ -116,7 +141,7 @@ public class EditStokeWarehouse extends AppCompatActivity implements AdapterView
             return;
         }
         if (intent == null) {
-            ItemStokeHouse itemStokeHouse = new ItemStokeHouse();
+            ItemsStore itemStokeHouse = new ItemsStore();
             itemStokeHouse.setId_code_category(idSpinnerCategory);
             itemStokeHouse.setId_code_store(idSpinnerStore);
             itemStokeHouse.setFirst_balanse(Integer.valueOf(firstBalance));
@@ -149,29 +174,3 @@ public class EditStokeWarehouse extends AppCompatActivity implements AdapterView
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

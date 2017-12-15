@@ -1,7 +1,6 @@
 package com.imagine.mohamedtaha.store;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +8,9 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 
 public class EditStore extends AppCompatActivity {
@@ -59,6 +58,7 @@ public class EditStore extends AppCompatActivity {
                 showDeleteConfirmationDialog();
 
 
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -102,7 +102,7 @@ public class EditStore extends AppCompatActivity {
 
     }
     public void deleteStore(){
-        String typeStore =ETTypeStore.getText().toString();
+       String typeStore =ETTypeStore.getText().toString();
         String notes = ETNotes.getText().toString();
 
         ItemsStore itemsStoreDelte = new ItemsStore();
@@ -111,6 +111,7 @@ public class EditStore extends AppCompatActivity {
         if (intent != null){
             dbHelper.deleteStore(itemsStoreDelte);
             Toast.makeText(getApplicationContext(), "Deleted Record", Toast.LENGTH_LONG).show();
+            finish();
 
         }else {
             Toast.makeText(getApplicationContext(), "Not Deleted Record", Toast.LENGTH_LONG).show();

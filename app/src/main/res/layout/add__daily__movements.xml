@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.imagine.mohamedtaha.store.Add_DAILY_MOVEMENTS">
+    tools:context="com.imagine.mohamedtaha.store.adapter.Add_DAILY_MOVEMENTS">
 
 </android.support.constraint.ConstraintLayout>

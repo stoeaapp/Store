@@ -52,4 +52,30 @@
         android:layout_marginStart="@dimen/margingRight"
        />
 
+    <Button
+        android:id="@+id/BTAddCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/EtNotes"
+        android:layout_marginTop="@dimen/margingRight"
+        app:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/EtNotes"
+        android:layout_marginEnd="@dimen/margingRight"
+         />
+
+    <Button
+        android:id="@+id/BTDeleteCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BTDelete"
+        android:visibility="gone"
+        app:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@+id/EtNotes"
+        android:layout_marginTop="@dimen/margingRight"
+        app:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/EtNotes"
+        android:layout_marginStart="@dimen/margingRight"/>
+
 </android.support.constraint.ConstraintLayout>

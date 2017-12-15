@@ -13,8 +13,11 @@
         android:text="اسم الصنف"
         android:layout_gravity="right"/>
 
-    <Spinner
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPCodeCategory"
+        android:hint="اسم الصنف"
+        android:textColorHint="#FFFFFF"
+        app:met_floatingLabel = "normal"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,8 +29,12 @@
         android:layout_height="wrap_content"
         android:text="اسم المخزن"
         android:layout_gravity="right"/>
-    <Spinner
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPCodeStore"
+        android:hint="اسم المخزن"
+
+        android:textColorHint="#FFFFFF"
+        app:met_floatingLabel = "normal"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

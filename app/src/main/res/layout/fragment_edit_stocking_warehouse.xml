@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/shape_rectangle"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.imagine.mohamedtaha.store.fragments.EditStockingWarehouseFragment">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/shape_title">
+       <ImageView
+           android:id="@+id/image_titile"
+           android:layout_alignParentTop="true"
+           android:layout_alignParentRight="true"
+           android:layout_marginEnd="16dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/logo_title"/>
+       <TextView
+           android:id="@+id/TVTitleStokeWearhouse"
+           android:layout_toLeftOf="@id/image_titile"
+           android:layout_marginEnd="16dp"
+           android:layout_centerInParent="true"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/add_stoke_titile"
+           android:textSize="20sp"
+           android:textStyle="bold"
+           android:textColor="@color/primary_text"
+           />
+   </RelativeLayout>
+
+       <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/SPCodeCategoryStock"
+        android:hint="@string/name_category"
+           android:textColorHighlight="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#FFFFFF"
+        app:met_floatingLabel = "normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+           android:layout_marginEnd="20dp"
+
+           />
+
+    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+        android:id="@+id/SPCodeStoreStock"
+        android:hint="@string/type_store"
+        android:textColorHint="#FFFFFF"
+        app:met_floatingLabel = "normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
+    <EditText
+        android:id="@+id/ETFirstBalanceStoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/first_balance"
+        android:textColorHint="@color/secondary_text"
+        android:layout_gravity="right"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
+    <EditText
+        android:id="@+id/ETNotesStoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/notes"
+        android:layout_gravity="right"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textColorHint="@color/secondary_text"
+
+
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/BTDeleteStokeWarehouse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/BTDelete"
+        android:visibility="gone"
+        android:layout_weight="1"
+        android:textColor="#212121"
+        android:textSize="25sp"
+        android:background="@drawable/shape_button"/>
+    <Button
+        android:id="@+id/BTAddStokeWarehouse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/BtAdd"
+        android:layout_weight="1"
+        android:textColor="#212121"
+        android:textSize="25sp"
+        android:background="@drawable/shape_button"
+        />
+
+
+</LinearLayout>
+
+</LinearLayout>

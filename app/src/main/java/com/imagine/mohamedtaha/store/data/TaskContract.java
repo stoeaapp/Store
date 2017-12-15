@@ -44,7 +44,7 @@ public class TaskContract {
             protected static final String TABLE_DAILY_MOVEMENTS = "daily_movements";
             protected static final String TABLE_USERS = "users";
 
-            // Since TaskEntry implements the interface "BaseColumns", it has an automatically produced
+            // Since TaskEntry implements the interfaces "BaseColumns", it has an automatically produced
             // "_ID" column in addition to the two below
 
             //Common column names

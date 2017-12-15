@@ -1,38 +1,45 @@
 package com.imagine.mohamedtaha.store.fragments;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.imagine.mohamedtaha.store.AdapterAddPermission;
-import com.imagine.mohamedtaha.store.AdapterAddStore;
-import com.imagine.mohamedtaha.store.ItemsPermission;
-import com.imagine.mohamedtaha.store.ItemsStore;
+import com.imagine.mohamedtaha.store.loaders.LoaderPErmission;
+import com.imagine.mohamedtaha.store.adapter.AdapterAddPermission;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class AddPremissionFragment extends Fragment {
+public class AddPremissionFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>{
     public AddPremissionFragment() {
         // Required empty public constructor
     }
+    public static final String ID_PERMISSION = "id";
+    public static final String NAME_PERMISION = "namePErmission";
+    public static final String NOTES_PERMISSION = "notes";
+    public static final String DIALOG_PERMISSION = "dialogPermission";
 
     FloatingActionButton fab_add_permission;
     ListView mListView;
     AdapterAddPermission adapterAddPermission;
     TaskDbHelper dbHelper;
+    ArrayList<ItemsStore> itemsPermissions = new ArrayList<ItemsStore>();
+    private ProgressBar progressBarPermission;
+    //Identifier for the category dataloader;
+    private static final int PERMISSION_LOADER = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,90 +58,62 @@ public class AddPremissionFragment extends Fragment {
 
         dbHelper = new TaskDbHelper(getActivity());
         mListView = (ListView) view.findViewById(R.id.listViewAddPermission);
+        progressBarPermission =(ProgressBar)view.findViewById(R.id.progressBarPermission);
 
-
-        ArrayList<ItemsPermission> itemsPermissions = dbHelper.getAllItemsPermission();
-        for (int ii = 0; ii < itemsPermissions.size(); ii++) {
-            ItemsPermission itemsPermission = itemsPermissions.get(ii);
-
-
-        }
         adapterAddPermission = new AdapterAddPermission(getContext(), itemsPermissions);
+        View emptyView = view.findViewById(R.id.empty_view_permission);
+        mListView.setEmptyView(emptyView);
         mListView.setAdapter(adapterAddPermission);
-    //    namePremission.setText("Name Permission");
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //   Toast.makeText(getContext(), "Click :"+ position, Toast.LENGTH_SHORT).show();
+                ItemsStore itemSPermision = itemsPermissions.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ID_PERMISSION, itemSPermision.getId());
+                bundle.putString(NAME_PERMISION, itemSPermision.getNamePermission());
+                bundle.putString(NOTES_PERMISSION, itemSPermision.getNotes());
+                // startActivity(intent);
+                //  long id = cursor.getLong(cursor.getColumnIndex(TaskContract.TaskEntry._ID));
+                EditPermissionFragment f = new EditPermissionFragment();
+                f.setArguments(bundle);
+                f.show(getFragmentManager(),DIALOG_PERMISSION);}});
+        //    namePremission.setText("Name Permission");
         fab_add_permission = (FloatingActionButton)view.findViewById(R.id.fab_add_permission);
         fab_add_permission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //  Intent intent = new Intent(getActivity(), EditCategory.class);
-                //    startActivity(intent);
+                new EditPermissionFragment().show(getFragmentManager(),DIALOG_PERMISSION);
 
-
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-                View view1 = getActivity().getLayoutInflater().inflate(R.layout.activity_dialog_add_category,null);
-                final EditText ETNamePermission = (EditText)view1.findViewById(R.id.ETNameCategory);
-                final EditText ETNotes = (EditText)view1.findViewById(R.id.EtNotes);
-
-                Button BTAddOrUpdate = (Button)view1.findViewById(R.id.BTAdd);
-                Button BTDelete = (Button)view1.findViewById(R.id.BTDelete);
-                BTAddOrUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String namePErmission =ETNamePermission.getText().toString();
-                        String notes = ETNotes.getText().toString();
-
-                        if (namePErmission.length() == 0){
-                            Toast.makeText(getContext(), "not should leave field name emputy", Toast.LENGTH_SHORT).show();
-                            return;
-
-                        }
-                        ItemsPermission itemsPermission = new ItemsPermission();
-                        itemsPermission.setNamePermission(namePErmission);
-                        itemsPermission.setNotes(notes);
-                        dbHelper.addPErmission(itemsPermission);
-                        if (itemsPermission == null){
-                            Toast.makeText(getActivity(),"Not save",Toast.LENGTH_LONG).show();
-
-                        }else {
-                            Toast.makeText(getActivity(),"Saved Succeflly",Toast.LENGTH_LONG).show();
-
-                        }
-
-
-                        /*
-                        //new Content values object
-                        ContentValues values = new ContentValues();
-                        values.put(TaskEntry.KEY_TYPE_STORE,typeStore);
-                        values.put(TaskEntry.KEY_NOTES,notes);
-                        values.put(TaskEntry.KEY_DATE,getDateTime());
-
-                        //Insert new category data via a ContentResolver
-                        Uri uri = getActivity().getContentResolver().insert(TaskEntry.CONTENT_URISTORE, values);
-                        if (uri != null){
-                            Toast.makeText(getActivity(), uri.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        */
-                      //  getActivity().finish();
-
-
-                    }
-                });
-                BTDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
-
-
-                    }
-                });
-                mBuilder.setView(view1);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
 
 
             }
         });
         return view;
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Kick off the loader
+        getActivity().getSupportLoaderManager().initLoader(PERMISSION_LOADER, null, this);
+    }
+
+    @Override
+    public Loader<ArrayList<ItemsStore>> onCreateLoader(int id, Bundle args) {
+        return new LoaderPErmission(getContext().getApplicationContext(),itemsPermissions,dbHelper);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<ArrayList<ItemsStore>> loader, ArrayList<ItemsStore> data) {
+        progressBarPermission.setVisibility(View.GONE);
+        mListView.setVisibility(View.VISIBLE);
+        adapterAddPermission.swapData(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<ArrayList<ItemsStore>> loader) {
+        adapterAddPermission.swapData(Collections.<ItemsStore>emptyList());
 
     }
 }

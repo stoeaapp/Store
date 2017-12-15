@@ -1,50 +1,41 @@
 package com.imagine.mohamedtaha.store.fragments;
 
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.content.CursorLoader;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.TextView;
 
 
-import com.imagine.mohamedtaha.store.AdapterAddCategory;
-import com.imagine.mohamedtaha.store.CategoryFileds;
-import com.imagine.mohamedtaha.store.EditCategory;
+import com.imagine.mohamedtaha.store.adapter.AdapterAddCategory;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 
-public class Add_Category_Fragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class Add_Category_Fragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     // TODO: Rename parameter arguments, choose names that match
     FloatingActionButton fabAddCategory;
     RecyclerView mRecycleView;
     AdapterAddCategory adapterAddCategory;
+    private LinearLayoutManager mLayoutManager;
+    View emptView;
 
-    List<CategoryFileds>categoryFildes;
+    List<ItemsStore>categoryFildes;
 
    //Identifier for the category dataloader;
     private static final int CATEGORY_LOADER = 0;
@@ -69,23 +60,32 @@ View view;
         view = inflater.inflate(R.layout.fragment_add__category_, container, false);
         //Set the RecycleView to its corresponding view
         mRecycleView = (RecyclerView) view.findViewById(R.id.recycleViewAddCategory);
+
         //Set the layout for the RecycleView to be a linear layout,which measures and
         //positions items within a RecycleView into a linear list
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+      //  mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mLayoutManager =     new LinearLayoutManager(getActivity());
+        mRecycleView.setLayoutManager(mLayoutManager);
 
+        emptView = view.findViewById(R.id.empty_view_category);
 
-        //Initalize the adapter and attach it to the RecycleView
+                //Initalize the adapter and attach it to the RecycleView
      //  adapterAddCategory = new AdapterAddCategory(getActivity());
 
         adapterAddCategory = new AdapterAddCategory(new AdapterAddCategory.showDetial() {
             @Override
             public void itemShowDetail(Cursor cursor) {
+                /*
               Intent intent = new Intent(getActivity(), EditCategory.class);
                 long id = cursor.getLong(cursor.getColumnIndex(TaskEntry._ID));
 
                 Uri currentCategoryUri = ContentUris.withAppendedId(TaskEntry.CONTENT_URI,id);
                 intent.setData(currentCategoryUri);
-                startActivity(intent);
+                startActivity(intent);*/
+                long id = cursor.getLong(cursor.getColumnIndex(TaskEntry._ID));
+                TestFragment f = TestFragment.newInstance(id);
+                f.show(getFragmentManager(),"dialog");
+
             }
         });
         mRecycleView.setAdapter(adapterAddCategory);
@@ -119,8 +119,9 @@ View view;
         fabAddCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditCategory.class);
-                startActivity(intent);
+                new TestFragment().show(getFragmentManager(),"dialog");
+           //     Intent intent = new Intent(getActivity(), EditCategory.class);
+             //   startActivity(intent);
 
 /*
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
@@ -201,7 +202,13 @@ View view;
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapterAddCategory.swapCursor(data);
+        if (data != null){
+//           emptView.setVisibility(View.VISIBLE);
+            mRecycleView.setVisibility(View.VISIBLE);
+            emptView.setVisibility(View.GONE);
+            adapterAddCategory.swapCursor(data);
+
+        }
 
     }
 
@@ -210,10 +217,6 @@ View view;
         adapterAddCategory.swapCursor(null);
 
     }
-    //get datetime
-    public static String getDateTime(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date=new Date();
-        return dateFormat.format(date);
-    }
+
+
 }

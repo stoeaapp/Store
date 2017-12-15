@@ -23,9 +23,9 @@ public class EditDailyMovements extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_daily_movements);
         dbHelper = new TaskDbHelper(this);
-        SPCodeCategoryDialy = (Spinner)findViewById(R.id.SPCodeCategoryDialy);
-        SPCodeStoreDialy =(Spinner)findViewById(R.id.SPCodeStoreDialy);
-        SPermissionDaily = (Spinner)findViewById(R.id.SPCovertTo);
+       // SPCodeCategoryDialy = (Spinner)findViewById(R.id.SPCodeCategoryDialy);
+       // SPCodeStoreDialy =(Spinner)findViewById(R.id.SPCodeStoreDialy);
+       // SPermissionDaily = (Spinner)findViewById(R.id.SPCovertTo);
 
         ETIncoming = (EditText)findViewById(R.id.ETIncoming);
         ETIssued = (EditText)findViewById(R.id.ETIssued);

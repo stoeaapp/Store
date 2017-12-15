@@ -1,0 +1,223 @@
+package com.imagine.mohamedtaha.store.fragments;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.data.ItemsStore;
+import com.imagine.mohamedtaha.store.data.TaskDbHelper;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import java.util.ArrayList;
+
+import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_CATEGORY;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_STORE;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.FIRST_BALANCE;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.ID_STOKE;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
+
+public class EditStockingWarehouseFragment extends DialogFragment implements DialogInterface.OnClickListener {
+
+
+    private MaterialBetterSpinner SPCodeCategory,SPCodeStore;
+    private EditText ETFisrtBalance,EtNotesStoke;
+    private Button BTAddStokeWarehouse,BTDeleteStokeWarehouse;
+    private TextView TVTitleStokeWearhouse;
+    AlertDialog dialogStokeWearehouse;
+    AlertDialog dialogDeleteStokeWearhouse;
+    String SpinnerCategory,SpinnerStore;
+    TaskDbHelper dbHelperStokeWearehouse;
+    Bundle intentStokeWearehouse ;
+    long idSpinnerCategory,idSpinnerStore;
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
+
+        View viewStockWarehouse = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_stocking_warehouse,null);
+        TVTitleStokeWearhouse = (TextView)viewStockWarehouse.findViewById(R.id.TVTitleStokeWearhouse);
+        SPCodeCategory = (MaterialBetterSpinner)viewStockWarehouse.findViewById(R.id.SPCodeCategoryStock);
+        SPCodeStore = (MaterialBetterSpinner)viewStockWarehouse.findViewById(R.id.SPCodeStoreStock);
+        ETFisrtBalance = (EditText)viewStockWarehouse.findViewById(R.id.ETFirstBalanceStoke);
+        EtNotesStoke = (EditText)viewStockWarehouse.findViewById(R.id.ETNotesStoke);
+        BTAddStokeWarehouse =(Button)viewStockWarehouse.findViewById(R.id.BTAddStokeWarehouse);
+        BTDeleteStokeWarehouse = (Button)viewStockWarehouse.findViewById(R.id.BTDeleteStokeWarehouse);
+        dbHelperStokeWearehouse = new TaskDbHelper(getContext());
+        intentStokeWearehouse = getArguments();
+        boolean saveState = true;
+        if (intentStokeWearehouse != null){
+            saveState = false;
+            BTDeleteStokeWarehouse.setVisibility(View.VISIBLE);
+            BTAddStokeWarehouse.setText(getString(R.string.BTUpdate));
+            TVTitleStokeWearhouse.setText(getString(R.string.update_stoke_titile));
+            SPCodeCategory.setText(intentStokeWearehouse.getString(CODE_CATEGORY));
+            SPCodeStore.setText(intentStokeWearehouse.getString(CODE_STORE));
+            ETFisrtBalance.setText(String.valueOf(intentStokeWearehouse.getInt(FIRST_BALANCE)));
+            EtNotesStoke.setText(intentStokeWearehouse.getString(NOTESTOKE));
+
+        }
+        SPCodeCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SpinnerCategory = parent.getItemAtPosition(position).toString();
+                idSpinnerCategory =parent.getItemIdAtPosition(position+1);
+            }
+        });
+        SPCodeStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SpinnerStore = parent.getItemAtPosition(position).toString();
+                idSpinnerStore =parent.getItemIdAtPosition(position+1);
+            }
+        });
+        loadSpinnerDataForCategory();
+        loadSpinnerDataForStore();
+        BTAddStokeWarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveStokeWearehouse();
+            }
+        });
+        BTDeleteStokeWarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteConfirmationDialog();
+            }
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+      //  builder.setTitle(saveState? "Add StokeWearehouse" : "Edit StokeWearehouse");
+        builder.setView(viewStockWarehouse);
+        dialogStokeWearehouse = builder.create();
+        dialogStokeWearehouse.show();
+        return dialogStokeWearehouse ;
+    }
+
+    public void saveStokeWearehouse(){
+        String firstBalance =ETFisrtBalance.getText().toString().trim();
+        String noteStoke = EtNotesStoke.getText().toString().trim();
+        if (idSpinnerCategory == 0 || idSpinnerStore == 0){
+            Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+        if ( intentStokeWearehouse == null && TextUtils.isEmpty(firstBalance) ||TextUtils.isEmpty(firstBalance) ){
+            // ETTypeStore.setError("not should leave field name emputy");
+            Toast.makeText(getContext(), getString(R.string.error_first_balance), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (intentStokeWearehouse == null) {
+            ItemsStore itemsSaveStoke = new ItemsStore();
+            itemsSaveStoke.setId_code_category(idSpinnerCategory);
+            itemsSaveStoke.setId_code_store(idSpinnerStore);
+            itemsSaveStoke.setFirst_balanse(Integer.valueOf(firstBalance));
+            itemsSaveStoke.setNotes(noteStoke);
+            if (itemsSaveStoke == null) {
+                Toast.makeText(getContext(), getString(R.string.error_save_category), Toast.LENGTH_LONG).show();
+            }else {
+                dbHelperStokeWearehouse.addStokeWarehouse(itemsSaveStoke);
+                Toast.makeText(getContext(), getString(R.string.save_category), Toast.LENGTH_LONG).show();
+                dialogStokeWearehouse.dismiss();
+            }
+        }else {
+            ItemsStore itemUpdateStoke = new ItemsStore();
+            itemUpdateStoke.setId(intentStokeWearehouse.getInt(ID_STOKE));
+            itemUpdateStoke.setId_code_category(idSpinnerCategory);
+            itemUpdateStoke.setId_code_store(idSpinnerStore);
+            itemUpdateStoke.setFirst_balanse(Integer.valueOf(firstBalance));
+            itemUpdateStoke.setNotes(noteStoke);
+            if (itemUpdateStoke != null){
+                dbHelperStokeWearehouse.updateStokeWarehouse(itemUpdateStoke);
+                Toast.makeText(getContext(), getString(R.string.update_category), Toast.LENGTH_LONG).show();
+                dialogStokeWearehouse.dismiss();
+
+            }else {
+                Toast.makeText(getContext(), getString(R.string.error_update_category), Toast.LENGTH_LONG).show();
+            }
+        } }
+    public void deleteStoke(){
+        if (intentStokeWearehouse != null){
+            String firstBalance =ETFisrtBalance.getText().toString();
+            String noteStoke = EtNotesStoke.getText().toString();
+            ItemsStore itemDeletePermision = new ItemsStore();
+            itemDeletePermision.setId(intentStokeWearehouse.getInt(ID_STOKE));
+            //itemDeletePermision.setFirst_balanse(Integer.valueOf(firstBalance));
+            //itemDeletePermision.setNotes(noteStoke);
+            if (itemDeletePermision != null){
+                dbHelperStokeWearehouse.deletePermission(itemDeletePermision);
+                Toast.makeText(getContext(), getString(R.string.delete_category), Toast.LENGTH_LONG).show();
+                dialogStokeWearehouse.dismiss();
+                dialogDeleteStokeWearhouse.dismiss();
+
+                // getActivity().finish();
+
+            }else {
+                Toast.makeText(getContext(), getString(R.string.error_delete_category), Toast.LENGTH_LONG).show();
+            }
+        }else {
+            // Toast.makeText(getActivity(), "Not Data For Deleted", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+    }
+    private void showDeleteConfirmationDialog(){
+        //Create an AlertDialog.Builder and set the message,and click listeners
+        //for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(R.string.delete_dialog_msg);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //User clicked the "Delete" button,so delete the Category
+                deleteStoke();
+
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //USer clciked the "cancel" button ,so dismiss the dialog and continue editing the category
+                if (dialog != null){
+                    dialog.dismiss();
+                }
+            }
+        });
+        //Create and show the AlertDialog
+        dialogDeleteStokeWearhouse = builder.create();
+        dialogDeleteStokeWearhouse.show();
+    }
+    public void loadSpinnerDataForCategory(){
+        ArrayList<String >IDCategory = dbHelperStokeWearehouse.getDataForSpinnerCategory();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,IDCategory);
+        // arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SPCodeCategory.setAdapter(arrayAdapter);
+    }
+    public void loadSpinnerDataForStore(){
+        ArrayList<String> IDStore = dbHelperStokeWearehouse.getDataForSpinnerStore();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,IDStore);
+        //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SPCodeStore.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+
+    }
+
+}

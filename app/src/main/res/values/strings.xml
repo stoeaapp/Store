@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Store</string>
+    <string name="app_name">YSYP</string>
 
     <!-- TODO: Items for menu -->
     <string name="action_settings">Settings</string>
@@ -18,15 +18,12 @@
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a Category</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- TODO: Page dialog Add Category -->
-
     <string name="name_category">اسم الصنف </string>
     <string name="natural_category">طبيعة الصنف</string>
     <string name="notes">ملاحظات </string>
+    <string name="add_category_titile">اضافة الصنف </string>
+    <string name="edit_category_titile">تعديل الصنف </string>
 
     <string name="BtAdd">إضافة </string>
     <string name="BTDelete">حذف </string>
@@ -34,33 +31,84 @@
     <string name="BtQuery">بحث </string>
     <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
+    <string name="action_search">ٍSearch</string>
 
-    <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
+    <!-- TODO: Page dialog Add Store -->
+    <string name="add_store_titile">إضافة مخزن</string>
+    <string name="update_store_titile">تعديل مخزن</string>
+    <string name="error_save_store">  لم يتم حفظ المخزن </string>
+    <string name="save_store">  تم حفظ المخزن بنجاح </string>
+    <string name="error_update_store">  لم يتم تعديل المخزن </string>
+    <string name="update_store">  تم تعديل المخزن بنجاح </string>
+    <string name="error_delete_store">  لم يتم حذف المخزن </string>
+    <string name="delete_store">  تم حذف المخزن بنجاح </string>
+    <!-- TODO: Page dialog Add  Permission -->
+    <string name="add_permission_titile">إضافة أذن</string>
+    <string name="update_permission_titile">تعديل أذن</string>
+    <string name="type_permission"> نوع الأذن</string>
+
+    <string name="error_save_permission">  لم يتم حفظ الأذن </string>
+    <string name="save_permission">  تم حفظ الأذن بنجاح </string>
+    <string name="error_update_permission">  لم يتم تعديل الأذن </string>
+    <string name="update_permission">  تم تعديل الأذن بنجاح </string>
+    <string name="error_delete_permission">  لم يتم حذف الأذن </string>
+    <string name="delete_permission">  تم حذف الأذن بنجاح </string>
+    <!-- TODO: Page dialog Add StokeWearehouse -->
+    <string name="first_balance">الرصيد الأول </string>
+    <string name="error_first_balance">يجب اختيار الرصيد الأول </string>
+
+    <string name="add_stoke_titile">إضافة ترصيد المستودع </string>
+    <string name="update_stoke_titile"> تعديل ترصيد المستودع </string>
+    <string name="error_empty_category_store"> اختر الصنف / المخزن </string>
+
+    <string name="error_save_category">  لم يتم حفظ الصنف </string>
+    <string name="save_category">  تم حفظ الصنف بنجاح </string>
+    <string name="error_update_category">  لم يتم تعديل الصنف </string>
+    <string name="update_category">  تم تعديل الصنف بنجاح </string>
+    <string name="error_delete_category">  لم يتم حذف الصنف </string>
+    <string name="delete_category">  تم حذف الصنف بنجاح </string>
+    <!-- TODO: Page dialog Add Daily Movements -->
+    <string name="add_daily_movement_titile">إضافة الحركات اليومية</string>
+    <string name="update_daily_movement_titile">تعديل الحركات اليومية</string>
+
+    <string name="name_permission">نوع الإذن</string>
+    <string name="incoming"> الوارد</string>
+    <string name="issued"> الصادر</string>
+    <string name="convert_to"> محول إلى</string>
+    <string name="error_empty_permission"> اختر الإذن</string>
+    <string name="error_save_daily"> لم يتم حفظ الحركة</string>
+    <string name="save_daily"> تم حفظ الحركة بنجاح </string>
+    <string name="error_update_daily"> لم يتم تعديل الحركة</string>
+    <string name="update_daily"> تم تعديل الحركة بنجاح </string>
+    <string name="error_delete_daily"> لم يتم مسح الحركة</string>
+    <string name="delete_daily"> تم مسح الحركة بنجاح </string>
+    <string name="error_empty_text">لا يمكن ترك الحقل فارغ </string>
+
+    <!-- Dialog button text for the option to confirm deleting the current category [CHAR LIMIT=20] -->
+    <string name="delete">مسح</string>
+    <!-- Dialog message to ask the user to confirm deleting the current category [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">هل تريد مسح هذا الصنف ؟ </string>
+    <!-- Dialog button text for the option to cancel deletion of the current category [CHAR LIMIT=20] -->
+    <string name="cancel">لا</string>
+    <!-- Title for the activity to add a new category [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_category">إضافة صنف</string>
 
-    <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
+    <!-- Title for the activity to edit an existing category [CHAR LIMIT=20] -->
     <string name="editor_activity_title_edit_category">تعديل صنف</string>
-    <!-- Toast message in editor when new pet has failed to be inserted [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when new category has failed to be inserted [CHAR LIMIT=NONE] -->
     <string name="editor_insert_category_failed">خطأ في حفظ السنف </string>
-    <!-- Toast message in editor when new pet has been successfully inserted [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when new category has been successfully inserted [CHAR LIMIT=NONE] -->
     <string name="editor_insert_category_successful">تم حفظ الصنف بنجاح </string>
 
-    <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when current category has failed to be updated [CHAR LIMIT=NONE] -->
     <string name="editor_update_category_failed">خطأ في تعديل الصنف</string>
 
-    <!-- Toast message in editor when current pet was successfully updated [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when current category was successfully updated [CHAR LIMIT=NONE] -->
     <string name="editor_update_category_successful">تم تعديل الصنف بنجاح </string>
-    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
-    <string name="delete">Delete</string>
-    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
-    <string name="delete_dialog_msg">هل تريد مسح هذا الصنف ؟ </string>
-    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
-    <string name="cancel">Cancel</string>
 
-
-    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when current category has failed to be deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_Category_failed">خطأ في مسح الصنف </string>
-    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
+    <!-- Toast message in editor when current category was successfully deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_category_successful">تم مسح الصنف بنجاح </string>
 
 
@@ -75,6 +123,9 @@
     <!-- TODO: Page custom_store_listview -->
     <string name="type_store">نوع المخزن</string>
     <string name="data_store">اخر تعديل</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
