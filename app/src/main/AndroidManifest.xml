@@ -12,11 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".adapter.Add_DAILY_MOVEMENTS" />
         <activity android:name=".dialog.DialogAddCategory" />
@@ -41,41 +37,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ActivityForIncludeFragments" />
         </activity>
-        <activity android:name=".EditStore"
-            />
-        <activity android:name=".StockingWarehouse"
-            >
+        <activity android:name=".EditStore" />
+        <activity android:name=".StockingWarehouse"></activity>
+        <activity android:name=".EditStokeWarehouse"></activity>
+        <activity android:name=".EditDailyMovements" />
+        <activity android:name=".TableDaliyMovmentes">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-    </activity>
-        <activity android:name=".EditStokeWarehouse"
-           >
-
-            </activity>
-        <activity android:name=".EditDailyMovements"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -37,7 +37,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     TaskDbHelper dbHelper ;
     ArrayList<ItemsStore>itemsDaily = new ArrayList<>();
     private ProgressBar progressBarDaily;
+    //private AdapterAddDailyMovements adapterAddDailyMovements;
+
     private AdapterAddDailyMovements adapterAddDailyMovements;
+
     private RecyclerView recyclerViewDailyMovements;
     public static final String IDDaily = "id";
     public static final String NAME_PERMISSION_DAILY = "namePermission";
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getNameGategory());
                 bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
                 bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
-                bundle.putString(CONVERT_TO_DAILY, itemsStore.getTypeStore());
+                bundle.putString(CONVERT_TO_DAILY, itemsStore.getConverTo());
                 EditDailyMovementsFragment f = new EditDailyMovementsFragment();
                 f.setArguments(bundle);
                 f.show(getSupportFragmentManager(),DIALOG_DALIY_MOVEMENTS);
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
         getSupportLoaderManager().initLoader(Daily_LOADER,null,this);
-
 
     }
 
@@ -186,4 +188,5 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         return false;
     }
+
 }

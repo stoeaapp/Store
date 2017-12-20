@@ -101,13 +101,19 @@ public class EditStoreFragment extends DialogFragment implements DialogInterface
     }
     public void saveStore(){
         String typeStore =ETTypeStore.getText().toString();
+        boolean isExist = dbHelper.isExistTypeStore(typeStore);
         String notes = ETNotes.getText().toString();
+
         if ( intent == null && TextUtils.isEmpty(typeStore) ||TextUtils.isEmpty(typeStore) ){
            // ETTypeStore.setError("not should leave field name emputy");
            Toast.makeText(getContext(), getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
             return;
         }
         if (intent == null) {
+            if (isExist ==true){
+                Toast.makeText(getContext(), getString(R.string.error_exist_name), Toast.LENGTH_SHORT).show();
+                return;
+            }
             ItemsStore itemsStoreSave = new ItemsStore();
             itemsStoreSave.setTypeStore(typeStore);
             itemsStoreSave.setNotes(notes);
@@ -116,6 +122,8 @@ public class EditStoreFragment extends DialogFragment implements DialogInterface
             }else {
                 dbHelper.addStore(itemsStoreSave);
                 Toast.makeText(getContext(), getString(R.string.save_store), Toast.LENGTH_LONG).show();
+              //  adapterAddStore.swapData(data);
+
                 dialog.dismiss();
             }
         }else {
@@ -126,6 +134,7 @@ public class EditStoreFragment extends DialogFragment implements DialogInterface
             if (itemsStoreUpdate != null){
                 dbHelper.updateStore(itemsStoreUpdate);
                 Toast.makeText(getContext(), getString(R.string.update_store), Toast.LENGTH_LONG).show();
+
                 dialog.dismiss();
 
             }else {

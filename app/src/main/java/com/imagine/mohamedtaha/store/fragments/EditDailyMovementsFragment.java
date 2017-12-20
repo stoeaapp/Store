@@ -35,10 +35,6 @@ import static com.imagine.mohamedtaha.store.MainActivity.ISSUED_DAILY;
 import static com.imagine.mohamedtaha.store.MainActivity.NAME_CATEGORY_DAILY;
 import static com.imagine.mohamedtaha.store.MainActivity.NAME_PERMISSION_DAILY;
 import static com.imagine.mohamedtaha.store.MainActivity.TYPE_STORE_DAILY;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_CATEGORY;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_STORE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.FIRST_BALANCE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
 
 
 public class EditDailyMovementsFragment extends DialogFragment implements DialogInterface.OnClickListener {
@@ -77,12 +73,20 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             BTDeleteDailyMovement.setVisibility(View.VISIBLE);
             BTAddDailyMovement.setText(getString(R.string.BTUpdate));
            TVTitleStokeWearhouse.setText(getString(R.string.update_daily_movement_titile));
-
            SPNamePermisionDaily.setText(intentDailyMovement.getString(NAME_PERMISSION_DAILY));
            SPTypeStoreDaily.setText(intentDailyMovement.getString(TYPE_STORE_DAILY));
            SPNameCategoryDaily.setText(intentDailyMovement.getString(NAME_CATEGORY_DAILY));
+           if (intentDailyMovement.getInt(INCOMING_DAILY)!=0){
+               ETIncoming.setVisibility(View.VISIBLE);
+           }
            ETIncoming.setText(String.valueOf(intentDailyMovement.getInt(INCOMING_DAILY)));
+           if (intentDailyMovement.getInt(ISSUED_DAILY)!=0){
+               ETIssued.setVisibility(View.VISIBLE);
+           }
            ETIssued.setText(String.valueOf(intentDailyMovement.getInt(ISSUED_DAILY)));
+           if (intentDailyMovement.getInt(CONVERT_TO_DAILY)!=0){
+               SPConvertToDaily.setVisibility(View.VISIBLE);
+           }
            SPConvertToDaily.setText(intentDailyMovement.getString(CONVERT_TO_DAILY));
 
 
@@ -104,6 +108,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerPermission = parent.getItemAtPosition(position).toString();
                 idSpinnerPermission =parent.getItemIdAtPosition(position+1);
+                showStateVisibilty();
+
             }
         });
         SPNameCategoryDaily.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,11 +133,11 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 idSpinnerConvertTo =parent.getItemIdAtPosition(position+1);
             }
         });
+
         loadSpinnerDataForCategory();
         loadSpinnerDataForStore();
         loadSpinnerDataForPermission();
         loadSpinnerDataForConvertTo();
-
        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        // builder.setTitle(saveState? "Add" : "Edit");
         builder.setView(view);
@@ -139,9 +145,30 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         dialogDailyMovement.show();
         return dialogDailyMovement;
     }
+    public void showStateVisibilty(){
+        switch ((int) idSpinnerPermission){
+            case 1:
+                ETIssued.setVisibility(View.VISIBLE);
+                ETIncoming.setVisibility(View.GONE);
+                SPConvertToDaily.setVisibility(View.GONE);
+
+                break;
+            case 2:
+                ETIssued.setVisibility(View.GONE);
+                ETIncoming.setVisibility(View.VISIBLE);
+                SPConvertToDaily.setVisibility(View.GONE);
+                break;
+            case 3:
+                ETIssued.setVisibility(View.VISIBLE);
+                ETIncoming.setVisibility(View.GONE);
+                SPConvertToDaily.setVisibility(View.VISIBLE);
+                break;
+
+        }
+            }
     public void saveDailyMovement(){
-         int  incoming =Integer.parseInt(ETIncoming.getText().toString());
-         int  issued = Integer.parseInt(ETIssued.getText().toString());
+         String  incoming =ETIncoming.getText().toString().trim();
+         String  issued =ETIssued.getText().toString().trim();
         if (idSpinnerPermission == 0 ){
             Toast.makeText(getContext(),getString(R.string.error_empty_permission), Toast.LENGTH_SHORT).show();
             return;
@@ -150,18 +177,27 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
             return;
 
-        } if ( intentDailyMovement == null && incoming <0&& issued <0  ){
+        } if ( intentDailyMovement == null &&  TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
             // ETTypeStore.setError("not should leave field name emputy");
             Toast.makeText(getContext(),getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
             return;
         }
+
         if (intentDailyMovement == null) {
             ItemsStore itemSaveDaily = new ItemsStore();
             itemSaveDaily.setId_permission_id(idSpinnerPermission);
             itemSaveDaily.setId_code_store(idSpinnerStore);
             itemSaveDaily.setId_code_category(idSpinnerCategory);
-            itemSaveDaily.setIncoming(incoming);
-            itemSaveDaily.setIssued(issued);
+            int incomings = 0;
+            if (!TextUtils.isEmpty(incoming)){
+                incomings = Integer.parseInt(incoming);
+            }
+            itemSaveDaily.setIncoming(Integer.valueOf(incomings));
+            int issueds = 0;
+            if (!TextUtils.isEmpty(issued)){
+                issueds = Integer.parseInt(issued);
+            }
+            itemSaveDaily.setIssued(Integer.valueOf(issueds));
             itemSaveDaily.setId_conert_to(idSpinnerConvertTo);
 
             if (itemSaveDaily == null) {
@@ -174,8 +210,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         }else {
             ItemsStore itemUpdateDialy = new ItemsStore();
             itemUpdateDialy.setId(intentDailyMovement.getInt(IDDaily));
-            itemUpdateDialy.setIncoming(incoming);
-            itemUpdateDialy.setIssued(issued);
+            itemUpdateDialy.setIncoming(Integer.valueOf(incoming));
+            itemUpdateDialy.setIssued(Integer.valueOf(issued));
             if (itemUpdateDialy != null){
                 dbHelperDailyMovement.updatePermission(itemUpdateDialy);
                 Toast.makeText(getContext(), getString(R.string.update_daily), Toast.LENGTH_LONG).show();

@@ -37,7 +37,9 @@ public class LoaderStokeWearehouse extends AsyncTaskLoader<ArrayList<ItemsStore>
     @Override
     public ArrayList<ItemsStore> loadInBackground() {
 
-        itemsStoke = dbHelperStoke.getAllStokeHouseByCategoryAndStory();
+            //    itemsStoke = dbHelperStoke.getAllStokeHouseByCategoryAndStoryByCursor();
+
+          itemsStoke = dbHelperStoke.getAllStokeHouseByCategoryAndStory();
         for (int ii = 0; ii<itemsStoke.size(); ii++){
             ItemsStore itemsStokes = itemsStoke.get(ii);
         }

@@ -53,7 +53,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         final String CREATE_TABLE_PERMISSION =
                 "CREATE TABLE "                + TaskEntry.TABLE_PERMISSION + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY,"+
                  TaskEntry.KEY_NAME_PERMISSION + " TEXT NOT NULL,"          + TaskEntry.KEY_NOTES  + " TEXT,"               +
-                        TaskEntry.KEY_USER_ID  + " INTEGER,"                + TaskEntry.KEY_DATE   + " DATETIME "           +  ")";
+                        TaskEntry.KEY_USER_ID  + " INTEGER,"                + TaskEntry.KEY_DATE   + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP "           +  ")";
         //Table Users
         final String CREATE_TABLE_USERS =
                 "CREATE TABLE " + TaskEntry.TABLE_USERS + " (" +TaskEntry._ID + " INTEGER PRIMARY KEY," + TaskEntry.KEY_NAME_USER +
@@ -71,8 +71,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         final String CREATE_TABLE_DAILY_MOVEMENTS =
            "CREATE TABLE "             + TaskEntry.TABLE_DAILY_MOVEMENTS + " (" + TaskEntry._ID       + " INTEGER PRIMARY KEY," +
            TaskEntry.KEY_CATEGORY_ID   + " INTEGER,"                     + TaskEntry.KEY_STORE_ID     + " INTEGER,"             +
-           TaskEntry.KEY_PERMISSION_ID + " INTEGER,"                     + TaskEntry.KEY_INCOMING     + " INTEGER,"             +
-           TaskEntry.KEY_ISSUED        + " INTEGER,"                     + TaskEntry.KEY_CONVERT_FROM + " TEXT,"                +
+           TaskEntry.KEY_PERMISSION_ID + " INTEGER,"                     + TaskEntry.KEY_INCOMING     + " INTEGER NOT NULL DEFAULT 0,"             +
+           TaskEntry.KEY_ISSUED        + " INTEGER NOT NULL DEFAULT 0,"                     + TaskEntry.KEY_CONVERT_FROM + " TEXT,"                +
            TaskEntry.KEY_CONVERT_TO    + " TEXT,"                        +TaskEntry.KEY_USER_ID       +" INTEGER,"              +
            TaskEntry.KEY_DATE          + " DATETIME"                     + ")";
 
@@ -115,7 +115,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(TaskEntry.KEY_TYPE_STORE,itemsStore.getTypeStore());
         values.put(TaskEntry.KEY_NOTES,itemsStore.getNotes());
-        values.put(TaskEntry.KEY_DATE, getDateTime());
+      //  values.put(TaskEntry.KEY_DATE, getDateTime());
         //Insert row
         long store_id = db.insert(TaskEntry.TABLE_STORE,null,values);
 
@@ -124,10 +124,33 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }else {
             Toast.makeText(mContext, " لم يتم الحفظ", Toast.LENGTH_SHORT).show();
 
+
         }*/
 
         return store_id;
     }
+    //____________________Check data exist or not______________________
+    public boolean isExistTypeStore(String typeStore){
+        String whereClause = TaskEntry.KEY_TYPE_STORE +"=?";
+        String [] whereArgs = new String[]{typeStore};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.query(TaskEntry.TABLE_STORE,null,whereClause,whereArgs,null,null,null);
+        boolean exist = (search.getCount() > 0);
+        search.close();db.close();
+        return exist;
+    }
+    //____________________Check data exist or not______________________
+
+    public boolean isExistCategoryName(String categoryName){
+        String whereClause = TaskEntry.KEY_NAME_CATEGORY +"=?";
+        String [] whereArgs = new String[]{categoryName};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.query(TaskEntry.TABLE_CATEGORIES,null,whereClause,whereArgs,null,null,null);
+        boolean exist = (search.getCount() > 0);
+        search.close();db.close();
+        return exist;
+    }
+
     //____________________Update Store______________________
     public long updateStore(ItemsStore itemsStore){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -165,7 +188,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             ItemsStore itemsStore = new ItemsStore();
             itemsStore.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
             itemsStore.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
-            itemsStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemsStore.setCreatedDate(c.getLong(c.getColumnIndex(TaskEntry.KEY_DATE)));
             //adding to tagd list
             itemsStores.add(itemsStore);
         }
@@ -197,7 +220,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             ItemsStore itemsPermission = new ItemsStore();
             itemsPermission.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
             itemsPermission.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
-            itemsPermission.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemsPermission.setCreatedDate(c.getLong(c.getColumnIndex(TaskEntry.KEY_DATE)));
             //adding to tagd list
             itemsPermissions.add(itemsPermission);
         }
@@ -222,6 +245,16 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
         db.delete(TaskEntry.TABLE_PERMISSION, TaskEntry._ID + " = ?",new String[]{String.valueOf(itemsPermission.getId())});
 
+    }
+    //____________________Check data exist or not______________________
+    public boolean isExistNamePErmission(String namePermission){
+        String whereClause = TaskEntry.KEY_NAME_PERMISSION +"=?";
+        String [] whereArgs = new String[]{namePermission};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.query(TaskEntry.TABLE_PERMISSION,null,whereClause,whereArgs,null,null,null);
+        boolean exist = (search.getCount() > 0);
+        search.close();db.close();
+        return exist;
     }
 
     //_____________________________Methods Daily Movements____________________________
@@ -300,7 +333,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
             itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
             itemDailyMovement.setId_conert_to(c.getInt(c.getColumnIndex(TaskEntry.KEY_CONVERT_TO)));
-            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setCreatedDate(c.getLong(c.getColumnIndex(TaskEntry.KEY_DATE)));
             //adding to todo list
             itemDailyMovements.add(itemDailyMovement);
         }
@@ -337,7 +370,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
             itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
             itemDailyMovement.setId_conert_to(c.getInt(c.getColumnIndex(TaskEntry.KEY_CONVERT_TO)));
-            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setCreatedDate(c.getLong(c.getColumnIndex(TaskEntry.KEY_DATE)));
             //adding to todo list
             itemDailyMovements.add(itemDailyMovement);
         }
@@ -378,11 +411,37 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             itemStokeHouse.setId_code_category(c.getLong(c.getColumnIndex(TaskEntry.KEY_CATEGORY_ID)));
             itemStokeHouse.setId_code_store(c.getLong(c.getColumnIndex(TaskEntry.KEY_STORE_ID)));
             itemStokeHouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
-            itemStokeHouse.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemStokeHouse.setCreatedDate(c.getLong(c.getColumnIndex(TaskEntry.KEY_DATE)));
             //adding to tagd list
             itemStokeHouses.add(itemStokeHouse);
         }
         return itemStokeHouses;
+    }
+
+    //____________________getting all StokeWareHouse under Store and Category wit Cursor____________________________
+
+    public Cursor getAllStokeHouseByCategoryAndStoryByCursor(){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "+"tsw. " +TaskEntry._ID + ", ts. " + TaskEntry.KEY_TYPE_STORE + ", tc."
+                +TaskEntry.KEY_NAME_CATEGORY +", tsw."+ TaskEntry.KEY_FIRST_BALANCE + " FROM " + TaskEntry.TABLE_STORE + " ts, "
+                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE
+                + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
+                +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
+                + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID ;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemStokeHouse = new ItemsStore();
+            itemStokeHouse.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemStokeHouse.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemStokeHouse.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemStokeHouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
+            //adding to todo list
+            itemStokeHouses.add(itemStokeHouse);
+        }
+        return c;
     }
 
     //____________________getting all StokeWareHouse under Store and Category____________________________
@@ -462,6 +521,33 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             itemStokeHouses.add(itemStokeHouse);
         }
         return itemStokeHouses;
+    }
+
+    //____________________getting all StokeWareHouse by Search and Cursor____________________________
+
+    public Cursor getAllStokeHouseBySearchByCursor(String search){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "+"tsw. " +TaskEntry._ID + ", ts. " + TaskEntry.KEY_TYPE_STORE + ", tc."
+                +TaskEntry.KEY_NAME_CATEGORY +", tsw."+ TaskEntry.KEY_FIRST_BALANCE + " FROM " + TaskEntry.TABLE_STORE + " ts, "
+                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE
+                + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
+                +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
+                + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID + " WHERE tc. " +TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+                search + "%'" ;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemStokeHouse = new ItemsStore();
+            itemStokeHouse.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemStokeHouse.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemStokeHouse.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemStokeHouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
+            //adding to todo list
+            itemStokeHouses.add(itemStokeHouse);
+        }
+        return c;
     }
     //____________________Update StokeWareHouse____________________________
     public int updateStokeWarehouse(ItemsStore itemsStoke){

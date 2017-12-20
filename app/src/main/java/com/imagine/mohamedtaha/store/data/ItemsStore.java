@@ -6,7 +6,33 @@ package com.imagine.mohamedtaha.store.data;
 
 public class ItemsStore {
 
-  private   String typeStore,namePermission,notes,createdDate,nameGategory,nauralCategory;
+  private   String typeStore;
+    private String namePermission;
+    private String notes;
+    private long createdDate;
+    private String nameGategory;
+    private String nauralCategory;
+
+    public long getmTimeInMilliseconds() {
+        return mTimeInMilliseconds;
+    }
+
+    public void setmTimeInMilliseconds(long mTimeInMilliseconds) {
+        this.mTimeInMilliseconds = mTimeInMilliseconds;
+    }
+
+    private long  mTimeInMilliseconds;
+
+
+    public String getConverTo() {
+        return converTo;
+    }
+
+    public void setConverTo(String converTo) {
+        this.converTo = converTo;
+    }
+
+    private String converTo;
     private int id,issued,incoming;
     private long id_code_category;
     private long id_code_store;
@@ -93,11 +119,11 @@ public class ItemsStore {
         this.notes = notes;
     }
 
-    public String getCreatedDate() {
+    public long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(long createdDate) {
         this.createdDate = createdDate;
     }
 

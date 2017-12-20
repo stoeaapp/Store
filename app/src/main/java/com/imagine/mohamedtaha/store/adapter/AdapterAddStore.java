@@ -79,4 +79,4 @@ public class AdapterAddStore extends BaseAdapter {
         this.itemsStores.addAll(itemsStoreCollections);
         notifyDataSetChanged();
     }
-}
+    }

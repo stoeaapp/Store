@@ -87,13 +87,19 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
 
     public void saveStore(){
         String namePermission =ETNamePermission.getText().toString();
+        boolean isExist = dbHelper.isExistNamePErmission(namePermission);
         String notes = ETNotesPermission.getText().toString();
+
         if ( intent == null && TextUtils.isEmpty(namePermission)|| TextUtils.isEmpty(namePermission) ){
             // ETTypeStore.setError("not should leave field name emputy");
             Toast.makeText(getContext(), getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
             return;
         }
         if (intent == null) {
+            if (isExist ==true){
+                Toast.makeText(getContext(), getString(R.string.error_exist_permission), Toast.LENGTH_SHORT).show();
+                return;
+            }
             ItemsStore itemSavePErmission = new ItemsStore();
             itemSavePErmission.setNamePermission(namePermission);
             itemSavePErmission.setNotes(notes);

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.TaskContract;
+import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class TestFragment extends DialogFragment implements DialogInterface.OnCl
     private Uri mCurrentCategoryUri;
     AlertDialog.Builder builder;
     AlertDialog dialog;
+    TaskDbHelper dbHelper;
 
 
     long id;

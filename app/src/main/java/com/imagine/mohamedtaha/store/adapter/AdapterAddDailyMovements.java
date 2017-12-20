@@ -72,7 +72,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         holder.namePermessionView.setText(data.getNamePermission());
         holder.typeStoreView.setText(data.getTypeStore());
         holder.nameCategoryView.setText(data.getNameGategory());
-        holder.dateView.setText(data.getCreatedDate());
+       // holder.dateView.setText(data.getCreatedDate());
 
 
     }

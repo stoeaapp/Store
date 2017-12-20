@@ -83,6 +83,9 @@
     <string name="error_delete_daily"> لم يتم مسح الحركة</string>
     <string name="delete_daily"> تم مسح الحركة بنجاح </string>
     <string name="error_empty_text">لا يمكن ترك الحقل فارغ </string>
+    <string name="error_exist_name">تم تسجيل اسم المخزن من قبل </string>
+    <string name="error_exist_permission">تم تسجيل اسم الإذن من قبل </string>
+    <string name="error_exist_category">تم تسجيل اسم الصنف من قبل </string>
 
     <!-- Dialog button text for the option to confirm deleting the current category [CHAR LIMIT=20] -->
     <string name="delete">مسح</string>

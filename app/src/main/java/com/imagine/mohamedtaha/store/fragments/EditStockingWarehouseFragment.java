@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,6 +33,11 @@ import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_STORE;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.FIRST_BALANCE;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.ID_STOKE;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.adapterAddStokeHouse;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.dbHelper;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.itemStokeHouses;
+import static com.imagine.mohamedtaha.store.StockingWarehouse.recycleViewAddCategory;
+
 
 public class EditStockingWarehouseFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
@@ -46,7 +52,38 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     TaskDbHelper dbHelperStokeWearehouse;
     Bundle intentStokeWearehouse ;
     long idSpinnerCategory,idSpinnerStore;
+    ArrayList<ItemsStore>itemsStores = new ArrayList<>();
+    private ArrayList<ItemsStore> getItems(String items){
+       // ItemsStore itemsStore  = new ItemsStore();
+        itemStokeHouses = dbHelper.getAllStokeHouseByCategoryAndStory();
+        for (int ii = 0; ii<itemStokeHouses.size(); ii++){
+            ItemsStore itemsStokes = itemStokeHouses.get(ii);
+        }
+      //  itemStokeHouses.removeAll(itemStokeHouses);
 
+        // recycleViewAddCategory.setAdapter(adapterAddStokeHouse);
+        return itemStokeHouses;
+      //  dbHelper.getAllStokeHouseByCategoryAndStory();
+     //   Cursor c =dbHelper.getAllStokeHouseByCategoryAndStory();
+     /*   while (c.moveToNext()){
+            int id = c.getInt(0);
+            String nameCategory = c.getString(1);
+            String typeStore = c.getString(2);
+            int firstBalance = c.getInt(3);
+            String notes = c.getString(4);
+            itemsStore.setId(id);
+            itemsStore.setNameGategory(nameCategory);
+            itemsStore.setTypeStore(typeStore);
+            itemsStore.setFirst_balanse(firstBalance);
+            itemsStore.setNotes(notes);
+            itemStokeHouses.add(itemsStore);
+        }*/
+      //  adapterAddStokeHouse.swapData(itemsStores);
+
+
+
+
+    }
     @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
@@ -150,7 +187,11 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
             }else {
                 Toast.makeText(getContext(), getString(R.string.error_update_category), Toast.LENGTH_LONG).show();
             }
-        } }
+        }
+        getItems(null);
+
+    }
+
     public void deleteStoke(){
         if (intentStokeWearehouse != null){
             String firstBalance =ETFisrtBalance.getText().toString();

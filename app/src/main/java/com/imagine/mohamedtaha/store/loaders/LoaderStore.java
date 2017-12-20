@@ -44,6 +44,7 @@ public class LoaderStore extends AsyncTaskLoader<ArrayList<ItemsStore>> {
         itemsStores = dbHelper.getAllItemsStore();
         for (int ii = 0; ii<itemsStores.size(); ii++){
             ItemsStore itemsStore = itemsStores.get(ii);
+
         }
         return itemsStores;
     }

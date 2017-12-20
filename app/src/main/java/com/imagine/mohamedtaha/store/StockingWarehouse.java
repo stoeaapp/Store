@@ -1,6 +1,7 @@
 package com.imagine.mohamedtaha.store;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -29,19 +30,20 @@ import java.util.Collections;
 
 public class StockingWarehouse extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>> , SearchView.OnQueryTextListener{
 FloatingActionButton fab_add_stock_warehouse;
-    ListView recycleViewAddCategory;
-    AdapterAddStokeHouse adapterAddStokeHouse;
-    TaskDbHelper dbHelper;
+ public static ListView recycleViewAddCategory;
+  public static AdapterAddStokeHouse adapterAddStokeHouse;
+   public static TaskDbHelper dbHelper;
     ProgressBar progressBarStoke;
     Toolbar toolbar;
     private static final int STOKE_LOADER = 3;
-    ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
+   public static ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
     public static final String ID_STOKE = "id";
     public static final String  CODE_CATEGORY= "codeCategory";
     public static final String CODE_STORE = "codeStore";
     public static final String FIRST_BALANCE = "firstBalance";
     public static final String NOTESTOKE = "notesStoke";
     public static final String DIALOG_STOKE_WEAREHOUSE = "dialogStokeWearhouse";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ FloatingActionButton fab_add_stock_warehouse;
         }*/
         adapterAddStokeHouse = new AdapterAddStokeHouse(this, itemStokeHouses);
         recycleViewAddCategory.setAdapter(adapterAddStokeHouse);
+        adapterAddStokeHouse.notifyDataSetChanged();
         recycleViewAddCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

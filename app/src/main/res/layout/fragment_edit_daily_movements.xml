@@ -94,19 +94,25 @@
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="@string/incoming"
-        android:inputType="number" />
+        android:inputType="number"
+        android:visibility="gone"
+        />
+    <EditText
+        android:id="@+id/ETIssued"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="26dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/issued"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="gone"
+
+        />
 </LinearLayout>
 
-        <EditText
-            android:id="@+id/ETIssued"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginEnd="26dp"
-            android:hint="@string/issued"
-            android:ems="10"
-            android:inputType="number" />
+
 
 
     <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
@@ -118,6 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
+        android:visibility="gone"
         />
 
     <LinearLayout

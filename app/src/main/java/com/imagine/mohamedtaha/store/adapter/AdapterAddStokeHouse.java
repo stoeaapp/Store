@@ -82,6 +82,8 @@ public class AdapterAddStokeHouse extends BaseAdapter {
         notifyDataSetChanged();
 
     }
+
+
     public void setFilter(ArrayList<ItemsStore> itemStoke){
         itemStokeHouses = new ArrayList<>();
         itemStokeHouses.addAll(itemStoke);
