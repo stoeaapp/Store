@@ -142,6 +142,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             startActivity(intent);
 
         }
+        if (id == R.id.add_reportes){
+            Intent intent = new Intent(MainActivity.this,TableDaliyMovmentes.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -185,6 +189,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          itemsDaily = dbHelper.getAllDailyMovementsBySearch(newText);
         if (itemsDaily !=null){
             adapterAddDailyMovements.setFilter(itemsDaily);
+            getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
+
         }
         return false;
     }

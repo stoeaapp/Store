@@ -17,12 +17,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/leaner"
         android:layout_marginBottom="30dp"
-        android:weightSum="25"
         android:gravity="center"
          />
     <LinearLayout
         android:id="@+id/leaner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintRight_toRightOf="parent"

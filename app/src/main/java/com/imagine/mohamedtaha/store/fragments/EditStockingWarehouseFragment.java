@@ -36,7 +36,6 @@ import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.adapterAddStokeHouse;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.dbHelper;
 import static com.imagine.mohamedtaha.store.StockingWarehouse.itemStokeHouses;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.recycleViewAddCategory;
 
 
 public class EditStockingWarehouseFragment extends DialogFragment implements DialogInterface.OnClickListener {

@@ -8,6 +8,8 @@ import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
@@ -30,7 +33,7 @@ import java.util.Collections;
 
 public class StockingWarehouse extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>> , SearchView.OnQueryTextListener{
 FloatingActionButton fab_add_stock_warehouse;
- public static ListView recycleViewAddCategory;
+ public static RecyclerView recycleViewAStokeWearehouse;
   public static AdapterAddStokeHouse adapterAddStokeHouse;
    public static TaskDbHelper dbHelper;
     ProgressBar progressBarStoke;
@@ -53,7 +56,9 @@ FloatingActionButton fab_add_stock_warehouse;
        // toolbar = (Toolbar)findViewById(R.id.toolbar);
      //   setSupportActionBar(toolbar);
 
-        recycleViewAddCategory =(ListView)findViewById(R.id.recycleViewAddStokeWarehouse);
+        recycleViewAStokeWearehouse =(RecyclerView)findViewById(R.id.recycleViewAddStokeWarehouse);
+        recycleViewAStokeWearehouse.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         progressBarStoke = (ProgressBar)findViewById(R.id.progressBarStoke);
 
      /*   ArrayList<ItemsStore> itemStokeHouses = dbHelper.getAllStokeHouseByCategoryAndStory();
@@ -61,11 +66,13 @@ FloatingActionButton fab_add_stock_warehouse;
             ItemsStore itemStokeHouse = itemStokeHouses.get(ii);
         }*/
         adapterAddStokeHouse = new AdapterAddStokeHouse(this, itemStokeHouses);
-        recycleViewAddCategory.setAdapter(adapterAddStokeHouse);
+        recycleViewAStokeWearehouse.setAdapter(adapterAddStokeHouse);
         adapterAddStokeHouse.notifyDataSetChanged();
-        recycleViewAddCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        recycleViewAStokeWearehouse.addOnItemTouchListener(new AdapterAddStokeHouse.RecycleTouchListener(getApplicationContext(),
+                recycleViewAStokeWearehouse, new AdapterAddStokeHouse.ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View view, int position) {
                 ItemsStore itemStoke = itemStokeHouses.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt(ID_STOKE, itemStoke.getId());
@@ -77,7 +84,12 @@ FloatingActionButton fab_add_stock_warehouse;
                 f.setArguments(bundle);
                 f.show(getSupportFragmentManager(),DIALOG_STOKE_WEAREHOUSE);
             }
-        });
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
         fab_add_stock_warehouse= (FloatingActionButton)findViewById(R.id.fab_add_stock_warehouse);
         fab_add_stock_warehouse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +106,7 @@ FloatingActionButton fab_add_stock_warehouse;
     @Override
     public void onLoadFinished(Loader<ArrayList<ItemsStore>> loader, ArrayList<ItemsStore> data) {
         progressBarStoke.setVisibility(View.GONE);
-        recycleViewAddCategory.setVisibility(View.VISIBLE);
+        recycleViewAStokeWearehouse.setVisibility(View.VISIBLE);
         adapterAddStokeHouse.swapData(data);
     }
     @Override

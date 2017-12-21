@@ -62,8 +62,8 @@ public class AdapterAddStore extends BaseAdapter {
         //Read the Store attributes from the Cursor for the current Store
         String idStore = String.valueOf(itemsStores.get(position).getId());
         String typeStore = itemsStores.get(position).getTypeStore();
-        //   String  dateStore = itemsStores.get(position).getCreatedDate();
-        String dateStore = itemsStores.get(position).getNotes();
+           String  dateStore = String.valueOf(itemsStores.get(position).getCreatedDate());
+     //   String dateStore = itemsStores.get(position).getNotes();
 
         //Update the TextView with the attributes for the current store
         TVID.setText(idStore);

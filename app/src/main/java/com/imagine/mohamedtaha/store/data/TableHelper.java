@@ -1,6 +1,8 @@
 package com.imagine.mohamedtaha.store.data;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.imagine.mohamedtaha.store.R;
 
@@ -41,5 +43,11 @@ public class TableHelper {
         return spaceProbes;
 
 
+    }
+
+    public void setFilter(ArrayList<ItemsStore> itemStoke){
+        itemStoke = new ArrayList<>();
+        itemStoke.addAll(itemStoke);
+      //  notifyDataSetChanged();
     }
 }

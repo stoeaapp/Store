@@ -3,6 +3,7 @@ package com.imagine.mohamedtaha.store.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
     @Override
     public DailyMovementsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_daily_movement,parent,false);
-        final AdapterAddDailyMovements.DailyMovementsViewHolder holder = new AdapterAddDailyMovements.DailyMovementsViewHolder(view);
+        final DailyMovementsViewHolder holder = new DailyMovementsViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +152,10 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         notifyDataSetChanged();
     }
 
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 }
 
 

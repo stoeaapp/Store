@@ -22,4 +22,8 @@
         android:orderInCategory="100"
         android:title="@string/add_stocking_warehouse"
         app:showAsAction="always"/>
+    <item android:id="@+id/add_reportes"
+        android:orderInCategory="100"
+        android:title="@string/add_reportes"
+        app:showAsAction="never"/>
 </menu>

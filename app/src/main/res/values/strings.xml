@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="add_data">إضافة البيانات</string>
     <string name="add_stocking_warehouse">ترصيد المستودع</string>
+    <string name="add_reportes"> تقرير الحركات اليومية</string>
 
 
     <!-- TODO: Text For Title Frgments -->
@@ -124,8 +125,9 @@
     <string name="keep_editing">Keep Editing</string>
 
     <!-- TODO: Page custom_store_listview -->
-    <string name="type_store">نوع المخزن</string>
+    <string name="type_store"> المخزن</string>
     <string name="data_store">اخر تعديل</string>
+    <string name="m_store"> م</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
