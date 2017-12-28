@@ -7,8 +7,11 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +25,16 @@ import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 
+import java.util.ArrayList;
+
 import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.ID_PERMISSION;
 import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.NAME_PERMISION;
 import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.NOTES_PERMISSION;
+import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.PERMISSION_LOADER;
+import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.adapterAddPermission;
 
 
-public class EditPermissionFragment extends DialogFragment implements DialogInterface.OnClickListener {
+public class EditPermissionFragment extends DialogFragment implements DialogInterface.OnClickListener{
     private EditText ETNamePermission,ETNotesPermission;
     private Button BTAddOrUpdatePermission, BTDeletePermission;
     private TextView TVTitlePermission;
@@ -39,6 +46,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_store,null);
+        TextInputLayout ETTypeStoreMaterial = (TextInputLayout)view.findViewById(R.id.ETTypeStoreMaterial);
         TVTitlePermission = (TextView)view.findViewById(R.id.TVTitleStore);
         ETNamePermission = (EditText)view.findViewById(R.id.ETTypeStoreStore);
         ETNotesPermission = (EditText)view.findViewById(R.id.EtNotesStore);
@@ -47,7 +55,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
         dbHelper = new TaskDbHelper(getContext());
         intent = getArguments();
         TVTitlePermission.setText(getString(R.string.add_permission_titile));
-        ETNamePermission.setHint(getString(R.string.type_permission));
+        ETTypeStoreMaterial.setHint(getString(R.string.type_permission));
 
         boolean saveState = true;
         if (intent != null ){
@@ -86,20 +94,22 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
 
 
     public void saveStore(){
-        String namePermission =ETNamePermission.getText().toString();
+        String namePermission =ETNamePermission.getText().toString().trim();
+        String notes = ETNotesPermission.getText().toString().trim();
         boolean isExist = dbHelper.isExistNamePErmission(namePermission);
-        String notes = ETNotesPermission.getText().toString();
 
         if ( intent == null && TextUtils.isEmpty(namePermission)|| TextUtils.isEmpty(namePermission) ){
-            // ETTypeStore.setError("not should leave field name emputy");
-            Toast.makeText(getContext(), getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
+            ETNamePermission.requestFocus();
+            ETNamePermission.setError(getString(R.string.error_empty_text));
+            return;
+        }
+        if (isExist ==true){
+            ETNamePermission.requestFocus();
+            ETNamePermission.setError(getString(R.string.error_exist_permission));
             return;
         }
         if (intent == null) {
-            if (isExist ==true){
-                Toast.makeText(getContext(), getString(R.string.error_exist_permission), Toast.LENGTH_SHORT).show();
-                return;
-            }
+
             ItemsStore itemSavePErmission = new ItemsStore();
             itemSavePErmission.setNamePermission(namePermission);
             itemSavePErmission.setNotes(notes);
@@ -124,6 +134,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             }else {
                 Toast.makeText(getContext(), getString(R.string.error_update_permission), Toast.LENGTH_LONG).show();
             }
+
         } }
     public void deleteStore(){
         if (intent != null){
@@ -133,6 +144,12 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             itemDeletePermision.setId(intent.getInt(ID_PERMISSION));
             itemDeletePermision.setNamePermission(namePermission);
             itemDeletePermision.setNotes(notes);
+            boolean isExist = dbHelper.isNamePermissioneUsedDailyMovements(intent.getInt(ID_PERMISSION));
+            if (isExist == true){
+                Toast.makeText(getContext(), getString(R.string.this_permission_used), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (itemDeletePermision != null){
                 dbHelper.deletePermission(itemDeletePermision);
                 Toast.makeText(getContext(), getString(R.string.delete_permission), Toast.LENGTH_LONG).show();

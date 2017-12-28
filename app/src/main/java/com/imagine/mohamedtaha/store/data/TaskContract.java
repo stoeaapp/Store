@@ -49,10 +49,13 @@ public class TaskContract {
 
             //Common column names
             public static final String KEY_DATE = "created_at";
+            public static final String KEY_TIME= "time";
+
             public static final String KEY_NOTES = "notes";
             public static final String KEY_CATEGORY_ID = "category_id";
             public static final String KEY_STORE_ID = "store_id";
             public static final String KEY_USER_ID = "user_id";
+
 
             //TABLE CATEGORIES  column names
             public static final String KEY_NAME_CATEGORY = "name_category";

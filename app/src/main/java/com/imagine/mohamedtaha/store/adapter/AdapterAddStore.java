@@ -57,18 +57,21 @@ public class AdapterAddStore extends BaseAdapter {
         //Find individual views that we want to modify in the list item layout
         TextView TVTypeStore = (TextView) listItemView.findViewById(R.id.TVType_store);
         TextView TVDateStore = (TextView) listItemView.findViewById(R.id.TVDdate_store);
+        TextView TVTimeStore = (TextView) listItemView.findViewById(R.id.TVTime_store);
+
         TextView TVID = (TextView) listItemView.findViewById(R.id.TVID);
 
         //Read the Store attributes from the Cursor for the current Store
         String idStore = String.valueOf(itemsStores.get(position).getId());
         String typeStore = itemsStores.get(position).getTypeStore();
-           String  dateStore = String.valueOf(itemsStores.get(position).getCreatedDate());
-     //   String dateStore = itemsStores.get(position).getNotes();
+        String  dateStore = String.valueOf(itemsStores.get(position).getCreatedDate());
+        String  timestore = String.valueOf(itemsStores.get(position).getCreatedTime());
 
         //Update the TextView with the attributes for the current store
         TVID.setText(idStore);
         TVTypeStore.setText(typeStore);
         TVDateStore.setText(dateStore);
+        TVTimeStore.setText(timestore);
 
 
         return listItemView;

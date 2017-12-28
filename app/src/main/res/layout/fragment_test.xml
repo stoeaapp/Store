@@ -3,100 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="2dp"
-    android:background="@drawable/shape_rectangle"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/icons"
     tools:context="com.imagine.mohamedtaha.store.fragments.TestFragment">
-
     <RelativeLayout
-
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_title">
-
         <ImageView
             android:id="@+id/image_titile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_titile" />
-
+          style="@style/ImageViewTitle"/>
         <TextView
             android:id="@+id/TVTitleCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginEnd="16dp"
-            android:layout_toLeftOf="@id/image_titile"
+            style="@style/TextViewTitle"
             android:text="@string/add_category_titile"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+             />
     </RelativeLayout>
-
-    <EditText
-        android:id="@+id/ETNameCategoryFF"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margingRight"
-        android:layout_marginTop="@dimen/margingRight"
-        android:layout_marginStart="@dimen/margingRight"
-        android:ems="10"
-        android:hint="@string/name_category"
-        android:inputType="textPersonName" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/ETNaturalGategoryFF"
+        <EditText
+            android:id="@+id/ETNameCategoryFF"
+            android:hint="@string/name_category"
+            style="@style/EditTextFragmentTextFirst" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margingRight"
-        android:layout_marginStart="@dimen/margingRight"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/natural_category"
-        android:layout_marginTop="@dimen/marginTopTen"
-        />
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/ETNaturalGategoryFF"
+            style="@style/EditTextFragmentTextSecond"
+            android:hint="@string/natural_category"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+<android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 
     <EditText
         android:id="@+id/EtNotesFF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        style="@style/EditTextFragmentTextSecond"
         android:hint="@string/notes"
-        android:maxLines="3"
-        android:layout_marginEnd="@dimen/margingRight"
-        android:layout_marginStart="@dimen/margingRight"
-          android:layout_marginTop="@dimen/marginTopTen"
-
         />
+</android.support.design.widget.TextInputLayout>
+
+
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
+        style="@style/LayoutButtonFragment">
+
         <Button
             android:id="@+id/BTDeleteCategory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:text="@string/BTDelete"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/margingRight"
-            android:layout_marginStart="@dimen/margingRight"
+           style="@style/ButtonFragment"
             android:visibility="gone"
-            />
 
+            />
         <Button
             android:id="@+id/BTAddCategory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/ButtonFragment"
             android:text="@string/BtAdd"
-            android:layout_weight="1"
-            android:layout_marginTop="@dimen/margingRight"
-            android:layout_marginEnd="@dimen/margingRight"
-            android:layout_marginStart="@dimen/margingRight"
-
             />
 
 

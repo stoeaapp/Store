@@ -191,7 +191,7 @@ View view;
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Define a projection that specifies the columns from the table we care about.
         String[]projection={
-                TaskEntry._ID,TaskEntry.KEY_NAME_CATEGORY,TaskEntry.KEY_DATE };
+                TaskEntry._ID,TaskEntry.KEY_NAME_CATEGORY,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME };
        return new CursorLoader(getContext(),
                 TaskEntry.CONTENT_URI,
                 projection,

@@ -1,93 +1,71 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/shape_rectangle"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/icons"
     tools:context="com.imagine.mohamedtaha.store.fragments.EditStoreFragment">
 
     <RelativeLayout
         android:id="@+id/layout_titile"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rectangle">
+        android:background="@drawable/shape_title">
         <ImageView
             android:id="@+id/image_titile"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_title"/>
+            style="@style/ImageViewTitle"/>
         <TextView
             android:id="@+id/TVTitleStore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+             style="@style/TextViewTitle"
             android:text="@string/add_store_titile"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/primary_text"
-            android:layout_toLeftOf="@id/image_titile"
-            android:layout_marginEnd="16dp"
-            android:layout_centerInParent="true"   />
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/ETTypeStoreStore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/type_store"
-        android:layout_marginEnd="@dimen/margingRight"
-        android:layout_below="@+id/layout_titile"
-        android:layout_marginTop="@dimen/marginTopTen"
-        android:layout_marginStart="@dimen/margingRight"
-
-        />
-
-       <EditText
-        android:id="@+id/EtNotesStore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/notes"
-        android:layout_below="@+id/ETTypeStoreStore"
-        android:layout_marginTop="@dimen/marginTopTen"
-        android:layout_marginStart="@dimen/margingRight"
-        android:layout_marginEnd="@dimen/margingRight"
 
            />
+    </RelativeLayout>
+<android.support.design.widget.TextInputLayout
+
+    android:id="@+id/ETTypeStoreMaterial"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/ETTypeStoreStore"
+        style="@style/EditTextFragmentTextFirst"
+        />
+
+</android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/ETNotesMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/EtNotesStore"
+            style="@style/EditTextFragmentTextSecond"
+            android:hint="@string/notes"
+            />
+    </android.support.design.widget.TextInputLayout>
+
     <LinearLayout
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/EtNotesStore">
+        android:gravity="center"
+       >
         <Button
             android:id="@+id/BTDeleteStore"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:visibility="gone"
             android:text="@string/BTDelete"
-            app:layout_goneMarginTop="@dimen/margingRight"
-            android:layout_marginStart="@dimen/margingRight"
+            style="@style/ButtonFragment"
+
             />
         <Button
             android:id="@+id/BTAddStore"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ETTypeStoreStore"
             android:text="@string/BtAdd"
-            android:layout_marginStart="@dimen/margingRight"
-            app:layout_goneMarginTop="@dimen/margingRight"
-            android:layout_marginEnd="@dimen/margingRight"
+            style="@style/ButtonFragment"
+
             />
 
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -12,16 +12,21 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -148,14 +153,22 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     public void saveStokeWearehouse(){
         String firstBalance =ETFisrtBalance.getText().toString().trim();
         String noteStoke = EtNotesStoke.getText().toString().trim();
-        if (idSpinnerCategory == 0 || idSpinnerStore == 0){
-            Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
+        if (idSpinnerCategory == 0){
+            SPCodeCategory.requestFocus();
+            SPCodeCategory.setError(getString(R.string.error_empty_category));
+          //  Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (idSpinnerStore == 0){
+            SPCodeStore.requestFocus();
+            SPCodeStore.setError(getString(R.string.error_empty_store));
             return;
 
         }
         if ( intentStokeWearehouse == null && TextUtils.isEmpty(firstBalance) ||TextUtils.isEmpty(firstBalance) ){
-            // ETTypeStore.setError("not should leave field name emputy");
-            Toast.makeText(getContext(), getString(R.string.error_first_balance), Toast.LENGTH_SHORT).show();
+            ETFisrtBalance.requestFocus();
+            ETFisrtBalance.setError(getString(R.string.error_first_balance));
+         //   Toast.makeText(getContext(), getString(R.string.error_first_balance), Toast.LENGTH_SHORT).show();
             return;
         }
         if (intentStokeWearehouse == null) {
@@ -182,12 +195,11 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
                 dbHelperStokeWearehouse.updateStokeWarehouse(itemUpdateStoke);
                 Toast.makeText(getContext(), getString(R.string.update_category), Toast.LENGTH_LONG).show();
                 dialogStokeWearehouse.dismiss();
-
             }else {
                 Toast.makeText(getContext(), getString(R.string.error_update_category), Toast.LENGTH_LONG).show();
             }
         }
-        getItems(null);
+ //       getItems(null);
 
     }
 
@@ -200,7 +212,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
             //itemDeletePermision.setFirst_balanse(Integer.valueOf(firstBalance));
             //itemDeletePermision.setNotes(noteStoke);
             if (itemDeletePermision != null){
-                dbHelperStokeWearehouse.deletePermission(itemDeletePermision);
+                dbHelperStokeWearehouse.deleteStokeWareHouse(itemDeletePermision);
                 Toast.makeText(getContext(), getString(R.string.delete_category), Toast.LENGTH_LONG).show();
                 dialogStokeWearehouse.dismiss();
                 dialogDeleteStokeWearhouse.dismiss();
@@ -259,5 +271,10 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     public void onClick(DialogInterface dialog, int which) {
 
     }
+    // holder.dateView.setText(data.getCreatedDate());
+
+
+
+
 
 }

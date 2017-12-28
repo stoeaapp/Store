@@ -71,6 +71,7 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
         int idIndex = mCursor.getColumnIndex(TaskEntry._ID);
         int nameCategoryIndex = mCursor.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY);
         int dateIndex = mCursor.getColumnIndex(TaskEntry.KEY_DATE);
+        int timeIndex = mCursor.getColumnIndex(TaskEntry.KEY_TIME);
 
         mCursor.moveToPosition(position); //get to the right location in the cursor
 
@@ -78,12 +79,14 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
         final int id = mCursor.getInt(idIndex);
         String nameCategory = mCursor.getString(nameCategoryIndex);
         String date = mCursor.getString(dateIndex);
+        String  time = mCursor.getString(timeIndex);
 
         //Set values
         // holder.itemView.setTag(id);
         holder.idCategoryView.setText(id + "");
         holder.nameCategoryView.setText(nameCategory);
         holder.dateCategoryView.setText(date);
+        holder.timeCategoryView.setText(time);
 
 
     }
@@ -126,12 +129,14 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
         TextView idCategoryView;
         TextView nameCategoryView;
         TextView dateCategoryView;
+        TextView timeCategoryView;
 
         public CategoryViewHolder(final View itemView) {
             super(itemView);
             idCategoryView = (TextView) itemView.findViewById(R.id.TVIDCategory);
             nameCategoryView = (TextView) itemView.findViewById(R.id.TVNameCategory);
             dateCategoryView = (TextView) itemView.findViewById(R.id.TVDate);
+            timeCategoryView = (TextView) itemView.findViewById(R.id.TVTime);
 
         }
     }

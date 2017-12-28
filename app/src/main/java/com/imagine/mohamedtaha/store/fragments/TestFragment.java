@@ -123,14 +123,23 @@ public class TestFragment extends DialogFragment implements DialogInterface.OnCl
         String nameCategoryString = ETCategoryName.getText().toString().trim();
         String naturalCategoryString = ETNaturalCategory.getText().toString().trim();
         String notesString = EtNotesFF.getText().toString().trim();
+      //  boolean isExist = dbHelper.isExistCategoryName(nameCategoryString);
 
         //  String notesString = ETNotes.getText().toString().trim();
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
-        if ( getArguments() == null && TextUtils.isEmpty(nameCategoryString) ||TextUtils.isEmpty(nameCategoryString)){
-            Toast.makeText(getActivity(), getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
+        if ( getArguments() == null && TextUtils.isEmpty(nameCategoryString)){
+            ETCategoryName.setError(getString(R.string.error_empty_text));
+            ETCategoryName.requestFocus();
+            //  Toast.makeText(getActivity(), getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
             return;
         }
+
+      /*  if (isExist ==true){
+            ETCategoryName.requestFocus();
+            ETCategoryName.setError(getString(R.string.error_exist_category));
+            return;
+        }*/
 
         // Create a ContentValues object where column names are the keys,
         // and Category attributes from the editor are the values.
@@ -214,6 +223,13 @@ public class TestFragment extends DialogFragment implements DialogInterface.OnCl
             //Pass in null for the selection and selection args because the mCurrentCategoryUri
             //content URI already identifies the Category that we want.
 //            uri = Uri.withAppendedPath(TaskContract.TaskEntry.CONTENT_URI,String.valueOf(id));
+            boolean isExistDialyMovements = dbHelper.isNameCategoryUsedDailyMovements(id);
+            boolean isExistStokeWearehouse = dbHelper.isNameCategoryUsedStokeWearhouse(id);
+
+            if (isExistDialyMovements == true || isExistStokeWearehouse == true){
+                Toast.makeText(getContext(), getString(R.string.this_category_used), Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             int rowsDeleted = getActivity().getContentResolver().delete(uri, null,null);
             //Show a toast mesage depending on whether ornot teh delete was successful.

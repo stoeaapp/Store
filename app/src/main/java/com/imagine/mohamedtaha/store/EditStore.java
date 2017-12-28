@@ -48,21 +48,6 @@ public class EditStore extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_save:
-                saveStore();
-                return true;
-            case R.id.action_delete:
-                showDeleteConfirmationDialog();
-
-
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     public void saveStore(){
 
         String typeStore =ETTypeStore.getText().toString();

@@ -9,7 +9,17 @@ public class ItemsStore {
   private   String typeStore;
     private String namePermission;
     private String notes;
-    private long createdDate;
+    private String createdDate;
+    private String createdTime;
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
     private String nameGategory;
     private String nauralCategory;
 
@@ -119,11 +129,11 @@ public class ItemsStore {
         this.notes = notes;
     }
 
-    public long getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(long createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 

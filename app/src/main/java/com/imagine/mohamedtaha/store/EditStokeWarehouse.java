@@ -93,16 +93,7 @@ public class EditStokeWarehouse extends AppCompatActivity implements AdapterView
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int idItem = item.getItemId();
-        if (idItem == R.id.action_save){
 
-        }if (idItem == R.id.action_delete){
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
     public void loadSpinnerDataForCategory(){
         IDCategory = dbHelper.getDataForSpinnerCategory();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,IDCategory);

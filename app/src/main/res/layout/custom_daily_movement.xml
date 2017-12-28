@@ -1,100 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
-    app:cardBackgroundColor="#5dbbc6"
-    app:cardCornerRadius="2dp"
+    app:cardUseCompatPadding="true"
     android:layout_gravity="center"
-    app:contentPadding="10dp">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/icons"
+    app:cardCornerRadius="8dp"
+    app:contentPadding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <LinearLayout
-        android:orientation="horizontal"
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:stretchColumns="*"
+        android:shrinkColumns="*"
         >
+        <TableRow>
 
-        <TextView
-            android:id="@+id/TVNamePermissionDaily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="اسم الأذن"
-            android:textColor="#FFFFFF"
-            />
+            <TextView
+                android:id="@+id/TVNamePermissionDaily"
+                style="@style/CardViewStyleData"
+                />
+            <TextView
+                android:text="اسم الأذن"
+                style="@style/CardViewStyleMain"
+                />
+        </TableRow>
 
+        <TableRow>
+            <TextView
+                android:id="@+id/TVNameStoreDaily"
+                style="@style/CardViewStyleData"
+                />
+            <TextView
+                style="@style/CardViewStyleMain"
+                android:text="اسم المخزن " />
+        </TableRow>
 
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
+        <TableRow>
+            <TextView
+                android:id="@+id/TVNameCategoryDaily"
+                style="@style/CardViewStyleData"
+                />
+            <TextView
+                style="@style/CardViewStyleMain"
+                android:text="اسم الصنف" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/TVDateDaily"
+                style="@style/CardViewStyleData"
+                />
+
+            <TextView
+                style="@style/CardViewStyleMain"
+                android:text="تاريخ اخر تعديل"
+                />
+        </TableRow>
+
+    </TableLayout>
+    <ImageView
+        android:id="@+id/Image_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right">
+        android:src="@drawable/ic_action_more_vert"
 
-        <TextView
-            android:id="@+id/TVNameStoreDaily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="اسم المخزن " />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right">
-
-        <TextView
-            android:id="@+id/TVNameCategoryDaily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="اسم الصنف" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right">
-
-        <TextView
-            android:id="@+id/TVDateDaily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="تاريخ اخر تعديل"
-            />
-    </LinearLayout>
-
-</LinearLayout>
+        />
 </android.support.v7.widget.CardView>

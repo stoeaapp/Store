@@ -170,18 +170,30 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
          String  incoming =ETIncoming.getText().toString().trim();
          String  issued =ETIssued.getText().toString().trim();
         if (idSpinnerPermission == 0 ){
-            Toast.makeText(getContext(),getString(R.string.error_empty_permission), Toast.LENGTH_SHORT).show();
+            SPNamePermisionDaily.requestFocus();
+            SPNamePermisionDaily.setError(getString(R.string.error_empty_permission));
+          //  Toast.makeText(getContext(),getString(R.string.error_empty_permission), Toast.LENGTH_SHORT).show();
             return;
 
-        }if (idSpinnerStore == 0 ||idSpinnerCategory == 0 ){
-            Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
+        }if (idSpinnerStore == 0){
+            SPTypeStoreDaily.requestFocus();
+            SPTypeStoreDaily.setError(getString(R.string.error_empty_store));
+          //  Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
             return;
 
-        } if ( intentDailyMovement == null &&  TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
-            // ETTypeStore.setError("not should leave field name emputy");
-            Toast.makeText(getContext(),getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
-            return;
         }
+      //  boolean ISSame = dbHelperDailyMovement.isTypeStoreisSame(idSpinnerStore);
+        if (idSpinnerCategory == 0) {
+            SPNameCategoryDaily.requestFocus();
+            SPNameCategoryDaily.setError(getString(R.string.error_empty_category));
+            return;
+
+        }if ( intentDailyMovement == null &&  TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
+                // ETTypeStore.setError("not should leave field name emputy");
+                Toast.makeText(getContext(),getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
 
         if (intentDailyMovement == null) {
             ItemsStore itemSaveDaily = new ItemsStore();
@@ -198,6 +210,12 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 issueds = Integer.parseInt(issued);
             }
             itemSaveDaily.setIssued(Integer.valueOf(issueds));
+
+            if (idSpinnerStore == idSpinnerConvertTo){
+                SPConvertToDaily.requestFocus();
+                SPConvertToDaily.setError(getString(R.string.error_same_store));
+                return;
+            }
             itemSaveDaily.setId_conert_to(idSpinnerConvertTo);
 
             if (itemSaveDaily == null) {
@@ -210,17 +228,31 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         }else {
             ItemsStore itemUpdateDialy = new ItemsStore();
             itemUpdateDialy.setId(intentDailyMovement.getInt(IDDaily));
-            itemUpdateDialy.setIncoming(Integer.valueOf(incoming));
-            itemUpdateDialy.setIssued(Integer.valueOf(issued));
+            itemUpdateDialy.setId_permission_id(idSpinnerPermission);
+            itemUpdateDialy.setId_code_store(idSpinnerStore);
+            itemUpdateDialy.setId_code_category(idSpinnerCategory);
+            int incomings = 0;
+            if (!TextUtils.isEmpty(incoming)){
+                incomings = Integer.parseInt(incoming);
+            }
+            itemUpdateDialy.setIncoming(Integer.valueOf(incomings));
+            int issueds = 0;
+            if (!TextUtils.isEmpty(issued)){
+                issueds = Integer.parseInt(issued);
+            }
+            itemUpdateDialy.setIssued(Integer.valueOf(issueds));
+            itemUpdateDialy.setId_conert_to(idSpinnerConvertTo);
+
             if (itemUpdateDialy != null){
-                dbHelperDailyMovement.updatePermission(itemUpdateDialy);
+                dbHelperDailyMovement.updateDailyMovements(itemUpdateDialy);
                 Toast.makeText(getContext(), getString(R.string.update_daily), Toast.LENGTH_LONG).show();
                 dialogDailyMovement.dismiss();
 
             }else {
                 Toast.makeText(getContext(), getString(R.string.error_update_daily), Toast.LENGTH_LONG).show();
             }
-        } }
+        }
+    }
     public void deleteDaily(){
         if (intentDailyMovement != null){
             String incoming =ETIncoming.getText().toString();
@@ -230,14 +262,11 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             itemDeleteDaily.setIncoming(Integer.valueOf(incoming));
             itemDeleteDaily.setIssued(Integer.valueOf(issued));
             if (itemDeleteDaily != null){
-                dbHelperDailyMovement.deletePermission(itemDeleteDaily);
+                dbHelperDailyMovement.deleteDailyMovements(itemDeleteDaily);
                 Toast.makeText(getContext(), getString(R.string.delete_daily), Toast.LENGTH_LONG).show();
                 dialogDailyMovement.dismiss();
                 dialogDeleteDailyMovement.dismiss();
-
-                // getActivity().finish();
-
-            }else {
+   }else {
                 Toast.makeText(getContext(), getString(R.string.error_delete_daily), Toast.LENGTH_LONG).show();
             }
         }else {

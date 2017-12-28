@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.R;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,36 +75,25 @@ public class AdapterAddPermission extends BaseAdapter {
         //Find individual views that we want to modify in the list item layout
         TextView TVTypeStore = (TextView)listItemView.findViewById(R.id.TVType_store);
         TextView TVTitle = (TextView)listItemView.findViewById(R.id.titleName);
-
-        //Find the TextView with ID
-        Date dateObject = new Date(itemsPermissions.get(position).getCreatedDate());
         TextView TVDateStore = (TextView)listItemView.findViewById(R.id.TVDdate_store);
-        //Format the date String(i.e. "Mar 3,1984")
-      //  String formattedDate = formatDate(dateObject);
-      //    String dateStore = itemsPermissions.get(position).getCreatedDate();
-    //   Date date = new Date(dateStore);
-        String datee = formatDate(dateObject);
-
-
-        //Display the date of the current
-        TVDateStore.setText(datee);
-        TextView timeShow = (TextView)listItemView.findViewById(R.id.TVTime_store);
-        String formattedTime = formatTime(dateObject);
-        timeShow.setText(formattedTime);
-
-
+        TextView TVTimeStore = (TextView)listItemView.findViewById(R.id.TVTime_store);
+        TextView TVIDStore   = (TextView)listItemView.findViewById(R.id.TVID);
 
 
         //Read the Store attributes from the Cursor for the current Store
         String idStore = String.valueOf(itemsPermissions.get(position).getId());
         String typeStore = itemsPermissions.get(position).getNamePermission();
-      //  String  dateStore = itemsPermissions.get(position).getCreatedDate();
+        String  dateStore = String.valueOf(itemsPermissions.get(position).getCreatedDate());
+        String  timeStore = itemsPermissions.get(position).getCreatedTime();
 
 
         //Update the TextView with the attributes for the current store
+        TVIDStore.setText(idStore);
         TVTypeStore.setText(typeStore);
        // TVDateStore.setText(dateStore);
         TVTitle.setText(R.string.type_permission);
+        TVDateStore.setText(dateStore);
+        TVTimeStore.setText(timeStore);
 
 
         return listItemView;    }

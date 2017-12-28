@@ -26,21 +26,7 @@ public class TaskContentProvider extends ContentProvider {
     public static final int CATEGORY = 100;
     public static final int CATEGORY_WITH_ID = 101;
 
-    public static final int STORE =200;
-    public static final int STORE_WITH_ID =201;
-
-    public static final int PERMISSION =300;
-    public static final int PERMISSION_WITH_ID =301;
-
-    public static final int USERS = 400;
-    public static final int USERS_WITH_ID =401;
-
-    public static final int STOCKING_WAREHOUSE = 500;
-    public static final int STOCKING_WAREHOUSE_WITH_ID =501;
-
-    public static final int DAILY_MOVEMENTS = 600;
-    public static final int DAILY_MOVEMENTS_WITH_ID =601;
-     //  Define a static buildUriMatcher method that associates URI's with their int match
+       //  Define a static buildUriMatcher method that associates URI's with their int match
     public static UriMatcher buildUriMatcher(){
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         //Add matches with addURI(String authrity, String path, int code)

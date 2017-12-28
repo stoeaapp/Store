@@ -1,5 +1,6 @@
 package com.imagine.mohamedtaha.store;
 
+import android.app.ActionBar;
 import android.app.LauncherActivity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,7 +26,7 @@ import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskContract;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
-import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
+//import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
 import com.imagine.mohamedtaha.store.fragments.TestFragment;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         recyclerViewDailyMovements.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapterAddDailyMovements = new AdapterAddDailyMovements(getApplicationContext(),itemsDaily);
           emptView = findViewById(R.id.empty_view_main_activity_relative);
+
 
       //  emptView = (TextView)findViewById(R.id.empty_view_category);
 
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          itemsDaily = dbHelper.getAllDailyMovementsBySearch(newText);
         if (itemsDaily !=null){
             adapterAddDailyMovements.setFilter(itemsDaily);
-            getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
+          //  getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
 
         }
         return false;

@@ -146,60 +146,6 @@ public class EditCategory extends AppCompatActivity implements LoaderManager.Loa
         getMenuInflater().inflate(R.menu.menu_editor,menu);
         return true;
     }
-    //This method is called after invalidateOptionsMenu(),so that the menu can be updated
-    // (some menu items can be hidden or made visible).
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-         super.onPrepareOptionsMenu(menu);
-        //If this is a new Category , hide  the "Delete" menu item.
-        if (mCurrentCategoryUri == null){
-            MenuItem menuItem = menu.findItem(R.id.action_delete);
-            menuItem.setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //User clicked on a menu option in the app bar overflow menu
-        switch (item.getItemId()){
-            case R.id.action_save:
-                //Save category to database
-                saveCategory();
-                //Exit Activity
-                finish();
-                return true;
-            //Respond to a click on the "Delete menu option
-            case R.id.action_delete:
-                //Pop up confirmation dialog for deletion
-                showDeleteConfirmationDialog();
-                return true;
-            //Respond to a click on the "Up" arrow button in the app bar
-            case android.R.id.home:
-                //If the category hasn't changed ,continue with navigation up to parent activity
-                //which is the CategoryActivity
-                if (!mCategoryHAsChanged){
-                    NavUtils.navigateUpFromSameTask(EditCategory.this);
-                    return true;
-                }
-                //Otherwise if there are unsaved changes,setup a dialog to warn the user.
-                //Create a click listener to handle the user confirming that changes should be discared.
-                DialogInterface.OnClickListener  discardButtonClickListener =
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //User clicked "Discard"button ,navigate to parent activity.
-                                NavUtils.navigateUpFromSameTask(EditCategory.this);
-                            }
-                        };
-                        //show a dialog that notifies the user they have unsaved changes
-                showUnsavedChangesDialog(discardButtonClickListener);
-                return true;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onBackPressed() {

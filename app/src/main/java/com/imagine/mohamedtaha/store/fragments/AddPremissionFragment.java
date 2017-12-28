@@ -34,12 +34,12 @@ public class AddPremissionFragment extends Fragment implements LoaderManager.Loa
 
     FloatingActionButton fab_add_permission;
     ListView mListView;
-    AdapterAddPermission adapterAddPermission;
+    public static  AdapterAddPermission adapterAddPermission;
     TaskDbHelper dbHelper;
     ArrayList<ItemsStore> itemsPermissions = new ArrayList<ItemsStore>();
     private ProgressBar progressBarPermission;
     //Identifier for the category dataloader;
-    private static final int PERMISSION_LOADER = 2;
+    public static final int PERMISSION_LOADER = 2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

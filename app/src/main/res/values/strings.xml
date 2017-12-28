@@ -1,4 +1,8 @@
 <resources>
+
+    <drawable name="actionbar_background">#FF0000</drawable>
+    <color name="color_title">#00FF00</color>
+
     <string name="app_name">YSYP</string>
 
     <!-- TODO: Items for menu -->
@@ -6,6 +10,21 @@
     <string name="add_data">إضافة البيانات</string>
     <string name="add_stocking_warehouse">ترصيد المستودع</string>
     <string name="add_reportes"> تقرير الحركات اليومية</string>
+
+    <!-- TODO: Text For Title App and Text Empity RecycleView and ListView -->
+    <string name="title_daily_movements">  الحركات اليومية</string>
+    <string name="title_report_daily_movements">  تقرير الحركات اليومية</string>
+    <string name="title_all_fragments">  تكويد المستودع</string>
+
+    <string name="title_empty_daily_movements">  لا توجد بيانات ...</string>
+    <string name="title_empty_view_daily_movements"> قم أولاً بإضافة الأصناف والمخازن والأذونات</string>
+    <string name="title_empty_view_daily_movements1">حتى تتمكن من إضافة الحركات اليومية</string>
+    <string name="title_empty_view_store">ابدأ بإضافة المخازن</string>
+    <string name="title_empty_view_permission">ابدأ بإضافة انواع الإذونات</string>
+    <string name="title_empty_view_category">ابدأ بإضافة الأصناف </string>
+    <string name="title_empty_view_stoke_wearehouse"> ترصيد المستودع  </string>
+    <string name="title_empty_view_stoke_wearehouse1">ابدأ أولاً بتكويد المستودع حتى تستطيع  </string>
+    <string name="content_picture"> لا توجد بيانات</string>
 
 
     <!-- TODO: Text For Title Frgments -->
@@ -60,7 +79,8 @@
 
     <string name="add_stoke_titile">إضافة ترصيد المستودع </string>
     <string name="update_stoke_titile"> تعديل ترصيد المستودع </string>
-    <string name="error_empty_category_store"> اختر الصنف / المخزن </string>
+    <string name="error_empty_category"> اختر الصنف  </string>
+    <string name="error_empty_store"> اختر المخزن </string>
 
     <string name="error_save_category">  لم يتم حفظ الصنف </string>
     <string name="save_category">  تم حفظ الصنف بنجاح </string>
@@ -87,6 +107,10 @@
     <string name="error_exist_name">تم تسجيل اسم المخزن من قبل </string>
     <string name="error_exist_permission">تم تسجيل اسم الإذن من قبل </string>
     <string name="error_exist_category">تم تسجيل اسم الصنف من قبل </string>
+    <string name="this_store_used">هذا المخزن مستخدم ولا يمكن مسحه</string>
+    <string name="this_permission_used">هذا الإذن مستخدم ولا يمكن مسحه</string>
+    <string name="this_category_used">هذا الصنف مستخدم ولا يمكن مسحه</string>
+    <string name="error_same_store">لا يمكن تحويل الصنف لنفس المخزن </string>
 
     <!-- Dialog button text for the option to confirm deleting the current category [CHAR LIMIT=20] -->
     <string name="delete">مسح</string>
@@ -132,5 +156,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <!-- TODO: Splach Activity -->
+
+    <string name="text_splash">  مخزنك في جوالك </string>
 
 </resources>

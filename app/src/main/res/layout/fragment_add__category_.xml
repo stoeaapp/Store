@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,34 +19,21 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/empty_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/emptyview"
-            android:scaleType="centerCrop"
-            android:layout_centerInParent="true"
+            style="@style/EmptyViewImage"
             />
         <TextView
             android:id="@+id/empty_text_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@+id/empty_image"
-            android:fontFamily="sans-serif-medium"
-            android:text="No text Now "
-            android:paddingTop="16dp"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:layout_centerHorizontal="true" />
+            android:text="@string/title_empty_daily_movements"
+            style="@style/EmptyViewTextViewMain"
+            />
 
         <TextView
             android:id="@+id/empty_subtitle_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@+id/empty_text_first"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:paddingTop="8dp"
-            android:text="@string/empty_view_subtitle_text"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#A2AAB0"/>
+            android:text="@string/title_empty_view_category"
+            style="@style/EmptyViewTextViewSecond"
+            />
 
 
     </RelativeLayout>
@@ -54,6 +41,7 @@
         android:id="@+id/fab_add_category"
         style="@style/FloatingButtonFragment"
         app:srcCompat="@drawable/ic_action_add"
-        app:fabSize="auto"/>
+        app:fabSize="auto"
+      />
 
 </RelativeLayout>

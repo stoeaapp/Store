@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.imagine.mohamedtaha.store.StockingWarehouse"
    >
@@ -13,17 +12,47 @@
         style="@style/ListViewAndRecycleView"
         android:visibility="gone"
         />
+    <RelativeLayout
+        android:id="@+id/empty_view_stoke_wearehouse"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/empty_image"
+            style="@style/EmptyViewImage"
+            />
+        <TextView
+            android:id="@+id/empty_text_first"
+            android:layout_below="@+id/empty_image"
+            android:text="@string/title_empty_daily_movements"
+            style="@style/EmptyViewTextViewMain"
+            />
+
+        <TextView
+            android:id="@+id/empty_subtitle_text"
+            android:layout_below="@+id/empty_text_first"
+            android:text="@string/title_empty_view_stoke_wearehouse1"
+            style="@style/EmptyViewTextViewSecond"
+            />
+
+        <TextView
+            android:id="@+id/empty1_subtitle_text"
+            android:layout_below="@+id/empty_subtitle_text"
+            android:text="@string/title_empty_view_stoke_wearehouse"
+            style="@style/EmptyViewTextViewSecond"
+            />
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_stock_warehouse"
         style="@style/FloatingButtonFragment"
-    app:fabSize="mini"
-    app:srcCompat="@android:drawable/ic_input_add"/>
+    app:fabSize="auto"
+        app:srcCompat="@drawable/ic_action_add"
+      />
 
     <ProgressBar
         android:id="@+id/progressBarStoke"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        style="@style/ProgressBarStyle"
+        />
 </RelativeLayout>

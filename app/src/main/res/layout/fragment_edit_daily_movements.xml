@@ -9,67 +9,40 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/shape_rectangle"
+    android:background="@color/icons"
     tools:context="com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rectangle">
+        android:background="@drawable/shape_title">
     <ImageView
         android:id="@+id/image_titile"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_title"/>
+       style="@style/ImageViewTitle"/>
     <TextView
         android:id="@+id/TVTitleStokeWearhouse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/add_daily_movement_titile"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary_text"
-        android:layout_toLeftOf="@id/image_titile"
-        android:layout_marginEnd="16dp"
-        android:layout_centerInParent="true"   />
+        style="@style/TextViewTitle"/>
 </RelativeLayout>
 
     <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPermissionDaily"
         android:hint="@string/name_permission"
-        app:met_floatingLabel = "normal"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginTop="20dp"
+        app:met_floatingLabel = "highlight"
+        style="@style/SpinnerForFragment"
         />
     <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPCodeStoreDialy"
         android:hint="@string/type_store"
-        android:textColorHint="#FFFFFF"
-        app:met_floatingLabel = "normal"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
+        app:met_floatingLabel = "highlight"
+      style="@style/SpinnerForFragment"
         />
     <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPCodeCategoryDialy"
-        android:textColorHint="#FFFFFF"
         android:hint="@string/name_category"
-        app:met_floatingLabel = "normal"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"        />
+        app:met_floatingLabel = "highlight"
+        style="@style/SpinnerForFragment"
+        />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -85,70 +58,42 @@
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
         />
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/ETIncoming"
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="26dp"
-        android:ems="10"
-        android:hint="@string/incoming"
-        android:inputType="number"
-        android:visibility="gone"
-        />
+
+        <EditText
+            android:id="@+id/ETIncoming"
+            style="@style/EditTextForFragmentIncomingandIssued"
+            android:hint="@string/incoming"
+            />
+
     <EditText
-        android:id="@+id/ETIssued"
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="26dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/issued"
-        android:ems="10"
-        android:inputType="number"
-        android:visibility="gone"
+           android:id="@+id/ETIssued"
+           android:hint="@string/issued"
+           style="@style/EditTextForFragmentIncomingandIssued"/>
 
-        />
+
 </LinearLayout>
-
-
-
-
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+   <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
         android:id="@+id/SPCovertToDaily"
         android:hint="@string/convert_to"
         app:met_floatingLabel = "normal"
-        android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:visibility="gone"
+       style="@style/SpinnerForFragment"
+       android:visibility="gone"
         />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+   <LinearLayout
+        style="@style/LayoutButtonFragment"
         >
         <Button
             android:id="@+id/BTDeleteDailyMovement"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ButtonFragment"
             android:text="@string/BTDelete"
-            android:layout_marginStart="16dp"
             android:visibility="gone"
+
+
             />
         <Button
             android:id="@+id/BTAddDailyMovement"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/ButtonFragment"
             android:text="@string/BtAdd"
-            android:layout_marginEnd="16dp"
             />
     </LinearLayout>
 

@@ -1,107 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryLight"
-   >
-
-    <TextView
-        android:id="@+id/idStore"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/m_store"
-        android:textSize="15sp"
-        android:textColor="@color/primary_text"
-        android:textStyle="bold"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-       />
-    <TextView
-        android:id="@+id/TVID"
-        app:layout_constraintRight_toRightOf="@+id/idStore"
-        app:layout_constraintTop_toBottomOf="@+id/idStore"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/secondary_text"
-
-         />
-    <TextView
-        android:id="@+id/titleName"
-        android:textColor="@color/primary_text"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/type_store"
-        android:textSize="15sp"
-        app:layout_constraintTop_toTopOf="@+id/idStore"
-        app:layout_constraintRight_toLeftOf="@+id/idStore"
-        app:layout_constraintLeft_toRightOf="@+id/textDate"
-      />
-
-    <TextView
-        android:id="@+id/TVType_store"
-        app:layout_constraintTop_toTopOf="@+id/TVID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/secondary_text"
-
-        app:layout_constraintRight_toLeftOf="@+id/TVID"
-        app:layout_constraintLeft_toRightOf="@+id/TVDdate_store" />
-    <TextView
-        android:id="@+id/textDate"
-        android:textColor="@color/primary_text"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/data_store"
-        android:textSize="15sp"
-
-         />
-    <TextView
-    android:id="@+id/TVDdate_store"
-    app:layout_constraintTop_toTopOf="@+id/TVID"
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="15sp"
-    app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/secondary_text"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/icons"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp"
+    app:contentPadding="10dp"
+   >
+   <TableLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:stretchColumns="*"
+       android:shrinkColumns="*"
+       >
+       <TableRow>
+           <TextView
+               android:id="@+id/TVType_store"
+               style="@style/CardViewStyleDataForStore"
+               />
+           <TextView
+               android:id="@+id/titleName"
+               android:text="@string/type_store"
+               style="@style/CardViewStyleMain"
+               />
+           <TextView
+               android:id="@+id/TVID"
+               style="@style/CardViewStyleData"
+               />
+           <TextView
+               android:id="@+id/idStore"
+               style="@style/CardViewStyleMain"
+               android:text="@string/m_store"
+           />
 
-        />
-    <TextView
-        app:layout_constraintTop_toTopOf="@+id/TVDdate_store"
-        android:id="@+id/TVTime_store"
+       </TableRow>
+            <TableRow>
+           <TextView
+               android:paddingTop="10dp"
+               android:id="@+id/TVDdate_store"
+               style="@style/CardViewStyleData"
+               />
+           <TextView
+               android:paddingTop="10dp"
+               android:id="@+id/TVTime_store"
+               style="@style/CardViewStyleData"
+               />
+           <TextView
+               android:paddingTop="10dp"
+               android:id="@+id/textDate"
+               style="@style/CardViewStyleMain"
+               android:text="@string/data_store"
+               />
+
+       </TableRow>
+
+   </TableLayout>
+    <ImageView
+        android:id="@+id/Image_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/secondary_text"
-
-        app:layout_constraintLeft_toLeftOf="@+id/textDate"
-
+        android:src="@drawable/ic_action_more_vert"
 
         />
-<View
 
-    app:layout_constraintTop_toBottomOf="@+id/TVTime_store"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_width="0dp"
-    android:layout_height="1dp"
-    android:background="@color/colorAccent"
-    />
-
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
