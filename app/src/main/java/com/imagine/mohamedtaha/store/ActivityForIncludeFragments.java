@@ -1,5 +1,6 @@
 package com.imagine.mohamedtaha.store;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -26,18 +27,49 @@ public class ActivityForIncludeFragments extends AppCompatActivity{
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+        invalidateOptionsMenu();
 
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_store_category_permission,menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
 
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
+        MenuItem menuItemAddData = menu.findItem(R.id.add_data);
+        MenuItem menuItemActionSearch = menu.findItem(R.id.action_search);
+
+        menuItemAddData.setVisible(false);
+        menuItemActionSearch.setVisible(false);
+
+        return super.onPrepareOptionsMenu(menu);
+
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.add_stocking_warehouse:
+                Intent intent = new Intent(ActivityForIncludeFragments.this,StockingWarehouse.class);
+                startActivity(intent);
+                break;
+            case R.id.add_reportes:
+                Intent intentReport = new Intent(ActivityForIncludeFragments.this,TableDaliyMovmentes.class);
+                startActivity(intentReport);
+                break;
+                }
+        return super.onOptionsItemSelected(item);
+
+    }
 }
 
 

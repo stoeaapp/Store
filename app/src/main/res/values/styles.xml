@@ -251,11 +251,10 @@
 
     <!-- Customize EditText number for Fragment Daily Movements. -->
     <style name="EditTextForFragmentIncomingandIssued" >
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginEnd">26dp</item>
         <item name="android:layout_marginTop">20dp</item>
-        <item name="android:layout_weight">4</item>
         <item name="android:ems">10</item>
         <item name="android:inputType">number</item>
         <item name="android:visibility">gone</item>

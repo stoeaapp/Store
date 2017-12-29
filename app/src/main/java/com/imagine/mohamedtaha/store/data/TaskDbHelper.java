@@ -387,8 +387,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     public ArrayList<ItemsStore>getIssedAndIncomingbyNameCategoryAndTypeStore(String nameCategory,String typeStore){
         SQLiteDatabase db=this.getReadableDatabase();
         ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
-        String selectQuery = "SELECT  SUM tdm."         +TaskEntry.KEY_INCOMING +
-                ", tdm. " + TaskEntry.KEY_ISSUED      + " FROM " + TaskEntry.TABLE_STORE      + " ts, "
+        String selectQuery = "SELECT  SUM tsh."         +TaskEntry.KEY_FIRST_BALANCE +
+                " FROM " + TaskEntry.TABLE_STOCKING_WAREHOUSE      + " WHERE "
                 +TaskEntry.TABLE_CATEGORIES              + " tc,"+ TaskEntry.TABLE_DAILY_MOVEMENTS  + " tdm  INNER JOIN "                   +
                 TaskEntry.TABLE_STORE                    + " ON ts."     + TaskEntry._ID + " = " + "tdm."
                 + TaskEntry.KEY_STORE_ID                 +" INNER JOIN  "                        +

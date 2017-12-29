@@ -58,17 +58,30 @@
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
         />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/ETIncomingMaterial"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        >
 
         <EditText
             android:id="@+id/ETIncoming"
             style="@style/EditTextForFragmentIncomingandIssued"
             android:hint="@string/incoming"
             />
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/ETIssuedMaterial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        >
     <EditText
            android:id="@+id/ETIssued"
            android:hint="@string/issued"
            style="@style/EditTextForFragmentIncomingandIssued"/>
+    </android.support.design.widget.TextInputLayout>
 
 
 </LinearLayout>

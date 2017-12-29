@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -182,15 +183,19 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             return;
 
         }
-      //  boolean ISSame = dbHelperDailyMovement.isTypeStoreisSame(idSpinnerStore);
         if (idSpinnerCategory == 0) {
             SPNameCategoryDaily.requestFocus();
             SPNameCategoryDaily.setError(getString(R.string.error_empty_category));
             return;
 
-        }if ( intentDailyMovement == null &&  TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
+        }if ( TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
                 // ETTypeStore.setError("not should leave field name emputy");
                 Toast.makeText(getContext(),getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (idSpinnerPermission == 3 &&idSpinnerConvertTo == 0 ){
+                SPConvertToDaily.requestFocus();
+                SPConvertToDaily.setError(getString(R.string.error_convert_to));
                 return;
             }
 

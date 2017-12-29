@@ -47,7 +47,7 @@
         <activity
             android:name=".StockingWarehouse"
             android:label="@string/add_stocking_warehouse"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ActivityForIncludeFragments">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

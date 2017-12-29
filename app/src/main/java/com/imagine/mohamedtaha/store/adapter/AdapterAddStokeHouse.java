@@ -1,6 +1,7 @@
 package com.imagine.mohamedtaha.store.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -77,13 +78,13 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         holder.noteView.setText(data.getNotes());
 
        // holder.dateView.setText(data.getCreatedDate());
-        holder.image_edit.setOnClickListener(new View.OnClickListener() {
+     /*   holder.image_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopupMenu(holder.image_edit);
             }
         });
-
+*/
     }
 
       @Override
@@ -144,7 +145,7 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
-                case R.id.action_settings:
+                case R.id.action_edit:
                     Toast.makeText(inflater.getContext(), "Edit ", Toast.LENGTH_SHORT).show();
 
 

@@ -7,6 +7,8 @@
 
     <!-- TODO: Items for menu -->
     <string name="action_settings">Settings</string>
+    <string name="action_edit">تعديل</string>
+
     <string name="add_data">إضافة البيانات</string>
     <string name="add_stocking_warehouse">ترصيد المستودع</string>
     <string name="add_reportes"> تقرير الحركات اليومية</string>
@@ -111,6 +113,7 @@
     <string name="this_permission_used">هذا الإذن مستخدم ولا يمكن مسحه</string>
     <string name="this_category_used">هذا الصنف مستخدم ولا يمكن مسحه</string>
     <string name="error_same_store">لا يمكن تحويل الصنف لنفس المخزن </string>
+    <string name="error_convert_to">يجب اختيار المخزن المحول له الصنف</string>
 
     <!-- Dialog button text for the option to confirm deleting the current category [CHAR LIMIT=20] -->
     <string name="delete">مسح</string>
