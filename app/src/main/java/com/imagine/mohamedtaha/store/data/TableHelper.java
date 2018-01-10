@@ -31,13 +31,20 @@ public class TableHelper {
         spaceProbes = new String[itemsStores.size()][6];
         for (int i = 0; i <itemsStores.size(); i++){
             itemsStore = itemsStores.get(i);
+          /*  spaceProbes[i][0]= String.valueOf(itemsStore.getId_permission_id());
+            spaceProbes[i][1]= String.valueOf(itemsStore.getId_code_category());
+            spaceProbes[i][2]= String.valueOf(itemsStore.getId_code_store());
+            spaceProbes[i][3]=String.valueOf(itemsStore.getIssued());
+            spaceProbes[i][4]=String.valueOf(itemsStore.getIncoming());
+            spaceProbes[i][5]=String.valueOf(itemsStore.getId_convert_to());
+*/
+
             spaceProbes[i][0]= itemsStore.getNamePermission();
             spaceProbes[i][1]= itemsStore.getNameGategory();
-            spaceProbes[i][2]=itemsStore.getTypeStore();
-         //   spaceProbes[i][3]= String.valueOf(itemsStore.getCreatedDate());
-            spaceProbes[i][3]=String.valueOf(itemsStore.getIncoming());
-            spaceProbes[i][4]=String.valueOf(itemsStore.getIssued());
-            spaceProbes[i][5]=String.valueOf(itemsStore.getConverTo());
+            spaceProbes[i][2]= itemsStore.getTypeStore();
+            spaceProbes[i][3]=String.valueOf(itemsStore.getIssued());
+            spaceProbes[i][4]=String.valueOf(itemsStore.getIncoming());
+            spaceProbes[i][5]= itemsStore.getConvertTo();
 
         }
         return spaceProbes;

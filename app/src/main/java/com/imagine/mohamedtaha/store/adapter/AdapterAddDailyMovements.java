@@ -73,7 +73,8 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         holder.namePermessionView.setText(data.getNamePermission());
         holder.typeStoreView.setText(data.getTypeStore());
         holder.nameCategoryView.setText(data.getNameGategory());
-       // holder.dateView.setText(data.getCreatedDate());
+        holder.convertView.setText(data.getConvertTo());
+        holder.dateView.setText(data.getCreatedDate());
 
 
     }
@@ -88,6 +89,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         TextView typeStoreView;
         TextView nameCategoryView;
         TextView dateView;
+        TextView convertView;
 
         public DailyMovementsViewHolder(final View itemView) {
             super(itemView);
@@ -95,6 +97,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
             typeStoreView = (TextView) itemView.findViewById(R.id.TVNameStoreDaily);
             nameCategoryView = (TextView) itemView.findViewById(R.id.TVNameCategoryDaily);
             dateView = (TextView) itemView.findViewById(R.id.TVDateDaily);
+            convertView = (TextView) itemView.findViewById(R.id.TVConvertTo);
 
         }
     }
@@ -157,30 +160,3 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         super.onAttachedToRecyclerView(recyclerView);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

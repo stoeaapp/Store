@@ -41,5 +41,6 @@
     <color name="transperant">#00ffffff</color>
     <color name="black_overlay">#9970bfd1</color>
     <!--Color outline for ImageView Picture Shehk -->
+    <color name="text_information_description">#99030964</color>
 
 </resources>

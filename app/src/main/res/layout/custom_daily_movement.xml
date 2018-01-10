@@ -23,7 +23,7 @@
                 style="@style/CardViewStyleData"
                 />
             <TextView
-                android:text="اسم الأذن"
+                android:text="@string/name_permission"
                 style="@style/CardViewStyleMain"
                 />
         </TableRow>
@@ -35,7 +35,7 @@
                 />
             <TextView
                 style="@style/CardViewStyleMain"
-                android:text="اسم المخزن " />
+                android:text="@string/name_type_store" />
         </TableRow>
 
         <TableRow>
@@ -45,7 +45,7 @@
                 />
             <TextView
                 style="@style/CardViewStyleMain"
-                android:text="اسم الصنف" />
+                android:text="@string/name_category" />
         </TableRow>
 
         <TableRow>
@@ -56,9 +56,54 @@
 
             <TextView
                 style="@style/CardViewStyleMain"
-                android:text="تاريخ اخر تعديل"
+                android:text="@string/data_store"
                 />
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/TVConvertTo"
+                style="@style/CardViewStyleData"
+                android:visibility="gone"
+
+                />
+
+            <TextView
+                android:id="@+id/TVConvertToShow"
+                style="@style/CardViewStyleMain"
+                android:text="@string/convert_to"
+                android:visibility="gone"
+
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/TVIncomingShow"
+                style="@style/CardViewStyleData"
+                android:visibility="gone"
+
+                />
+
+            <TextView
+                style="@style/CardViewStyleMain"
+                android:text="@string/incoming"
+                android:visibility="gone"
+
+                />
+        </TableRow><TableRow>
+        <TextView
+            android:id="@+id/TVIssuedShow"
+            style="@style/CardViewStyleData"
+            android:visibility="gone"
+            />
+
+        <TextView
+            style="@style/CardViewStyleMain"
+            android:text="@string/issued"
+            android:visibility="gone"
+
+            />
+    </TableRow>
 
     </TableLayout>
     <ImageView
@@ -66,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_more_vert"
+        android:contentDescription="@string/content_picture"
 
         />
 </android.support.v7.widget.CardView>

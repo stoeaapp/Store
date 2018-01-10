@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -97,6 +99,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
         SPCodeCategory = (MaterialBetterSpinner)viewStockWarehouse.findViewById(R.id.SPCodeCategoryStock);
         SPCodeStore = (MaterialBetterSpinner)viewStockWarehouse.findViewById(R.id.SPCodeStoreStock);
         ETFisrtBalance = (EditText)viewStockWarehouse.findViewById(R.id.ETFirstBalanceStoke);
+        ETFisrtBalance.addTextChangedListener(new CheckZero());
         EtNotesStoke = (EditText)viewStockWarehouse.findViewById(R.id.ETNotesStoke);
         BTAddStokeWarehouse =(Button)viewStockWarehouse.findViewById(R.id.BTAddStokeWarehouse);
         BTDeleteStokeWarehouse = (Button)viewStockWarehouse.findViewById(R.id.BTDeleteStokeWarehouse);
@@ -191,6 +194,11 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
             itemUpdateStoke.setId_code_store(idSpinnerStore);
             itemUpdateStoke.setFirst_balanse(Integer.valueOf(firstBalance));
             itemUpdateStoke.setNotes(noteStoke);
+            boolean isExistConvertDailyMovements = dbHelperStokeWearehouse.isFirstBalanceUsedStokewearhouse(intentStokeWearehouse.getInt(ID_STOKE));
+            if (isExistConvertDailyMovements ==true){
+                Toast.makeText(getContext(), getString(R.string.this_category_not_updated), Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (itemUpdateStoke != null){
                 dbHelperStokeWearehouse.updateStokeWarehouse(itemUpdateStoke);
                 Toast.makeText(getContext(), getString(R.string.update_category), Toast.LENGTH_LONG).show();
@@ -211,6 +219,11 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
             itemDeletePermision.setId(intentStokeWearehouse.getInt(ID_STOKE));
             //itemDeletePermision.setFirst_balanse(Integer.valueOf(firstBalance));
             //itemDeletePermision.setNotes(noteStoke);
+            boolean isExistConvertDailyMovements = dbHelperStokeWearehouse.isFirstBalanceUsedStokewearhouse(intentStokeWearehouse.getInt(ID_STOKE));
+            if (isExistConvertDailyMovements ==true){
+                Toast.makeText(getContext(), getString(R.string.this_category_not_updated), Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (itemDeletePermision != null){
                 dbHelperStokeWearehouse.deleteStokeWareHouse(itemDeletePermision);
                 Toast.makeText(getContext(), getString(R.string.delete_category), Toast.LENGTH_LONG).show();
@@ -274,7 +287,38 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     // holder.dateView.setText(data.getCreatedDate());
 
 
+    class CheckZero implements TextWatcher {
 
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            try{
+                if (Integer.parseInt(s.toString())<1)
+                    s.delete(0,s.length());
+            }catch (NumberFormatException e){
+
+            }
+
+        }
+    }
 
 
 }
+
+
+
+
+
+
+
+
+

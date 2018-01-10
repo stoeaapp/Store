@@ -11,7 +11,8 @@
 
     <string name="add_data">إضافة البيانات</string>
     <string name="add_stocking_warehouse">ترصيد المستودع</string>
-    <string name="add_reportes"> تقرير الحركات اليومية</string>
+    <string name="add_reportes"> تقارير الرصيد الأول  </string>
+    <string name="add_reportes_daily"> تقارير الحركات اليومية  </string>
 
     <!-- TODO: Text For Title App and Text Empity RecycleView and ListView -->
     <string name="title_daily_movements">  الحركات اليومية</string>
@@ -24,14 +25,15 @@
     <string name="title_empty_view_store">ابدأ بإضافة المخازن</string>
     <string name="title_empty_view_permission">ابدأ بإضافة انواع الإذونات</string>
     <string name="title_empty_view_category">ابدأ بإضافة الأصناف </string>
-    <string name="title_empty_view_stoke_wearehouse"> ترصيد المستودع  </string>
-    <string name="title_empty_view_stoke_wearehouse1">ابدأ أولاً بتكويد المستودع حتى تستطيع  </string>
+    <string name="title_empty_view_stoke_wearehouse"> حتى تستطيع ترصيد المستودع  </string>
     <string name="content_picture"> لا توجد بيانات</string>
 
 
     <!-- TODO: Text For Title Frgments -->
     <string name="add_category">إضافة الأصناف</string>
     <string name="add_store">إضافة المخازن</string>
+    <string name="add_store_convert">إضافة المخازن المحولة</string>
+
     <string name="add_permission">إضافة الأذن</string>
     <string name="title_add_category">إضافة الأصناف</string>
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
@@ -46,7 +48,9 @@
     <string name="notes">ملاحظات </string>
     <string name="add_category_titile">اضافة الصنف </string>
     <string name="edit_category_titile">تعديل الصنف </string>
+    <string name="search">ابحث بــ </string>
 
+    search
     <string name="BtAdd">إضافة </string>
     <string name="BTDelete">حذف </string>
     <string name="BTUpdate">تعديل </string>
@@ -98,6 +102,7 @@
     <string name="incoming"> الوارد</string>
     <string name="issued"> الصادر</string>
     <string name="convert_to"> محول إلى</string>
+    <string name="currentBalance"> الرصيد الحالي</string>
     <string name="error_empty_permission"> اختر الإذن</string>
     <string name="error_save_daily"> لم يتم حفظ الحركة</string>
     <string name="save_daily"> تم حفظ الحركة بنجاح </string>
@@ -105,15 +110,22 @@
     <string name="update_daily"> تم تعديل الحركة بنجاح </string>
     <string name="error_delete_daily"> لم يتم مسح الحركة</string>
     <string name="delete_daily"> تم مسح الحركة بنجاح </string>
-    <string name="error_empty_text">لا يمكن ترك الحقل فارغ </string>
+    <string name="error_empty_text">لا يمكن ترك الحقل فارغ أو تكون قمته 0 </string>
     <string name="error_exist_name">تم تسجيل اسم المخزن من قبل </string>
     <string name="error_exist_permission">تم تسجيل اسم الإذن من قبل </string>
     <string name="error_exist_category">تم تسجيل اسم الصنف من قبل </string>
     <string name="this_store_used">هذا المخزن مستخدم ولا يمكن مسحه</string>
+    <string name="this_store_not_updated">هذا المخزن مستخدم ولا يمكن تعديله</string>
+    <string name="this_category_not_updated">هذا الصنف مستخدم ولا يمكن تعديله أوحذفه</string>
+    <string name="this_movement_not_allow">هذه الحركة لا يمكن مسحها \n بسبب وجود حركات بعدها</string>
+
     <string name="this_permission_used">هذا الإذن مستخدم ولا يمكن مسحه</string>
+    <string name="this_permission_not_updated">هذا الإذن مستخدم ولا يمكن تعديله</string>
+
     <string name="this_category_used">هذا الصنف مستخدم ولا يمكن مسحه</string>
     <string name="error_same_store">لا يمكن تحويل الصنف لنفس المخزن </string>
     <string name="error_convert_to">يجب اختيار المخزن المحول له الصنف</string>
+    <string name="error_issued_balance">الرصيد الصادر أكبر من الرصيد المتاح</string>
 
     <!-- Dialog button text for the option to confirm deleting the current category [CHAR LIMIT=20] -->
     <string name="delete">مسح</string>
@@ -153,6 +165,8 @@
 
     <!-- TODO: Page custom_store_listview -->
     <string name="type_store"> المخزن</string>
+    <string name="name_type_store"> اسم المخزن</string>
+
     <string name="data_store">اخر تعديل</string>
     <string name="m_store"> م</string>
 
@@ -163,5 +177,6 @@
     <!-- TODO: Splach Activity -->
 
     <string name="text_splash">  مخزنك في جوالك </string>
+    <dimen name="title_text_size">20dp</dimen>
 
 </resources>

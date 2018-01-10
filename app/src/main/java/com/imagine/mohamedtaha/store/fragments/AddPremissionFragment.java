@@ -6,7 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,7 +29,7 @@ import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AddPremissionFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>{
+public class AddPremissionFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener {
     public AddPremissionFragment() {
         // Required empty public constructor
     }
@@ -115,5 +121,33 @@ public class AddPremissionFragment extends Fragment implements LoaderManager.Loa
     public void onLoaderReset(Loader<ArrayList<ItemsStore>> loader) {
         adapterAddPermission.swapData(Collections.<ItemsStore>emptyList());
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        itemsPermissions = dbHelper.getAllItemsPermissionBySearch(newText);
+        if (itemsPermissions !=null){
+            adapterAddPermission.setFilter(itemsPermissions);
+            //  getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
+
+        }
+        return false;
     }
 }

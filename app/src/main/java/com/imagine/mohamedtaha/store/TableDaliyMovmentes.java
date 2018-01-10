@@ -52,11 +52,11 @@ public class TableDaliyMovmentes extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_editor,menu);
         MenuItem  item = menu.findItem(R.id.action_search);
         SearchView searchView =(SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -68,10 +68,11 @@ public class TableDaliyMovmentes extends AppCompatActivity implements SearchView
     public boolean onQueryTextChange(String newText) {
       //  tb.setDataAdapter(new SimpleTableDataAdapter(this,tableHelper.getSpaceProbes()));
 
-       itemsDaily = dbHelper.getAllDailyMovementsBySearch(newText);
+     /*  itemsDaily = dbHelper.getAllDailyMovementsBySearch(newText);
         if (itemsDaily !=null){
            tableHelper.setFilter(itemsDaily);
-        }
+        }*/
+
 
         return false;    }
 }

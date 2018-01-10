@@ -157,7 +157,7 @@ FloatingActionButton fab_add_stock_warehouse;
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        itemStokeHouses = dbHelper.getAllStokeHouseBySearch(newText);
+        itemStokeHouses = dbHelper.getAllStokeHouseBySearchCategoryName(newText);
         if (itemStokeHouses !=null){
             adapterAddStokeHouse.setFilter(itemStokeHouses);
           //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);

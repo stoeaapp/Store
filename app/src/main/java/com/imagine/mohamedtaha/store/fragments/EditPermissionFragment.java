@@ -103,13 +103,13 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             ETNamePermission.setError(getString(R.string.error_empty_text));
             return;
         }
-        if (isExist ==true){
-            ETNamePermission.requestFocus();
-            ETNamePermission.setError(getString(R.string.error_exist_permission));
-            return;
-        }
-        if (intent == null) {
 
+        if (intent == null) {
+            if (isExist ==true){
+                ETNamePermission.requestFocus();
+                ETNamePermission.setError(getString(R.string.error_exist_permission));
+                return;
+            }
             ItemsStore itemSavePErmission = new ItemsStore();
             itemSavePErmission.setNamePermission(namePermission);
             itemSavePErmission.setNotes(notes);
@@ -122,12 +122,18 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             }
         }else {
 
-            ItemsStore itemUpdatePErmision = new ItemsStore();
-            itemUpdatePErmision.setId(intent.getInt(ID_PERMISSION));
-            itemUpdatePErmision.setNamePermission(namePermission);
-            itemUpdatePErmision.setNotes(notes);
-            if (itemUpdatePErmision != null){
-                dbHelper.updatePermission(itemUpdatePErmision);
+            ItemsStore itemUpdatePermision = new ItemsStore();
+            itemUpdatePermision.setId(intent.getInt(ID_PERMISSION));
+            itemUpdatePermision.setNamePermission(namePermission);
+            itemUpdatePermision.setNotes(notes);
+            boolean isExistForUpdated = dbHelper.isNamePermissioneUsedDailyMovements(intent.getInt(ID_PERMISSION));
+            if (isExistForUpdated == true){
+                Toast.makeText(getContext(), getString(R.string.this_permission_not_updated), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (itemUpdatePermision != null){
+                dbHelper.updatePermission(itemUpdatePermision);
                 Toast.makeText(getContext(), getString(R.string.update_permission), Toast.LENGTH_LONG).show();
                 dialog.dismiss();
 

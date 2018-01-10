@@ -1,5 +1,8 @@
 <resources>
+    <style name="HeaderBar">
+        <item name="android:background">@color/colorPrimary</item>
 
+    </style>
     <!-- تغيير الأكشن بار  -->
 
     <style name="CustomActivityTheme" parent="@style/Theme.AppCompat.Light">

@@ -5,11 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.imagine.mohamedtaha.store.MainActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/HeaderBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+
+        >
+
+    </android.support.v7.widget.Toolbar>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleViewDailyMovements"
             style="@style/ListViewAndRecycleView"
             android:visibility="gone"
+            android:layout_below="@+id/toolbar"
             />
+
     <RelativeLayout
         android:id="@+id/empty_view_main_activity_relative"
         android:layout_centerInParent="true"
@@ -47,6 +61,7 @@
         style="@style/FloatingButtonFragment"
         app:srcCompat="@drawable/ic_action_add"
         app:fabSize="auto"
+        app:backgroundTint="@color/colorAccent"
         />
     <ProgressBar
         android:id="@+id/progressBarDaily"

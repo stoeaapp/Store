@@ -43,6 +43,7 @@ public class TaskContract {
             protected static final String TABLE_PERMISSION = "permission";
             protected static final String TABLE_DAILY_MOVEMENTS = "daily_movements";
             protected static final String TABLE_USERS = "users";
+            protected static final String TABLE_CONVERT_STORE = "convert_store";
 
             // Since TaskEntry implements the interfaces "BaseColumns", it has an automatically produced
             // "_ID" column in addition to the two below
@@ -63,6 +64,7 @@ public class TaskContract {
 
             //Table Stores column names
             public static final String KEY_TYPE_STORE = "type_store";
+            public static final String KEY_TYPE_STORE_CONVERT = "type_store_convert";
 
             //Table permissions column names
             public static final String KEY_NAME_PERMISSION ="permission";

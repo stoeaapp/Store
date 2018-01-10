@@ -34,8 +34,8 @@ public class LoaderDailyMovements extends AsyncTaskLoader<ArrayList<ItemsStore>>
     @Override
     public ArrayList<ItemsStore> loadInBackground() {
         itemsDaily = dbHelper.getAllDailyMovements();
-        for (int ii = 0; ii < itemsDaily.size(); ii++) {
-            ItemsStore itemsDailys = itemsDaily.get(ii);
+        for (int i = 0; i < itemsDaily.size(); i++) {
+            ItemsStore itemsDailys = itemsDaily.get(i);
         }
         return itemsDaily;    }
 }

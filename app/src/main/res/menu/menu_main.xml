@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_search"
         android:title="@string/action_search"
-        android:icon="@drawable/ic_action_searche"
+        android:icon="@drawable/ic_action_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
     <item
@@ -25,5 +25,9 @@
     <item android:id="@+id/add_reportes"
         android:orderInCategory="100"
         android:title="@string/add_reportes"
+        app:showAsAction="never"/>
+    <item android:id="@+id/add_reportes_daily"
+        android:orderInCategory="100"
+        android:title="@string/add_reportes_daily"
         app:showAsAction="never"/>
 </menu>

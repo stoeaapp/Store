@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.imagine.mohamedtaha.store.fragments.AddStoreFragment">
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/listViewAddStore"
+        style="@style/ListViewAndRecycleView"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:id="@+id/empty_view_store"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/empty_image"
+            style="@style/EmptyViewImage"
+            />
+        <TextView
+            android:id="@+id/empty_text_first"
+            android:text="@string/title_empty_daily_movements"
+            android:layout_below="@+id/empty_image"
+            style="@style/EmptyViewTextViewMain"
+            />
+
+        <TextView
+            android:id="@+id/empty_subtitle_text"
+            android:layout_below="@+id/empty_text_first"
+            android:text="@string/title_empty_view_store"
+            style="@style/EmptyViewTextViewSecond"
+            />
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_convert_store"
+        style="@style/FloatingButtonFragment"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_action_add"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/ProgressBarStyle"
+        />
+</RelativeLayout>

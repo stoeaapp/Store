@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/empty_subtitle_text"
             android:layout_below="@+id/empty_text_first"
-            android:text="@string/title_empty_view_stoke_wearehouse1"
+            android:text="@string/title_empty_view_daily_movements"
             style="@style/EmptyViewTextViewSecond"
             />
 

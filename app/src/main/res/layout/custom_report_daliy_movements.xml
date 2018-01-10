@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*"
+    android:shrinkColumns="*"
+    android:padding="10dp"
+    android:background="@drawable/shape_border_table"
+    >
+    <TableRow>
+        <TextView
+            android:id="@+id/TVConvertToReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            android:textColor="@color/secondary_text"
+            />
+        <TextView
+            android:id="@+id/TVIncomingReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            android:textColor="@color/secondary_text"
+            />
+        <TextView
+            android:id="@+id/TVIssuedeportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            android:textColor="@color/secondary_text"
+            />
+        <TextView
+            android:id="@+id/TVNameCategoryReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/secondary_text"
+            android:layout_weight="1.5"
+            />
+        <TextView
+            android:id="@+id/TVNameStoreReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/secondary_text"
+            android:layout_weight="1"
+
+            />
+        <TextView
+            android:id="@+id/TVNamePermissionReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/secondary_text"
+            android:layout_weight="1.5"
+
+            />
+        <TextView
+            android:id="@+id/TVIDReportDailyMovements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/secondary_text"
+            android:layout_weight="0.5"
+
+            />
+
+    </TableRow>
+
+
+</TableLayout>
+
+

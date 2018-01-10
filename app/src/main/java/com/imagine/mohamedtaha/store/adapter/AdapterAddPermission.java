@@ -23,7 +23,7 @@ import java.util.Locale;
  */
 
 public class AdapterAddPermission extends BaseAdapter {
-    private final ArrayList<ItemsStore> itemsPermissions;
+    private  ArrayList<ItemsStore> itemsPermissions;
     private final LayoutInflater inflater;
 
     public AdapterAddPermission(Context context,ArrayList<ItemsStore> itemsPermissions) {
@@ -102,5 +102,10 @@ public class AdapterAddPermission extends BaseAdapter {
         this.itemsPermissions.addAll(itemsStoreCollections);
         notifyDataSetChanged();
 
+    }
+    public void setFilter(ArrayList<ItemsStore> itemStoke){
+        itemsPermissions = new ArrayList<>();
+        itemsPermissions.addAll(itemStoke);
+        notifyDataSetChanged();
     }
 }

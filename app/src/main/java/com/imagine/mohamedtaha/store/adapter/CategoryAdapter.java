@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.fragments.AddConvertStoreFragment;
 import com.imagine.mohamedtaha.store.fragments.AddPremissionFragment;
 import com.imagine.mohamedtaha.store.fragments.AddStoreFragment;
 import com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment;
@@ -30,7 +31,8 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             return new Add_Category_Fragment();
         }else if (position == 1){
             return new AddStoreFragment();
-        }else {
+        }else
+        {
             return new AddPremissionFragment();
         }
     }
@@ -52,22 +54,3 @@ public class CategoryAdapter extends FragmentPagerAdapter {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

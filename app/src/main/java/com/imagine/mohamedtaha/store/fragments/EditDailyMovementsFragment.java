@@ -5,13 +5,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +43,7 @@ import static com.imagine.mohamedtaha.store.MainActivity.TYPE_STORE_DAILY;
 
 public class EditDailyMovementsFragment extends DialogFragment implements DialogInterface.OnClickListener {
     private EditText ETIssued,ETIncoming;
-    private TextView TVTitleStokeWearhouse;
+    private TextView TVTitleStokeWearhouse,ETCurentBalance,TVShowText;
     private Button BTDeleteDailyMovement, BTAddDailyMovement;
     MaterialBetterSpinner SPNamePermisionDaily, SPTypeStoreDaily, SPNameCategoryDaily, SPConvertToDaily;
     Bundle intentDailyMovement;
@@ -48,29 +51,36 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
     AlertDialog dialogDailyMovement;
     AlertDialog dialogDeleteDailyMovement;
     long idSpinnerCategory,idSpinnerStore, idSpinnerPermission, idSpinnerConvertTo;
-    String SpinnerCategory,SpinnerStore, SpinnerPermission, SpinnerConvertTo;
+    int firstBalance ,sumIncoming, sumIssued,sumConvertTo,currentBalance;
 
+    String SpinnerCategory,SpinnerStore, SpinnerPermission;
+    String  SpinnerConvertTo = null;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_daily_movements,null);
         TVTitleStokeWearhouse = (TextView)view.findViewById(R.id.TVTitleStokeWearhouse);
+        TVShowText = (TextView)view.findViewById(R.id.ETshowText);
         ETIncoming = (EditText)view.findViewById(R.id.ETIncoming);
         ETIssued = (EditText)view.findViewById(R.id.ETIssued);
+        ETIncoming.addTextChangedListener(new CheckZero());
+        ETIssued.addTextChangedListener(new CheckZero());
+
         SPNamePermisionDaily =(MaterialBetterSpinner)view.findViewById(R.id.SPermissionDaily);
         SPTypeStoreDaily = (MaterialBetterSpinner)view.findViewById(R.id.SPCodeStoreDialy);
         SPNameCategoryDaily = (MaterialBetterSpinner)view.findViewById(R.id.SPCodeCategoryDialy);
         SPConvertToDaily = (MaterialBetterSpinner)view.findViewById(R.id.SPCovertToDaily);
         BTAddDailyMovement = (Button)view.findViewById(R.id.BTAddDailyMovement);
         BTDeleteDailyMovement = (Button)view.findViewById(R.id.BTDeleteDailyMovement);
+        ETCurentBalance = (TextView)view.findViewById(R.id.ETCurentBalance);
 
         dbHelperDailyMovement = new TaskDbHelper(getContext());
 
         intentDailyMovement = getArguments();
-        boolean saveState = true;
+     //   boolean saveState = true;
        if (intentDailyMovement != null){
-            saveState = false;
+      //      saveState = false;
             BTDeleteDailyMovement.setVisibility(View.VISIBLE);
             BTAddDailyMovement.setText(getString(R.string.BTUpdate));
            TVTitleStokeWearhouse.setText(getString(R.string.update_daily_movement_titile));
@@ -85,7 +95,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                ETIssued.setVisibility(View.VISIBLE);
            }
            ETIssued.setText(String.valueOf(intentDailyMovement.getInt(ISSUED_DAILY)));
-           if (intentDailyMovement.getInt(CONVERT_TO_DAILY)!=0){
+           if (intentDailyMovement.getString(CONVERT_TO_DAILY)!=null){
                SPConvertToDaily.setVisibility(View.VISIBLE);
            }
            SPConvertToDaily.setText(intentDailyMovement.getString(CONVERT_TO_DAILY));
@@ -110,6 +120,15 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 SpinnerPermission = parent.getItemAtPosition(position).toString();
                 idSpinnerPermission =parent.getItemIdAtPosition(position+1);
                 showStateVisibilty();
+                SPNameCategoryDaily.setText( " ");
+                SpinnerCategory = "";
+                idSpinnerCategory = 0;
+                ETCurentBalance.setText("");
+                TVShowText.setVisibility(View.INVISIBLE);
+                ETIncoming.setText("");
+                ETIssued.setText("");
+
+
 
             }
         });
@@ -118,6 +137,14 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerCategory = parent.getItemAtPosition(position).toString();
                 idSpinnerCategory =parent.getItemIdAtPosition(position+1);
+                firstBalance = dbHelperDailyMovement.getFirstBalance(idSpinnerCategory,idSpinnerStore);
+                sumIssued = dbHelperDailyMovement.getIssedForDailyMovements(idSpinnerCategory,idSpinnerStore);
+                sumIncoming = dbHelperDailyMovement.getIncomingForDailyMovements(idSpinnerCategory,idSpinnerStore);
+                sumConvertTo = dbHelperDailyMovement.getConvertToForDailyMovements(idSpinnerCategory,idSpinnerStore);
+                currentBalance = firstBalance + sumIncoming + sumConvertTo -  sumIssued;
+                TVShowText.setVisibility(View.VISIBLE);
+                ETCurentBalance.setText(currentBalance + "");
+
             }
         });
         SPTypeStoreDaily.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,6 +152,13 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerStore = parent.getItemAtPosition(position).toString();
                 idSpinnerStore =parent.getItemIdAtPosition(position+1);
+                SPNameCategoryDaily.setText("");
+                SpinnerCategory = "";
+                idSpinnerCategory = 0;
+                ETCurentBalance.setText("");
+                TVShowText.setVisibility(View.INVISIBLE);
+
+
             }
         });
         SPConvertToDaily.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -139,7 +173,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         loadSpinnerDataForStore();
         loadSpinnerDataForPermission();
         loadSpinnerDataForConvertTo();
-       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
        // builder.setTitle(saveState? "Add" : "Edit");
         builder.setView(view);
         dialogDailyMovement = builder.create();
@@ -164,22 +198,28 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 ETIncoming.setVisibility(View.GONE);
                 SPConvertToDaily.setVisibility(View.VISIBLE);
                 break;
+            case 4:
+                ETIssued.setVisibility(View.VISIBLE);
+                ETIncoming.setVisibility(View.GONE);
+                SPConvertToDaily.setVisibility(View.GONE);
+                break;
 
         }
             }
     public void saveDailyMovement(){
          String  incoming =ETIncoming.getText().toString().trim();
-         String  issued =ETIssued.getText().toString().trim();
+         String   issued =ETIssued.getText().toString().trim();
+      //  int inc = Integer.parseInt(incoming);
+     //   int iss = Integer.parseInt(issued);
+
         if (idSpinnerPermission == 0 ){
             SPNamePermisionDaily.requestFocus();
             SPNamePermisionDaily.setError(getString(R.string.error_empty_permission));
-          //  Toast.makeText(getContext(),getString(R.string.error_empty_permission), Toast.LENGTH_SHORT).show();
             return;
 
         }if (idSpinnerStore == 0){
             SPTypeStoreDaily.requestFocus();
             SPTypeStoreDaily.setError(getString(R.string.error_empty_store));
-          //  Toast.makeText(getContext(), getString(R.string.error_empty_category_store), Toast.LENGTH_SHORT).show();
             return;
 
         }
@@ -187,18 +227,23 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             SPNameCategoryDaily.requestFocus();
             SPNameCategoryDaily.setError(getString(R.string.error_empty_category));
             return;
-
-        }if ( TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued) ){
-                // ETTypeStore.setError("not should leave field name emputy");
+//|| inc <=0 && iss <=0
+        }if ( TextUtils.isEmpty(incoming)&&  TextUtils.isEmpty(issued)  ){
                 Toast.makeText(getContext(),getString(R.string.error_empty_text), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (idSpinnerPermission == 3 &&idSpinnerConvertTo == 0 ){
+            if (idSpinnerPermission == 3 && idSpinnerConvertTo == 0 ){
                 SPConvertToDaily.requestFocus();
                 SPConvertToDaily.setError(getString(R.string.error_convert_to));
                 return;
             }
-
+            if (idSpinnerPermission == 1){
+                int issuedInteger = issuedInteger  = Integer.valueOf(issued);
+                if (issuedInteger > currentBalance){
+                    ETIssued.requestFocus();
+                    ETIssued.setError(getString(R.string.error_issued_balance));
+                    return;}
+          }
 
         if (intentDailyMovement == null) {
             ItemsStore itemSaveDaily = new ItemsStore();
@@ -221,7 +266,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 SPConvertToDaily.setError(getString(R.string.error_same_store));
                 return;
             }
-            itemSaveDaily.setId_conert_to(idSpinnerConvertTo);
+            itemSaveDaily.setId_convert_to(idSpinnerConvertTo);
+
 
             if (itemSaveDaily == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_daily), Toast.LENGTH_LONG).show();
@@ -236,6 +282,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             itemUpdateDialy.setId_permission_id(idSpinnerPermission);
             itemUpdateDialy.setId_code_store(idSpinnerStore);
             itemUpdateDialy.setId_code_category(idSpinnerCategory);
+
             int incomings = 0;
             if (!TextUtils.isEmpty(incoming)){
                 incomings = Integer.parseInt(incoming);
@@ -246,7 +293,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 issueds = Integer.parseInt(issued);
             }
             itemUpdateDialy.setIssued(Integer.valueOf(issueds));
-            itemUpdateDialy.setId_conert_to(idSpinnerConvertTo);
+            itemUpdateDialy.setId_convert_to(idSpinnerConvertTo);
 
             if (itemUpdateDialy != null){
                 dbHelperDailyMovement.updateDailyMovements(itemUpdateDialy);
@@ -264,8 +311,17 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             String issued = ETIssued.getText().toString();
             ItemsStore itemDeleteDaily = new ItemsStore();
             itemDeleteDaily.setId(intentDailyMovement.getInt(IDDaily));
-            itemDeleteDaily.setIncoming(Integer.valueOf(incoming));
-            itemDeleteDaily.setIssued(Integer.valueOf(issued));
+         //   itemDeleteDaily.setIncoming(Integer.valueOf(incoming));
+         //   itemDeleteDaily.setIssued(Integer.valueOf(issued));
+          //  long isLastRow = dbHelperDailyMovement.isLAstRow();
+          //  if ( isLastRow != intentDailyMovement.getLong(IDDaily)){
+           //     Toast.makeText(getContext(), getString(R.string.this_movement_not_allow), Toast.LENGTH_SHORT).show();
+            //    return;
+           // }
+            /*else {
+                Toast.makeText(getContext(), "The is problem", Toast.LENGTH_SHORT).show();
+
+            }*/
             if (itemDeleteDaily != null){
                 dbHelperDailyMovement.deleteDailyMovements(itemDeleteDaily);
                 Toast.makeText(getContext(), getString(R.string.delete_daily), Toast.LENGTH_LONG).show();
@@ -279,6 +335,30 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             return;
         }
 
+    }
+    class CheckZero implements TextWatcher{
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            try{
+                if (Integer.parseInt(s.toString())<1)
+                    s.delete(0,s.length());
+                 //   s.replace(0,s.length(),"1");
+            }catch (NumberFormatException e){
+
+            }
+
+        }
     }
     private void showDeleteConfirmationDialog(){
         //Create an AlertDialog.Builder and set the message,and click listeners
@@ -330,7 +410,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         SPNamePermisionDaily.setAdapter(arrayAdapterPermission);
     }
     public void loadSpinnerDataForConvertTo(){
-        ArrayList<String> IDConvertTo = dbHelperDailyMovement.getDataForSpinnerStore();
+        ArrayList<String> IDConvertTo = dbHelperDailyMovement.getDataForSpinnerConvertStore();
         ArrayAdapter<String> arrayAdapterConvertTo = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,IDConvertTo);
         //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SPConvertToDaily.setAdapter(arrayAdapterConvertTo);

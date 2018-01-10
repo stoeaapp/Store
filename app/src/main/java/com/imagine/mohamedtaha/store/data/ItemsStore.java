@@ -11,6 +11,15 @@ public class ItemsStore {
     private String notes;
     private String createdDate;
     private String createdTime;
+    private String convertTo;
+
+    public String getConvertTo() {
+        return convertTo;
+    }
+
+    public void setConvertTo(String convertTo) {
+        this.convertTo = convertTo;
+    }
 
     public String getCreatedTime() {
         return createdTime;
@@ -34,33 +43,24 @@ public class ItemsStore {
     private long  mTimeInMilliseconds;
 
 
-    public String getConverTo() {
-        return converTo;
-    }
-
-    public void setConverTo(String converTo) {
-        this.converTo = converTo;
-    }
-
-    private String converTo;
     private int id,issued,incoming;
     private long id_code_category;
     private long id_code_store;
     private long id_permission_id;
 
-    public long getId_conert_to() {
-        return id_conert_to;
+    public long getId_convert_to() {
+        return id_convert_to;
     }
 
-    public void setId_conert_to(long id_conert_to) {
-        this.id_conert_to = id_conert_to;
+    public void setId_convert_to(long id_conert_to) {
+        this.id_convert_to = id_conert_to;
     }
 
     public long getUserId() {
         return userId;
     }
 
-    private long id_conert_to;
+    private long id_convert_to;
 
     private long userId;
     private int first_balanse;

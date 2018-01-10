@@ -1,0 +1,125 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.imagine.mohamedtaha.store.ReportStoreFragment">
+<RadioGroup
+    android:id="@+id/groupRadio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:checkedButton="@id/RBNameCategory"
+    android:background="@color/colorPrimary"
+    >
+
+
+    <RadioButton
+        android:id="@+id/RBFirstBalance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="@color/icons"
+        android:text="@string/first_balance"
+        android:gravity="center"
+        />
+    <RadioButton
+        android:id="@+id/RBTypeStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_store"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="@color/icons"
+        />
+    <RadioButton
+        android:id="@+id/RBNameCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_category"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="@color/icons"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"/>
+
+</RadioGroup>
+    <TableLayout
+        android:layout_margin="16dp"
+    android:id="@+id/leanerTitle"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:layout_below="@+id/groupRadio">
+    <TableRow>
+        <TextView
+            android:id="@+id/titleID"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/primary_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/first_balance"/>
+        <TextView
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/primary_text"
+            android:layout_toLeftOf="@+id/titleID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/name_category"/>
+        <TextView
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/primary_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/titleNotes"
+            android:text="@string/type_store"/>
+        <TextView
+            android:id="@+id/titleNotes"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/primary_text"
+            android:layout_marginStart="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/m_store"/>
+
+
+    </TableRow>
+
+</TableLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleViewReportStore"
+        android:layout_below="@+id/leanerTitle"
+                android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
