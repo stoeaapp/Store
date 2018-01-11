@@ -10,8 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterReportDailyMovements;
 import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
@@ -19,6 +25,7 @@ import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 import com.imagine.mohamedtaha.store.loaders.LoaderStokeWearehouse;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,8 +39,10 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
     //Identifier for the category dataloader;
     public static final int STORE_REPORT_LOADER = 7;
     private LinearLayoutManager mLayoutManager;
-    RadioButton RBNameGategory,RBTypeStore,RBIssuedBalance,RBNamePermission,RBIncomingBalance;
+    RadioButton RBNameGategory,RBTypeStoreDaily,RBIssuedBalance,RBNamePermission,RBIncomingBalance,RBAllStore;
     long sumIncoming;
+    MaterialBetterSpinner SPSelectTypeStore;
+    String selectTypeStore;
 
 
     @Override
@@ -42,10 +51,20 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
         //   view = inflater.inflate(R.layout.fragment_report_store, container, false);
         setContentView(R.layout.report_daily_movements);
         RBNameGategory=(RadioButton)findViewById(R.id.RBNameCategoryDaily);
-        RBTypeStore=(RadioButton)findViewById(R.id.RBTypeStoreDaily);
+        RBTypeStoreDaily=(RadioButton)findViewById(R.id.RBChooseTypeStore);
         RBIssuedBalance=(RadioButton)findViewById(R.id.RBIssuedBalanceDialy);
         RBNamePermission=(RadioButton)findViewById(R.id.RBNamePermissionDaily);
         RBIncomingBalance=(RadioButton)findViewById(R.id.RBIncomingBalanceDaily);
+        RBAllStore=(RadioButton)findViewById(R.id.RBAllStore);
+        SPSelectTypeStore =(MaterialBetterSpinner) findViewById(R.id.SPSelectTypeStore);
+
+        SPSelectTypeStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectTypeStore = parent.getItemAtPosition(position).toString();
+
+            }
+        });
 
         dbHelper = new TaskDbHelper(this);
         recyclerViewReportDailyMovements = (RecyclerView) findViewById(R.id.recycleViewReportDailyMovements);
@@ -53,10 +72,12 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
 
         adapterReportDailyMovements = new AdapterReportDailyMovements(this, itemsStoresReport);
         recyclerViewReportDailyMovements.setAdapter(adapterReportDailyMovements);
-
+        loadSpinnerDataForStore();
         getSupportLoaderManager().initLoader(STORE_REPORT_LOADER,null,this);
+      //  if(RBTypeStore.isChecked())SPSelectTypeStore.setVisibility(View.VISIBLE);
+        //else SPSelectTypeStore.setVisibility(View.INVISIBLE);
 
-    }
+}
        /*
     View view;
     @Override
@@ -112,31 +133,91 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (RBNameGategory.isChecked()){
-            itemsStoresReport = dbHelper.getAllDailyMovementsByCategoryName(newText);
-            if (itemsStoresReport !=null){
-                adapterReportDailyMovements.setFilter(itemsStoresReport);
-             //   sumIncoming = dbHelper.getIncomingReportesForDailyMovements(newText);
+
+        if (RBAllStore.isChecked()){
+            if (RBNameGategory.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByCategoryName(newText);
+                if (itemsStoresReport !=null){
+                    adapterReportDailyMovements.setFilter(itemsStoresReport);
+                    //   sumIncoming = dbHelper.getIncomingReportesForDailyMovements(newText);
+                }
+
+                //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
+            }else if (RBNamePermission.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByNamePermission(newText);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+            }else if (RBIncomingBalance.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByIncoming(newText);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+
+            }
+            else  {
+                itemsStoresReport = dbHelper.getAllDailyMovementsByIssued(newText);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
             }
 
-            //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
-        }else if (RBTypeStore.isChecked()){
-            itemsStoresReport = dbHelper.getAllDailyMovementsByTypeStore(newText);
-            if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
-            //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
-        }else if (RBNamePermission.isChecked()){
-            itemsStoresReport = dbHelper.getAllDailyMovementsByNamePermission(newText);
-            if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
-        }else if (RBIncomingBalance.isChecked()){
-            itemsStoresReport = dbHelper.getAllDailyMovementsByIncoming(newText);
-            if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+        }else if (RBTypeStoreDaily.isChecked()){
+
+            if (RBNameGategory.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByCategoryNameAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null){
+                    adapterReportDailyMovements.setFilter(itemsStoresReport);
+                    //   sumIncoming = dbHelper.getIncomingReportesForDailyMovements(newText);
+                }
+
+                //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
+            }else if (RBNamePermission.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByNamePermissionAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+            }else if (RBIncomingBalance.isChecked()){
+                itemsStoresReport = dbHelper.getAllDailyMovementsByIncomingAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+
+            }
+            else  {
+                itemsStoresReport = dbHelper.getAllDailyMovementsByIssuedAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
+            }
 
         }
-        else  {
-            itemsStoresReport = dbHelper.getAllDailyMovementsByIssued(newText);
-            if (itemsStoresReport !=null)adapterReportDailyMovements.setFilter(itemsStoresReport);
-        }
-
-
         return false;
-    }}
+    }
+
+    public void checkSpinner(View view){
+        boolean checked = ((RadioButton)view).isChecked();
+        switch (view.getId()){
+            case R.id.RBAllStore:
+                if (checked)
+                    SPSelectTypeStore.setVisibility(View.INVISIBLE);
+        break;
+            case R.id.RBChooseTypeStore:
+                if (checked)
+                    SPSelectTypeStore.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    public void loadSpinnerDataForStore(){
+        ArrayList<String> IDStore = dbHelper.getDataForSpinnerStore();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,IDStore);
+        //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SPSelectTypeStore.setAdapter(arrayAdapter);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

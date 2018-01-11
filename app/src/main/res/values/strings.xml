@@ -16,6 +16,7 @@
 
     <!-- TODO: Text For Title App and Text Empity RecycleView and ListView -->
     <string name="title_daily_movements">  الحركات اليومية</string>
+    <string name="title_report_first_balance">  تقرير ترصيدالمستودع</string>
     <string name="title_report_daily_movements">  تقرير الحركات اليومية</string>
     <string name="title_all_fragments">  تكويد المستودع</string>
 
@@ -48,7 +49,7 @@
     <string name="notes">ملاحظات </string>
     <string name="add_category_titile">اضافة الصنف </string>
     <string name="edit_category_titile">تعديل الصنف </string>
-    <string name="search">ابحث بــ </string>
+    <string name="search">ابحث في </string>
 
     search
     <string name="BtAdd">إضافة </string>
@@ -100,7 +101,11 @@
 
     <string name="name_permission">نوع الإذن</string>
     <string name="incoming"> الوارد</string>
+    <string name="all_store"> كل المخازن</string>
+    <string name="select_type_store"> اسم المخزن</string>
+
     <string name="issued"> الصادر</string>
+
     <string name="convert_to"> محول إلى</string>
     <string name="currentBalance"> الرصيد الحالي</string>
     <string name="error_empty_permission"> اختر الإذن</string>

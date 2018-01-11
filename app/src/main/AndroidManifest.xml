@@ -15,7 +15,13 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".dialog.DialogAddCategory" />
         <activity android:name=".dialog.DialogAddStore" />
-        <activity android:name=".ReportStoreFragment" />
+        <activity android:name=".ReportStoreFragment"
+            android:label="@string/title_report_first_balance"
+            android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+
+        </activity>
         <activity
             android:name=".ActivityForIncludeFragments"
             android:label="@string/title_all_fragments"
@@ -56,10 +62,8 @@
         <activity
             android:name=".TableDaliyMovmentes"
             android:label="@string/title_report_daily_movements"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+           >
+
         </activity>
         <activity
             android:name=".SplashActivity"
@@ -70,8 +74,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReportesActivity" />
-        <activity android:name=".ReportDailyMovements"></activity>
+        <activity android:name=".ReportesActivity"
+            android:parentActivityName=".MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+        </activity>
+        <activity android:name=".ReportDailyMovements"
+            android:label="@string/title_report_daily_movements"
+            android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

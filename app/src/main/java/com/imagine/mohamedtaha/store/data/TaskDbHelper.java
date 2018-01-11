@@ -750,9 +750,45 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemDailyMovements;
     }
+    //____________________get All DailyMovements by name Permission and TypeStore____________________________
 
+    public ArrayList<ItemsStore>getAllDailyMovementsByNamePermissionAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "         +"tdm. "   +TaskEntry._ID +
+                ", ts. " + TaskEntry.KEY_TYPE_STORE      + ", tc."  +TaskEntry.KEY_NAME_CATEGORY +
+                ", tp."  + TaskEntry.KEY_NAME_PERMISSION + ", tcs. "+TaskEntry.KEY_TYPE_STORE_CONVERT+
+                ", tdm. "+TaskEntry.KEY_INCOMING         +", tdm. "+TaskEntry.KEY_ISSUED         +
+                ", tdm. "+TaskEntry.KEY_DATE             +
+                " FROM " +TaskEntry.TABLE_DAILY_MOVEMENTS+ " tdm  INNER JOIN "                   +
+                TaskEntry.TABLE_STORE                    + " ts ON ts."     + TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_STORE_ID                 +" INNER JOIN  "                        +
+                TaskEntry.TABLE_CATEGORIES               + " tc ON tc."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_CATEGORY_ID              +" INNER JOIN  "                        +
+                TaskEntry.TABLE_PERMISSION               + " tp ON tp."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
+                TaskEntry.TABLE_CONVERT_STORE            + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
+                + TaskEntry.KEY_CONVERT_TO               + " WHERE ( ts. "  +TaskEntry.KEY_TYPE_STORE + " LIKE '%"
+                + typeStore + "%' OR tcs. "  +TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" +
+                typeStore + "%' ) AND tp. "  + TaskEntry.KEY_NAME_PERMISSION+ " LIKE '%" + search + "%'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
+            itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
+            itemDailyMovement.setConvertTo(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE_CONVERT)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
     //____________________get All DailyMovements by Category Name____________________________
-
     public ArrayList<ItemsStore>getAllDailyMovementsByCategoryName(String search){
         SQLiteDatabase db=this.getReadableDatabase();
         ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
@@ -788,6 +824,48 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemDailyMovements;
     }
+    //____________________get All DailyMovements by Category Name and TypeStore____________________________
+    public ArrayList<ItemsStore>getAllDailyMovementsByCategoryNameAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "         +"tdm. "   +TaskEntry._ID +
+                ", ts. " + TaskEntry.KEY_TYPE_STORE      + ", tc."  +TaskEntry.KEY_NAME_CATEGORY +
+                ", tp."  + TaskEntry.KEY_NAME_PERMISSION + ", tcs. "+TaskEntry.KEY_TYPE_STORE_CONVERT+
+                ", tdm. "+TaskEntry.KEY_INCOMING         +", tdm. "+TaskEntry.KEY_ISSUED         +
+                ", tdm. "+TaskEntry.KEY_DATE             +
+                " FROM " +TaskEntry.TABLE_DAILY_MOVEMENTS+ " tdm  INNER JOIN "                   +
+                TaskEntry.TABLE_STORE                    + " ts ON ts."     + TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_STORE_ID                 +" INNER JOIN  "                        +
+                TaskEntry.TABLE_CATEGORIES               + " tc ON tc."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_CATEGORY_ID              +" INNER JOIN  "                        +
+                TaskEntry.TABLE_PERMISSION               + " tp ON tp."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
+                TaskEntry.TABLE_CONVERT_STORE          + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
+                + TaskEntry.KEY_CONVERT_TO             + " WHERE ( ts. " +TaskEntry.KEY_TYPE_STORE + " LIKE '%" +
+                typeStore + "%' OR tcs."  +TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" +
+                typeStore + "%' ) AND tc."+ TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+                search + "%'";
+
+
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
+            itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
+            itemDailyMovement.setConvertTo(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE_CONVERT)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
+
     //____________________get All DailyMovements by  Type Store____________________________
 
     public ArrayList<ItemsStore>getAllDailyMovementsByTypeStore(String search){
@@ -807,6 +885,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                 + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
                 TaskEntry.TABLE_CONVERT_STORE          + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
                 + TaskEntry.KEY_CONVERT_TO             + " WHERE ts. " +TaskEntry.KEY_TYPE_STORE + " LIKE '%" +
+                search + "%' OR tcs. " +TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" +
                 search + "%'" ;
         Cursor c=db.rawQuery(selectQuery,null);
         //looping through all rows and adding to list
@@ -863,6 +942,45 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemDailyMovements;
     }
+    //____________________get All DailyMovements by  Incoming and TypeStore____________________________
+
+    public ArrayList<ItemsStore>getAllDailyMovementsByIncomingAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "         +"tdm. "   +TaskEntry._ID +
+                ", ts. " + TaskEntry.KEY_TYPE_STORE      + ", tc."  +TaskEntry.KEY_NAME_CATEGORY +
+                ", tp."  + TaskEntry.KEY_NAME_PERMISSION + ", tcs. "+TaskEntry.KEY_TYPE_STORE_CONVERT+
+                ", tdm. "+TaskEntry.KEY_INCOMING         +", tdm. "+TaskEntry.KEY_ISSUED         +
+                ", tdm. "+TaskEntry.KEY_DATE             +
+                " FROM " +TaskEntry.TABLE_DAILY_MOVEMENTS+ " tdm  INNER JOIN "                   +
+                TaskEntry.TABLE_STORE                    + " ts ON ts."     + TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_STORE_ID                 +" INNER JOIN  "                        +
+                TaskEntry.TABLE_CATEGORIES               + " tc ON tc."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_CATEGORY_ID              +" INNER JOIN  "                        +
+                TaskEntry.TABLE_PERMISSION               + " tp ON tp."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
+                TaskEntry.TABLE_CONVERT_STORE          + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
+                + TaskEntry.KEY_CONVERT_TO             + " WHERE ( ts. " +TaskEntry.KEY_TYPE_STORE + " LIKE '%" +
+                typeStore + "%' OR tcs."  +TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" +
+                typeStore + "%' ) AND tdm."+TaskEntry.KEY_INCOMING + " >= " +" ' "
+                + search + "'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
+            itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
+            itemDailyMovement.setConvertTo(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE_CONVERT)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
     //____________________get All DailyMovements by  Issued____________________________
 
     public ArrayList<ItemsStore>getAllDailyMovementsByIssued(String search){
@@ -882,6 +1000,45 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                 + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
                 TaskEntry.TABLE_CONVERT_STORE          + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
                 + TaskEntry.KEY_CONVERT_TO             + " WHERE tdm. " +TaskEntry.KEY_ISSUED + " >= " +" ' "
+                + search + "'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
+            itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
+            itemDailyMovement.setConvertTo(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE_CONVERT)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
+    //____________________get All DailyMovements by  Issued and TypeStore____________________________
+
+    public ArrayList<ItemsStore>getAllDailyMovementsByIssuedAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "         +"tdm. "   +TaskEntry._ID +
+                ", ts. " + TaskEntry.KEY_TYPE_STORE      + ", tc."  +TaskEntry.KEY_NAME_CATEGORY +
+                ", tp."  + TaskEntry.KEY_NAME_PERMISSION + ", tcs. "+TaskEntry.KEY_TYPE_STORE_CONVERT+
+                ", tdm. "+TaskEntry.KEY_INCOMING         +", tdm. "+TaskEntry.KEY_ISSUED         +
+                ", tdm. "+TaskEntry.KEY_DATE             +
+                " FROM " +TaskEntry.TABLE_DAILY_MOVEMENTS+ " tdm  INNER JOIN "                   +
+                TaskEntry.TABLE_STORE                    + " ts ON ts."     + TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_STORE_ID                 +" INNER JOIN  "                        +
+                TaskEntry.TABLE_CATEGORIES               + " tc ON tc."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_CATEGORY_ID              +" INNER JOIN  "                        +
+                TaskEntry.TABLE_PERMISSION               + " tp ON tp."      +TaskEntry._ID + " = " + "tdm."
+                + TaskEntry.KEY_PERMISSION_ID            +" LEFT JOIN  "                        +
+                TaskEntry.TABLE_CONVERT_STORE            + " tcs ON tcs."     +TaskEntry._ID+ " = " + "tdm."
+                + TaskEntry.KEY_CONVERT_TO               + " WHERE ( ts. " +TaskEntry.KEY_TYPE_STORE + " LIKE '%" +
+                typeStore + "%' OR tcs."  +TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" +
+                typeStore + "%' ) AND tdm. " +TaskEntry.KEY_ISSUED + " >= " +" ' "
                 + search + "'" ;
         Cursor c=db.rawQuery(selectQuery,null);
         //looping through all rows and adding to list
@@ -1073,6 +1230,34 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemStokeHouses;
     }
+    //____________________getting all StokeWareHouse by Search Category Name and TypeStore____________________________
+
+    public ArrayList<ItemsStore>getAllStokeHouseBySearchCategoryNameAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "+"tsw. " +TaskEntry._ID + ", ts. " + TaskEntry.KEY_TYPE_STORE + ", tc."
+                +TaskEntry.KEY_NAME_CATEGORY +", tsw."+ TaskEntry.KEY_FIRST_BALANCE + " FROM " + TaskEntry.TABLE_STORE + " ts, "
+                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE
+                + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
+                +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
+                + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID + " WHERE tc. " +TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+                search + "%' AND ts."+ TaskEntry.KEY_TYPE_STORE + " LIKE '%" + typeStore + "%'";
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemStokeHouse = new ItemsStore();
+            itemStokeHouse.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemStokeHouse.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemStokeHouse.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemStokeHouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
+            //adding to todo list
+            itemStokeHouses.add(itemStokeHouse);
+        }
+        return itemStokeHouses;
+    }
+
+
     //____________________getting all StokeWareHouse by Search Type Store ____________________________
 
     public ArrayList<ItemsStore>getAllStokeHouseBySearchTypeStore(String search){
@@ -1111,7 +1296,33 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                 + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
                 +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
                 + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID + " WHERE tsw. " +TaskEntry.KEY_FIRST_BALANCE +
-                " >= ' " +   search + " ' ";
+                " >= ' " +   search + " ' " ;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemStokeHouse = new ItemsStore();
+            itemStokeHouse.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemStokeHouse.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemStokeHouse.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemStokeHouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
+            //adding to todo list
+            itemStokeHouses.add(itemStokeHouse);
+        }
+        return itemStokeHouses;
+    }
+    //____________________getting all StokeWareHouse by Search First Balance and TypeStore ____________________________
+
+    public ArrayList<ItemsStore>getAllStokeHouseBySearchFirstBalanceAndTypeStore(String search,String typeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "+"tsw. " +TaskEntry._ID + ", ts. " + TaskEntry.KEY_TYPE_STORE + ", tc."
+                +TaskEntry.KEY_NAME_CATEGORY +", tsw."+ TaskEntry.KEY_FIRST_BALANCE + " FROM " + TaskEntry.TABLE_STORE + " ts, "
+                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE
+                + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
+                +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
+                + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID + " WHERE tsw. " +TaskEntry.KEY_FIRST_BALANCE +
+                " >= ' " +   search + " ' AND ts."+ TaskEntry.KEY_TYPE_STORE + " LIKE '%" + typeStore + "%'";
 
         Cursor c=db.rawQuery(selectQuery,null);
         //looping through all rows and adding to list

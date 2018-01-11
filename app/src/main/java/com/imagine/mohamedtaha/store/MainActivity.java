@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //if (!showInformation){
+        /*if (!showInformation){
             showInformation();
-          //  showInformation = true;
-        //}
+            showInformation = true;
+        }*/
         dbHelper = new TaskDbHelper(this);
         recyclerViewDailyMovements = (RecyclerView)findViewById(R.id.recycleViewDailyMovements);
         progressBarDaily = (ProgressBar)findViewById(R.id.progressBarDaily);

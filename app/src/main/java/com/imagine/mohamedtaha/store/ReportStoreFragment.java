@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 
@@ -17,6 +20,7 @@ import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderStokeWearehouse;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,25 +35,38 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
     //Identifier for the category dataloader;
     public static final int STORE_REPORT_LOADER = 6;
     private LinearLayoutManager mLayoutManager;
-    RadioButton RBNameGategory,RBTypeStore,RBFirstBalance;
+    RadioButton RBNameGategory,RBFirstBalance,RBChooseTypeStoreStoke,RBAllStoreStoke;
+    MaterialBetterSpinner SPSelectTypeStoreStoke;
+    String selectTypeStore;
 
 
-       @Override
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
            super.onCreate(savedInstanceState);
         //   view = inflater.inflate(R.layout.fragment_report_store, container, false);
            setContentView(R.layout.fragment_report_store);
            RBNameGategory=(RadioButton)findViewById(R.id.RBNameCategory);
-           RBTypeStore=(RadioButton)findViewById(R.id.RBTypeStore);
            RBFirstBalance=(RadioButton)findViewById(R.id.RBFirstBalance);
+           SPSelectTypeStoreStoke = (MaterialBetterSpinner)findViewById(R.id.SPSelectTypeStoreStoke);
+           RBChooseTypeStoreStoke = (RadioButton)findViewById(R.id.RBChooseTypeStoreStoke);
+           RBAllStoreStoke = (RadioButton)findViewById(R.id.RBAllStoreStoke);
 
+
+        SPSelectTypeStoreStoke.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectTypeStore = parent.getItemAtPosition(position).toString();
+
+            }
+        });
            dbHelper = new TaskDbHelper(this);
            recyclerViewReportStore = (RecyclerView) findViewById(R.id.recycleViewReportStore);
            recyclerViewReportStore.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
           adapterReportStore = new AdapterReportStore(this, itemsStoresReport);
            recyclerViewReportStore.setAdapter(adapterReportStore);
-
+           loadSpinnerDataForStore();
            getSupportLoaderManager().initLoader(STORE_REPORT_LOADER,null,this);
 
        }
@@ -108,22 +125,49 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (RBNameGategory.isChecked()){
+        if (RBAllStoreStoke.isChecked()){
+
+            if (RBNameGategory.isChecked()){
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchCategoryName(newText);
             if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
                 //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
-            }else if (RBTypeStore.isChecked()){
-            itemsStoresReport = dbHelper.getAllStokeHouseBySearchTypeStore(newText);
-            if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
-            //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
-                }
-        else  {
+            } else  {
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalance(newText);
             if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
         }
 
+        }else if (RBChooseTypeStoreStoke.isChecked()){
+            if (RBNameGategory.isChecked()){
+                itemsStoresReport = dbHelper.getAllStokeHouseBySearchCategoryNameAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+            } else  {
+                itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalanceAndTypeStore(newText,selectTypeStore);
+                if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+            }
+        }
+
 
         return false;
+    }
+    public void checkSpinner(View view){
+        boolean checked = ((RadioButton)view).isChecked();
+        switch (view.getId()){
+            case R.id.RBAllStoreStoke:
+                if (checked)
+                    SPSelectTypeStoreStoke.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.RBChooseTypeStoreStoke:
+                if (checked)
+                    SPSelectTypeStoreStoke.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+    public void loadSpinnerDataForStore(){
+        ArrayList<String> IDStore = dbHelper.getDataForSpinnerStore();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,IDStore);
+        //  arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SPSelectTypeStoreStoke.setAdapter(arrayAdapter);
     }
 
 }
