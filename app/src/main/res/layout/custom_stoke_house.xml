@@ -24,7 +24,7 @@
         <TextView
             android:id="@+id/text_m"
            style="@style/CardViewStyleMain"
-            android:text="رقم الترصيد" />
+            android:text="@string/number_stoke" />
     </TableRow>    <TableRow>
         <TextView
             android:id="@+id/TVCodeCategory"
@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/text_code_category"
             style="@style/CardViewStyleMain"
-            android:text="كود الصنف"
+            android:text="@string/name_category"
 />
 
     </TableRow>
@@ -46,7 +46,7 @@
     <TextView
         android:id="@+id/text_code_store"
         style="@style/CardViewStyleMain"
-        android:text="كود المخزن "
+        android:text="@string/name_type_store"
        />
 </TableRow>
     <TableRow>
@@ -58,20 +58,10 @@
         <TextView
             android:id="@+id/text_first_balance"
             style="@style/CardViewStyleMain"
-            android:text="الرصيد الأول"
+            android:text="@string/first_balance"
             />
     </TableRow>
-    <TableRow>
-        <TextView
-            android:id="@+id/TVNotes"
-            style="@style/CardViewStyleData"
-            />
-        <TextView
-            android:id="@+id/text_notes"
-            style="@style/CardViewStyleMain"
-            android:text="ملاحظات"
-            />
-    </TableRow>
+
       </TableLayout>
     <ImageView
         android:id="@+id/Image_edit"

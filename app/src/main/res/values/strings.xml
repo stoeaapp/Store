@@ -45,6 +45,8 @@
 
     <!-- TODO: Page dialog Add Category -->
     <string name="name_category">اسم الصنف </string>
+    <string name="number_stoke">رقم الترصيد  </string>
+
     <string name="natural_category">طبيعة الصنف</string>
     <string name="notes">ملاحظات </string>
     <string name="add_category_titile">اضافة الصنف </string>
@@ -107,7 +109,9 @@
     <string name="issued"> الصادر</string>
 
     <string name="convert_to"> محول إلى</string>
-    <string name="currentBalance"> الرصيد الحالي</string>
+    <string name="current_Balance"> الرصيد الحالي</string>
+    <string name="show_current_Balance"> إظهار الرصيد الحالي</string>
+
     <string name="error_empty_permission"> اختر الإذن</string>
     <string name="error_save_daily"> لم يتم حفظ الحركة</string>
     <string name="save_daily"> تم حفظ الحركة بنجاح </string>

@@ -75,7 +75,6 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         holder.codeCategoryView.setText(data.getNameGategory());
         holder.codeTypeStoreView.setText(data.getTypeStore());
         holder.firstBalanceView.setText(String.valueOf(data.getFirst_balanse()));
-        holder.noteView.setText(data.getNotes());
 
        // holder.dateView.setText(data.getCreatedDate());
      /*   holder.image_edit.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +97,6 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         TextView codeCategoryView;
         TextView codeTypeStoreView;
         TextView firstBalanceView;
-        TextView noteView;
         ImageView image_edit;
 
         public StokeWearhouseViewHolder(final View itemView) {
@@ -107,7 +105,6 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
              codeCategoryView = (TextView)itemView.findViewById(R.id.TVCodeCategory);
              codeTypeStoreView = (TextView)itemView.findViewById(R.id.TVCodeٍStore);
              firstBalanceView = (TextView)itemView.findViewById(R.id.TVFirstBalance);
-             noteView = (TextView)itemView.findViewById(R.id.TVNotes);
             image_edit = (ImageView)itemView.findViewById(R.id.Image_edit);
 
         }

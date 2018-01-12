@@ -15,12 +15,13 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".dialog.DialogAddCategory" />
         <activity android:name=".dialog.DialogAddStore" />
-        <activity android:name=".ReportStoreFragment"
+        <activity
+            android:name=".ReportStokeFragment"
             android:label="@string/title_report_first_balance"
             android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".ActivityForIncludeFragments"
@@ -61,10 +62,7 @@
         <activity android:name=".EditStokeWarehouse" />
         <activity
             android:name=".TableDaliyMovmentes"
-            android:label="@string/title_report_daily_movements"
-           >
-
-        </activity>
+            android:label="@string/title_report_daily_movements" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/NoActionBar">
@@ -74,17 +72,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReportesActivity"
+        <activity
+            android:name=".ReportesActivity"
             android:parentActivityName=".MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ReportDailyMovements"
+        <activity
+            android:name=".ReportDailyMovements"
             android:label="@string/title_report_daily_movements"
             android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+        <activity android:name=".ActivityShowReportes" />
+        <activity android:name=".ReportStoreActivity" />
+        <activity android:name=".ReportPremissionActivity" />
+        <activity android:name=".ReportCategoryActivity"></activity>
     </application>
 
 </manifest>

@@ -128,8 +128,6 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 ETIncoming.setText("");
                 ETIssued.setText("");
 
-
-
             }
         });
         SPNameCategoryDaily.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -237,8 +235,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
                 SPConvertToDaily.setError(getString(R.string.error_convert_to));
                 return;
             }
-            if (idSpinnerPermission == 1){
-                int issuedInteger = issuedInteger  = Integer.valueOf(issued);
+            if (idSpinnerPermission == 1 ||idSpinnerPermission ==3 ||idSpinnerPermission ==4 ){
+                int issuedInteger  = Integer.valueOf(issued);
                 if (issuedInteger > currentBalance){
                     ETIssued.requestFocus();
                     ETIssued.setError(getString(R.string.error_issued_balance));

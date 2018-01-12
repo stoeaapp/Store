@@ -13,10 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterReportDailyMovements;
@@ -26,6 +28,8 @@ import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 import com.imagine.mohamedtaha.store.loaders.LoaderStokeWearehouse;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,15 +44,19 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
     public static final int STORE_REPORT_LOADER = 7;
     private LinearLayoutManager mLayoutManager;
     RadioButton RBNameGategory,RBTypeStoreDaily,RBIssuedBalance,RBNamePermission,RBIncomingBalance,RBAllStore;
-    long sumIncoming;
     MaterialBetterSpinner SPSelectTypeStore;
     String selectTypeStore;
+    CheckBox CBShowCurrentBalanceDaily;
+    TextView show_current_balance_daily;
+    int showScreenCurrentBalance,firstBalance ,sumIncoming, sumIssued,sumConvertTo;
+
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //   view = inflater.inflate(R.layout.fragment_report_store, container, false);
+        //   view = inflater.inflate(R.layout.fragment_report_stoke, container, false);
         setContentView(R.layout.report_daily_movements);
         RBNameGategory=(RadioButton)findViewById(R.id.RBNameCategoryDaily);
         RBTypeStoreDaily=(RadioButton)findViewById(R.id.RBChooseTypeStore);
@@ -56,6 +64,8 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
         RBNamePermission=(RadioButton)findViewById(R.id.RBNamePermissionDaily);
         RBIncomingBalance=(RadioButton)findViewById(R.id.RBIncomingBalanceDaily);
         RBAllStore=(RadioButton)findViewById(R.id.RBAllStore);
+        CBShowCurrentBalanceDaily = (CheckBox)findViewById(R.id.CBShowCurrentBalanceDaily);
+        show_current_balance_daily=(TextView)findViewById(R.id.show_current_balance_daily);
         SPSelectTypeStore =(MaterialBetterSpinner) findViewById(R.id.SPSelectTypeStore);
 
         SPSelectTypeStore.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,7 +94,7 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view = inflater.inflate(R.layout.fragment_report_store, container, false);
+         view = inflater.inflate(R.layout.fragment_report_stoke, container, false);
 
         dbHelper = new TaskDbHelper(getActivity());
         recyclerViewReportStore = (RecyclerView) view.findViewById(R.id.recycleViewReportStore);
@@ -160,6 +170,12 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
 
             if (RBNameGategory.isChecked()){
                 itemsStoresReport = dbHelper.getAllDailyMovementsByCategoryNameAndTypeStore(newText,selectTypeStore);
+                sumIncoming = dbHelper.getIncomingByNameCategoryAndTypeStore(newText,selectTypeStore);
+                sumIssued = dbHelper.getIssuedByNameCategoryAndTypeStore(newText,selectTypeStore);
+                sumConvertTo = dbHelper.getConvertToByNameCategoryAndTypeStore(newText,selectTypeStore);
+                firstBalance = dbHelper.getFirstBalanceByNameCategoryAndTypeStore(newText,selectTypeStore);
+                showScreenCurrentBalance = firstBalance + sumIncoming + sumConvertTo -  sumIssued;
+                show_current_balance_daily.setText(showScreenCurrentBalance + " ");
                 if (itemsStoresReport !=null){
                     adapterReportDailyMovements.setFilter(itemsStoresReport);
                     //   sumIncoming = dbHelper.getIncomingReportesForDailyMovements(newText);
@@ -187,13 +203,51 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
         boolean checked = ((RadioButton)view).isChecked();
         switch (view.getId()){
             case R.id.RBAllStore:
-                if (checked)
+                if (checked){
                     SPSelectTypeStore.setVisibility(View.INVISIBLE);
-        break;
+                    CBShowCurrentBalanceDaily.setVisibility(View.GONE);
+                    CBShowCurrentBalanceDaily.setChecked(false);
+                    show_current_balance_daily.setVisibility(View.GONE);
+                }
+                        break;
             case R.id.RBChooseTypeStore:
                 if (checked)
                     SPSelectTypeStore.setVisibility(View.VISIBLE);
+                if (RBNameGategory.isChecked()){
+                    CBShowCurrentBalanceDaily.setVisibility(View.VISIBLE);
+                    show_current_balance_daily.setVisibility(View.INVISIBLE);
+
+                }
+
                 break;
+            case R.id.RBNameCategoryDaily:
+                if (RBTypeStoreDaily.isChecked()){
+                    CBShowCurrentBalanceDaily.setVisibility(View.VISIBLE);
+                    show_current_balance_daily.setVisibility(View.INVISIBLE);
+
+                }
+
+                break;
+                default:{
+                    CBShowCurrentBalanceDaily.setVisibility(View.GONE);
+                    show_current_balance_daily.setVisibility(View.GONE);
+                    CBShowCurrentBalanceDaily.setChecked(false);
+
+                }
+        }
+    }
+    public void checkCheckBoxDaily(View view){
+        boolean checked = ((CheckBox)view).isChecked();
+        switch (view.getId()){
+            case R.id.CBShowCurrentBalanceDaily:
+                if(checked){
+                    show_current_balance_daily.setVisibility(View.VISIBLE);
+                    break;
+                }else {
+                    show_current_balance_daily.setVisibility(View.INVISIBLE);
+                    break;
+                }
+
         }
     }
 

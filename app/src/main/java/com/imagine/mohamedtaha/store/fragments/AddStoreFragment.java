@@ -161,7 +161,7 @@ public class AddStoreFragment extends Fragment {
 
 
     public static class  EditStoreFragment extends DialogFragment implements DialogInterface.OnClickListener {
-        private EditText ETTypeStore,ETNotes;
+        private EditText ETTypeStore,ETNotesStore;
         private Button BTAddOrUpdate, BTDelete;
         private TextView TVTitleStore;
         Bundle intent;
@@ -175,7 +175,7 @@ public class AddStoreFragment extends Fragment {
             TextInputLayout ETTypeStoreMaterial = (TextInputLayout)view.findViewById(R.id.ETTypeStoreMaterial);
             TVTitleStore = (TextView)view.findViewById(R.id.TVTitleStore);
             ETTypeStore = (EditText)view.findViewById(R.id.ETTypeStoreStore);
-            ETNotes = (EditText)view.findViewById(R.id.EtNotesStore);
+            ETNotesStore = (EditText)view.findViewById(R.id.EtNotesStore);
             BTAddOrUpdate = (Button)view.findViewById(R.id.BTAddStore);
             BTDelete = (Button)view.findViewById(R.id.BTDeleteStore);
             dbHelper = new TaskDbHelper(getContext());
@@ -190,7 +190,7 @@ public class AddStoreFragment extends Fragment {
                 TVTitleStore.setText(getString(R.string.update_store_titile));
                 BTDelete.setVisibility(View.VISIBLE);
                 ETTypeStore.setText(intent.getString(TYPE_STORE));
-                ETNotes.setText(intent.getString(NOTES_STORE));
+                ETNotesStore.setText(intent.getString(NOTES_STORE));
             }
             BTAddOrUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -247,8 +247,8 @@ public class AddStoreFragment extends Fragment {
         }
         public void saveStore(){
             String typeStore =ETTypeStore.getText().toString().trim();
+            String notes = ETNotesStore.getText().toString().trim();
             boolean isExist = dbHelper.isExistTypeStore(typeStore);
-            String notes = ETNotes.getText().toString().trim();
 
             if ( intent == null && TextUtils.isEmpty(typeStore) ||TextUtils.isEmpty(typeStore) ){
                 // ETTypeStore.setError("not should leave field name emputy");
@@ -257,14 +257,14 @@ public class AddStoreFragment extends Fragment {
                 ETTypeStore.setError(getString(R.string.error_empty_text));
                 return;
             }
-
+            if (isExist ==true){
+                ETTypeStore.requestFocus();
+                ETTypeStore.setError(getString(R.string.error_exist_name));
+                return;
+            }
             if (intent == null) {
 
-                if (isExist ==true){
-                    ETTypeStore.requestFocus();
-                    ETTypeStore.setError(getString(R.string.error_exist_name));
-                    return;
-                }
+
                 ItemsStore itemsStoreSave = new ItemsStore();
                 itemsStoreSave.setTypeStore(typeStore);
                 itemsStoreSave.setConvertTo(typeStore);
@@ -308,12 +308,12 @@ public class AddStoreFragment extends Fragment {
             } }
         public void deleteStore(){
             if (intent != null){
-                String typeStore =ETTypeStore.getText().toString();
-                String notes = ETNotes.getText().toString();
+                //String typeStore =ETTypeStore.getText().toString();
+                //String notes = ETNotesStore.getText().toString();
                 ItemsStore itemsStoreDelte = new ItemsStore();
                 itemsStoreDelte.setId(intent.getInt(ID_STORE));
-                itemsStoreDelte.setTypeStore(typeStore);
-                itemsStoreDelte.setNotes(notes);
+              //  itemsStoreDelte.setTypeStore(typeStore);
+               // itemsStoreDelte.setNotes(notes);
                 boolean isExistDialyMovements = dbHelper.isTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));
                 boolean isExistStokeWearehouse = dbHelper.isTypeStoreUsedStokewearhouse(intent.getInt(ID_STORE));
                 boolean isExistConvertDailyMovements = dbHelper.isConvertTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));

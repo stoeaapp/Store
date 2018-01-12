@@ -1,7 +1,6 @@
 package com.imagine.mohamedtaha.store;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -305,9 +304,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         }
         if (id == R.id.add_reportes){
-              Intent intent = new Intent(MainActivity.this,ReportStoreFragment.class);
+              Intent intent = new Intent(MainActivity.this,ReportStokeFragment.class);
             startActivity(intent);
-          /*  ReportStoreFragment fragment = new ReportStoreFragment();
+          /*  ReportStokeFragment fragment = new ReportStokeFragment();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.contaner,fragment);
             transaction.commit();*/

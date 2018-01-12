@@ -537,6 +537,98 @@ public class TaskDbHelper extends SQLiteOpenHelper {
           }
     //____________________get report in Issued and Incoming by name category and type store____________________________
 
+
+    public int getFirstBalanceByNameCategoryAndTypeStore(String nameCategory,String TypeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selectQuery = "SELECT SUM( tsw." +TaskEntry.KEY_FIRST_BALANCE  + ") FROM "
+                + TaskEntry.TABLE_STOCKING_WAREHOUSE + " tsw " +
+                " INNER JOIN " + TaskEntry.TABLE_CATEGORIES + " tc ON " +
+                " tsw. "+TaskEntry.KEY_CATEGORY_ID + " = tc. " + TaskEntry._ID +
+                " INNER JOIN " + TaskEntry.TABLE_STORE + " ts ON tsw. "+ TaskEntry.KEY_STORE_ID +" = "
+                +" ts. " + TaskEntry._ID + " WHERE tc. "+TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +nameCategory +
+                 "%' AND ts."+TaskEntry.KEY_TYPE_STORE + " LIKE '%" + TypeStore + "%'" ;
+
+                int sumFirstBalance = 0;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        c.moveToFirst();
+
+        if(c != null && c.getCount()>0){
+            sumFirstBalance = c.getInt(0);
+        }
+        return sumFirstBalance;
+
+    }
+
+    //____________________get report in  SUM(Incoming) by name category and type store____________________________
+    public int getIncomingByNameCategoryAndTypeStore(String nameCategory,String TypeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selectQuery = "SELECT SUM( td." +TaskEntry.KEY_INCOMING + ") FROM "
+                + TaskEntry.TABLE_DAILY_MOVEMENTS + " td " +
+                " INNER JOIN " + TaskEntry.TABLE_CATEGORIES + " tc ON " +
+                " td. "+TaskEntry.KEY_CATEGORY_ID + " = tc. " + TaskEntry._ID +
+                " INNER JOIN " + TaskEntry.TABLE_STORE + " ts ON td. "+ TaskEntry.KEY_STORE_ID +" = "
+                +" ts. " + TaskEntry._ID + " WHERE tc. "+TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +nameCategory +
+                "%' AND ts."+TaskEntry.KEY_TYPE_STORE + " LIKE '%" + TypeStore + "%'" ;
+
+        int sumFirstBalance = 0;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        c.moveToFirst();
+
+        if(c != null && c.getCount()>0){
+            sumFirstBalance = c.getInt(0);
+        }
+        return sumFirstBalance;
+
+    }
+    //____________________get report in  SUM(Issued) by name category and type store____________________________
+    public int getIssuedByNameCategoryAndTypeStore(String nameCategory,String TypeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selectQuery = "SELECT SUM( td." +TaskEntry.KEY_ISSUED + ") FROM "
+                + TaskEntry.TABLE_DAILY_MOVEMENTS + " td " +
+                " INNER JOIN " + TaskEntry.TABLE_CATEGORIES + " tc ON " +
+                " td. "+TaskEntry.KEY_CATEGORY_ID + " = tc. " + TaskEntry._ID +
+                " INNER JOIN " + TaskEntry.TABLE_STORE + " ts ON td. "+ TaskEntry.KEY_STORE_ID +" = "
+                +" ts. " + TaskEntry._ID + " WHERE tc. "+TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +nameCategory +
+                "%' AND ts."+TaskEntry.KEY_TYPE_STORE + " LIKE '%" + TypeStore + "%'" ;
+
+        int sumFirstBalance = 0;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        c.moveToFirst();
+
+        if(c != null && c.getCount()>0){
+            sumFirstBalance = c.getInt(0);
+        }
+        return sumFirstBalance;
+
+    }
+    //____________________get report in  SUM(ConvertTo) by name category and type store____________________________
+    public int getConvertToByNameCategoryAndTypeStore(String nameCategory,String TypeStore){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selectQuery = "SELECT SUM( td." +TaskEntry.KEY_ISSUED + ") FROM "
+                + TaskEntry.TABLE_DAILY_MOVEMENTS + " td " +
+                " INNER JOIN " + TaskEntry.TABLE_CATEGORIES + " tc ON " +
+                " td. "+TaskEntry.KEY_CATEGORY_ID + " = tc. " + TaskEntry._ID +
+                " INNER JOIN " + TaskEntry.TABLE_CONVERT_STORE + " tcs ON td. "+ TaskEntry.KEY_CONVERT_TO +" = "
+                +" tcs. " + TaskEntry._ID + " WHERE tc. "+TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +nameCategory +
+                "%' AND tcs."+TaskEntry.KEY_TYPE_STORE_CONVERT + " LIKE '%" + TypeStore + "%'" ;
+
+        int sumFirstBalance = 0;
+
+        Cursor c=db.rawQuery(selectQuery,null);
+        c.moveToFirst();
+
+        if(c != null && c.getCount()>0){
+            sumFirstBalance = c.getInt(0);
+        }
+        return sumFirstBalance;
+
+    }
+
+    //____________________get report in Issued and Incoming by name category and type store____________________________
+
     public int getIncomingForDailyMovements(long categoryId,long storeId){
         SQLiteDatabase db=this.getReadableDatabase();
         String selectQuery = "SELECT SUM( " +TaskEntry.KEY_INCOMING  +

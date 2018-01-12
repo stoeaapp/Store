@@ -4,42 +4,42 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.imagine.mohamedtaha.store.ReportStoreFragment">
+    tools:context="com.imagine.mohamedtaha.store.ReportStokeFragment">
     <RadioGroup
         android:id="@+id/groupRadioStore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="right"
         android:checkedButton="@id/RBAllStoreStoke"
-        android:padding="5dp"
         android:background="@color/colorPrimary"
         >
+
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:id="@+id/SPSelectTypeStoreStoke"
             android:hint="@string/type_store"
-            android:layout_weight="2"
             app:met_floatingLabel = "highlight"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:visibility="invisible"
+
             />
         <RadioButton
             android:id="@+id/RBChooseTypeStoreStoke"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/icons"
             android:text="@string/select_type_store"
             android:gravity="center"
             android:onClick="checkSpinner"
+            android:layout_marginStart="10dp"
             />
         <RadioButton
             android:id="@+id/RBAllStoreStoke"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="12sp"
@@ -47,20 +47,19 @@
             android:text="@string/all_store"
             android:gravity="center"
             android:onClick="checkSpinner"
-
+            android:layout_marginStart="10dp"
 
             />
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1.50"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
             android:gravity="right"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="16dp"
             android:textStyle="bold"
-            android:paddingLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textSize="12sp"
             android:textColor="@color/primary_text"/>
 
@@ -68,25 +67,48 @@
 
     <RadioGroup
     android:id="@+id/groupRadio"
+    android:layout_below="@+id/groupRadioStore"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-    android:gravity="center_horizontal"
+        android:gravity="right"
     android:checkedButton="@id/RBNameCategory"
     android:background="@color/colorPrimary"
     >
-
-
+        <TextView
+            android:id="@+id/show_current_balance_stoke"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@color/icons"
+            android:visibility="invisible"
+            />
+        <CheckBox
+            android:id="@+id/CBShowCurrentBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_Balance"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/icons"
+            android:layout_marginStart="10dp"
+            android:visibility="invisible"
+            android:onClick="checkCheckBox"
+            />
     <RadioButton
         android:id="@+id/RBFirstBalance"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="@color/icons"
         android:text="@string/first_balance"
         android:gravity="center"
+        android:layout_marginEnd="10dp"
+        android:onClick="checkSpinner"
         />
 
     <RadioButton
@@ -96,8 +118,11 @@
         android:text="@string/name_category"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="15sp"
+        android:textSize="12sp"
+        android:layout_marginEnd="40dp"
         android:textColor="@color/icons"
+        android:onClick="checkSpinner"
+
 
         />
 
@@ -165,5 +190,6 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

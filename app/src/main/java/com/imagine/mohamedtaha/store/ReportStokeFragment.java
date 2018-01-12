@@ -13,8 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class ReportStoreFragment extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener{
+public class ReportStokeFragment extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener{
     public static AdapterReportStore adapterReportStore;
     TaskDbHelper dbHelper;
     RecyclerView recyclerViewReportStore;
@@ -38,19 +40,24 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
     RadioButton RBNameGategory,RBFirstBalance,RBChooseTypeStoreStoke,RBAllStoreStoke;
     MaterialBetterSpinner SPSelectTypeStoreStoke;
     String selectTypeStore;
+    TextView showCurrentBalance,title_current_balance_stoke;
+    int showScreenCurrentBalance;
+    CheckBox CBShowCurentBalance;
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
            super.onCreate(savedInstanceState);
-        //   view = inflater.inflate(R.layout.fragment_report_store, container, false);
-           setContentView(R.layout.fragment_report_store);
+        //   view = inflater.inflate(R.layout.fragment_report_stoke, container, false);
+           setContentView(R.layout.fragment_report_stoke);
            RBNameGategory=(RadioButton)findViewById(R.id.RBNameCategory);
            RBFirstBalance=(RadioButton)findViewById(R.id.RBFirstBalance);
            SPSelectTypeStoreStoke = (MaterialBetterSpinner)findViewById(R.id.SPSelectTypeStoreStoke);
            RBChooseTypeStoreStoke = (RadioButton)findViewById(R.id.RBChooseTypeStoreStoke);
            RBAllStoreStoke = (RadioButton)findViewById(R.id.RBAllStoreStoke);
+           CBShowCurentBalance = (CheckBox)findViewById(R.id.CBShowCurrentBalance);
+           showCurrentBalance  =(TextView)findViewById(R.id.show_current_balance_stoke);
 
 
         SPSelectTypeStoreStoke.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,7 +74,9 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
           adapterReportStore = new AdapterReportStore(this, itemsStoresReport);
            recyclerViewReportStore.setAdapter(adapterReportStore);
            loadSpinnerDataForStore();
-           getSupportLoaderManager().initLoader(STORE_REPORT_LOADER,null,this);
+
+        getSupportLoaderManager().initLoader(STORE_REPORT_LOADER,null,this);
+
 
        }
        /*
@@ -76,7 +85,7 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         view = inflater.inflate(R.layout.fragment_report_store, container, false);
+         view = inflater.inflate(R.layout.fragment_report_stoke, container, false);
 
         dbHelper = new TaskDbHelper(getActivity());
         recyclerViewReportStore = (RecyclerView) view.findViewById(R.id.recycleViewReportStore);
@@ -119,6 +128,7 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+     //  showCurrentBalance.setText(showScreenCurrentBalance+ " ");
 
         return false;
     }
@@ -130,7 +140,6 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
             if (RBNameGategory.isChecked()){
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchCategoryName(newText);
             if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
-                //  getSupportLoaderManager().restartLoader(STOKE_LOADER,null,this);
             } else  {
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalance(newText);
             if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
@@ -138,7 +147,11 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
 
         }else if (RBChooseTypeStoreStoke.isChecked()){
             if (RBNameGategory.isChecked()){
+
                 itemsStoresReport = dbHelper.getAllStokeHouseBySearchCategoryNameAndTypeStore(newText,selectTypeStore);
+                showScreenCurrentBalance = dbHelper.getFirstBalanceByNameCategoryAndTypeStore(newText,selectTypeStore);
+                showCurrentBalance.setText(showScreenCurrentBalance+ " ");
+
                 if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
             } else  {
                 itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalanceAndTypeStore(newText,selectTypeStore);
@@ -149,16 +162,48 @@ public class ReportStoreFragment extends AppCompatActivity implements LoaderMana
 
         return false;
     }
+    public void checkCheckBox(View view){
+        boolean checked = ((CheckBox)view).isChecked();
+        switch (view.getId()){
+            case R.id.CBShowCurrentBalance:
+                if(checked){
+                    showCurrentBalance.setVisibility(View.VISIBLE);
+                    break;
+                }else {
+                    showCurrentBalance.setVisibility(View.INVISIBLE);
+                    break;
+                }
+
+        }
+
+    }
     public void checkSpinner(View view){
         boolean checked = ((RadioButton)view).isChecked();
         switch (view.getId()){
             case R.id.RBAllStoreStoke:
                 if (checked)
-                    SPSelectTypeStoreStoke.setVisibility(View.INVISIBLE);
+                SPSelectTypeStoreStoke.setVisibility(View.INVISIBLE);
+                CBShowCurentBalance.setVisibility(View.INVISIBLE);
+                showCurrentBalance.setVisibility(View.INVISIBLE);
+                CBShowCurentBalance.setChecked(false);
                 break;
             case R.id.RBChooseTypeStoreStoke:
                 if (checked)
-                    SPSelectTypeStoreStoke.setVisibility(View.VISIBLE);
+                 SPSelectTypeStoreStoke.setVisibility(View.VISIBLE);
+                if (RBNameGategory.isChecked()){
+                    CBShowCurentBalance.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.RBNameCategory:
+                if (RBChooseTypeStoreStoke.isChecked()){
+                    CBShowCurentBalance.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.RBFirstBalance:
+                CBShowCurentBalance.setVisibility(View.INVISIBLE);
+                showCurrentBalance.setVisibility(View.INVISIBLE);
+                CBShowCurentBalance.setChecked(false);
+
                 break;
         }
     }
