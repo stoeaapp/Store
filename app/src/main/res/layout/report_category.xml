@@ -5,8 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.imagine.mohamedtaha.store.ReportCategory">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_margin="11dp"
+        >
+        <Button
+            android:id="@+id/showDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="اختر التاريخ"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_date_range"
+            android:visibility="invisible"
+            />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="10dp"
+            android:checkedButton="@id/RB_NameCategory"
+            android:layout_gravity="center"
+            >
+            <RadioButton
+             android:id="@+id/RB_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:onClick="checkCheckBoxCategory"
+            android:text="التاريخ"/>
+            <RadioButton
+                android:id="@+id/RB_NameCategory"
+                android:onClick="checkCheckBoxCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_category"/>
+        </RadioGroup>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/searchBy"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/primary_text"/>
+
+    </LinearLayout>
     <TableLayout
-        android:layout_marginTop="16dp"
+
+        android:layout_marginTop="62dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="16dp"

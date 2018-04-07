@@ -251,6 +251,35 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemDailyMovements;
     }
+    public ArrayList<ItemsStore>getAllCategoryByDate(String date){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = " SELECT * FROM " + TaskEntry.TABLE_CATEGORIES +
+                " WHERE " + TaskEntry.KEY_DATE  + " >='" +
+                date + "'" ;
+//        String selectQuery = "SELECT  DISTINCT "         +"tc."   +TaskEntry._ID +
+//                 ", tc."  +TaskEntry.KEY_NAME_CATEGORY +", tc. "+TaskEntry.KEY_DATE+
+//                ", tc. "+TaskEntry.KEY_NATURAL_CATEGORY         +", tu. "+TaskEntry.KEY_NAME_USER + ", tc. "+
+//                TaskEntry.KEY_NOTES         +
+//                " FROM " +TaskEntry.TABLE_CATEGORIES+ " tc  INNER JOIN "                   +
+//                TaskEntry.TABLE_USERS                    + " tu ON tu."     + TaskEntry._ID + " = " + "tc."
+//                + TaskEntry.KEY_USER_ID                   + " WHERE tc. " +TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+//                search + "%'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+            //   itemDailyMovement.setUserName(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_USER)));
+            itemDailyMovement.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
 
     public ArrayList<ItemsStore>getAllCategoryByCategoryName(){
         SQLiteDatabase db=this.getReadableDatabase();

@@ -61,7 +61,8 @@
     <string name="edit_category_titile">تعديل الصنف </string>
     <string name="search">ابحث في </string>
 
-    search
+    <string name="searchBy">ابحث بـ </string>
+
     <string name="BtAdd">إضافة </string>
     <string name="BTDelete">حذف </string>
     <string name="BTUpdate">تعديل </string>
