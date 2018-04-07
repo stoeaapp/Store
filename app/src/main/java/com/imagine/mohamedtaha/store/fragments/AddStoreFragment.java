@@ -95,7 +95,7 @@ public class AddStoreFragment extends Fragment {
 
 
         //Initalize the adapter and attach it to the RecycleView
-        //  adapterAddCategory = new AdapterAddCategory(getActivity());
+        //  adapterAddCategoryContentProvider = new AdapterAddCategoryContentProvider(getActivity());
 
 
         //Setup the item click listener
@@ -217,8 +217,7 @@ public class AddStoreFragment extends Fragment {
 
         }
 
-        private   void getPlanets()
-        {
+        private   void getPlanets()  {
             itemsStores.clear();
             TaskDbHelper db=new TaskDbHelper(getContext());
             ItemsStore p=null;
@@ -247,7 +246,7 @@ public class AddStoreFragment extends Fragment {
         }
         public void saveStore(){
             String typeStore =ETTypeStore.getText().toString().trim();
-            String notes = ETNotesStore.getText().toString().trim();
+            String notesStore = ETNotesStore.getText().toString().trim();
             boolean isExist = dbHelper.isExistTypeStore(typeStore);
 
             if ( intent == null && TextUtils.isEmpty(typeStore) ||TextUtils.isEmpty(typeStore) ){
@@ -263,12 +262,10 @@ public class AddStoreFragment extends Fragment {
                 return;
             }
             if (intent == null) {
-
-
                 ItemsStore itemsStoreSave = new ItemsStore();
                 itemsStoreSave.setTypeStore(typeStore);
                 itemsStoreSave.setConvertTo(typeStore);
-                itemsStoreSave.setNotes(notes);
+                itemsStoreSave.setNotes(notesStore);
                 if (itemsStoreSave == null) {
                     Toast.makeText(getContext(),getString(R.string.error_save_store), Toast.LENGTH_LONG).show();
                 }else {
@@ -285,7 +282,7 @@ public class AddStoreFragment extends Fragment {
                 itemsStoreUpdate.setId(intent.getInt(ID_STORE));
                 itemsStoreUpdate.setTypeStore(typeStore);
                 itemsStoreUpdate.setConvertTo(typeStore);
-                itemsStoreUpdate.setNotes(notes);
+                itemsStoreUpdate.setNotes(notesStore);
                 boolean isExistDialyMovements = dbHelper.isTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));
                 boolean isExistStokeWearehouse = dbHelper.isTypeStoreUsedStokewearhouse(intent.getInt(ID_STORE));
                 boolean isExistConvertDailyMovements = dbHelper.isConvertTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));

@@ -269,7 +269,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     }
     public void loadSpinnerDataForCategory(){
         ArrayList<String >IDCategory = dbHelperStokeWearehouse.getDataForSpinnerCategory();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,IDCategory);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, IDCategory);
         // arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SPCodeCategory.setAdapter(arrayAdapter);
     }

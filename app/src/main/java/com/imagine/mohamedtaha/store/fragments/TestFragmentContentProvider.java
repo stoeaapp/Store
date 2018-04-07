@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +25,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class TestFragment extends DialogFragment implements DialogInterface.OnClickListener{
+public class TestFragmentContentProvider extends DialogFragment implements DialogInterface.OnClickListener{
     private static final String EXTRA_ID = "id";
     EditText ETCategoryName,ETNaturalCategory,EtNotesFF;
     private TextView TVTitleCategory;
@@ -39,19 +38,19 @@ public class TestFragment extends DialogFragment implements DialogInterface.OnCl
 
 
     long id;
-    public static TestFragment newInstance(long id){
+    public static TestFragmentContentProvider newInstance(long id){
         Bundle bundle = new Bundle();
         bundle.putLong(EXTRA_ID,id);
 
-        TestFragment testFragment = new TestFragment();
-        testFragment.setArguments(bundle);
-        return testFragment;
+        TestFragmentContentProvider testFragmentContentProvider = new TestFragmentContentProvider();
+        testFragmentContentProvider.setArguments(bundle);
+        return testFragmentContentProvider;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_test,null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_content_provider,null);
         TVTitleCategory = (TextView)view.findViewById(R.id.TVTitleCategory);
         ETCategoryName = (EditText)view.findViewById(R.id.ETNameCategoryFF);
         ETNaturalCategory =(EditText)view.findViewById(R.id.ETNaturalGategoryFF);

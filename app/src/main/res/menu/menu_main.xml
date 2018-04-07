@@ -22,12 +22,17 @@
         android:orderInCategory="100"
         android:title="@string/add_stocking_warehouse"
         app:showAsAction="always"/>
-    <item android:id="@+id/add_reportes"
+    <item android:id="@+id/reportes"
         android:orderInCategory="100"
-        android:title="@string/add_reportes"
+        android:title="@string/reportes"
         app:showAsAction="never"/>
-    <item android:id="@+id/add_reportes_daily"
+    <item android:id="@+id/backup"
         android:orderInCategory="100"
-        android:title="@string/add_reportes_daily"
+        android:title="@string/backup"
         app:showAsAction="never"/>
+    <item android:id="@+id/import_backup"
+        android:orderInCategory="100"
+        android:title="@string/import_backup"
+        app:showAsAction="never"/>
+
 </menu>

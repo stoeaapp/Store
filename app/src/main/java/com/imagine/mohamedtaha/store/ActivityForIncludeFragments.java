@@ -62,7 +62,7 @@ public class ActivityForIncludeFragments extends AppCompatActivity{
                 Intent intent = new Intent(ActivityForIncludeFragments.this,StockingWarehouse.class);
                 startActivity(intent);
                 break;
-            case R.id.add_reportes:
+            case R.id.reportes:
                 Intent intentReport = new Intent(ActivityForIncludeFragments.this,TableDaliyMovmentes.class);
                 startActivity(intentReport);
                 break;

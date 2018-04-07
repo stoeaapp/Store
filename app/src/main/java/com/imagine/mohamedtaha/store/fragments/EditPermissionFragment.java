@@ -103,13 +103,13 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             ETNamePermission.setError(getString(R.string.error_empty_text));
             return;
         }
-
+       /* if (isExist ==true){
+            ETNamePermission.requestFocus();
+            ETNamePermission.setError(getString(R.string.error_exist_permission));
+            return;
+        }*/
         if (intent == null) {
-            if (isExist ==true){
-                ETNamePermission.requestFocus();
-                ETNamePermission.setError(getString(R.string.error_exist_permission));
-                return;
-            }
+
             ItemsStore itemSavePErmission = new ItemsStore();
             itemSavePErmission.setNamePermission(namePermission);
             itemSavePErmission.setNotes(notes);

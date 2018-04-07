@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,9 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.CursorLoader;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.TextView;
 
 
-import com.imagine.mohamedtaha.store.adapter.AdapterAddCategory;
+import com.imagine.mohamedtaha.store.adapter.AdapterAddCategoryContentProvider;
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
@@ -27,20 +25,18 @@ import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
 import java.util.List;
 
 
-public class Add_Category_Fragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class Add_Category_Fragment_ContentProvider extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     // TODO: Rename parameter arguments, choose names that match
     FloatingActionButton fabAddCategory;
     RecyclerView mRecycleView;
-    AdapterAddCategory adapterAddCategory;
+    AdapterAddCategoryContentProvider adapterAddCategoryContentProvider;
     private LinearLayoutManager mLayoutManager;
     View emptView;
-
-    List<ItemsStore>categoryFildes;
 
    //Identifier for the category dataloader;
     private static final int CATEGORY_LOADER = 0;
 
-    public Add_Category_Fragment() {
+    public Add_Category_Fragment_ContentProvider() {
         // Required empty public constructor
     }
 
@@ -70,9 +66,9 @@ View view;
         emptView = view.findViewById(R.id.empty_view_category);
 
                 //Initalize the adapter and attach it to the RecycleView
-     //  adapterAddCategory = new AdapterAddCategory(getActivity());
+     //  adapterAddCategoryContentProvider = new AdapterAddCategoryContentProvider(getActivity());
 
-        adapterAddCategory = new AdapterAddCategory(new AdapterAddCategory.showDetial() {
+        adapterAddCategoryContentProvider = new AdapterAddCategoryContentProvider(new AdapterAddCategoryContentProvider.showDetial() {
             @Override
             public void itemShowDetail(Cursor cursor) {
                 /*
@@ -83,15 +79,15 @@ View view;
                 intent.setData(currentCategoryUri);
                 startActivity(intent);*/
                 long id = cursor.getLong(cursor.getColumnIndex(TaskEntry._ID));
-                TestFragment f = TestFragment.newInstance(id);
+                TestFragmentContentProvider f = TestFragmentContentProvider.newInstance(id);
                 f.show(getFragmentManager(),"dialog");
 
             }
         });
-        mRecycleView.setAdapter(adapterAddCategory);
+        mRecycleView.setAdapter(adapterAddCategoryContentProvider);
 /*
-        mRecycleView.addOnItemTouchListener(new AdapterAddCategory.RecycleTouchListener(getActivity(),
-                mRecycleView, new AdapterAddCategory.ClickListener() {
+        mRecycleView.addOnItemTouchListener(new AdapterAddCategoryContentProvider.RecycleTouchListener(getActivity(),
+                mRecycleView, new AdapterAddCategoryContentProvider.ClickListener() {
 
             @Override
             public void onClick(View view, int position) {
@@ -119,7 +115,7 @@ View view;
         fabAddCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new TestFragment().show(getFragmentManager(),"dialog");
+                new TestFragmentContentProvider().show(getFragmentManager(),"dialog");
            //     Intent intent = new Intent(getActivity(), EditCategory.class);
              //   startActivity(intent);
 
@@ -206,7 +202,7 @@ View view;
 //           emptView.setVisibility(View.VISIBLE);
             mRecycleView.setVisibility(View.VISIBLE);
             emptView.setVisibility(View.GONE);
-            adapterAddCategory.swapCursor(data);
+            adapterAddCategoryContentProvider.swapCursor(data);
 
         }
 
@@ -214,7 +210,7 @@ View view;
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        adapterAddCategory.swapCursor(null);
+        adapterAddCategoryContentProvider.swapCursor(null);
 
     }
 

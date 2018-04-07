@@ -14,22 +14,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterReportDailyMovements;
-import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
-import com.imagine.mohamedtaha.store.loaders.LoaderStokeWearehouse;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -103,8 +96,8 @@ public class ReportDailyMovements  extends  AppCompatActivity implements LoaderM
 
         // progressBarPermission =(ProgressBar)view.findViewById(R.id.progressBarPermission);
 
-        adapterReportStore = new AdapterReportStore(getContext(), itemsStoresReport);
-        recyclerViewReportStore.setAdapter(adapterReportStore);
+        adapterReportStoke = new AdapterReportStoke(getContext(), itemsStoresReport);
+        recyclerViewReportStore.setAdapter(adapterReportStoke);
 
         return view;
     }*/

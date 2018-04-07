@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/icons"
+    tools:context="com.imagine.mohamedtaha.store.fragments.AddCategoryFragment">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_title">
+        <ImageView
+            android:id="@+id/image_titile"
+            style="@style/ImageViewTitle"/>
+        <TextView
+            android:id="@+id/TVTitleCategory"
+            style="@style/TextViewTitle"
+            android:text="@string/add_category_titile"
+            />
+    </RelativeLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/ETNameCategoryFF"
+            android:hint="@string/name_category"
+            style="@style/EditTextFragmentTextFirst" />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/ETNaturalGategoryFF"
+            style="@style/EditTextFragmentTextSecond"
+            android:hint="@string/natural_category"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/EtNotesFF"
+            style="@style/EditTextFragmentTextSecond"
+            android:hint="@string/notes"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <LinearLayout
+        style="@style/LayoutButtonFragment">
+
+        <Button
+            android:id="@+id/BTDeleteCategory"
+            android:text="@string/BTDelete"
+            style="@style/ButtonFragment"
+            android:visibility="gone"
+
+            />
+        <Button
+            android:id="@+id/BTAddCategory"
+            style="@style/ButtonFragment"
+            android:text="@string/BtAdd"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

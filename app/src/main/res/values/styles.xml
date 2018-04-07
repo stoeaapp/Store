@@ -168,6 +168,8 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_alignParentRight">true</item>
+        <item name="android:description">@string/content_picture</item>
+
     </style>
 
 
@@ -262,5 +264,12 @@
         <item name="android:inputType">number</item>
         <item name="android:visibility">gone</item>
 
+    </style>
+
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 </resources>

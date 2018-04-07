@@ -22,9 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
+import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
+import com.imagine.mohamedtaha.store.data.TaskContract;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 //import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
@@ -35,10 +38,12 @@ import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import tourguide.tourguide.TourGuide;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>
+        ,SearchView.OnQueryTextListener,BackupData.OnBackupListener {
     private static final int Daily_LOADER = 4;
     TaskDbHelper dbHelper ;
     ArrayList<ItemsStore>itemsDaily = new ArrayList<>();
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String DIALOG_DALIY_MOVEMENTS = "dialogDaliy";
 
+    private BackupData backupData;
+
     View emptView;
 
     TextView convertTo ;
@@ -74,11 +81,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*if (!showInformation){
+     /*   if (!showInformation){
             showInformation();
             showInformation = true;
         }*/
         dbHelper = new TaskDbHelper(this);
+        backupData = new BackupData(this);
+        backupData.setOnBackListener(this);
         recyclerViewDailyMovements = (RecyclerView)findViewById(R.id.recycleViewDailyMovements);
         progressBarDaily = (ProgressBar)findViewById(R.id.progressBarDaily);
         recyclerViewDailyMovements.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -303,18 +312,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             startActivity(intent);
 
         }
-        if (id == R.id.add_reportes){
-              Intent intent = new Intent(MainActivity.this,ReportStokeFragment.class);
+        if (id == R.id.reportes){
+              Intent intent = new Intent(MainActivity.this,ReportesActivity.class);
             startActivity(intent);
           /*  ReportStokeFragment fragment = new ReportStokeFragment();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.contaner,fragment);
             transaction.commit();*/
+        }if (id == R.id.backup){
+            backupData.exportToSD();
+           // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
         }
-        if (id == R.id.add_reportes_daily){
-            Intent intent = new Intent(MainActivity.this,ReportDailyMovements.class);
-            startActivity(intent);
-
+        if (id == R.id.import_backup){
+            backupData.importFromSD();
+            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -370,4 +381,75 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return false;
     }
 
+    @Override
+    public void onFinishExport(String error) {
+        String notify = error;
+        if (error == null){
+            notify = "تم تصدير قاعدة البيانات بنجاح";
+        }
+        Toast.makeText(MainActivity.this, notify, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onFinishImport(String error) {
+        String notify = error;
+        if (error == null) {
+            notify = "تم إستيراد قاعدة البيانات بنجاح";
+         //   updateListNote();
+        }
+        Toast.makeText(MainActivity.this, notify, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+      //  updateListNote();
+
+    }
+
+    /**
+     * select all note from database and set to ls
+     * use for loop to add into listNote.
+     * We must add all item in ls into listNote then adapter can update
+     * we add reverse ls to show new note at top of list
+     */
+//    private void updateListNote() {
+//        // clear old list
+//        itemsDaily.clear();
+//        // add all notes from database, reverse list
+//    ArrayList<ItemsStore> ls = dbHelper.getListNote( "SELECT * FROM " + TaskContract.TaskEntry.TABLE_DAILY_MOVEMENTS);
+//
+//        // reverse list
+//        for (int i = ls.size() - 1; i >= 0; i--) {
+//            itemsDaily.add(ls.get(i));
+//        }
+//
+//        adapterAddDailyMovements.notifyDataSetChanged();
+//    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

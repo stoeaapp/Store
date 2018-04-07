@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.imagine.mohamedtaha.store.ReportCategory">
+    <TableLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/leanerTitle"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leanerSearch">
+        <TableRow>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/notes"/>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_user"/>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/natural_category"/>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/data_created"/>
+
+
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_category"/>
+            <TextView
+                android:id="@+id/titleNotes"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/m_store"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleViewReportCategory"
+        android:layout_below="@+id/leanerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

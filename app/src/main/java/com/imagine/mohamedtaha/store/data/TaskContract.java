@@ -37,13 +37,13 @@ public class TaskContract {
             public static final Uri CONTENT_URISTORE = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TASKSSTORE).build();
 
               //Table Names
-            protected static final String TABLE_CATEGORIES = "categories";
-            protected static final String TABLE_STORE = "store";
-            protected static final String TABLE_STOCKING_WAREHOUSE = "Stocking_marehouse";
-            protected static final String TABLE_PERMISSION = "permission";
-            protected static final String TABLE_DAILY_MOVEMENTS = "daily_movements";
-            protected static final String TABLE_USERS = "users";
-            protected static final String TABLE_CONVERT_STORE = "convert_store";
+            public static final String TABLE_CATEGORIES = "categories";
+            public static final String TABLE_STORE = "store";
+            public static final String TABLE_STOCKING_WAREHOUSE = "Stocking_marehouse";
+            public static final String TABLE_PERMISSION = "permission";
+            public static final String TABLE_DAILY_MOVEMENTS = "daily_movements";
+            public static final String TABLE_USERS = "users";
+            public static final String TABLE_CONVERT_STORE = "convert_store";
 
             // Since TaskEntry implements the interfaces "BaseColumns", it has an automatically produced
             // "_ID" column in addition to the two below
@@ -82,12 +82,12 @@ public class TaskContract {
 
 
             //Table DAILY_MOVEMENTS column names
-            protected static final String KEY_PERMISSION_ID = "permission_id";
-            protected static final String KEY_INCOMING = "incoming";
-            protected static final String KEY_ISSUED = "issued";
-            protected static final  String KEY_ACTUAL_BALANCE ="actual_balance";
-            protected static final  String KEY_CONVERT_FROM = "convert_from";
-            protected static final String KEY_CONVERT_TO = "convert_to";
+            public static final String KEY_PERMISSION_ID = "permission_id";
+            public static final String KEY_INCOMING = "incoming";
+            public static final String KEY_ISSUED = "issued";
+            public static final  String KEY_ACTUAL_BALANCE ="actual_balance";
+            public static final  String KEY_CONVERT_FROM = "convert_from";
+            public static final String KEY_CONVERT_TO = "convert_to";
 
             /*      categories
          - - - - - - - - - - - - - - - - - - - - - -

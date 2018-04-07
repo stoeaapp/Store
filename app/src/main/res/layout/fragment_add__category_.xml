@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment">
+    tools:context="com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment_ContentProvider">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView

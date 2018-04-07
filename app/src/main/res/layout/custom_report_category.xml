@@ -29,7 +29,16 @@
             android:layout_weight="1.5"
             android:textColor="@color/secondary_text"
             />
-
+        <TextView
+            android:id="@+id/TVNaturalCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_weight="1.5"
+            android:textColor="@color/secondary_text"
+            />
         <TextView
             android:id="@+id/TVDateAdd"
             android:layout_width="0dp"

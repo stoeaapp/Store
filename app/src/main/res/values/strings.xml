@@ -12,6 +12,10 @@
     <string name="add_data">إضافة البيانات</string>
     <string name="add_stocking_warehouse">ترصيد المستودع</string>
     <string name="add_reportes"> تقارير الرصيد الأول  </string>
+    <string name="reportes"> التقارير  </string>
+    <string name="backup"> نسخةاحتياطية  </string>
+    <string name="import_backup"> استيراد قاعدةالبيانات  </string>
+
     <string name="add_reportes_daily"> تقارير الحركات اليومية  </string>
 
     <!-- TODO: Text For Title App and Text Empity RecycleView and ListView -->
@@ -19,6 +23,8 @@
     <string name="title_report_first_balance">  تقرير ترصيدالمستودع</string>
     <string name="title_report_daily_movements">  تقرير الحركات اليومية</string>
     <string name="title_all_fragments">  تكويد المستودع</string>
+    <string name="title_report_category">  تقرير الأصناف</string>
+    <string name="title_report_store">  تقرير المخازن</string>
 
     <string name="title_empty_daily_movements">  لا توجد بيانات ...</string>
     <string name="title_empty_view_daily_movements"> قم أولاً بإضافة الأصناف والمخازن والأذونات</string>
@@ -46,6 +52,8 @@
     <!-- TODO: Page dialog Add Category -->
     <string name="name_category">اسم الصنف </string>
     <string name="number_stoke">رقم الترصيد  </string>
+    <string name="number">الكمية  </string>
+    <string name="name_user">اسم المستخدم </string>
 
     <string name="natural_category">طبيعة الصنف</string>
     <string name="notes">ملاحظات </string>
@@ -178,10 +186,7 @@
 
     <string name="data_store">اخر تعديل</string>
     <string name="m_store"> م</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="data_created"> تاريخ الإنشاء</string>
 
     <!-- TODO: Splach Activity -->
 

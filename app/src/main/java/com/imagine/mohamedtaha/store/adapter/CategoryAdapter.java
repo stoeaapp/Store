@@ -1,16 +1,14 @@
 package com.imagine.mohamedtaha.store.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.fragments.AddConvertStoreFragment;
 import com.imagine.mohamedtaha.store.fragments.AddPremissionFragment;
 import com.imagine.mohamedtaha.store.fragments.AddStoreFragment;
-import com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment;
+import com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment_ContentProvider;
 
 /**
  * Created by MANASATT on 25/11/17.
@@ -28,7 +26,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
-            return new Add_Category_Fragment();
+            return new Add_Category_Fragment_ContentProvider();
         }else if (position == 1){
             return new AddStoreFragment();
         }else

@@ -1,9 +1,164 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.imagine.mohamedtaha.store.ReportStoreActivity">
+    <RadioGroup
+        android:id="@+id/groupRadioStore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:checkedButton="@id/RBAllStore"
+        android:padding="5dp"
+        android:background="@color/colorPrimary"
+        >
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/SPSelectTypeStore"
+            android:hint="@string/type_store"
+            app:met_floatingLabel = "highlight"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:gravity="center"
 
-</android.support.constraint.ConstraintLayout>
+            />
+
+        <RadioButton
+            android:id="@+id/RBChooseTypeStore"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/icons"
+            android:text="@string/select_type_store"
+            android:gravity="center"
+
+            />
+        <RadioButton
+            android:id="@+id/RBAllStore"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/icons"
+            android:text="@string/all_store"
+            android:gravity="center"
+
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:gravity="right"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text"/>
+
+    </RadioGroup>
+  <TableLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/leanerTitle"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/groupRadioStore">
+        <TableRow>
+            <TextView
+                android:id="@+id/titleConvertTo"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/convert_to"/>
+            <TextView
+                android:id="@+id/titleIncoming"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/incoming"/>
+            <TextView
+                android:id="@+id/titleIssuned"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/issued"/>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_category"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/type_store"/>
+            <TextView
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name_permission"/>
+            <TextView
+                android:id="@+id/titleNotes"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/primary_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/m_store"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleViewReportDailyMovements"
+        android:layout_below="@+id/leanerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

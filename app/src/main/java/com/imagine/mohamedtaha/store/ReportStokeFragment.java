@@ -18,7 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
+import com.imagine.mohamedtaha.store.adapter.AdapterReportStoke;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderStokeWearehouse;
@@ -29,7 +29,7 @@ import java.util.Collections;
 
 
 public class ReportStokeFragment extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener{
-    public static AdapterReportStore adapterReportStore;
+    public static AdapterReportStoke adapterReportStoke;
     TaskDbHelper dbHelper;
     RecyclerView recyclerViewReportStore;
     ArrayList<ItemsStore> itemsStoresReport = new ArrayList<ItemsStore>();
@@ -71,8 +71,8 @@ public class ReportStokeFragment extends AppCompatActivity implements LoaderMana
            recyclerViewReportStore = (RecyclerView) findViewById(R.id.recycleViewReportStore);
            recyclerViewReportStore.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-          adapterReportStore = new AdapterReportStore(this, itemsStoresReport);
-           recyclerViewReportStore.setAdapter(adapterReportStore);
+          adapterReportStoke = new AdapterReportStoke(this, itemsStoresReport);
+           recyclerViewReportStore.setAdapter(adapterReportStoke);
            loadSpinnerDataForStore();
 
         getSupportLoaderManager().initLoader(STORE_REPORT_LOADER,null,this);
@@ -94,8 +94,8 @@ public class ReportStokeFragment extends AppCompatActivity implements LoaderMana
 
         // progressBarPermission =(ProgressBar)view.findViewById(R.id.progressBarPermission);
 
-        adapterReportStore = new AdapterReportStore(getContext(), itemsStoresReport);
-        recyclerViewReportStore.setAdapter(adapterReportStore);
+        adapterReportStoke = new AdapterReportStoke(getContext(), itemsStoresReport);
+        recyclerViewReportStore.setAdapter(adapterReportStoke);
 
         return view;
     }*/
@@ -108,12 +108,12 @@ public class ReportStokeFragment extends AppCompatActivity implements LoaderMana
     @Override
     public void onLoadFinished(Loader<ArrayList<ItemsStore>> loader, ArrayList<ItemsStore> data) {
         //recyclerViewReportStore.setVisibility(View.VISIBLE);
-        adapterReportStore.swapData(data);
+        adapterReportStoke.swapData(data);
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<ItemsStore>> loader) {
-        adapterReportStore.swapData(Collections.<ItemsStore>emptyList());
+        adapterReportStoke.swapData(Collections.<ItemsStore>emptyList());
 
 
     }
@@ -139,10 +139,10 @@ public class ReportStokeFragment extends AppCompatActivity implements LoaderMana
 
             if (RBNameGategory.isChecked()){
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchCategoryName(newText);
-            if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+            if (itemsStoresReport !=null) adapterReportStoke.setFilter(itemsStoresReport);
             } else  {
             itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalance(newText);
-            if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+            if (itemsStoresReport !=null) adapterReportStoke.setFilter(itemsStoresReport);
         }
 
         }else if (RBChooseTypeStoreStoke.isChecked()){
@@ -152,10 +152,10 @@ public class ReportStokeFragment extends AppCompatActivity implements LoaderMana
                 showScreenCurrentBalance = dbHelper.getFirstBalanceByNameCategoryAndTypeStore(newText,selectTypeStore);
                 showCurrentBalance.setText(showScreenCurrentBalance+ " ");
 
-                if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+                if (itemsStoresReport !=null) adapterReportStoke.setFilter(itemsStoresReport);
             } else  {
                 itemsStoresReport = dbHelper.getAllStokeHouseBySearchFirstBalanceAndTypeStore(newText,selectTypeStore);
-                if (itemsStoresReport !=null)adapterReportStore.setFilter(itemsStoresReport);
+                if (itemsStoresReport !=null) adapterReportStoke.setFilter(itemsStoresReport);
             }
         }
 

@@ -97,7 +97,7 @@ public class AddConvertStoreFragment extends Fragment {
 
 
             //Initalize the adapter and attach it to the RecycleView
-            //  adapterAddCategory = new AdapterAddCategory(getActivity());
+            //  adapterAddCategoryContentProvider = new AdapterAddCategoryContentProvider(getActivity());
 
 
             //Setup the item click listener

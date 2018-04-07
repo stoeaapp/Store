@@ -6,7 +6,7 @@ package com.imagine.mohamedtaha.store.data;
 
 public class ItemsStore {
 
-  private   String typeStore;
+    private   String typeStore;
     private String namePermission;
     private String notes;
     private String createdDate;
@@ -31,6 +31,15 @@ public class ItemsStore {
 
     private String nameGategory;
     private String nauralCategory;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public long getmTimeInMilliseconds() {
         return mTimeInMilliseconds;

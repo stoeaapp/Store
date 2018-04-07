@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imagine.mohamedtaha.store">
 
+    <!-- set can read and write on sd card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,10 +22,10 @@
         <activity
             android:name=".ReportStokeFragment"
             android:label="@string/title_report_first_balance"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ReportesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ReportesActivity" />
         </activity>
         <activity
             android:name=".ActivityForIncludeFragments"
@@ -74,6 +78,7 @@
         </activity>
         <activity
             android:name=".ReportesActivity"
+            android:label="@string/reportes"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -82,15 +87,31 @@
         <activity
             android:name=".ReportDailyMovements"
             android:label="@string/title_report_daily_movements"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ReportesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ReportesActivity" />
         </activity>
         <activity android:name=".ActivityShowReportes" />
         <activity android:name=".ReportStoreActivity" />
         <activity android:name=".ReportPremissionActivity" />
-        <activity android:name=".ReportCategoryActivity"></activity>
+        <activity android:name=".ReportCategoryActivity" />
+        <activity
+            android:name=".ReportCategory"
+            android:label="@string/title_report_category"
+            android:parentActivityName=".ReportesActivity"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ReportesActivity" />
+        </activity>
+        <activity android:name=".ReportStores"
+            android:label="@string/title_report_store"
+            android:parentActivityName=".ReportesActivity"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ReportesActivity" /></activity>
     </application>
 
 </manifest>

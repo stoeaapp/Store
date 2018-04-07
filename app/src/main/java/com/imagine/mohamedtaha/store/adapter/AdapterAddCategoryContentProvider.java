@@ -12,17 +12,17 @@ import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
 
 /**
- * Created by ManasatPC on 13/01/18.
+ * Created by MANASATT on 25/11/17.
  */
 
-public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.CategoryViewHolder> {
+public class AdapterAddCategoryContentProvider extends RecyclerView.Adapter<AdapterAddCategoryContentProvider.CategoryViewHolder> {
     //class variables for the cursor that holds category data and the Context
     private Cursor mCursor;
     private Context mContext;
     //  private List<CategoryFileds>categoryFiledses;
 
     //Constrctor  for the CategoryCursorAdapter that initializes the Context
-    public AdapterAddCategory(Context context) {
+    public AdapterAddCategoryContentProvider(Context context) {
         this.mContext = context;
 //        this.categoryFiledses = categoryFiledses;
 
@@ -30,7 +30,7 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
 
     private showDetial mListener;
 
-    public AdapterAddCategory(showDetial listener) {
+    public AdapterAddCategoryContentProvider(showDetial listener) {
         this.mListener = listener;
 //        this.categoryFiledses = categoryFiledses;
 

@@ -52,7 +52,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
     AlertDialog dialogDeleteDailyMovement;
     long idSpinnerCategory,idSpinnerStore, idSpinnerPermission, idSpinnerConvertTo;
     int firstBalance ,sumIncoming, sumIssued,sumConvertTo,currentBalance;
-
+    int isLastRow;
     String SpinnerCategory,SpinnerStore, SpinnerPermission;
     String  SpinnerConvertTo = null;
 
@@ -78,7 +78,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         dbHelperDailyMovement = new TaskDbHelper(getContext());
 
         intentDailyMovement = getArguments();
-     //   boolean saveState = true;
+
+        //   boolean saveState = true;
        if (intentDailyMovement != null){
       //      saveState = false;
             BTDeleteDailyMovement.setVisibility(View.VISIBLE);
@@ -135,6 +136,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 SpinnerCategory = parent.getItemAtPosition(position).toString();
                 idSpinnerCategory =parent.getItemIdAtPosition(position+1);
+
                 firstBalance = dbHelperDailyMovement.getFirstBalance(idSpinnerCategory,idSpinnerStore);
                 sumIssued = dbHelperDailyMovement.getIssedForDailyMovements(idSpinnerCategory,idSpinnerStore);
                 sumIncoming = dbHelperDailyMovement.getIncomingForDailyMovements(idSpinnerCategory,idSpinnerStore);
@@ -307,19 +309,29 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         if (intentDailyMovement != null){
             String incoming =ETIncoming.getText().toString();
             String issued = ETIssued.getText().toString();
+
+
             ItemsStore itemDeleteDaily = new ItemsStore();
             itemDeleteDaily.setId(intentDailyMovement.getInt(IDDaily));
-         //   itemDeleteDaily.setIncoming(Integer.valueOf(incoming));
-         //   itemDeleteDaily.setIssued(Integer.valueOf(issued));
-          //  long isLastRow = dbHelperDailyMovement.isLAstRow();
-          //  if ( isLastRow != intentDailyMovement.getLong(IDDaily)){
-           //     Toast.makeText(getContext(), getString(R.string.this_movement_not_allow), Toast.LENGTH_SHORT).show();
-            //    return;
-           // }
-            /*else {
-                Toast.makeText(getContext(), "The is problem", Toast.LENGTH_SHORT).show();
+            int incomings = 0;
+            if (!TextUtils.isEmpty(incoming)){
+                incomings = Integer.parseInt(incoming);
+            }
+            itemDeleteDaily.setIncoming(Integer.valueOf(incomings));
 
-            }*/
+            int issueds = 0;
+            if (!TextUtils.isEmpty(issued)){
+                issueds = Integer.parseInt(issued);
+            }
+            itemDeleteDaily.setIssued(Integer.valueOf(issueds));
+
+            isLastRow = dbHelperDailyMovement.isLastRow();
+
+            if ( isLastRow != intentDailyMovement.getInt(IDDaily)){
+                Toast.makeText(getContext(), getString(R.string.this_movement_not_allow), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (itemDeleteDaily != null){
                 dbHelperDailyMovement.deleteDailyMovements(itemDeleteDaily);
                 Toast.makeText(getContext(), getString(R.string.delete_daily), Toast.LENGTH_LONG).show();

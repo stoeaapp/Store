@@ -19,11 +19,11 @@ import java.util.Locale;
 
 public class TaskDbHelper extends SQLiteOpenHelper {
     //the name of the database
-    private static final String DATABASE_NAME = "stores.db";
+    public static final String DATABASE_NAME = "stores.db";
     Context mContext;
 
     // If you change the database schema, you must increment the database version
-    private static final int VERSION = 4;
+    private static final int VERSION = 5;
 
     public TaskDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -39,51 +39,54 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         //Create  tables (careful to follow sQL formatting rules)
         //Table Caregory
         final String CREATE_TABLE_CATEGORIES =
-                "CREATE TABLE "                + TaskEntry.TABLE_CATEGORIES  + " ("                 + TaskEntry._ID    +
-                    " INTEGER PRIMARY KEY, "   + TaskEntry.KEY_NAME_CATEGORY + " TEXT NOT NULL, "   +
-                TaskEntry.KEY_NATURAL_CATEGORY + " TEXT, "                   + TaskEntry.KEY_NOTES  + " TEXT,"         +
-                        TaskEntry.KEY_USER_ID  + " INTEGER,"                 + TaskEntry.KEY_DATE   + " DATE,"         +
-                        TaskEntry.KEY_TIME    + " TIME" + ")" ;
+                "CREATE TABLE "                    + TaskEntry.TABLE_CATEGORIES  + " ("                 + TaskEntry._ID    +
+                        " INTEGER PRIMARY KEY, "   + TaskEntry.KEY_NAME_CATEGORY + " TEXT NOT NULL, "   +
+                        TaskEntry.KEY_NATURAL_CATEGORY + " TEXT, "               + TaskEntry.KEY_NOTES  + " TEXT,"         +
+                        TaskEntry.KEY_USER_ID      + " INTEGER,"                 + TaskEntry.KEY_DATE   + " DATE,"         +
+                        TaskEntry.KEY_TIME         + " TIME"                     + ")" ;
         //Table Stores
         final String CREATE_TABLE_STORES =
-                "CREATE TABLE "         + TaskEntry.TABLE_STORE + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY," +
-               TaskEntry.KEY_TYPE_STORE + " TEXT NOT NULL,"     + TaskEntry.KEY_TYPE_STORE_CONVERT + " TEXT NOT NULL," +
-               TaskEntry.KEY_NOTES      + " TEXT," +TaskEntry.KEY_USER_ID + " INTEGER,"
-                        +   TaskEntry.KEY_DATE + " DATE,"                +
-                  TaskEntry.KEY_TIME    + " TIME"+ ")";
+                "CREATE TABLE "         + TaskEntry.TABLE_STORE + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY,"   +
+                        TaskEntry.KEY_TYPE_STORE + " TEXT NOT NULL,"     + TaskEntry.KEY_NOTES  + " TEXT NOT NULL,"                  +
+                        TaskEntry.KEY_USER_ID    + " INTEGER,"           + TaskEntry.KEY_DATE   + " DATE,"                  +
+                        TaskEntry.KEY_TIME    + " TIME"+ ")";
         //Table Convert
         final String CREATE_TABLE_CONVERT_STORE =
-                "CREATE TABLE "         + TaskEntry.TABLE_CONVERT_STORE + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY," +
-                        TaskEntry.KEY_TYPE_STORE_CONVERT + " TEXT NOT NULL,"     + TaskEntry.KEY_NOTES  +                " TEXT," +
-                        TaskEntry.KEY_USER_ID + " INTEGER,"           +   TaskEntry.KEY_DATE + " DATE,"                +
-                        TaskEntry.KEY_TIME    + " TIME"+ ")";
+                "CREATE TABLE " + TaskEntry.TABLE_CONVERT_STORE + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY," +
+                        TaskEntry.KEY_TYPE_STORE_CONVERT        + " TEXT NOT NULL,"    + TaskEntry.KEY_NOTES     +                " TEXT," +
+                        TaskEntry.KEY_USER_ID                   + " INTEGER,"          +   TaskEntry.KEY_DATE    +
+                        " DATE,"                                +TaskEntry.KEY_TIME    + " TIME"                 + ")";
 
         //Table Permission
         final String CREATE_TABLE_PERMISSION =
-                "CREATE TABLE "                + TaskEntry.TABLE_PERMISSION + " (" + TaskEntry._ID + " INTEGER PRIMARY KEY,"+
-                 TaskEntry.KEY_NAME_PERMISSION + " TEXT NOT NULL,"          + TaskEntry.KEY_NOTES  + " TEXT,"               +
-                        TaskEntry.KEY_USER_ID  + " INTEGER,"                + TaskEntry.KEY_DATE   + " DATE, "              +
-                        TaskEntry.KEY_TIME    + " TIME"+ ")";
+                "CREATE TABLE "                + TaskEntry.TABLE_PERMISSION    + " ("                  + TaskEntry._ID +
+                        " INTEGER PRIMARY KEY,"+ TaskEntry.KEY_NAME_PERMISSION + " TEXT NOT NULL,"     +
+                        TaskEntry.KEY_NOTES    + " TEXT,"                      +TaskEntry.KEY_USER_ID  + " INTEGER,"
+                        + TaskEntry.KEY_DATE   + " DATE, "                     +TaskEntry.KEY_TIME     + " TIME"  + ")";
         //Table Users
         final String CREATE_TABLE_USERS =
-                "CREATE TABLE " + TaskEntry.TABLE_USERS + " (" +TaskEntry._ID + " INTEGER PRIMARY KEY," + TaskEntry.KEY_NAME_USER +
-                        " TEXT NOT NULL," + TaskEntry.KEY_PASSWORD_USERS + " TEXT NOT NULL," + TaskEntry.KEY_RETRY_PASSWORD       +
-                        " TEXT NOT NULL," + TaskEntry.KEY_MOBILE + " TEXT NOT NULL," + TaskEntry.KEY_EMAIL + " TEXT," +
-                        TaskEntry.KEY_DATE +        " DATE,"  +  TaskEntry.KEY_TIME    + " TIME" + ")";
+                "CREATE TABLE " + TaskEntry.TABLE_USERS + " (" +TaskEntry._ID + " INTEGER PRIMARY KEY,"      +
+                        TaskEntry.KEY_NAME_USER         +" TEXT NOT NULL,"    + TaskEntry.KEY_PASSWORD_USERS +
+                        " TEXT NOT NULL,"               + TaskEntry.KEY_RETRY_PASSWORD                       +
+                        " TEXT NOT NULL,"               + TaskEntry.KEY_MOBILE + " TEXT NOT NULL,"           +
+                        TaskEntry.KEY_EMAIL             + " TEXT,"             + TaskEntry.KEY_DATE          +
+                        " DATE,"                        +  TaskEntry.KEY_TIME  + " TIME"                     + ")";
         //Table STOCKING_WAREHOUSE
         final String CREATE_TABLE_STOCKING_WAREHOUSE =
-                "CREATE TABLE "            + TaskEntry.TABLE_STOCKING_WAREHOUSE   + " (" +TaskEntry._ID + " INTEGER PRIMARY KEY," +
-                TaskEntry.KEY_CATEGORY_ID  + " INTEGER," + TaskEntry.KEY_STORE_ID + " INTEGER,"         +
-               TaskEntry.KEY_FIRST_BALANCE + " INTEGER," + TaskEntry.KEY_NOTES    + " TEXT,"            + TaskEntry.KEY_USER_ID   +
-                        " INTEGER,"        + TaskEntry.KEY_DATE                   + " DATE,"             +  TaskEntry.KEY_TIME     + " TIME"+")";
+                "CREATE TABLE "            + TaskEntry.TABLE_STOCKING_WAREHOUSE   + " (" +TaskEntry._ID        +
+                   " INTEGER PRIMARY KEY," + TaskEntry.KEY_CATEGORY_ID            + " INTEGER,"                +
+                    TaskEntry.KEY_STORE_ID + " INTEGER,"                          +TaskEntry.KEY_FIRST_BALANCE +
+                   " INTEGER,"             + TaskEntry.KEY_NOTES                  + " TEXT,"                   +
+                   TaskEntry.KEY_USER_ID   + " INTEGER,"                          + TaskEntry.KEY_DATE         +
+                   " DATE,"                +  TaskEntry.KEY_TIME                  + " TIME"                    +")";
 
         //Table DAILY_MOVEMENTS
         final String CREATE_TABLE_DAILY_MOVEMENTS =
            "CREATE TABLE "             + TaskEntry.TABLE_DAILY_MOVEMENTS + " (" + TaskEntry._ID       + " INTEGER PRIMARY KEY," +
            TaskEntry.KEY_CATEGORY_ID   + " INTEGER,"                     + TaskEntry.KEY_STORE_ID     + " INTEGER,"             +
            TaskEntry.KEY_PERMISSION_ID + " INTEGER,"                     + TaskEntry.KEY_INCOMING     + " INTEGER NOT NULL DEFAULT 0,"             +
-           TaskEntry.KEY_ISSUED        + " INTEGER NOT NULL DEFAULT 0,"                     + TaskEntry.KEY_CONVERT_FROM + " TEXT,"                +
-           TaskEntry.KEY_CONVERT_TO    + " INTEGER,"                        +TaskEntry.KEY_USER_ID       +" INTEGER,"              +
+           TaskEntry.KEY_ISSUED        + " INTEGER NOT NULL DEFAULT 0,"  + TaskEntry.KEY_CONVERT_FROM + " TEXT,"                +
+           TaskEntry.KEY_CONVERT_TO    + " INTEGER,"                     +TaskEntry.KEY_USER_ID       +" INTEGER,"              +
            TaskEntry.KEY_DATE          + " DATE,"                        +TaskEntry.KEY_TIME    + " TIME"+  ")";
 
         db.execSQL(CREATE_TABLE_CATEGORIES);
@@ -132,6 +135,162 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         Date time=new Date();
         return dateFormat.format(time);
     }
+    //_____________________________Methods Category____________________________
+
+    //_____________________________Insert Table Category____________________________
+    public long addCategory(ItemsStore itemsStore){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TaskEntry.KEY_NAME_CATEGORY,itemsStore.getNameGategory());
+        values.put(TaskEntry.KEY_NATURAL_CATEGORY,itemsStore.getNauralCategory());
+        values.put(TaskEntry.KEY_NOTES,itemsStore.getNotes());
+        values.put(TaskEntry.KEY_DATE, getDate());
+        values.put(TaskEntry.KEY_TIME, getTime());
+        //Insert row
+        long store_id = db.insert(TaskEntry.TABLE_CATEGORIES,null,values);
+
+        return store_id;
+    }
+    //____________________Update Category______________________
+    public long updateCategory(ItemsStore itemsStore){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TaskEntry._ID,itemsStore.getId());
+        values.put(TaskEntry.KEY_NAME_CATEGORY,itemsStore.getNameGategory());
+        values.put(TaskEntry.KEY_NATURAL_CATEGORY,itemsStore.getNauralCategory());
+        values.put(TaskEntry.KEY_NOTES,itemsStore.getNotes());
+        values.put(TaskEntry.KEY_DATE, getDate());
+        values.put(TaskEntry.KEY_TIME, getTime());
+        String selection = TaskEntry._ID + "=?";
+        String[] selectionArgs =new String[]{String.valueOf(itemsStore.getId())};
+        //updating row
+        int updateStore = db.update(TaskEntry.TABLE_CATEGORIES,values, selection,selectionArgs);
+        //  Log.d("Updated Result: ","= "+updateStore);
+        return updateStore;
+
+    }
+
+    //____________________Delete Category____________________________
+    public int deleteCategory(ItemsStore itemsStore){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleteRow=  db.delete(TaskEntry.TABLE_CATEGORIES, TaskEntry._ID + " = ?",new String[]{String.valueOf(itemsStore.getId())});
+        return deleteRow;
+    }
+
+
+    //___________________________get All Categories___________________
+    public ArrayList<ItemsStore>getAllItemsCategories(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<ItemsStore> itemsStores = new ArrayList<>();
+        String []columns = {TaskEntry._ID,TaskEntry.KEY_NAME_CATEGORY,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME
+        ,TaskEntry.KEY_NATURAL_CATEGORY,TaskEntry.KEY_NOTES};
+        Cursor c = db.query(TaskEntry.TABLE_CATEGORIES, columns,null,null,null,null,null);
+        //Looping through all rows and adding to list
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+            ItemsStore itemsStore = new ItemsStore();
+            itemsStore.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemsStore.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemsStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemsStore.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+            itemsStore.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+            itemsStore.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+
+            //adding to tagd list
+            itemsStores.add(itemsStore);
+        }
+        return itemsStores;
+    }
+    //___________________________get All Categories by Name Category___________________
+    public ArrayList<ItemsStore>getAllItemsCategoriesByCategoryName(String nameCategory){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<ItemsStore> itemsStores = new ArrayList<>();
+        String []columns = {TaskEntry._ID,TaskEntry.KEY_NAME_CATEGORY,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME
+                ,TaskEntry.KEY_NATURAL_CATEGORY,TaskEntry.KEY_NOTES};
+        Cursor c = db.query(TaskEntry.TABLE_CATEGORIES, columns,null,null,null,null,null);
+        //Looping through all rows and adding to list
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+            ItemsStore itemsStore = new ItemsStore();
+            itemsStore.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemsStore.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemsStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemsStore.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+            itemsStore.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+            itemsStore.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+
+            //adding to tagd list
+            itemsStores.add(itemsStore);
+        }
+        return itemsStores;
+    }
+    public ArrayList<ItemsStore>getAllCategoryByCategoryName(String search){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = " SELECT * FROM " + TaskEntry.TABLE_CATEGORIES +
+                " WHERE " + TaskEntry.KEY_NAME_CATEGORY  + " LIKE '%" +
+                search + "%'" ;
+//        String selectQuery = "SELECT  DISTINCT "         +"tc."   +TaskEntry._ID +
+//                 ", tc."  +TaskEntry.KEY_NAME_CATEGORY +", tc. "+TaskEntry.KEY_DATE+
+//                ", tc. "+TaskEntry.KEY_NATURAL_CATEGORY         +", tu. "+TaskEntry.KEY_NAME_USER + ", tc. "+
+//                TaskEntry.KEY_NOTES         +
+//                " FROM " +TaskEntry.TABLE_CATEGORIES+ " tc  INNER JOIN "                   +
+//                TaskEntry.TABLE_USERS                    + " tu ON tu."     + TaskEntry._ID + " = " + "tc."
+//                + TaskEntry.KEY_USER_ID                   + " WHERE tc. " +TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+//                search + "%'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+         //   itemDailyMovement.setUserName(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_USER)));
+            itemDailyMovement.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+                  //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
+
+    public ArrayList<ItemsStore>getAllCategoryByCategoryName(){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = "SELECT  DISTINCT "         +"tc."   +TaskEntry._ID +
+                ", tc."  +TaskEntry.KEY_NAME_CATEGORY +", tc. "+TaskEntry.KEY_DATE+
+                ", tc. "+TaskEntry.KEY_NATURAL_CATEGORY         +", tu. "+TaskEntry.KEY_NAME_USER + ", tc. "+
+                TaskEntry.KEY_NOTES         +
+                " FROM " +TaskEntry.TABLE_CATEGORIES+ " tc  INNER JOIN "                   +
+                TaskEntry.TABLE_USERS                    + " tu ON tu."     + TaskEntry._ID + " = " + "tc."
+                + TaskEntry.KEY_USER_ID               ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+            itemDailyMovement.setUserName(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_USER)));
+            itemDailyMovement.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
+    }
+
+    //____________________Check data exist or not______________________
+
+    public boolean isExistCategoryName(String categoryName){
+        String whereClause = TaskEntry.KEY_NAME_CATEGORY +"=?";
+        String [] whereArgs = new String[]{categoryName};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.query(TaskEntry.TABLE_CATEGORIES,null,whereClause,whereArgs,null,null,null);
+        boolean exist = (search.getCount() > 0);
+        search.close();db.close();
+        return exist;
+    }
+
+
     //_____________________________Methods Store____________________________
 
     //_____________________________Insert Table Store____________________________
@@ -139,7 +298,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TaskEntry.KEY_TYPE_STORE,itemsStore.getTypeStore());
-        values.put(TaskEntry.KEY_TYPE_STORE_CONVERT,itemsStore.getConvertTo());
+       // values.put(TaskEntry.KEY_TYPE_STORE_CONVERT,itemsStore.getConvertTo());
         values.put(TaskEntry.KEY_NOTES,itemsStore.getNotes());
         values.put(TaskEntry.KEY_DATE, getDate());
         values.put(TaskEntry.KEY_TIME, getTime());
@@ -170,23 +329,13 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         search.close();db.close();
         return exist;
     }
-    //____________________Check data exist or not______________________
 
-    public boolean isExistCategoryName(String categoryName){
-        String whereClause = TaskEntry.KEY_NAME_CATEGORY +"=?";
-        String [] whereArgs = new String[]{categoryName};
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor search = db.query(TaskEntry.TABLE_CATEGORIES,null,whereClause,whereArgs,null,null,null);
-        boolean exist = (search.getCount() > 0);
-        search.close();db.close();
-        return exist;
-    }
 
     //____________________Update Store______________________
     public long updateStore(ItemsStore itemsStore){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(TaskEntry._ID,itemsStore.getId());
+       // values.put(TaskEntry._ID,itemsStore.getId());
         values.put(TaskEntry.KEY_TYPE_STORE,itemsStore.getTypeStore());
         values.put(TaskEntry.KEY_NOTES,itemsStore.getNotes());
         values.put(TaskEntry.KEY_DATE, getDate());
@@ -215,7 +364,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     public ArrayList<ItemsStore>getAllItemsStore(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<ItemsStore> itemsStores = new ArrayList<>();
-        String []columns = {TaskEntry._ID,TaskEntry.KEY_TYPE_STORE,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME};
+        String []columns = {TaskEntry._ID,TaskEntry.KEY_TYPE_STORE,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME,TaskEntry.KEY_NOTES};
         Cursor c = db.query(TaskEntry.TABLE_STORE, columns,null,null,null,null,null);
         //Looping through all rows and adding to list
         for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
@@ -224,10 +373,44 @@ public class TaskDbHelper extends SQLiteOpenHelper {
             itemsStore.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
             itemsStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
             itemsStore.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+            itemsStore.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+
             //adding to tagd list
             itemsStores.add(itemsStore);
         }
         return itemsStores;
+    }
+    //___________________________get All Stores by TypeStore___________________
+
+    public ArrayList<ItemsStore>getAllStoresByTypeStore(String search){
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<ItemsStore> itemDailyMovements = new ArrayList<ItemsStore>();
+        String selectQuery = " SELECT * FROM " + TaskEntry.TABLE_STORE +
+                " WHERE " + TaskEntry.KEY_TYPE_STORE  + " LIKE '%" +
+                search + "%'" ;
+//        String selectQuery = "SELECT  DISTINCT "         +"tc."   +TaskEntry._ID +
+//                 ", tc."  +TaskEntry.KEY_NAME_CATEGORY +", tc. "+TaskEntry.KEY_DATE+
+//                ", tc. "+TaskEntry.KEY_NATURAL_CATEGORY         +", tu. "+TaskEntry.KEY_NAME_USER + ", tc. "+
+//                TaskEntry.KEY_NOTES         +
+//                " FROM " +TaskEntry.TABLE_CATEGORIES+ " tc  INNER JOIN "                   +
+//                TaskEntry.TABLE_USERS                    + " tu ON tu."     + TaskEntry._ID + " = " + "tc."
+//                + TaskEntry.KEY_USER_ID                   + " WHERE tc. " +TaskEntry.KEY_NAME_CATEGORY + " LIKE '%" +
+//                search + "%'" ;
+        Cursor c=db.rawQuery(selectQuery,null);
+        //looping through all rows and adding to list
+        for (c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+            ItemsStore itemDailyMovement = new ItemsStore();
+            itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+            itemDailyMovement.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+            itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+            itemDailyMovement.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+
+            //   itemDailyMovement.setUserName(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_USER)));
+            itemDailyMovement.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+            //adding to todo list
+            itemDailyMovements.add(itemDailyMovement);
+        }
+        return itemDailyMovements;
     }
 
 
@@ -328,9 +511,10 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TaskEntry.KEY_NAME_PERMISSION,itemsPermission.getNamePermission());
-        values.put(TaskEntry.KEY_NOTES ,itemsPermission.getNotes());
         values.put(TaskEntry.KEY_DATE, getDate());
-        values.put(TaskEntry.KEY_TIME, getTime());        //Insert row
+        values.put(TaskEntry.KEY_TIME, getTime());
+        values.put(TaskEntry.KEY_NOTES ,itemsPermission.getNotes());
+//Insert row
         long store_id = db.insert(TaskEntry.TABLE_PERMISSION,null,values);
         return store_id;
     }
@@ -378,9 +562,10 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         return itemsPermissions;
     }
     //____________________Update Permission______________________
-    public int updatePermission(ItemsStore itemsPermission){
+    public long updatePermission(ItemsStore itemsPermission){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(TaskEntry._ID,itemsPermission.getId());
         values.put(TaskEntry.KEY_NAME_PERMISSION,itemsPermission.getNamePermission());
         values.put(TaskEntry.KEY_NOTES,itemsPermission.getNotes());
         values.put(TaskEntry.KEY_DATE, getDate());
@@ -388,7 +573,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         String selection = TaskEntry._ID + "=?";
         String[] selectionArgs =new String[]{String.valueOf(itemsPermission.getId())};
         //updating row
-        return db.update(TaskEntry.TABLE_PERMISSION,values, selection,selectionArgs);
+      //  return db.update(TaskEntry.TABLE_PERMISSION,values, selection,selectionArgs);
+        return db.replace(TaskEntry.TABLE_PERMISSION,null,values);
 
     }
     //____________________Delete Permission____________________________
@@ -447,6 +633,36 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         //updating row
         return db.update(TaskEntry.TABLE_DAILY_MOVEMENTS,values, selection,selectionArgs);
 
+    }
+    public boolean deleteMovementsBackup(String where){
+        return delete(TaskEntry.TABLE_DAILY_MOVEMENTS,where);
+    }
+    public boolean deletePermissionBackup(String where){
+        return delete(TaskEntry.TABLE_PERMISSION,where);
+    }
+    public boolean deleteCategoresBackup(String where){
+        return delete(TaskEntry.TABLE_CATEGORIES,where);
+    }
+    public boolean deleteStoreBackup(String where){
+        return delete(TaskEntry.TABLE_STORE,where);
+    }
+    public boolean deleteConvertStoreBackup(String where){
+        return delete(TaskEntry.TABLE_CONVERT_STORE,where);
+    }
+    public boolean deleteStokeBackup(String where){
+        return delete(TaskEntry.TABLE_STOCKING_WAREHOUSE,where);
+    }
+    public boolean deleteUsersBackup(String where){
+        return delete(TaskEntry.TABLE_USERS,where);
+    }
+    /**
+     * delete id row of table
+     */
+    public boolean delete(String table, String where) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long index = db.delete(table, where, null);
+        close();
+        return index > 0;
     }
     //____________________Delete DailyMovements____________________________
     public void deleteDailyMovements(ItemsStore itemsDailyMovements){
@@ -788,22 +1004,35 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         return exist;
     }
     //____________________Check IsLastRowInTable or not______________________
-    public boolean isLAstRow(){
+
+
+      public int isLastRow(){
+
         SQLiteDatabase db = this.getReadableDatabase();
 
-      /*  String selectQuery = "SELECT  "  +TaskEntry._ID +
+        String selectQuery = "SELECT  "  +TaskEntry._ID +
                 " FROM " + TaskEntry.TABLE_DAILY_MOVEMENTS+
-                " ORDER BY "+TaskEntry._ID  +" DESC LIMIT 1 ";*/
+                " ORDER BY "+TaskEntry._ID  +" DESC LIMIT 1 ";
+     /*
         String selectQuery = "SELECT " + TaskEntry._ID + " FROM " + TaskEntry.TABLE_DAILY_MOVEMENTS +
-                " WHERE "+TaskEntry._ID  +" = " + " (SELECT MAX(" +TaskEntry._ID + ")" + " FROM "+ TaskEntry.TABLE_DAILY_MOVEMENTS + ")" ;
-        Cursor search = db.rawQuery(selectQuery,null);
+                " WHERE "+TaskEntry._ID  +" = " + " (SELECT MAX(" +TaskEntry._ID + ")" + " FROM "+
+                TaskEntry.TABLE_DAILY_MOVEMENTS + ")" ;*/
+        int sumFirstBalance = 0;
 
-          boolean exist =  search.isLast();
+        Cursor search = db.rawQuery(selectQuery,null);
+        search.moveToFirst();
+
+        if(search != null && search.getCount()>0){
+            sumFirstBalance = search.getInt(0);
+        }
+
+      //    boolean exist =  search.isLast();
      //   search.close();
 
 
-        db.close();
-        return exist;
+    //    db.close();
+        return sumFirstBalance;
+
     }
        //____________________get All DailyMovements by name Permission____________________________
 
@@ -1501,4 +1730,125 @@ public ArrayList<String> getDataForSpinnerStore(){
         }
         return IDPermission;
     }
-}
+
+    /**
+     * convert cursor to note
+     */
+    public ItemsStore cursorToNoteForTableDailyMovements(Cursor c) {
+
+        ItemsStore itemDailyMovement = new ItemsStore();
+        itemDailyMovement.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemDailyMovement.setId_permission_id(c.getInt(c.getColumnIndex(TaskEntry.KEY_PERMISSION_ID)));
+        itemDailyMovement.setId_code_category(c.getInt(c.getColumnIndex(TaskEntry.KEY_CATEGORY_ID)));
+        itemDailyMovement.setId_code_store(c.getInt(c.getColumnIndex(TaskEntry.KEY_STORE_ID)));
+        itemDailyMovement.setIncoming(c.getInt(c.getColumnIndex(TaskEntry.KEY_INCOMING)));
+        itemDailyMovement.setIssued(c.getInt(c.getColumnIndex(TaskEntry.KEY_ISSUED)));
+        itemDailyMovement.setId_convert_to(c.getInt(c.getColumnIndex(TaskEntry.KEY_CONVERT_TO)));
+        itemDailyMovement.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        return itemDailyMovement;
+    }
+
+    public ItemsStore cursorToNoteForTableStokeWarehouse(Cursor c) {
+
+        ItemsStore itemStokeWearhouse = new ItemsStore();
+        itemStokeWearhouse.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemStokeWearhouse.setId_code_category(c.getInt(c.getColumnIndex(TaskEntry.KEY_CATEGORY_ID)));
+        itemStokeWearhouse.setId_code_store(c.getInt(c.getColumnIndex(TaskEntry.KEY_STORE_ID)));
+        itemStokeWearhouse.setFirst_balanse(c.getInt(c.getColumnIndex(TaskEntry.KEY_FIRST_BALANCE)));
+        itemStokeWearhouse.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        itemStokeWearhouse.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+        itemStokeWearhouse.setUserId(c.getInt(c.getColumnIndex(TaskEntry.KEY_USER_ID)));
+        itemStokeWearhouse.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+        return itemStokeWearhouse;
+    }
+    public ItemsStore cursorToNoteForTablePermission(Cursor c) {
+
+        ItemsStore itemPermission = new ItemsStore();
+        itemPermission.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemPermission.setNamePermission(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_PERMISSION)));
+        itemPermission.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        itemPermission.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+        itemPermission.setUserId(c.getInt(c.getColumnIndex(TaskEntry.KEY_USER_ID)));
+        itemPermission.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+             return itemPermission;
+    }
+    public ItemsStore cursorToNoteForTableStore(Cursor c) {
+
+        ItemsStore itemStore = new ItemsStore();
+        itemStore.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemStore.setTypeStore(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE)));
+        itemStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        itemStore.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+        itemStore.setUserId(c.getInt(c.getColumnIndex(TaskEntry.KEY_USER_ID)));
+        itemStore.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+        return itemStore;
+    }
+    public ItemsStore cursorToNoteForTableCategores(Cursor c) {
+
+        ItemsStore itemCategores = new ItemsStore();
+        itemCategores.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemCategores.setNameGategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY)));
+        itemCategores.setNauralCategory(c.getString(c.getColumnIndex(TaskEntry.KEY_NATURAL_CATEGORY)));
+        itemCategores.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        itemCategores.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+        itemCategores.setUserId(c.getInt(c.getColumnIndex(TaskEntry.KEY_USER_ID)));
+        itemCategores.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+        return itemCategores;
+    }
+    public ItemsStore cursorToNoteForTableConvertStore(Cursor c) {
+        ItemsStore itemConvertStore = new ItemsStore();
+        itemConvertStore.setId(c.getInt(c.getColumnIndex(TaskEntry._ID)));
+        itemConvertStore.setConvertTo(c.getString(c.getColumnIndex(TaskEntry.KEY_TYPE_STORE_CONVERT)));
+        itemConvertStore.setCreatedDate(c.getString(c.getColumnIndex(TaskEntry.KEY_DATE)));
+        itemConvertStore.setCreatedTime(c.getString(c.getColumnIndex(TaskEntry.KEY_TIME)));
+        itemConvertStore.setUserId(c.getInt(c.getColumnIndex(TaskEntry.KEY_USER_ID)));
+        itemConvertStore.setNotes(c.getString(c.getColumnIndex(TaskEntry.KEY_NOTES)));
+        return itemConvertStore;
+    }
+
+//    public ArrayList<ItemsStore> getListNote(String sql) {
+//
+//        ArrayList<ItemsStore> list = new ArrayList<>();
+//        Cursor cursor = getAll(sql);
+//
+//        while (!cursor.isAfterLast()) {
+//            list.add(cursorToNoteForTableDailyMovements(cursor));
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+//
+//        return list;
+//    }
+//    public Cursor getAll(String sql) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery(sql, null);
+//        if (cursor != null) {
+//            cursor.moveToFirst();
+//        }
+//        close();
+//        return cursor;
+//    }
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
