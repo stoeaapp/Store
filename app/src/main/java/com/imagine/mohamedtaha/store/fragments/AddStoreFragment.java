@@ -167,7 +167,7 @@ public class AddStoreFragment extends Fragment {
         Bundle intent;
         TaskDbHelper dbHelper;
         AlertDialog dialog;
-
+        String checkTypeStore;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -191,7 +191,10 @@ public class AddStoreFragment extends Fragment {
                 BTDelete.setVisibility(View.VISIBLE);
                 ETTypeStore.setText(intent.getString(TYPE_STORE));
                 ETNotesStore.setText(intent.getString(NOTES_STORE));
+                checkTypeStore= intent.getString(TYPE_STORE);
+
             }
+
             BTAddOrUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -256,16 +259,17 @@ public class AddStoreFragment extends Fragment {
                 ETTypeStore.setError(getString(R.string.error_empty_text));
                 return;
             }
-            if (isExist ==true){
-                ETTypeStore.requestFocus();
-                ETTypeStore.setError(getString(R.string.error_exist_name));
-                return;
-            }
+
             if (intent == null) {
                 ItemsStore itemsStoreSave = new ItemsStore();
                 itemsStoreSave.setTypeStore(typeStore);
                 itemsStoreSave.setConvertTo(typeStore);
                 itemsStoreSave.setNotes(notesStore);
+                if (isExist ==true){
+                    ETTypeStore.requestFocus();
+                    ETTypeStore.setError(getString(R.string.error_exist_name));
+                    return;
+                }
                 if (itemsStoreSave == null) {
                     Toast.makeText(getContext(),getString(R.string.error_save_store), Toast.LENGTH_LONG).show();
                 }else {
@@ -286,10 +290,18 @@ public class AddStoreFragment extends Fragment {
                 boolean isExistDialyMovements = dbHelper.isTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));
                 boolean isExistStokeWearehouse = dbHelper.isTypeStoreUsedStokewearhouse(intent.getInt(ID_STORE));
                 boolean isExistConvertDailyMovements = dbHelper.isConvertTypeStoreUsedDailyMovements(intent.getInt(ID_STORE));
+
                if (isExistDialyMovements == true || isExistStokeWearehouse == true || isExistConvertDailyMovements ==true){
                     Toast.makeText(getContext(), getString(R.string.this_store_not_updated), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (!checkTypeStore.equals(typeStore) && isExist == true ){
+                    ETTypeStore.requestFocus();
+                    ETTypeStore.setError(getString(R.string.error_exist_name));
+                    return;
+                }
+
                 if (itemsStoreUpdate != null){
                     dbHelper.updateStore(itemsStoreUpdate);
                     dbHelper.updateConvertStore(itemsStoreUpdate);

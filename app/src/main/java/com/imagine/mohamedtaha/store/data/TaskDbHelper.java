@@ -200,6 +200,15 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemsStores;
     }
+    public Cursor getAllItemsCategoriesCusror(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String []columns = {TaskEntry._ID,TaskEntry.KEY_NAME_CATEGORY,TaskEntry.KEY_DATE,TaskEntry.KEY_TIME
+                ,TaskEntry.KEY_NATURAL_CATEGORY,TaskEntry.KEY_NOTES};
+        Cursor c = db.rawQuery("SELECT * FROM "+TaskEntry.TABLE_CATEGORIES +" ",null);
+
+        return c;
+    }
+
     //___________________________get All Categories by Name Category___________________
     public ArrayList<ItemsStore>getAllItemsCategoriesByCategoryName(String nameCategory){
         SQLiteDatabase db = this.getReadableDatabase();
