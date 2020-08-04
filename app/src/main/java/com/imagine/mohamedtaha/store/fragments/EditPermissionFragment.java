@@ -6,12 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
@@ -42,7 +40,6 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
     TaskDbHelper dbHelper;
     AlertDialog dialog;
     AlertDialog alertDialogDelete;
-    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_store,null);
@@ -60,7 +57,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
         boolean saveState = true;
         if (intent != null ){
             saveState = false;
-            BTAddOrUpdatePermission.setText(getString(R.string.BTUpdate));
+            BTAddOrUpdatePermission.setText(getString(R.string.action_edit));
             TVTitlePermission.setText(getString(R.string.update_permission_titile));
 
             BTDeletePermission.setVisibility(View.VISIBLE);
@@ -178,7 +175,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
         //for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //User clicked the "Delete" button,so delete the Category

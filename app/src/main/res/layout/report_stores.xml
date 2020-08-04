@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.imagine.mohamedtaha.store.ReportCategory">
+    tools:context="com.imagine.mohamedtaha.store.ui.activity.ReportCategory">
     <TableLayout
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
@@ -71,12 +71,12 @@
 
     </TableLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewReportStore"
         android:layout_below="@+id/leanerTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

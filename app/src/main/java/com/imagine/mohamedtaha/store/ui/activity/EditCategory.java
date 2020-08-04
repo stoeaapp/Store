@@ -1,5 +1,6 @@
-package com.imagine.mohamedtaha.store;
+package com.imagine.mohamedtaha.store.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -8,8 +9,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -17,6 +17,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
 
 import java.text.SimpleDateFormat;
@@ -190,7 +194,7 @@ public class EditCategory extends AppCompatActivity implements LoaderManager.Loa
         //for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //User clicked the "Delete" button,so delete the Category

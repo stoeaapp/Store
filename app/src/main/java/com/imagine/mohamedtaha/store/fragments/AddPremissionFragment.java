@@ -1,13 +1,7 @@
 package com.imagine.mohamedtaha.store.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,8 +12,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imagine.mohamedtaha.store.loaders.LoaderPErmission;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddPermission;
 import com.imagine.mohamedtaha.store.R;
@@ -29,7 +31,7 @@ import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AddPremissionFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener {
+public class AddPremissionFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>, SearchView.OnQueryTextListener {
     public AddPremissionFragment() {
         // Required empty public constructor
     }

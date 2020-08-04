@@ -1,12 +1,14 @@
-package com.imagine.mohamedtaha.store;
+package com.imagine.mohamedtaha.store.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.AdapterShowReportes;
 
 import java.util.List;

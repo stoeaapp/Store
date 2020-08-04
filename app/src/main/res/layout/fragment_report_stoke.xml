@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.imagine.mohamedtaha.store.ReportStokeFragment">
+    tools:context="com.imagine.mohamedtaha.store.ui.activity.ReportStokeFragment">
     <RadioGroup
         android:id="@+id/groupRadioStore"
         android:layout_width="match_parent"
@@ -183,13 +183,13 @@
 
 </TableLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewReportStore"
         android:layout_below="@+id/leanerTitle"
                 android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </RelativeLayout>

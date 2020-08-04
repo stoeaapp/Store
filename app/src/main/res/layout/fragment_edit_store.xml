@@ -21,7 +21,7 @@
 
            />
     </RelativeLayout>
-<android.support.design.widget.TextInputLayout
+<com.google.android.material.textfield.TextInputLayout
     android:id="@+id/ETTypeStoreMaterial"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -30,9 +30,9 @@
         style="@style/EditTextFragmentTextFirst"
         />
 
-</android.support.design.widget.TextInputLayout>
+</com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ETNotesMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -42,7 +42,7 @@
             style="@style/EditTextFragmentTextSecond"
             android:hint="@string/notes"
             />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_marginTop="16dp"

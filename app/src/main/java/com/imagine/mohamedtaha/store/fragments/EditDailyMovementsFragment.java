@@ -2,28 +2,22 @@ package com.imagine.mohamedtaha.store.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
@@ -32,13 +26,13 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
-import static com.imagine.mohamedtaha.store.MainActivity.CONVERT_TO_DAILY;
-import static com.imagine.mohamedtaha.store.MainActivity.IDDaily;
-import static com.imagine.mohamedtaha.store.MainActivity.INCOMING_DAILY;
-import static com.imagine.mohamedtaha.store.MainActivity.ISSUED_DAILY;
-import static com.imagine.mohamedtaha.store.MainActivity.NAME_CATEGORY_DAILY;
-import static com.imagine.mohamedtaha.store.MainActivity.NAME_PERMISSION_DAILY;
-import static com.imagine.mohamedtaha.store.MainActivity.TYPE_STORE_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.CONVERT_TO_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.IDDaily;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.INCOMING_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.ISSUED_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.NAME_CATEGORY_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.NAME_PERMISSION_DAILY;
+import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.TYPE_STORE_DAILY;
 
 
 public class EditDailyMovementsFragment extends DialogFragment implements DialogInterface.OnClickListener {
@@ -83,7 +77,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
        if (intentDailyMovement != null){
       //      saveState = false;
             BTDeleteDailyMovement.setVisibility(View.VISIBLE);
-            BTAddDailyMovement.setText(getString(R.string.BTUpdate));
+            BTAddDailyMovement.setText(getString(R.string.action_edit));
            TVTitleStokeWearhouse.setText(getString(R.string.update_daily_movement_titile));
            SPNamePermisionDaily.setText(intentDailyMovement.getString(NAME_PERMISSION_DAILY));
            SPTypeStoreDaily.setText(intentDailyMovement.getString(TYPE_STORE_DAILY));
@@ -375,7 +369,7 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         //for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //User clicked the "Delete" button,so delete the Category

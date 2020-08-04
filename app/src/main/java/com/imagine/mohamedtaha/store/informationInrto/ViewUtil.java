@@ -1,10 +1,11 @@
 package com.imagine.mohamedtaha.store.informationInrto;
 
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewManager;
 import android.view.ViewTreeObserver;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * Created by ManasatPC on 05/01/18.

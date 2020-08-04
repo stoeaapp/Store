@@ -6,5 +6,5 @@ package com.imagine.mohamedtaha.store;
 
 public class ItemsReportes {
     static String []titleReportes= {"تقارير الرصيد الأول","تقارير الحركات اليومية"};
-    static String [] contentReportes= {"com.imagine.mohamedtaha.store.ReportStokeFragment","com.imagine.mohamedtaha.store.ReportStokeFragment"};
+    static String [] contentReportes= {"com.imagine.mohamedtaha.store.ui.activity.ReportStokeFragment","com.imagine.mohamedtaha.store.ui.activity.ReportStokeFragment"};
 }

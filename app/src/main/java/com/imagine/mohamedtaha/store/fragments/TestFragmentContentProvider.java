@@ -7,14 +7,16 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.TaskContract;
@@ -61,7 +63,7 @@ public class TestFragmentContentProvider extends DialogFragment implements Dialo
         boolean nn= true;
         if (getArguments() != null && getArguments().getLong(EXTRA_ID) != 0){
             id = getArguments().getLong(EXTRA_ID);
-            BTAddCategory.setText(getString(R.string.BTUpdate));
+            BTAddCategory.setText(getString(R.string.action_edit));
             BTDeleteCategory.setVisibility(View.VISIBLE);
             TVTitleCategory.setText(getString(R.string.edit_category_titile));
              uri = Uri.withAppendedPath(TaskContract.TaskEntry.CONTENT_URI,String.valueOf(id));
@@ -193,7 +195,7 @@ public class TestFragmentContentProvider extends DialogFragment implements Dialo
         //for the positive and negative buttons on the dialog.
        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //User clicked the "Delete" button,so delete the Category

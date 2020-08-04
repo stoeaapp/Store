@@ -1,7 +1,8 @@
 package com.imagine.mohamedtaha.store.loaders;
 
-import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskContract;

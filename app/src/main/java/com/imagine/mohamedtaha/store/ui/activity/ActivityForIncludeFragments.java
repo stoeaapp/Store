@@ -1,18 +1,19 @@
-package com.imagine.mohamedtaha.store;
+package com.imagine.mohamedtaha.store.ui.activity;
 
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.CategoryAdapter;
 
-public class ActivityForIncludeFragments extends AppCompatActivity{
+public class ActivityForIncludeFragments extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -59,11 +60,11 @@ public class ActivityForIncludeFragments extends AppCompatActivity{
         int id = item.getItemId();
         switch (id){
             case R.id.add_stocking_warehouse:
-                Intent intent = new Intent(ActivityForIncludeFragments.this,StockingWarehouse.class);
+                Intent intent = new Intent(ActivityForIncludeFragments.this, StockingWarehouse.class);
                 startActivity(intent);
                 break;
             case R.id.reportes:
-                Intent intentReport = new Intent(ActivityForIncludeFragments.this,TableDaliyMovmentes.class);
+                Intent intentReport = new Intent(ActivityForIncludeFragments.this, TableDaliyMovmentes.class);
                 startActivity(intentReport);
                 break;
                 }

@@ -1,9 +1,10 @@
 package com.imagine.mohamedtaha.store.adapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.fragments.AddPremissionFragment;
@@ -18,7 +19,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
     //Context of the app
     private Context mContext;
 
-    public CategoryAdapter(Context context,FragmentManager fm) {
+    public CategoryAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }

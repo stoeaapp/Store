@@ -1,17 +1,20 @@
 package com.imagine.mohamedtaha.store;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 
 /**
  * Created by ManasatPC on 09/01/18.
  */
 
-public class ShowReportes extends Fragment{
+public class ShowReportes extends Fragment {
     final static String ARG_POSITION = "position";
     int mCurrentPosition =-1;
 

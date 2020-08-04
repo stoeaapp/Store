@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.imagine.mohamedtaha.store.SplashActivity">
+    tools:context="com.imagine.mohamedtaha.store.ui.activity.SplashActivity">
     <ImageView
         android:id="@+id/imageSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/splash_image"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
         android:layout_centerInParent="true"/>
     <TextView
         android:id="@+id/TVIdLogo"

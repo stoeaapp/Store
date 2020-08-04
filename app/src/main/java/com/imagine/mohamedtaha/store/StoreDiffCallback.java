@@ -1,6 +1,7 @@
 package com.imagine.mohamedtaha.store;
 
-import android.support.v7.util.DiffUtil;
+
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 

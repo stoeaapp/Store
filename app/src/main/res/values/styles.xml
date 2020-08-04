@@ -111,7 +111,7 @@
         <item name="android:src">@drawable/emptyview</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:contentDescription">@string/content_picture</item>
+        <item name="android:contentDescription">@string/title_empty_daily_movements</item>
 
     </style>
     <style name="ProgressBarStyle" >
@@ -168,7 +168,7 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:description">@string/content_picture</item>
+        <item name="android:description">@string/title_empty_daily_movements</item>
 
     </style>
 

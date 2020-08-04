@@ -7,7 +7,7 @@
     tools:context="com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment_ContentProvider">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewAddCategory"
         style="@style/ListViewAndRecycleView"
         android:visibility="gone"
@@ -37,7 +37,7 @@
 
 
     </RelativeLayout>
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_category"
         style="@style/FloatingButtonFragment"
         app:srcCompat="@drawable/ic_action_add"

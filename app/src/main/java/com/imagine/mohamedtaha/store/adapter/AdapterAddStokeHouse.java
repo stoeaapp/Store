@@ -1,11 +1,7 @@
 package com.imagine.mohamedtaha.store.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -13,25 +9,18 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.fragments.EditStockingWarehouseFragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_CATEGORY;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_STORE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.DIALOG_STOKE_WEAREHOUSE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.FIRST_BALANCE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.ID_STOKE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
 
 /**
  * Created by MANASATT on 03/12/17.
@@ -103,7 +92,7 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
             super(itemView);
              idView = (TextView)itemView.findViewById(R.id.TVID);
              codeCategoryView = (TextView)itemView.findViewById(R.id.TVCodeCategory);
-             codeTypeStoreView = (TextView)itemView.findViewById(R.id.TVCodeٍStore);
+             codeTypeStoreView = (TextView)itemView.findViewById(R.id.TVCodeStore);
              firstBalanceView = (TextView)itemView.findViewById(R.id.TVFirstBalance);
             image_edit = (ImageView)itemView.findViewById(R.id.Image_edit);
 
@@ -114,9 +103,7 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         this.itemStokeHouses.clear();
         this.itemStokeHouses.addAll(itemsStokeCollections);
         notifyDataSetChanged();
-
     }
-
 
     public void setFilter(ArrayList<ItemsStore> itemStoke){
         itemStokeHouses = new ArrayList<>();
@@ -130,8 +117,6 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         inflater.inflate(R.menu.menu_store_category_permission,popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new MyMenuItemClickListener() );
         popupMenu.show();
-
-
     }
     //Click listener for popup menu items
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener{

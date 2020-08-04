@@ -2,47 +2,37 @@ package com.imagine.mohamedtaha.store.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_CATEGORY;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.CODE_STORE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.FIRST_BALANCE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.ID_STOKE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.NOTESTOKE;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.adapterAddStokeHouse;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.dbHelper;
-import static com.imagine.mohamedtaha.store.StockingWarehouse.itemStokeHouses;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.CODE_CATEGORY;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.CODE_STORE;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.FIRST_BALANCE;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.ID_STOKE;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.NOTESTOKE;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.dbHelper;
+import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.itemStokeHouses;
 
 
 public class EditStockingWarehouseFragment extends DialogFragment implements DialogInterface.OnClickListener {
@@ -109,7 +99,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
         if (intentStokeWearehouse != null){
             saveState = false;
             BTDeleteStokeWarehouse.setVisibility(View.VISIBLE);
-            BTAddStokeWarehouse.setText(getString(R.string.BTUpdate));
+            BTAddStokeWarehouse.setText(getString(R.string.action_edit));
             TVTitleStokeWearhouse.setText(getString(R.string.update_stoke_titile));
             SPCodeCategory.setText(intentStokeWearehouse.getString(CODE_CATEGORY));
             SPCodeStore.setText(intentStokeWearehouse.getString(CODE_STORE));
@@ -246,7 +236,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
         //for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //User clicked the "Delete" button,so delete the Category

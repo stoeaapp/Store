@@ -1,16 +1,19 @@
 package com.imagine.mohamedtaha.store;
 
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.adapter.AdapterReportCategory;
 import com.imagine.mohamedtaha.store.adapter.AdapterReportStore;
@@ -22,7 +25,7 @@ import com.imagine.mohamedtaha.store.loaders.LoaderReportStore;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ReportStores extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>,SearchView.OnQueryTextListener{
+public class ReportStores extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>, SearchView.OnQueryTextListener{
     public static AdapterReportStore adapterReportStore;
     TaskDbHelper dbHelper;
     RecyclerView recycleViewReportStore;

@@ -1,7 +1,6 @@
 package com.imagine.mohamedtaha.store.adapter;
 
 import android.content.Context;
-import android.support.v7.util.DiffUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

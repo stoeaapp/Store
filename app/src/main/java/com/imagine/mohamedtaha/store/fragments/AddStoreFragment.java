@@ -5,14 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.imagine.mohamedtaha.store.data.TaskContract;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.imagine.mohamedtaha.store.loaders.LoaderStore;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddStore;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
@@ -44,6 +45,7 @@ public class AddStoreFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     FloatingActionButton fabAddCategory;
+
     public static ListView mListView;
     public static AdapterAddStore adapterAddStore;
     TaskDbHelper dbHelper;
@@ -186,7 +188,7 @@ public class AddStoreFragment extends Fragment {
             boolean saveState = true;
             if (intent != null ){
                 saveState = false;
-                BTAddOrUpdate.setText(getString(R.string.BTUpdate));
+                BTAddOrUpdate.setText(getString(R.string.action_edit));
                 TVTitleStore.setText(getString(R.string.update_store_titile));
                 BTDelete.setVisibility(View.VISIBLE);
                 ETTypeStore.setText(intent.getString(TYPE_STORE));
@@ -354,7 +356,7 @@ public class AddStoreFragment extends Fragment {
             //for the positive and negative buttons on the dialog.
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage(R.string.delete_dialog_msg);
-            builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.BTDelete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //User clicked the "Delete" button,so delete the Category
@@ -376,8 +378,5 @@ public class AddStoreFragment extends Fragment {
             alertDialog.show();
         }
     }
-
-
-
 
 }

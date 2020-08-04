@@ -1,21 +1,14 @@
-package com.imagine.mohamedtaha.store;
+package com.imagine.mohamedtaha.store.ui.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -24,10 +17,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
-import com.imagine.mohamedtaha.store.data.TaskContract;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 //import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
@@ -38,12 +41,11 @@ import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import tourguide.tourguide.TourGuide;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>
-        ,SearchView.OnQueryTextListener,BackupData.OnBackupListener {
+        , SearchView.OnQueryTextListener,BackupData.OnBackupListener {
     private static final int Daily_LOADER = 4;
     TaskDbHelper dbHelper ;
     ArrayList<ItemsStore>itemsDaily = new ArrayList<>();
@@ -304,16 +306,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             return true;
         }
         if (id == R.id.add_data){
-            Intent intent = new Intent(MainActivity.this,ActivityForIncludeFragments.class);
+            Intent intent = new Intent(MainActivity.this, ActivityForIncludeFragments.class);
             startActivity(intent);
 
         }if (id == R.id.add_stocking_warehouse){
-            Intent intent = new Intent(MainActivity.this,StockingWarehouse.class);
+            Intent intent = new Intent(MainActivity.this, StockingWarehouse.class);
             startActivity(intent);
 
         }
         if (id == R.id.reportes){
-              Intent intent = new Intent(MainActivity.this,ReportesActivity.class);
+              Intent intent = new Intent(MainActivity.this, ReportesActivity.class);
             startActivity(intent);
           /*  ReportStokeFragment fragment = new ReportStokeFragment();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

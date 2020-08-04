@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.imagine.mohamedtaha.store.MainActivity">
-    <android.support.v7.widget.Toolbar
+    tools:context="com.imagine.mohamedtaha.store.ui.activity.MainActivity">
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/HeaderBar"
         android:layout_width="match_parent"
@@ -16,8 +16,8 @@
 
         >
 
-    </android.support.v7.widget.Toolbar>
-        <android.support.v7.widget.RecyclerView
+    </androidx.appcompat.widget.Toolbar>
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewDailyMovements"
             style="@style/ListViewAndRecycleView"
             android:visibility="gone"
@@ -56,7 +56,7 @@
             />
 
     </RelativeLayout>
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabDaily"
         style="@style/FloatingButtonFragment"
         app:srcCompat="@drawable/ic_action_add"

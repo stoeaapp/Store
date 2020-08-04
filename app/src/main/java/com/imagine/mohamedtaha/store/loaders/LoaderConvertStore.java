@@ -1,7 +1,8 @@
 package com.imagine.mohamedtaha.store.loaders;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import androidx.loader.content.AsyncTaskLoader;
 
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * Created by ManasatPC on 01/01/18.
  */
 
-public class LoaderConvertStore extends AsyncTaskLoader<ArrayList<ItemsStore>>{
+public class LoaderConvertStore extends AsyncTaskLoader<ArrayList<ItemsStore>> {
 
         TaskDbHelper dbHelper  ;
         ArrayList<ItemsStore> itemsConvertStores = new ArrayList<>() ;

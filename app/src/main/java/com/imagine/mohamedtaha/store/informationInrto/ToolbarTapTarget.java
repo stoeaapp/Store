@@ -3,14 +3,17 @@ package com.imagine.mohamedtaha.store.informationInrto;
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -47,8 +50,8 @@ public class ToolbarTapTarget extends ViewTapTarget {
 
         if (instance instanceof Toolbar) {
             return new SupportToolbarProxy((Toolbar) instance);
-        } else if (instance instanceof android.widget.Toolbar) {
-            return new StandardToolbarProxy((android.widget.Toolbar) instance);
+        } else if (instance instanceof Toolbar) {
+            return new StandardToolbarProxy((Toolbar) instance);
         }
 
         throw new IllegalStateException("Couldn't provide proper toolbar proxy instance");
@@ -205,9 +208,9 @@ public class ToolbarTapTarget extends ViewTapTarget {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private static class StandardToolbarProxy implements ToolbarProxy {
-        private final android.widget.Toolbar toolbar;
+        private final Toolbar toolbar;
 
-        StandardToolbarProxy(android.widget.Toolbar toolbar) {
+        StandardToolbarProxy(Toolbar toolbar) {
             this.toolbar = toolbar;
         }
 

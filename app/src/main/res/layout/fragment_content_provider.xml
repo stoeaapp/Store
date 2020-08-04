@@ -18,7 +18,7 @@
             android:text="@string/add_category_titile"
              />
     </RelativeLayout>
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -27,8 +27,8 @@
             android:hint="@string/name_category"
             style="@style/EditTextFragmentTextFirst" />
 
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
@@ -37,8 +37,8 @@
             android:hint="@string/natural_category"
             />
 
-    </android.support.design.widget.TextInputLayout>
-<android.support.design.widget.TextInputLayout
+    </com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.textfield.TextInputLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -48,7 +48,7 @@
         style="@style/EditTextFragmentTextSecond"
         android:hint="@string/notes"
         />
-</android.support.design.widget.TextInputLayout>
+</com.google.android.material.textfield.TextInputLayout>
 
 
 

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imagine.mohamedtaha.store">
 
-    <!-- set can read and write on sd card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -14,26 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/title_daily_movements"
             android:theme="@style/NoActionBar" />
         <activity android:name=".dialog.DialogAddCategory" />
         <activity android:name=".dialog.DialogAddStore" />
         <activity
-            android:name=".ReportStokeFragment"
+            android:name=".ui.activity.ReportStokeFragment"
             android:label="@string/title_report_first_balance"
-            android:parentActivityName=".ReportesActivity">
+            android:parentActivityName=".ui.activity.ReportesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ReportesActivity" />
+                android:value=".ui.activity.ReportesActivity" />
         </activity>
         <activity
-            android:name=".ActivityForIncludeFragments"
+            android:name=".ui.activity.ActivityForIncludeFragments"
             android:label="@string/title_all_fragments"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activity.MainActivity" />
         </activity>
 
         <provider
@@ -46,29 +45,29 @@
             android:exported="false" />
 
         <activity
-            android:name=".EditCategory"
-            android:parentActivityName=".ActivityForIncludeFragments">
+            android:name=".ui.activity.EditCategory"
+            android:parentActivityName=".ui.activity.ActivityForIncludeFragments">
 
             <!-- PArent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ActivityForIncludeFragments" />
+                android:value=".ui.activity.ActivityForIncludeFragments" />
         </activity>
-        <activity android:name=".EditStore" />
+        <activity android:name=".ui.activity.EditStore" />
         <activity
-            android:name=".StockingWarehouse"
+            android:name=".ui.activity.StockingWarehouse"
             android:label="@string/add_stocking_warehouse"
-            android:parentActivityName=".ActivityForIncludeFragments">
+            android:parentActivityName=".ui.activity.ActivityForIncludeFragments">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activity.MainActivity" />
         </activity>
-        <activity android:name=".EditStokeWarehouse" />
+        <activity android:name=".ui.activity.EditStokeWarehouse" />
         <activity
-            android:name=".TableDaliyMovmentes"
+            android:name=".ui.activity.TableDaliyMovmentes"
             android:label="@string/title_report_daily_movements" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,41 +76,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReportesActivity"
+            android:name=".ui.activity.ReportesActivity"
             android:label="@string/reportes"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".ReportDailyMovements"
+            android:name=".ui.activity.ReportDailyMovements"
             android:label="@string/title_report_daily_movements"
-            android:parentActivityName=".ReportesActivity">
+            android:parentActivityName=".ui.activity.ReportesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ReportesActivity" />
+                android:value=".ui.activity.ReportesActivity" />
         </activity>
-        <activity android:name=".ActivityShowReportes" />
-        <activity android:name=".ReportStoreActivity" />
-        <activity android:name=".ReportPremissionActivity" />
-        <activity android:name=".ReportCategoryActivity" />
+        <activity android:name=".ui.activity.ActivityShowReportes" />
+        <activity android:name=".ui.activity.ReportStoreActivity" />
+        <activity android:name=".ui.activity.ReportPremissionActivity" />
+        <activity android:name=".ui.activity.ReportCategoryActivity" />
         <activity
-            android:name=".ReportCategory"
+            android:name=".ui.activity.ReportCategory"
             android:label="@string/title_report_category"
-            android:parentActivityName=".ReportesActivity"
+            android:parentActivityName=".ui.activity.ReportesActivity"
             android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ReportesActivity" />
+                android:value=".ui.activity.ReportesActivity" />
         </activity>
         <activity android:name=".ReportStores"
             android:label="@string/title_report_store"
-            android:parentActivityName=".ReportesActivity"
+            android:parentActivityName=".ui.activity.ReportesActivity"
             android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ReportesActivity" /></activity>
+                android:value=".ui.activity.ReportesActivity" /></activity>
     </application>
 
 </manifest>

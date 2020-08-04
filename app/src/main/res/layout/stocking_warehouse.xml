@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imagine.mohamedtaha.store.StockingWarehouse"
+    tools:context="com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse"
    >
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewAddStokeWarehouse"
         style="@style/ListViewAndRecycleView"
         android:visibility="gone"
@@ -44,7 +44,7 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_stock_warehouse"
         style="@style/FloatingButtonFragment"
     app:fabSize="auto"

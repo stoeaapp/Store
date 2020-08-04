@@ -13,13 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.ReportCategory;
-import com.imagine.mohamedtaha.store.ReportDailyMovements;
-import com.imagine.mohamedtaha.store.ReportStokeFragment;
+import com.imagine.mohamedtaha.store.ui.activity.ReportCategory;
+import com.imagine.mohamedtaha.store.ui.activity.ReportDailyMovements;
+import com.imagine.mohamedtaha.store.ui.activity.ReportStokeFragment;
 import com.imagine.mohamedtaha.store.ReportStores;
-import com.imagine.mohamedtaha.store.ReportesActivity;
-
-import java.util.List;
 
 /**
  * Created by ManasatPC on 13/01/18.

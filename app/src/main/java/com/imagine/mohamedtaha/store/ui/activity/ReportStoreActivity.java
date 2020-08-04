@@ -1,7 +1,10 @@
-package com.imagine.mohamedtaha.store;
+package com.imagine.mohamedtaha.store.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.imagine.mohamedtaha.store.R;
 
 public class ReportStoreActivity extends AppCompatActivity {
 
