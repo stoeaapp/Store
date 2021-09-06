@@ -9,22 +9,20 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.databinding.ActivitySplashBinding;
 import com.imagine.mohamedtaha.store.mvvm.interactor.InteractorSplash;
 import com.imagine.mohamedtaha.store.mvvm.presenter.PresenterSplash;
 import com.imagine.mohamedtaha.store.mvvm.view.ViewSplash;
 
 public class SplashActivity extends AppCompatActivity implements ViewSplash {
-    ImageView imageViewSplash;
-    TextView idLogo;
-    private PresenterSplash presenterSplash;
-    @Override
+    private ActivitySplashBinding  binding;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        imageViewSplash = (ImageView) findViewById(R.id.imageSplash);
-        idLogo = (TextView) findViewById(R.id.TVIdLogo);
-        presenterSplash = new InteractorSplash(getApplicationContext(), this);
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        PresenterSplash presenterSplash = new InteractorSplash(getApplicationContext(), this);
         presenterSplash.showSplashAnimation();
     }
 
@@ -37,6 +35,6 @@ public class SplashActivity extends AppCompatActivity implements ViewSplash {
 
     @Override
     public void startAnimation(Animation animation) {
-        imageViewSplash.startAnimation(animation);
+        binding.imageSplash.startAnimation(animation);
     }
 }

@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
 repositories {
     mavenCentral()
     maven() {
@@ -6,14 +10,14 @@ repositories {
     }
 }
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildFeatures {
         viewBinding true
     }
     defaultConfig {
         applicationId "com.imagine.mohamedtaha.store"
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -25,29 +29,91 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures{
+        dataBinding = true
+    }
     // Butter knife requires Java 8.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'})
-    def appcompat_version = "1.1.0"
 
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation 'androidx.appcompat:appcompat:1.3.1'
 // For loading and tinting drawables on older versions of the platform
-    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+    implementation 'androidx.appcompat:appcompat-resources:1.3.1'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'de.codecrafters.tableview:tableview:2.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'com.github.wdullaer:materialDateTimePicker:v3.0.0'
     implementation('com.github.worker8:tourguide:1.0.17-SNAPSHOT@aar') {transitive = true}
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.2'
     implementation files('libs/jxl.jar')
+
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.activity:activity-ktx:1.3.1'
+
+    // Dependencies for working with Architecture components
+    // You'll probably have to update the version numbers in build.gradle (Project)
+
+    // Room components
+    implementation 'androidx.room:room-ktx:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
+    androidTestImplementation 'androidx.room:room-testing:2.3.0'
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+
+    // Kotlin components
+
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
+
+    // UI
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation ('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+
+
+
+//    implementation('androidx.room:room-runtime:2.3.0')
+//    annotationProcessor 'androidx.room:room-compiler:2.3.0'
+//
+//    // optional - Kotlin Extensions and Coroutines support for Room
+//    implementation('androidx.room:room-ktx:2.3.0')
+//
+//    // optional - RxJava3 support for Room
+//    implementation 'androidx.room:room-rxjava3:2.3.0'
+//
+//    // optional - Test helpers
+//    testImplementation('androidx.room:room-testing:2.3.0')
+//
+//    // optional - Paging 3 Integration
+//    implementation("androidx.room:room-paging:2.4.0-alpha04")
+
+    //curved-bottom-navigation
+    implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
+
 }
 
 

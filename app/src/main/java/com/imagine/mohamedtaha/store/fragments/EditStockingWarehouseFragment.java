@@ -17,11 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
+import com.imagine.mohamedtaha.store.room.StoreViewModel;
+import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.ItemStore;
+import com.imagine.mohamedtaha.store.room.data.StockingHouse;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
@@ -31,11 +37,11 @@ import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.CODE_S
 import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.FIRST_BALANCE;
 import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.ID_STOKE;
 import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.NOTESTOKE;
-import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.dbHelper;
 import static com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse.itemStokeHouses;
 
 
 public class EditStockingWarehouseFragment extends DialogFragment implements DialogInterface.OnClickListener {
+    private StoreViewModel viewModel;
 
 
     private MaterialBetterSpinner SPCodeCategory,SPCodeStore;
@@ -49,13 +55,13 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
     Bundle intentStokeWearehouse ;
     long idSpinnerCategory,idSpinnerStore;
     ArrayList<ItemsStore>itemsStores = new ArrayList<>();
-    private ArrayList<ItemsStore> getItems(String items){
-       // ItemsStore itemsStore  = new ItemsStore();
-        itemStokeHouses = dbHelper.getAllStokeHouseByCategoryAndStory();
-        for (int ii = 0; ii<itemStokeHouses.size(); ii++){
-            ItemsStore itemsStokes = itemStokeHouses.get(ii);
-        }
-      //  itemStokeHouses.removeAll(itemStokeHouses);
+    private ArrayList<ItemStore> getItems(String items){
+//       // ItemsStore itemsStore  = new ItemsStore();
+//        itemStokeHouses = dbHelper.getAllStokeHouseByCategoryAndStory();
+//        for (int ii = 0; ii<itemStokeHouses.size(); ii++){
+//            ItemsStore itemsStokes = itemStokeHouses.get(ii);
+//        }
+//      //  itemStokeHouses.removeAll(itemStokeHouses);
 
         // recycleViewAddCategory.setAdapter(adapterAddStokeHouse);
         return itemStokeHouses;
@@ -80,6 +86,13 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
 
 
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new StoreViewModelFactory(((StoreApplication) getActivity().getApplication()).getRepository()).create(StoreViewModel.class);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
@@ -165,15 +178,17 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
             return;
         }
         if (intentStokeWearehouse == null) {
-            ItemsStore itemsSaveStoke = new ItemsStore();
-            itemsSaveStoke.setId_code_category(idSpinnerCategory);
-            itemsSaveStoke.setId_code_store(idSpinnerStore);
-            itemsSaveStoke.setFirst_balanse(Integer.valueOf(firstBalance));
-            itemsSaveStoke.setNotes(noteStoke);
+            StockingHouse itemsSaveStoke = new StockingHouse(idSpinnerCategory,idSpinnerStore,firstBalance,"",noteStoke,"","");
+//            itemsSaveStoke.setId_code_category(idSpinnerCategory);
+//            itemsSaveStoke.setId_code_store(idSpinnerStore);
+//            itemsSaveStoke.setFirst_balanse(Integer.valueOf(firstBalance));
+//            itemsSaveStoke.setNotes_(noteStoke);
             if (itemsSaveStoke == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_category), Toast.LENGTH_LONG).show();
             }else {
-                dbHelperStokeWearehouse.addStokeWarehouse(itemsSaveStoke);
+
+                viewModel.insertStokeWarehouse(itemsSaveStoke);
+             //  dbHelperStokeWearehouse.addStokeWarehouse(itemsSaveStoke);
                 Toast.makeText(getContext(), getString(R.string.save_category), Toast.LENGTH_LONG).show();
                 dialogStokeWearehouse.dismiss();
             }
@@ -190,6 +205,7 @@ public class EditStockingWarehouseFragment extends DialogFragment implements Dia
                 return;
             }
             if (itemUpdateStoke != null){
+
                 dbHelperStokeWearehouse.updateStokeWarehouse(itemUpdateStoke);
                 Toast.makeText(getContext(), getString(R.string.update_category), Toast.LENGTH_LONG).show();
                 dialogStokeWearehouse.dismiss();

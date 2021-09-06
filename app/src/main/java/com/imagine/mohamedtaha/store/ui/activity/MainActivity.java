@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -26,12 +27,14 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
+import com.imagine.mohamedtaha.store.databinding.ActivityMainBinding;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 //import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
 import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
@@ -39,13 +42,16 @@ import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem;
 import tourguide.tourguide.TourGuide;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>
         , SearchView.OnQueryTextListener,BackupData.OnBackupListener {
+    private ActivityMainBinding binding;
     private static final int Daily_LOADER = 4;
     TaskDbHelper dbHelper ;
     ArrayList<ItemsStore>itemsDaily = new ArrayList<>();
@@ -81,7 +87,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+//        binding.curvedBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                if (menuItem.getItemId() == R.id.home){
+//                    Toast.makeText(MainActivity.this,"home",Toast.LENGTH_LONG).show();
+//                }else  if (menuItem.getItemId() == R.id.stockingWarehouse){
+//                    Toast.makeText(MainActivity.this,"stockingWarehouse",Toast.LENGTH_LONG).show();
+//                }else if (menuItem.getItemId() == R.id.adds){
+//                    Toast.makeText(MainActivity.this,"Adds",Toast.LENGTH_LONG).show();
+//                }
+//                return true;
+//            }
+//        });
 
      /*   if (!showInformation){
             showInformation();

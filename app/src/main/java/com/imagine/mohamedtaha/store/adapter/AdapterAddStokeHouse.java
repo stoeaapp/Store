@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.room.data.ItemStore;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by MANASATT on 03/12/17.
@@ -28,14 +30,14 @@ import java.util.Collection;
 
 public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHouse.StokeWearhouseViewHolder> {
     private final LayoutInflater inflater;
-    private  ArrayList<ItemsStore>itemStokeHouses;
+    private  ArrayList<ItemStore>itemStokeHouses;
     private showDetial mListener;
     Cursor cursor;
     public interface showDetial{
         void itemShowDetial(Cursor cursor);
     }
 
-    public AdapterAddStokeHouse(Context  context, ArrayList<ItemsStore> itemStokeHouses) {
+    public AdapterAddStokeHouse(Context  context, ArrayList<ItemStore> itemStokeHouses) {
         this.inflater = LayoutInflater.from(context);
         this.itemStokeHouses = itemStokeHouses;
     }
@@ -59,11 +61,11 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
 
     @Override
     public void onBindViewHolder(final StokeWearhouseViewHolder holder, int position) {
-        ItemsStore data = itemStokeHouses.get(position);
+        ItemStore data = itemStokeHouses.get(position);
         holder.idView.setText(String.valueOf(data.getId()));
-        holder.codeCategoryView.setText(data.getNameGategory());
+        holder.codeCategoryView.setText(data.getNameCategory());
         holder.codeTypeStoreView.setText(data.getTypeStore());
-        holder.firstBalanceView.setText(String.valueOf(data.getFirst_balanse()));
+//        holder.firstBalanceView.setText(String.valueOf(data.getFirst_balanse()));
 
        // holder.dateView.setText(data.getCreatedDate());
      /*   holder.image_edit.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +101,13 @@ public class AdapterAddStokeHouse extends RecyclerView.Adapter<AdapterAddStokeHo
         }
     }
 
-    public void swapData(Collection<ItemsStore> itemsStokeCollections){
+    public void swapData(List<ItemStore> itemsStokeCollections){
         this.itemStokeHouses.clear();
         this.itemStokeHouses.addAll(itemsStokeCollections);
         notifyDataSetChanged();
     }
 
-    public void setFilter(ArrayList<ItemsStore> itemStoke){
+    public void setFilter(ArrayList<ItemStore> itemStoke){
         itemStokeHouses = new ArrayList<>();
         itemStokeHouses.addAll(itemStoke);
         notifyDataSetChanged();

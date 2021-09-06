@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.imagine.mohamedtaha.store.ui.activity.MainActivity">
+        <androidx.appcompat.widget.Toolbar
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/toolbar"
+            style="@style/HeaderBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+
+            >
+
+        </androidx.appcompat.widget.Toolbar>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewDailyMovements"
+            style="@style/ListViewAndRecycleView"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_below="@+id/toolbar"
+            />
+
+        <RelativeLayout
+            android:id="@+id/empty_view_main_activity_relative"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/empty_image"
+                style="@style/EmptyViewImage"
+
+                />
+            <TextView
+                android:id="@+id/empty_text_first"
+                android:layout_below="@+id/empty_image"
+                style="@style/EmptyViewTextViewMain"
+                android:text="@string/title_empty_daily_movements"
+                />
+
+            <TextView
+                android:id="@+id/empty_subtitle_text"
+                style="@style/EmptyViewTextViewSecond"
+                android:layout_below="@+id/empty_text_first"
+                android:text="@string/title_empty_view_daily_movements"
+                />
+
+            <TextView
+                android:id="@+id/empty1_subtitle_text"
+                style="@style/EmptyViewTextViewSecond"
+                android:layout_below="@+id/empty_subtitle_text"
+                android:text="@string/title_empty_view_daily_movements1"
+                />
+
+        </RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDaily"
+            style="@style/FloatingButtonFragment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_action_add"
+            app:fabSize="auto"
+            app:backgroundTint="@color/colorAccent"
+            />
+        <ProgressBar
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/progressBarDaily"
+            style="@style/ProgressBarStyle"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
