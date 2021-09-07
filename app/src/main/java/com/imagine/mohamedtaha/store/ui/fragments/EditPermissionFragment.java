@@ -1,16 +1,12 @@
-package com.imagine.mohamedtaha.store.fragments;
+package com.imagine.mohamedtaha.store.ui.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,19 +16,24 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
+import com.imagine.mohamedtaha.store.room.StoreViewModel;
+import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.Permissions;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.ID_PERMISSION;
-import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.NAME_PERMISION;
-import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.NOTES_PERMISSION;
-import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.PERMISSION_LOADER;
-import static com.imagine.mohamedtaha.store.fragments.AddPremissionFragment.adapterAddPermission;
+import static com.imagine.mohamedtaha.store.ui.fragments.PermissionsFragment.ID_PERMISSION;
+import static com.imagine.mohamedtaha.store.ui.fragments.PermissionsFragment.NAME_PERMISION;
+import static com.imagine.mohamedtaha.store.ui.fragments.PermissionsFragment.NOTES_PERMISSION;
 
 
 public class EditPermissionFragment extends DialogFragment implements DialogInterface.OnClickListener{
+    private StoreViewModel viewModel;
     private EditText ETNamePermission,ETNotesPermission;
     private Button BTAddOrUpdatePermission, BTDeletePermission;
     private TextView TVTitlePermission;
@@ -44,6 +45,7 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_edit_store,null);
         TextInputLayout ETTypeStoreMaterial = (TextInputLayout)view.findViewById(R.id.ETTypeStoreMaterial);
+        viewModel = new StoreViewModelFactory(((StoreApplication)getActivity().getApplication()).getRepository()).create(StoreViewModel.class);
         TVTitlePermission = (TextView)view.findViewById(R.id.TVTitleStore);
         ETNamePermission = (EditText)view.findViewById(R.id.ETTypeStoreStore);
         ETNotesPermission = (EditText)view.findViewById(R.id.EtNotesStore);
@@ -107,22 +109,23 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
         }*/
         if (intent == null) {
 
-            ItemsStore itemSavePErmission = new ItemsStore();
-            itemSavePErmission.setNamePermission(namePermission);
-            itemSavePErmission.setNotes(notes);
-            if (itemSavePErmission == null) {
+            Permissions itemSavePermission = new Permissions(namePermission,notes);
+            itemSavePermission.setTime(getTime());
+            itemSavePermission.setCreatedAt(getDate());
+            if (itemSavePermission == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_permission), Toast.LENGTH_LONG).show();
             }else {
-                dbHelper.addPermission(itemSavePErmission);
+                viewModel.insertPermissions(itemSavePermission);
+              //  dbHelper.addPermission(itemSavePErmission);
                 Toast.makeText(getContext(), getString(R.string.save_permission), Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         }else {
 
-            ItemsStore itemUpdatePermision = new ItemsStore();
-            itemUpdatePermision.setId(intent.getInt(ID_PERMISSION));
-            itemUpdatePermision.setNamePermission(namePermission);
-            itemUpdatePermision.setNotes(notes);
+            Permissions itemUpdatePermision = new Permissions(namePermission,notes);
+            itemUpdatePermision.setId(intent.getLong(ID_PERMISSION));
+            itemUpdatePermision.setUpdatedAt(getDate());
+//            itemUpdatePermision.setNotes(notes);
             boolean isExistForUpdated = dbHelper.isNamePermissioneUsedDailyMovements(intent.getInt(ID_PERMISSION));
             if (isExistForUpdated == true){
                 Toast.makeText(getContext(), getString(R.string.this_permission_not_updated), Toast.LENGTH_SHORT).show();
@@ -130,7 +133,8 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
             }
 
             if (itemUpdatePermision != null){
-                dbHelper.updatePermission(itemUpdatePermision);
+                viewModel.updatePermissions(intent.getLong(ID_PERMISSION),namePermission,notes,getDate());
+                //dbHelper.updatePermission(itemUpdatePermision);
                 Toast.makeText(getContext(), getString(R.string.update_permission), Toast.LENGTH_LONG).show();
                 dialog.dismiss();
 
@@ -141,29 +145,23 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
         } }
     public void deleteStore(){
         if (intent != null){
-            String namePermission =ETNamePermission.getText().toString();
-            String notes = ETNotesPermission.getText().toString();
-            ItemsStore itemDeletePermision = new ItemsStore();
-            itemDeletePermision.setId(intent.getInt(ID_PERMISSION));
-            itemDeletePermision.setNamePermission(namePermission);
-            itemDeletePermision.setNotes(notes);
             boolean isExist = dbHelper.isNamePermissioneUsedDailyMovements(intent.getInt(ID_PERMISSION));
             if (isExist == true){
                 Toast.makeText(getContext(), getString(R.string.this_permission_used), Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if (itemDeletePermision != null){
-                dbHelper.deletePermission(itemDeletePermision);
+          //  if (itemDeletePermision != null){
+                viewModel.deletePermissions(intent.getLong(ID_PERMISSION));
                 Toast.makeText(getContext(), getString(R.string.delete_permission), Toast.LENGTH_LONG).show();
                 dialog.dismiss();
                 alertDialogDelete.dismiss();
 
                // getActivity().finish();
 
-            }else {
-                Toast.makeText(getContext(), getString(R.string.error_delete_permission), Toast.LENGTH_LONG).show();
-            }
+//            }else {
+//                Toast.makeText(getContext(), getString(R.string.error_delete_permission), Toast.LENGTH_LONG).show();
+//            }
         }else {
             // Toast.makeText(getActivity(), "Not Data For Deleted", Toast.LENGTH_LONG).show();
             return;
@@ -200,5 +198,17 @@ public class EditPermissionFragment extends DialogFragment implements DialogInte
     @Override
     public void onClick(DialogInterface dialog, int which) {
 
+    }
+    //get date
+    public static String getDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date=new Date();
+        return dateFormat.format(date);
+    }
+    //get time
+    public static String getTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a", Locale.getDefault());
+        Date time=new Date();
+        return dateFormat.format(time);
     }
 }

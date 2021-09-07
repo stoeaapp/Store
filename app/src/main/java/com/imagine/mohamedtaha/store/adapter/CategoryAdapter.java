@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.fragments.AddPremissionFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.PermissionsFragment;
 import com.imagine.mohamedtaha.store.fragments.AddStoreFragment;
 import com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment_ContentProvider;
 
@@ -32,7 +32,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             return new AddStoreFragment();
         }else
         {
-            return new AddPremissionFragment();
+            return new PermissionsFragment();
         }
     }
 

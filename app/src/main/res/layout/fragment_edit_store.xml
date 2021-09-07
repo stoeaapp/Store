@@ -1,70 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/icons"
-    tools:context="com.imagine.mohamedtaha.store.fragments.EditStoreFragment">
+<layout>
 
-    <RelativeLayout
-        android:id="@+id/layout_titile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_title">
-        <ImageView
-            android:id="@+id/image_titile"
-            style="@style/ImageViewTitle"/>
-        <TextView
-            android:id="@+id/TVTitleStore"
-             style="@style/TextViewTitle"
-            android:text="@string/add_store_titile"
-
-           />
-    </RelativeLayout>
-<com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/ETTypeStoreMaterial"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/ETTypeStoreStore"
-        style="@style/EditTextFragmentTextFirst"
-        />
-
-</com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ETNotesMaterial"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/icons"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/EtNotesStore"
-            style="@style/EditTextFragmentTextSecond"
-            android:hint="@string/notes"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        <RelativeLayout
+            android:id="@+id/layout_titile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_title">
 
-    <LinearLayout
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-       >
-        <Button
-            android:id="@+id/BTDeleteStore"
-            android:visibility="gone"
-            android:text="@string/BTDelete"
-            style="@style/ButtonFragment"
+            <ImageView
+                android:id="@+id/image_titile"
+                style="@style/ImageViewTitle" />
 
-            />
-        <Button
-            android:id="@+id/BTAddStore"
-            android:text="@string/BtAdd"
-            style="@style/ButtonFragment"
+            <TextView
+                android:id="@+id/TVTitleStore"
+                style="@style/TextViewTitle"
+                android:text="@string/add_store_titile"
 
-            />
+                />
+        </RelativeLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ETTypeStoreMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ETTypeStoreStore"
+                style="@style/EditTextFragmentTextFirst" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ETNotesMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/EtNotesStore"
+                style="@style/EditTextFragmentTextSecond"
+                android:hint="@string/notes" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/BTDeleteStore"
+                style="@style/ButtonFragment"
+                android:text="@string/BTDelete"
+                android:visibility="gone"
+
+                />
+
+            <Button
+                android:id="@+id/BTAddStore"
+                style="@style/ButtonFragment"
+                android:text="@string/BtAdd"
+
+                />
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</layout>

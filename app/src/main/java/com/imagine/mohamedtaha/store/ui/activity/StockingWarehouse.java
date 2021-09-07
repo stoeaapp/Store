@@ -21,7 +21,7 @@ import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.StockingWarehouseBinding;
-import com.imagine.mohamedtaha.store.fragments.EditStockingWarehouseFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.EditStockingWarehouseFragment;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.ItemStore;

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.room.data.Permissions;
 
 import org.w3c.dom.Text;
 
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -23,10 +25,10 @@ import java.util.Locale;
  */
 
 public class AdapterAddPermission extends BaseAdapter {
-    private  ArrayList<ItemsStore> itemsPermissions;
+    private List<Permissions> itemsPermissions;
     private final LayoutInflater inflater;
 
-    public AdapterAddPermission(Context context,ArrayList<ItemsStore> itemsPermissions) {
+    public AdapterAddPermission(Context context,ArrayList<Permissions> itemsPermissions) {
         this.inflater = LayoutInflater.from(context);
         this.itemsPermissions = itemsPermissions;
     }
@@ -82,9 +84,9 @@ public class AdapterAddPermission extends BaseAdapter {
 
         //Read the Store attributes from the Cursor for the current Store
         String idStore = String.valueOf(itemsPermissions.get(position).getId());
-        String typeStore = itemsPermissions.get(position).getNamePermission();
-        String  dateStore = String.valueOf(itemsPermissions.get(position).getCreatedDate());
-        String  timeStore = itemsPermissions.get(position).getCreatedTime();
+        String typeStore = itemsPermissions.get(position).getPermissionName();
+        String  dateStore = String.valueOf(itemsPermissions.get(position).getCreatedAt());
+        String  timeStore = itemsPermissions.get(position).getTime();
 
 
         //Update the TextView with the attributes for the current store
@@ -97,13 +99,13 @@ public class AdapterAddPermission extends BaseAdapter {
 
 
         return listItemView;    }
-    public void swapData(Collection<ItemsStore> itemsStoreCollections){
+    public void swapData(Collection<Permissions> itemsStoreCollections){
         this.itemsPermissions.clear();
         this.itemsPermissions.addAll(itemsStoreCollections);
         notifyDataSetChanged();
 
     }
-    public void setFilter(ArrayList<ItemsStore> itemStoke){
+    public void setFilter(ArrayList<Permissions> itemStoke){
         itemsPermissions = new ArrayList<>();
         itemsPermissions.addAll(itemStoke);
         notifyDataSetChanged();
