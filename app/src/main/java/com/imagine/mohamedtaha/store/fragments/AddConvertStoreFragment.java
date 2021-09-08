@@ -32,6 +32,7 @@ import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderConvertStore;
+import com.imagine.mohamedtaha.store.ui.fragments.stores.EditStoreFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,9 +108,9 @@ public class AddConvertStoreFragment extends Fragment {
                     bundle.putInt(ID_STORE, itemsStore.getId());
                     bundle.putString(TYPE_CONVERT_STORE, itemsStore.getConvertTo());
                     bundle.putString(NOTES_STORE, itemsStore.getNotes());
-                    com.imagine.mohamedtaha.store.fragments.AddStoreFragment.EditStoreFragment f = new com.imagine.mohamedtaha.store.fragments.AddStoreFragment.EditStoreFragment();
+                    EditStoreFragment f = new EditStoreFragment();
                     f.setArguments(bundle);
-                    f.show(getFragmentManager(),DIALOD_STORE);
+                    f.show(getChildFragmentManager(),DIALOD_STORE);
                 }
             });
 
@@ -117,7 +118,7 @@ public class AddConvertStoreFragment extends Fragment {
             fab_add_convert_store.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new EditConvertStoreFragment().show(getFragmentManager(),DIALOD_STORE);
+                    new EditConvertStoreFragment().show(getChildFragmentManager(),DIALOD_STORE);
                 }
             });
             return view;

@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.ui.fragments.PermissionsFragment;
-import com.imagine.mohamedtaha.store.fragments.AddStoreFragment;
-import com.imagine.mohamedtaha.store.fragments.Add_Category_Fragment_ContentProvider;
+import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.stores.AddStoreFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.categories.addCategoryFragment;
 
 /**
  * Created by MANASATT on 25/11/17.
@@ -27,7 +27,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
-            return new Add_Category_Fragment_ContentProvider();
+            return new addCategoryFragment();
         }else if (position == 1){
             return new AddStoreFragment();
         }else

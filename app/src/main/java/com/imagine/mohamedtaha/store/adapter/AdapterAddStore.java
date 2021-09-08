@@ -10,22 +10,25 @@ import android.widget.TextView;
 import com.imagine.mohamedtaha.store.StoreDiffCallback;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.room.data.Stores;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by MANASATT on 29/11/17.
  */
 
 public class AdapterAddStore extends BaseAdapter {
-    private ArrayList<ItemsStore> itemsStores = new ArrayList<>();
+    private ArrayList<Stores> itemsStores;
     private final LayoutInflater inflater;
 
-    public AdapterAddStore(Context context, ArrayList<ItemsStore> itemsStores) {
+    public AdapterAddStore(Context context, ArrayList<Stores> itemsStores) {
         //  super(context, itemStore/*flags*/);
         this.inflater = LayoutInflater.from(context);
+        this.itemsStores = new ArrayList<>();
         this.itemsStores = itemsStores;
     }
 
@@ -63,8 +66,8 @@ public class AdapterAddStore extends BaseAdapter {
         //Read the Store attributes from the Cursor for the current Store
         String idStore = String.valueOf(itemsStores.get(position).getId());
         String typeStore = itemsStores.get(position).getTypeStore();
-        String  dateStore = String.valueOf(itemsStores.get(position).getCreatedDate());
-        String  timestore = String.valueOf(itemsStores.get(position).getCreatedTime());
+        String  dateStore = String.valueOf(itemsStores.get(position).getCreatedAt());
+        String  timestore = String.valueOf(itemsStores.get(position).getTime());
 
         //Update the TextView with the attributes for the current store
         TVID.setText(idStore);
@@ -76,7 +79,7 @@ public class AdapterAddStore extends BaseAdapter {
         return listItemView;
     }
 
-    public void swapData(Collection<ItemsStore> itemsStoreCollections) {
+    public void swapData(List<Stores> itemsStoreCollections) {
         this.itemsStores.clear();
         this.itemsStores.addAll(itemsStoreCollections);
         notifyDataSetChanged();

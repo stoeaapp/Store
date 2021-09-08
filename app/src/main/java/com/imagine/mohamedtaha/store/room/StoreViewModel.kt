@@ -14,6 +14,11 @@ class StoreViewModel(private val repository: StoreRepository) :ViewModel(){
     val allCategoriesLiveData:LiveData<List<Categories>> = repository.getAllCategories.asLiveData()
     fun insertCategory(categories: Categories) = viewModelScope.launch { repository.insertCategory(categories) }
 
+    fun updateCategory(id:Long,category_category:String,natural_category:String,notes:String,update_date:String) = viewModelScope.launch {
+        repository.updateCategory(id,category_category,natural_category,notes,update_date) }
+
+    fun deleteCategory(id: Long) = viewModelScope.launch { repository.deleteCategory(id) }
+
     //_____________________________Methods Permissions____________________________
 
     val allPermissionsLiveData:LiveData<List<Permissions>> = repository.getAllPermissions.asLiveData()
@@ -27,6 +32,15 @@ class StoreViewModel(private val repository: StoreRepository) :ViewModel(){
     //_____________________________Methods Stores____________________________
     val allStoresLiveData:LiveData<List<Stores>> =repository.getAllStores.asLiveData()
     fun insertStore(stores: Stores) = viewModelScope.launch { repository.insertStores(stores) }
+    fun updateStore(id:Long,type_store:String,notes:String,update_date: String) = viewModelScope.launch {
+        repository.updateStore(id,type_store,notes,update_date) }
+    fun deleteStore(id:Long) = viewModelScope.launch { repository.deleteStore(id) }
+
+    //_____________________________Methods Convert Stores____________________________
+    fun insertConvertStore(convertStores: ConvertStores) = viewModelScope.launch { repository.insertConvertStore(convertStores) }
+    fun updateConvertStore(id:Long,type_store:String,notes:String,update_date: String) = viewModelScope.launch {
+        repository.updateConvertStore(id,type_store,notes,update_date) }
+    fun deleteConvertStore(id:Long) = viewModelScope.launch { repository.deleteConvertStore(id) }
 
 
     val AllStokeHouseByCategoryAndStory:LiveData<List<ItemStore>> = repository.getAllStokeHouseByCategoryAndStory.asLiveData()

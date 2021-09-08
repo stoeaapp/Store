@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
+import com.imagine.mohamedtaha.store.room.data.Categories;
+import com.imagine.mohamedtaha.store.room.data.Stores;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ManasatPC on 13/01/18.
@@ -18,15 +23,15 @@ import com.imagine.mohamedtaha.store.data.TaskContract.TaskEntry;
 
 public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.CategoryViewHolder> {
     //class variables for the cursor that holds category data and the Context
-    private Cursor mCursor;
+    private List<Categories> itemCategory;
     private Context mContext;
     //  private List<CategoryFileds>categoryFiledses;
 
     //Constrctor  for the CategoryCursorAdapter that initializes the Context
-    public AdapterAddCategory(Context context) {
+    public AdapterAddCategory(Context context,List<Categories> itemCategory,showDetial listener) {
         this.mContext = context;
-//        this.categoryFiledses = categoryFiledses;
-
+     this.itemCategory = itemCategory;
+        this.mListener = listener;
     }
 
     private showDetial mListener;
@@ -50,8 +55,8 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
             @Override
             public void onClick(View v) {
                 int position = categoryViewHolder.getAdapterPosition();
-                mCursor.moveToPosition(position);
-                if (mListener != null) mListener.itemShowDetail(mCursor);
+              //  mCursor.moveToPosition(position);
+                if (mListener != null) mListener.itemShowDetail(position);
             }
         });
 
@@ -69,18 +74,12 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
         holder.nameCategoryView.setText(categoryFileds.getNameGategory());
         holder.dateCategoryView.setText(categoryFileds.getDate());*/
         //Indices for the _id , de
-        int idIndex = mCursor.getColumnIndex(TaskEntry._ID);
-        int nameCategoryIndex = mCursor.getColumnIndex(TaskEntry.KEY_NAME_CATEGORY);
-        int dateIndex = mCursor.getColumnIndex(TaskEntry.KEY_DATE);
-        int timeIndex = mCursor.getColumnIndex(TaskEntry.KEY_TIME);
-
-        mCursor.moveToPosition(position); //get to the right location in the cursor
 
         //Determine the values of the wanted data
-        final int id = mCursor.getInt(idIndex);
-        String nameCategory = mCursor.getString(nameCategoryIndex);
-        String date = mCursor.getString(dateIndex);
-        String  time = mCursor.getString(timeIndex);
+        final Long id = itemCategory.get(position).getId();
+        String nameCategory =itemCategory.get(position).getCategoryName();
+        String date = itemCategory.get(position).getCreatedAt();
+        String  time = itemCategory.get(position).getTime();
 
         //Set values
         // holder.itemView.setTag(id);
@@ -93,35 +92,21 @@ public class AdapterAddCategory extends RecyclerView.Adapter<AdapterAddCategory.
     }
 
     public interface showDetial {
-        void itemShowDetail(Cursor cursor);
+        void itemShowDetail(Integer cursor);
     }
 
     //Returns the number of items todisplay
     @Override
     public int getItemCount() {
-        if (mCursor == null) {
+        if (itemCategory == null) {
             return 0;
         }
-        return mCursor.getCount();
+        return itemCategory.size();
     }
-
-    /**
-     * When data changes and a re-query occurs, this function swaps the old Cursor
-     * with a newly updated Cursor (Cursor c) that is passed in.
-     */
-    public Cursor swapCursor(Cursor c) {
-        //check if this cursor is the same as the previous cursor(mCursor)
-        if (mCursor == c) {
-            return null; //bc nothing has changed
-        }
-        Cursor temp = mCursor;
-        this.mCursor = c; //new cursor value assigned
-
-        //check if this is a valid cursor ,then update the cursor
-        if (c != null) {
-            this.notifyDataSetChanged();
-        }
-        return temp;
+    public void swapData(List<Categories> itemsStoreCollections) {
+        this.itemCategory.clear();
+        this.itemCategory.addAll(itemsStoreCollections);
+        notifyDataSetChanged();
     }
 
     //Inner class for creating ViewHolders

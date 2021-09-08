@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imagine.mohamedtaha.store.fragments.AddStoreFragment">
+    tools:context="com.imagine.mohamedtaha.store.ui.fragments.stores.AddStoreFragment">
     <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/listViewAddStore"

@@ -450,10 +450,6 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         }
         return itemDailyMovements;
     }
-
-
-
-
     //____________________Update Convert Store______________________
     public long updateConvertStore(ItemsStore itemsConvertStore){
         SQLiteDatabase db = this.getWritableDatabase();
