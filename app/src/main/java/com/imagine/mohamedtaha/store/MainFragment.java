@@ -1,6 +1,5 @@
 package com.imagine.mohamedtaha.store;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +27,7 @@ import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
 import com.imagine.mohamedtaha.store.ui.activity.ActivityForIncludeFragments;
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity;
-import com.imagine.mohamedtaha.store.ui.activity.StockingWarehouse;
+import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,11 +49,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
     public static final String CONVERT_TO_DAILY = "convert_to";
     public static final String INCOMING_DAILY = "incoming";
     public static final String ISSUED_DAILY = "issued";
-
     public static final String DIALOG_DALIY_MOVEMENTS = "dialogDaliy";
-
     private BackupData backupData;
-    public Activity mActivity;
     private static boolean showInformation = false;
 
     public MainFragment() {

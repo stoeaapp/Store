@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Database(entities = [ItemStore::class, StockingHouse::class, Categories::class, Permissions::class, Stores::class, Users::class, ConvertStores::class]
-        ,version = 7,exportSchema = true)
+        ,version = 8,exportSchema = true)
 public abstract class StoreRoomDatabase:RoomDatabase() {
     abstract fun storeDao():StoreDao
     companion object{

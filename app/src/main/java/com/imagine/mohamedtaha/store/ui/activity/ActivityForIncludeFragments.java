@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.CategoryAdapter;
+import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 public class ActivityForIncludeFragments extends AppCompatActivity {
     @Override

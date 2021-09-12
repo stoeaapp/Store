@@ -63,6 +63,7 @@
                 android:id="@+id/BTAddStore"
                 style="@style/ButtonFragment"
                 android:text="@string/BtAdd"
+                android:paddingBottom="100dp"
 
                 />
         </LinearLayout>

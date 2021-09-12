@@ -18,4 +18,12 @@ object Constant {
     const val NAME_CATEGORY = "name_category"
     const val NATURAL_CATEGORY = "natural_category"
 
+// Fragment StockingWarehouse
+    const val ID_STOKE = "id"
+    const val CODE_NAME_CATEGORY = "codeNameCategory"
+    const val CODE_TYPE_STORE = "codeTypeStore"
+    const val FIRST_BALANCE = "firstBalance"
+    const val DIALOG_STOKE_WEAR_HOUSE = "dialogStokeWearHouse"
+
+
 }

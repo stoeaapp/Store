@@ -1,74 +1,78 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/icons"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imagine.mohamedtaha.store.ui.fragments.EditStockingWarehouseFragment">
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="@drawable/shape_title">
-       <ImageView
-           android:id="@+id/image_titile"
-           style="@style/ImageViewTitle"/>
-       <TextView
-           android:id="@+id/TVTitleStokeWearhouse"
-          style="@style/TextViewTitle"
-           android:text="@string/add_stoke_titile"
+<layout>
 
-           />
-   </RelativeLayout>
-
-       <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/SPCodeCategoryStock"
-        android:hint="@string/name_category"
-        android:layout_marginTop="16dp"
-        app:met_floatingLabel = "highlight"
-           style="@style/SpinnerForFragment"
-           />
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/SPCodeStoreStock"
-        android:hint="@string/type_store"
-        app:met_floatingLabel = "highlight"
-        style="@style/SpinnerForFragment"
-        />
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/icons"
+        android:orientation="vertical"
+        tools:context="com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.EditStockingWarehouseFragment">
 
-    <EditText
-        android:id="@+id/ETFirstBalanceStoke"
-        android:hint="@string/first_balance"
-        style="@style/EditTextFragmentNumber"
-        />
-    </com.google.android.material.textfield.TextInputLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_title">
+
+            <ImageView
+                android:id="@+id/image_titile"
+                style="@style/ImageViewTitle" />
+
+            <TextView
+                android:id="@+id/TVTitleStokeWearhouse"
+                style="@style/TextViewTitle"
+                android:text="@string/add_stoke_titile"
+
+                />
+        </RelativeLayout>
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/SPCodeCategoryStock"
+            style="@style/SpinnerForFragment"
+            android:layout_marginTop="16dp"
+            android:hint="@string/name_category"
+            app:met_floatingLabel="highlight" />
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/SPCodeStoreStock"
+            style="@style/SpinnerForFragment"
+            android:hint="@string/type_store"
+            app:met_floatingLabel="highlight" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ETFirstBalanceStoke"
+                style="@style/EditTextFragmentNumber"
+                android:hint="@string/first_balance" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/ETNotesStoke"
-        android:hint="@string/notes"
-       style="@style/EditTextFragmentTextSecond"
-        />
-    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/ETNotesStoke"
+                style="@style/EditTextFragmentTextSecond"
+                android:hint="@string/notes" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-    style="@style/LayoutButtonFragment">
-    <Button
-        android:id="@+id/BTDeleteStokeWarehouse"
-        android:text="@string/BTDelete"
-        android:visibility="gone"
-        style="@style/ButtonFragment"/>
-    <Button
-        android:id="@+id/BTAddStokeWarehouse"
-        android:text="@string/BtAdd"
-        style="@style/ButtonFragment"
-        />
-</LinearLayout>
+        <LinearLayout style="@style/LayoutButtonFragment">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/BTDeleteStokeWarehouse"
+                style="@style/ButtonFragment"
+                android:text="@string/BTDelete"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/BTAddStokeWarehouse"
+                style="@style/ButtonFragment"
+                android:text="@string/BtAdd" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

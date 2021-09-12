@@ -17,8 +17,6 @@
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_daily_movements"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".dialog.DialogAddCategory" />
-        <activity android:name=".dialog.DialogAddStore" />
         <activity
             android:name=".ui.activity.ReportStokeFragment"
             android:label="@string/title_report_first_balance"
@@ -56,7 +54,7 @@
         </activity>
         <activity android:name=".ui.activity.EditStore" />
         <activity
-            android:name=".ui.activity.StockingWarehouse"
+            android:name=".ui.fragments.stockingwarehouse.StockingWarehouse"
             android:label="@string/add_stocking_warehouse"
             android:parentActivityName=".ui.activity.ActivityForIncludeFragments">
             <meta-data

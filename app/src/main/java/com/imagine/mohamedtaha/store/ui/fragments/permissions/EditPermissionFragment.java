@@ -43,7 +43,7 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
         binding = FragmentEditStoreBinding.inflate(getLayoutInflater(), container, false);
         dbHelper = new TaskDbHelper(getContext());
         intent = getArguments();
-        binding.ETTypeStoreStore.setText(getString(R.string.add_permission_titile));
+        binding.TVTitleStore.setText(getString(R.string.add_permission_titile));
         binding.ETTypeStoreMaterial.setHint(getString(R.string.type_permission));
 
         if (intent != null) {

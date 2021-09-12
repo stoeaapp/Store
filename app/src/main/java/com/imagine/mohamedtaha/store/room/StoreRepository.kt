@@ -13,6 +13,7 @@ class StoreRepository(private val storeDao: StoreDao) {
     suspend fun insertCategory(categories: Categories){
         storeDao.insertCategory(categories)
     }
+
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun updateCategory(id:Long,category_name:String,natural_category:String,notes:String,update_date:String){
@@ -96,6 +97,7 @@ class StoreRepository(private val storeDao: StoreDao) {
 
     val getAllStokeHouseByCategoryAndStory: kotlinx.coroutines.flow.Flow<List<ItemStore>> = storeDao.getAllStokeHouseByCategoryAndStory()
     val getAllStokeWareHouse: kotlinx.coroutines.flow.Flow<List<StockingHouse>> = storeDao.getAllStokeWareHouse()
+    val getAllStokeWareHouseWitCategoriesAndStores: kotlinx.coroutines.flow.Flow<List<StockWareWithCategoriesAndStores>> = storeDao.getAllStokeWareHouseWitCategoriesAndStores()
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insertStokeWarehouse(stockingHouse: StockingHouse){

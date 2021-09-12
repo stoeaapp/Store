@@ -1487,8 +1487,8 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         ArrayList<ItemsStore> itemStokeHouses = new ArrayList<ItemsStore>();
         String selectQuery = "SELECT  DISTINCT "+"tsw. " +TaskEntry._ID + ", ts. " + TaskEntry.KEY_TYPE_STORE + ", tc."
                 +TaskEntry.KEY_NAME_CATEGORY +", tsw."+ TaskEntry.KEY_FIRST_BALANCE + " FROM " + TaskEntry.TABLE_STORE + " ts, "
-                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE
-                + " tsw  INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
+                +TaskEntry.TABLE_CATEGORIES + " tc,"+  TaskEntry.TABLE_STOCKING_WAREHOUSE + " tsw " +
+                " INNER JOIN "  +TaskEntry.TABLE_STORE + " ON ts."+ TaskEntry._ID + " = " + "tsw." + TaskEntry.KEY_STORE_ID
                 +" INNER JOIN  " +TaskEntry.TABLE_CATEGORIES+ " ON tc."+TaskEntry._ID
                 + " = " + "tsw." + TaskEntry.KEY_CATEGORY_ID ;
 

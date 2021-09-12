@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.activity;
+package com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse;
 
 
 import android.os.Bundle;
@@ -13,93 +13,68 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
-import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.StockingWarehouseBinding;
-import com.imagine.mohamedtaha.store.ui.fragments.EditStockingWarehouseFragment;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
-import com.imagine.mohamedtaha.store.room.data.ItemStore;
-import com.imagine.mohamedtaha.store.room.data.StockingHouse;
+import com.imagine.mohamedtaha.store.room.data.StockWareWithCategoriesAndStores;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.imagine.mohamedtaha.store.Constant.CODE_NAME_CATEGORY;
+import static com.imagine.mohamedtaha.store.Constant.CODE_TYPE_STORE;
+import static com.imagine.mohamedtaha.store.Constant.DIALOG_STOKE_WEAR_HOUSE;
+import static com.imagine.mohamedtaha.store.Constant.NOTES;
 
 public class StockingWarehouse extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private StockingWarehouseBinding binding;
-    private StoreViewModel viewModel;
-
     public static AdapterAddStokeHouse adapterAddStokeHouse;
-    public static TaskDbHelper dbHelper;
-    private static final int STOKE_LOADER = 3;
-    public static ArrayList<ItemStore> itemStokeHouses = new ArrayList<ItemStore>();
-    public static final String ID_STOKE = "id";
-    public static final String CODE_CATEGORY = "codeCategory";
-    public static final String CODE_STORE = "codeStore";
-    public static final String FIRST_BALANCE = "firstBalance";
-    public static final String NOTESTOKE = "notesStoke";
-    public static final String DIALOG_STOKE_WEAREHOUSE = "dialogStokeWearhouse";
+    public static ArrayList<StockWareWithCategoriesAndStores> itemStokeHouses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = StockingWarehouseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
+        StoreViewModel viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
+        viewModel.getAllStokeWareHouseWitCategoriesAndStores().observe(this, categories -> {
+            Log.d("iddd" ," " +categories.size());
+            if (categories.size() > 0) {
+                adapterAddStokeHouse.swapData(categories);
+                binding.emptyViewStokeWearehouse.setVisibility(View.GONE);
+                binding.progressBarStoke.setVisibility(View.GONE);
+                binding.recycleViewAddStokeWarehouse.setVisibility(View.VISIBLE);
+            } else {
+                binding.emptyViewStokeWearehouse.setVisibility(View.VISIBLE);
+                binding.progressBarStoke.setVisibility(View.VISIBLE);
+                binding.recycleViewAddStokeWarehouse.setVisibility(View.GONE);
+            }
+        });
 
-        dbHelper = new TaskDbHelper(this);
         binding.recycleViewAddStokeWarehouse.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapterAddStokeHouse = new AdapterAddStokeHouse(this, itemStokeHouses);
         binding.recycleViewAddStokeWarehouse.setAdapter(adapterAddStokeHouse);
-
-//        final Observer<List<ItemStore>> StockWareHouseObserver = itemStores -> {
-//            if (itemStores.size() > 0) {
-//                adapterAddStokeHouse.swapData(itemStores);
-//                binding.emptyViewStokeWearehouse.setVisibility(View.GONE);
-//                binding.progressBarStoke.setVisibility(View.GONE);
-//                binding.recycleViewAddStokeWarehouse.setVisibility(View.VISIBLE);
-//            } else {
-//                binding.emptyViewStokeWearehouse.setVisibility(View.VISIBLE);
-//                binding.progressBarStoke.setVisibility(View.VISIBLE);
-//                binding.recycleViewAddStokeWarehouse.setVisibility(View.GONE);
-//            }
-//        };
-//        viewModel.getAllStokeHouseByCategoryAndStory().observe(this, StockWareHouseObserver);
-
-        final Observer<List<StockingHouse>> StockWareHouseObserver = itemStores -> {
-            Log.d("itemstt"," " + itemStores.size());
-            if (itemStores.size() > 0) {
-//                adapterAddStokeHouse.swapData(itemStores);
-//                binding.emptyViewStokeWearehouse.setVisibility(View.GONE);
-//                binding.progressBarStoke.setVisibility(View.GONE);
-//                binding.recycleViewAddStokeWarehouse.setVisibility(View.VISIBLE);
-//            } else {
-//                binding.emptyViewStokeWearehouse.setVisibility(View.VISIBLE);
-//                binding.progressBarStoke.setVisibility(View.VISIBLE);
-//                binding.recycleViewAddStokeWarehouse.setVisibility(View.GONE);
-            }
-        };
-        viewModel.getAllStokeWareHouse().observe(this, StockWareHouseObserver);
 
         binding.recycleViewAddStokeWarehouse.addOnItemTouchListener(new AdapterAddStokeHouse.RecycleTouchListener(getApplicationContext(),
                 binding.recycleViewAddStokeWarehouse, new AdapterAddStokeHouse.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ItemStore itemStoke = itemStokeHouses.get(position);
+                StockWareWithCategoriesAndStores itemStoke = itemStokeHouses.get(position);
                 Bundle bundle = new Bundle();
                 //bundle.putInt(ID_STOKE, itemStoke.getId());
-                bundle.putString(CODE_CATEGORY, itemStoke.getNameCategory());
-                bundle.putString(CODE_STORE, itemStoke.getTypeStore());
+                bundle.putString(CODE_NAME_CATEGORY, itemStoke.getCategoryName());
+                bundle.putString(CODE_TYPE_STORE, itemStoke.getTypeStore());
+
+
                 //   bundle.putInt(FIRST_BALANCE, itemStoke.getFirst_balanse());
-                bundle.putString(NOTESTOKE, itemStoke.getNotes());
+                bundle.putString(NOTES, itemStoke.getNotes());
                 EditStockingWarehouseFragment f = new EditStockingWarehouseFragment();
                 f.setArguments(bundle);
-                f.show(getSupportFragmentManager(), DIALOG_STOKE_WEAREHOUSE);
+                f.show(getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
             }
 
 
@@ -111,7 +86,7 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
         binding.fabAddStockWarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EditStockingWarehouseFragment().show(getSupportFragmentManager(), DIALOG_STOKE_WEAREHOUSE);
+                new EditStockingWarehouseFragment().show(getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
             }
         });
     }

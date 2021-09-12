@@ -8,26 +8,26 @@ interface StoreDao {
     //_____________________________Methods Permissions____________________________
 
     //___________________________________Add Permissions__________________________
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPermissions(permissions: Permissions)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPermissions(permissions: Permissions):Long
 
     //___________________________________Update Permissions__________________________
     @Query("UPDATE permissions SET  permission_name =:permission_name ,notes =:notes ,updated_at =:update_date WHERE id = :id")
     suspend fun updatePermissions(id:Long,permission_name:String,notes:String,update_date:String)
     @Update()
-    suspend fun updatePermissions(permissions: Permissions)
+    suspend fun updatePermissions(permissions: Permissions):Int
 
     //___________________________________Delete Permissions_______________________
     @Query("DELETE FROM permissions WHERE id= :id")
     suspend fun deletePermission(id:Long)
 
     //____________________getting all Permissions_________________________________
-    @Query("SELECT * FROM permissions")
+    @Query("SELECT * FROM permissions ORDER BY id DESC")
     fun getAllPermission(): kotlinx.coroutines.flow.Flow<List<Permissions>>
 
 
     //_____________________________Methods Categories____________________________
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCategory(categories: Categories)
 
     //____________________getting all Categories_________________________________
@@ -83,7 +83,7 @@ interface StoreDao {
 
     //___________________________________Add StokeWareHouse____________________________
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStokeWarehouse(stockingHouse: StockingHouse)
+    suspend fun insertStokeWarehouse(stockingHouse: StockingHouse):Long
 
     //____________________getting all StokeWareHouse under Store and Category____________________________
     @Query("SELECT * FROM stores")
@@ -93,4 +93,10 @@ interface StoreDao {
     @Query("SELECT * FROM stocking_ware_house")
     fun getAllStokeWareHouse(): kotlinx.coroutines.flow.Flow<List<StockingHouse>>
 
+    @Query("SELECT DISTINCT * FROM type_store ts , categories tc,stocking_ware_house tswh inner join type_store on ts.id = tswh.store_id  inner join categories on tc.id = tswh.category_id ")
+    fun getAllStokeWareHouseWitCategoriesAndStores(): kotlinx.coroutines.flow.Flow<List<StockWareWithCategoriesAndStores>>
+//    tswh.id,ts.type_store,tc.category_name ,tswh.first_balance
+//    @Query("SELECT * FROM categories  inner join stocking_ware_house on categories.id = stocking_ware_house.category_id ")
+//    fun getAllStokeWareHouseWitCategories(): kotlinx.coroutines.flow.Flow<List<StockWareWithCategoriesAndStores>>
+//tswh.id,ts.type_store,tc.category_name ,tswh.first_balance
 }
