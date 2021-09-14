@@ -21,19 +21,20 @@ import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.databinding.StockingWarehouseBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
-import com.imagine.mohamedtaha.store.room.data.StockWareWithCategoriesAndStores;
+import com.imagine.mohamedtaha.store.room.data.ShowStockWare;
 
 import java.util.ArrayList;
 
 import static com.imagine.mohamedtaha.store.Constant.CODE_NAME_CATEGORY;
 import static com.imagine.mohamedtaha.store.Constant.CODE_TYPE_STORE;
 import static com.imagine.mohamedtaha.store.Constant.DIALOG_STOKE_WEAR_HOUSE;
+import static com.imagine.mohamedtaha.store.Constant.FIRST_BALANCE;
 import static com.imagine.mohamedtaha.store.Constant.NOTES;
 
 public class StockingWarehouse extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private StockingWarehouseBinding binding;
     public static AdapterAddStokeHouse adapterAddStokeHouse;
-    public static ArrayList<StockWareWithCategoriesAndStores> itemStokeHouses = new ArrayList<>();
+    public static ArrayList<ShowStockWare> itemStokeHouses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
         binding = StockingWarehouseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         StoreViewModel viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
-        viewModel.getAllStokeWareHouseWitCategoriesAndStores().observe(this, categories -> {
+        viewModel.getAllStokeWareHouseWitCategoriesAndStoresShow().observe(this, categories -> {
             Log.d("iddd" ," " +categories.size());
             if (categories.size() > 0) {
                 adapterAddStokeHouse.swapData(categories);
@@ -63,14 +64,12 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
                 binding.recycleViewAddStokeWarehouse, new AdapterAddStokeHouse.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                StockWareWithCategoriesAndStores itemStoke = itemStokeHouses.get(position);
+                ShowStockWare itemStoke = itemStokeHouses.get(position);
                 Bundle bundle = new Bundle();
                 //bundle.putInt(ID_STOKE, itemStoke.getId());
                 bundle.putString(CODE_NAME_CATEGORY, itemStoke.getCategoryName());
                 bundle.putString(CODE_TYPE_STORE, itemStoke.getTypeStore());
-
-
-                //   bundle.putInt(FIRST_BALANCE, itemStoke.getFirst_balanse());
+                bundle.putString(FIRST_BALANCE, itemStoke.getFirstBalance());
                 bundle.putString(NOTES, itemStoke.getNotes());
                 EditStockingWarehouseFragment f = new EditStockingWarehouseFragment();
                 f.setArguments(bundle);

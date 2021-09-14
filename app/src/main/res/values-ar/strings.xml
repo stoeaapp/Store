@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">YSYP</string>
+    <string name="title_profile">الملف الشخصي </string>
+    <string name="title_add">إضافة </string>
+    <string name="title_daily_movements" >  الحركات اليومية</string>
+
     <string name="action_settings" translatable="false">الضبط</string>
     <string name="add_data" translatable="false">إضافة البيانات</string>
     <string name="add_stocking_warehouse" translatable="false">ترصيد المستودع</string>
@@ -9,7 +13,6 @@
     <string name="backup" translatable="false">" نسخةاحتياطية  "</string>
     <string name="import_backup" translatable="false">" استيراد قاعدةالبيانات  "</string>
     <string name="add_reportes_daily" translatable="false">" تقارير الحركات اليومية  "</string>
-    <string name="title_daily_movements" translatable="false">"  الحركات اليومية"</string>
     <string name="title_report_first_balance" translatable="false">"  تقرير ترصيدالمستودع"</string>
     <string name="title_report_daily_movements" translatable="false">"  تقرير الحركات اليومية"</string>
     <string name="title_all_fragments" translatable="false">"  تكويد المستودع"</string>
@@ -22,11 +25,13 @@
     <string name="title_empty_view_permission" translatable="false">ابدأ بإضافة انواع الإذونات</string>
     <string name="title_empty_view_category" translatable="false">"ابدأ بإضافة الأصناف "</string>
     <string name="title_empty_view_stoke_wearehouse" translatable="false">" حتى تستطيع ترصيد المستودع  "</string>
-    <string name="add_category" translatable="false">إضافة الأصناف</string>
-    <string name="add_store" translatable="false">إضافة المخازن</string>
+    <string name="add_category" >إضافة الأصناف</string>
+
+    <string name="add_store">إضافة المخازن</string>
+
     <string name="add_store_convert" translatable="false">إضافة المخازن المحولة</string>
     <string name="title_add_category" translatable="false">إضافة الأصناف</string>
-    <string name="add_permission" translatable="false">إضافة الإذن</string>
+    <string name="add_permission">إضافة الإذونات</string>
     <string name="empty_view_title_text" translatable="false">It\'s a bit lonely here...</string>
     <string name="empty_view_subtitle_text" translatable="false">Get started by adding a Category</string>
     <string name="name_category" translatable="false">"اسم الصنف "</string>
@@ -121,4 +126,6 @@
     <string name="m_store">" م"</string>
     <string name="text_splash"> مخزنك في جوالك</string>
     <string name="data_created">" تاريخ الإنشاء"</string>
+    <string name="add_floating_button">Floating button</string>
+    <string name="image">Image</string>
 </resources>

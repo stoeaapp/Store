@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
-
+apply plugin: 'dagger.hilt.android.plugin'
 repositories {
     mavenCentral()
     maven() {
@@ -24,7 +24,7 @@ android {
            //For create schema for database
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [
+                arguments += [
                         "room.schemaLocation": "$projectDir/src/main/assets/schemas".toString(),
                         "room.incremental"   : "true"
                 ]
@@ -55,6 +55,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -123,35 +124,7 @@ dependencies {
     //curved-bottom-navigation
     implementation 'np.com.susanthapa:curved_bottom_navigation:0.6.5'
 
+     //Hilt
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-compiler:2.38.1'
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

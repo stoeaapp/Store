@@ -5,53 +5,58 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
-import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.ActivityMainBinding;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
-//import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
 import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
-import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
+import com.imagine.mohamedtaha.store.room.StoreViewModel;
+import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
+import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 import tourguide.tourguide.TourGuide;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>
-        , SearchView.OnQueryTextListener,BackupData.OnBackupListener {
+//import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
+
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
     private ActivityMainBinding binding;
+    private StoreViewModel viewModel;
     private static final int Daily_LOADER = 4;
-    TaskDbHelper dbHelper ;
-    ArrayList<ItemsStore>itemsDaily = new ArrayList<>();
+    TaskDbHelper dbHelper;
+    ArrayList<ShowDailyMovements> itemsDaily = new ArrayList<>();
     private ProgressBar progressBarDaily;
     //private AdapterAddDailyMovements adapterAddDailyMovements;
 
@@ -72,33 +77,67 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     View emptView;
 
-    TextView convertTo ;
+    TextView convertTo;
     TextView TVConvertToShow;
     TourGuide tourGuide;
     View homeButton;
     public Activity mActivity;
     Toolbar toolbar;
 
-    private static boolean showInformation =false;
+    private static boolean showInformation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        binding.curvedBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                if (menuItem.getItemId() == R.id.home){
-//                    Toast.makeText(MainActivity.this,"home",Toast.LENGTH_LONG).show();
-//                }else  if (menuItem.getItemId() == R.id.stockingWarehouse){
-//                    Toast.makeText(MainActivity.this,"stockingWarehouse",Toast.LENGTH_LONG).show();
-//                }else if (menuItem.getItemId() == R.id.adds){
-//                    Toast.makeText(MainActivity.this,"Adds",Toast.LENGTH_LONG).show();
-//                }
-//                return true;
-//            }
-//        });
+        viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
+        viewModel.getAllDailyMovement().observe(this, new Observer<List<ShowDailyMovements>>() {
+            @Override
+            public void onChanged(List<ShowDailyMovements> showDailyMovements) {
+                if (showDailyMovements.size() > 0) {
+                    recyclerViewDailyMovements.setVisibility(View.VISIBLE);
+                    adapterAddDailyMovements.swapData(showDailyMovements);
+                    progressBarDaily.setVisibility(View.GONE);
+                    emptView.setVisibility(View.GONE);
+
+                } else {
+                    recyclerViewDailyMovements.setVisibility(View.GONE);
+                    progressBarDaily.setVisibility(View.GONE);
+                    emptView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        binding.BottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.daily_movements: {
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.replace(R.id.frameLayout, new PermissionsFragment()).commit();
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+
+
+                    }
+                    case R.id.stockingWarehouse: {
+
+                    }
+                    case R.id.adds: {
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.replace(R.id.frameLayout, new PermissionsFragment());
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                    case R.id.profile: {
+
+                    }
+                }
+                return false;
+            }
+        });
 
      /*   if (!showInformation){
             showInformation();
@@ -107,35 +146,36 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         dbHelper = new TaskDbHelper(this);
         backupData = new BackupData(this);
         backupData.setOnBackListener(this);
-        recyclerViewDailyMovements = (RecyclerView)findViewById(R.id.recycleViewDailyMovements);
-        progressBarDaily = (ProgressBar)findViewById(R.id.progressBarDaily);
+        recyclerViewDailyMovements = (RecyclerView) findViewById(R.id.recycleViewDailyMovements);
+        progressBarDaily = (ProgressBar) findViewById(R.id.progressBarDaily);
         recyclerViewDailyMovements.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapterAddDailyMovements = new AdapterAddDailyMovements(getApplicationContext(),itemsDaily);
-          emptView = findViewById(R.id.empty_view_main_activity_relative);
-      //  emptView = (TextView)findViewById(R.id.empty_view_category);
+        adapterAddDailyMovements = new AdapterAddDailyMovements(getApplicationContext(), itemsDaily);
+        emptView = findViewById(R.id.empty_view_main_activity_relative);
+        //  emptView = (TextView)findViewById(R.id.empty_view_category);
 
 
-        convertTo = (TextView)findViewById(R.id.TVConvertTo);
-         TVConvertToShow = (TextView)findViewById(R.id.TVConvertToShow);
+        convertTo = (TextView) findViewById(R.id.TVConvertTo);
+        TVConvertToShow = (TextView) findViewById(R.id.TVConvertToShow);
 
 
         recyclerViewDailyMovements.addOnItemTouchListener(new AdapterAddDailyMovements.RecycleTouchListener(getApplicationContext(),
                 recyclerViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ItemsStore itemsStore = itemsDaily.get(position);
+                ShowDailyMovements itemsStore = itemsDaily.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putInt(IDDaily, itemsStore.getId());
-                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getNamePermission());
+                bundle.putString(IDDaily, itemsStore.getId());
+                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
                 bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
-                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getNameGategory());
+                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
                 bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
                 bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
                 bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
                 EditDailyMovementsFragment f = new EditDailyMovementsFragment();
                 f.setArguments(bundle);
-                f.show(getSupportFragmentManager(),DIALOG_DALIY_MOVEMENTS);
-     }
+                f.show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
+            }
+
             @Override
             public void onLongClick(View view, int position) {
 
@@ -147,20 +187,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new EditDailyMovementsFragment().show(getSupportFragmentManager(),DIALOG_DALIY_MOVEMENTS);
+                new EditDailyMovementsFragment().show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
             }
         });
-
-        getSupportLoaderManager().initLoader(Daily_LOADER,null,this);
-        final  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // toolbar.inflateMenu(R.menu.menu_main);
-
-
+        // toolbar.inflateMenu(R.menu.menu_main);
 
 
     }
-    public void showInformation(){
+
+    public void showInformation() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -179,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Using deprecated methods makes you look way cool
         droidTarget.offset(display.getWidth() / 2, display.getHeight() / 2);
 */
-       // final SpannableString sassyDesc = new SpannableString("هذا الزر يقوم بالرجوع للصفحة السابقة");
+        // final SpannableString sassyDesc = new SpannableString("هذا الزر يقوم بالرجوع للصفحة السابقة");
 
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
@@ -192,18 +229,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                 .targetCircleColor(android.R.color.black)
                                 .transparentTarget(true)
                                 .textColor(android.R.color.black)
-                               // .descriptionTextColor(R.color.backgroundCardView2)
+                                // .descriptionTextColor(R.color.backgroundCardView2)
                                 .titleTextSize(18)
                                 .id(2),
                         //Note Add Store and Permission and Category
-                        TapTarget.forToolbarMenuItem(toolbar,R.id.add_data,"هذا الزر يقوم بالإضافة","وهو يقوم بإضافة الأصناف والمخازن والإذونات")
+                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_data, "هذا الزر يقوم بالإضافة", "وهو يقوم بإضافة الأصناف والمخازن والإذونات")
                                 .dimColor(android.R.color.black)
                                 .outerCircleColor(R.color.colorAccent)
                                 .targetCircleColor(android.R.color.black)
                                 .transparentTarget(true)
                                 .textColor(android.R.color.black).id(3),
                         //Note Add StkoeWearhouse
-                        TapTarget.forToolbarMenuItem(toolbar,R.id.add_stocking_warehouse,"هذا الزر يقوم بترصيد المستودع","وعن طريقه يتم إضافة جميع الأصناف والكميات الموجودة في المستودع داخل التطبيق")
+                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_stocking_warehouse, "هذا الزر يقوم بترصيد المستودع", "وعن طريقه يتم إضافة جميع الأصناف والكميات الموجودة في المستودع داخل التطبيق")
                                 .dimColor(android.R.color.black)
                                 .outerCircleColor(R.color.colorAccent)
                                 .targetCircleColor(android.R.color.black)
@@ -322,66 +359,34 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             return true;
         }
-        if (id == R.id.add_data){
+        if (id == R.id.add_data) {
             Intent intent = new Intent(MainActivity.this, ActivityForIncludeFragments.class);
             startActivity(intent);
 
-        }if (id == R.id.add_stocking_warehouse){
+        }
+        if (id == R.id.add_stocking_warehouse) {
             Intent intent = new Intent(MainActivity.this, StockingWarehouse.class);
             startActivity(intent);
 
         }
-        if (id == R.id.reportes){
-              Intent intent = new Intent(MainActivity.this, ReportesActivity.class);
+        if (id == R.id.reportes) {
+            Intent intent = new Intent(MainActivity.this, ReportesActivity.class);
             startActivity(intent);
           /*  ReportStokeFragment fragment = new ReportStokeFragment();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.contaner,fragment);
             transaction.commit();*/
-        }if (id == R.id.backup){
-            backupData.exportToSD();
-           // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
         }
-        if (id == R.id.import_backup){
+        if (id == R.id.backup) {
+            backupData.exportToSD();
+            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.import_backup) {
             backupData.importFromSD();
             // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public Loader<ArrayList<ItemsStore>> onCreateLoader(int id, Bundle args) {
-        return new LoaderDailyMovements(getApplicationContext(),itemsDaily,dbHelper);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArrayList<ItemsStore>> loader, ArrayList<ItemsStore> data) {
-        if (data.isEmpty()){
-            //recyclerViewDailyMovements.setVisibility(View.GONE);
-            progressBarDaily.setVisibility(View.GONE);
-//            emptView.setVisibility(View.VISIBLE);
-        }else {
-            recyclerViewDailyMovements.setVisibility(View.VISIBLE);
-            adapterAddDailyMovements.swapData(data);
-            progressBarDaily.setVisibility(View.GONE);
-            emptView.setVisibility(View.GONE);
-
-           /* if (CONVERT_TO_DAILY !=null){
-                convertTo.setVisibility(View.VISIBLE);
-                TVConvertToShow.setVisibility(View.VISIBLE);
-
-            }
-*/
-        }
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<ArrayList<ItemsStore>> loader) {
-        adapterAddDailyMovements.swapData(Collections.<ItemsStore>emptyList());
-        adapterAddDailyMovements.notifyItemChanged(recyclerViewDailyMovements.indexOfChild(emptView));
-
     }
 
     @Override
@@ -391,19 +396,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onQueryTextChange(String newText) {
-         itemsDaily = dbHelper.getAllDailyMovementsByNamePermission(newText);
-        if (itemsDaily !=null){
-            adapterAddDailyMovements.setFilter(itemsDaily);
-          //  getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
-
-        }
+//        itemsDaily = dbHelper.getAllDailyMovementsByNamePermission(newText);
+//        if (itemsDaily != null) {
+//            adapterAddDailyMovements.setFilter(itemsDaily);
+//            //  getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);
+//        }
         return false;
     }
 
     @Override
     public void onFinishExport(String error) {
         String notify = error;
-        if (error == null){
+        if (error == null) {
             notify = "تم تصدير قاعدة البيانات بنجاح";
         }
         Toast.makeText(MainActivity.this, notify, Toast.LENGTH_SHORT).show();
@@ -415,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String notify = error;
         if (error == null) {
             notify = "تم إستيراد قاعدة البيانات بنجاح";
-         //   updateListNote();
+            //   updateListNote();
         }
         Toast.makeText(MainActivity.this, notify, Toast.LENGTH_SHORT).show();
 
@@ -424,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onResume() {
         super.onResume();
-      //  updateListNote();
+        //  updateListNote();
 
     }
 

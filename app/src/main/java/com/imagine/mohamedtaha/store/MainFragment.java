@@ -25,6 +25,7 @@ import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.FragmentMainBinding;
 import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
+import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
 import com.imagine.mohamedtaha.store.ui.activity.ActivityForIncludeFragments;
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
@@ -38,7 +39,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private static final int Daily_LOADER = 4;
     TaskDbHelper dbHelper;
-    ArrayList<ItemsStore> itemsDaily = new ArrayList<>();
+    ArrayList<ShowDailyMovements> itemsDaily = new ArrayList<>();
     //private AdapterAddDailyMovements adapterAddDailyMovements;
 
     private AdapterAddDailyMovements adapterAddDailyMovements;
@@ -84,12 +85,12 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
                 binding.recycleViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                ItemsStore itemsStore = itemsDaily.get(position);
+                ShowDailyMovements itemsStore = itemsDaily.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putInt(IDDaily, itemsStore.getId());
-                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getNamePermission());
+                bundle.putString(IDDaily, itemsStore.getId());
+                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
                 bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
-                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getNameGategory());
+                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
                 bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
                 bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
                 bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
@@ -311,7 +312,8 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public Loader<ArrayList<ItemsStore>> onCreateLoader(int id, Bundle args) {
-        return new LoaderDailyMovements(getActivity(), itemsDaily, dbHelper);
+      //  return new LoaderDailyMovements(getActivity(), itemsDaily, dbHelper);
+        return null;
     }
 
     @Override
@@ -322,7 +324,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 //            emptView.setVisibility(View.VISIBLE);
         } else {
             binding.recycleViewDailyMovements.setVisibility(View.VISIBLE);
-            adapterAddDailyMovements.swapData(data);
+           // adapterAddDailyMovements.swapData(data);
             binding.progressBarDaily.setVisibility(View.GONE);
             binding.emptyViewMainActivityRelative.setVisibility(View.GONE);
 
@@ -338,7 +340,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoaderReset(Loader<ArrayList<ItemsStore>> loader) {
-        adapterAddDailyMovements.swapData(Collections.<ItemsStore>emptyList());
+      //  adapterAddDailyMovements.swapData(Collections.<ItemsStore>emptyList());
         adapterAddDailyMovements.notifyItemChanged(binding.recycleViewDailyMovements.indexOfChild(binding.emptyViewMainActivityRelative));
 
     }
@@ -350,7 +352,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        itemsDaily = dbHelper.getAllDailyMovementsByNamePermission(newText);
+      //  itemsDaily = dbHelper.getAllDailyMovementsByNamePermission(newText);
         if (itemsDaily != null) {
             adapterAddDailyMovements.setFilter(itemsDaily);
             //  getSupportLoaderManager().restartLoader(Daily_LOADER,null,this);

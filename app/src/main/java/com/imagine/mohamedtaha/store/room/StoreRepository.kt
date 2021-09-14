@@ -3,11 +3,13 @@ package com.imagine.mohamedtaha.store.room
 import androidx.annotation.WorkerThread
 import com.imagine.mohamedtaha.store.room.data.*
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class StoreRepository(private val storeDao: StoreDao) {
+class StoreRepository @Inject constructor(private val storeDao: StoreDao) {
     //_____________________________Methods Categories____________________________
 
     val getAllCategories :Flow<List<Categories>> = storeDao.getAllCategories()
+
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insertCategory(categories: Categories){
@@ -30,8 +32,8 @@ class StoreRepository(private val storeDao: StoreDao) {
     val getAllPermissions :Flow<List<Permissions>> = storeDao.getAllPermission()
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertPermissions(permissions: Permissions){
-        storeDao.insertPermissions(permissions)
+    suspend fun insertPermissions(permissions: Permissions):Long{
+     return storeDao.insertPermissions(permissions)
     }
 
     @Suppress("RedundantSuspendModifier")
@@ -91,17 +93,36 @@ class StoreRepository(private val storeDao: StoreDao) {
         storeDao.deleteConvertStore(id)
     }
 
-
-
-
-
-    val getAllStokeHouseByCategoryAndStory: kotlinx.coroutines.flow.Flow<List<ItemStore>> = storeDao.getAllStokeHouseByCategoryAndStory()
     val getAllStokeWareHouse: kotlinx.coroutines.flow.Flow<List<StockingHouse>> = storeDao.getAllStokeWareHouse()
-    val getAllStokeWareHouseWitCategoriesAndStores: kotlinx.coroutines.flow.Flow<List<StockWareWithCategoriesAndStores>> = storeDao.getAllStokeWareHouseWitCategoriesAndStores()
+    val getAllStokeWareHouseWitCategoriesAndStoresShow: kotlinx.coroutines.flow.Flow<List<ShowStockWare>> = storeDao.getAllStokeWareHouseWitCategoriesAndStores()
+
+
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insertStokeWarehouse(stockingHouse: StockingHouse){
         storeDao.insertStokeWarehouse(stockingHouse)
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insertDailyMovement(dailyMovements: DailyMovements){
+        storeDao.insertDailyMovement(dailyMovements)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun updateDailyMovement(id: Long,permission_id:Long,category_id:Long,store_id:Long,convert_to:Long,incoming:Int,issued:Int,update_date:String){
+        storeDao.updateDailyMovement(id,permission_id ,category_id ,store_id ,convert_to ,incoming ,issued ,update_date)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun deleteDailyMovement(id:Long){
+        storeDao.deleteDailyMovement(id)
+    }
+//Add daily movement
+
+    val getAllDailyMovement: kotlinx.coroutines.flow.Flow<List<ShowDailyMovements>> = storeDao.getAllDailyMovement()
+
 
 }

@@ -1,16 +1,22 @@
 package com.imagine.mohamedtaha.store.ui.fragments.permissions;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.imagine.mohamedtaha.store.Constant;
 import com.imagine.mohamedtaha.store.R;
@@ -41,6 +47,15 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentEditStoreBinding.inflate(getLayoutInflater(), container, false);
+//        BottomSheetDialog bottomSheetDialog = (BottomSheetDialog)super.onCreateDialog(savedInstanceState);
+//        bottomSheetDialog.setOnShowListener(dialog ->{
+//            BottomSheetDialog dialogc = (BottomSheetDialog)dialog;
+//            FrameLayout bottomSheet = dialogc.findViewById(android.support.design.R.id.design_bottom_sheet);
+//            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+//            bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//
+//        });
         dbHelper = new TaskDbHelper(getContext());
         intent = getArguments();
         binding.TVTitleStore.setText(getString(R.string.add_permission_titile));
@@ -75,16 +90,19 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
             return;
         }*/
         if (intent == null) {
-
             Permissions itemSavePermission = new Permissions(namePermission, notes);
             itemSavePermission.setTime(getTime());
             itemSavePermission.setCreatedAt(getDate());
             if (itemSavePermission == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_permission), Toast.LENGTH_LONG).show();
             } else {
-                viewModel.insertPermissions(itemSavePermission);
+          //  viewModel.insertPermissions(itemSavePermission);
                 Toast.makeText(getContext(), getString(R.string.save_permission), Toast.LENGTH_LONG).show();
-                requireActivity().finish();
+
+              //  requireActivity().finish();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("taha",itemSavePermission);
+                getParentFragmentManager().setFragmentResult(Constant.DIALOG_PERMISSION,bundle);
             }
         } else {
 
@@ -102,12 +120,18 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
                 //dbHelper.updatePermission(itemUpdatePermision);
                 Toast.makeText(getContext(), getString(R.string.update_permission), Toast.LENGTH_LONG).show();
                 //  dialog.dismiss();
-
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("taha",itemUpdatePermision);
+//                getParentFragmentManager().setFragmentResult(Constant.DIALOG_PERMISSION,bundle);
             } else {
                 Toast.makeText(getContext(), getString(R.string.error_update_permission), Toast.LENGTH_LONG).show();
             }
 
         }
+//        Intent resultCalue = new Intent() ;
+//        resultCalue.putExtra("data"," Iam back");
+//        getActivity().setResult(Activity.RESULT_OK, resultCalue);
+//        getActivity().onBackPressed();
     }
 
     public void deleteStore() {

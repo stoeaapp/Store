@@ -43,6 +43,7 @@
         style="@style/FloatingButtonFragment"
         app:fabSize="auto"
         app:srcCompat="@drawable/ic_action_add"
+        android:contentDescription="@string/add_floating_button"
         />
 
     <ProgressBar

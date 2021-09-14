@@ -19,7 +19,6 @@
     <string name="add_reportes_daily" translatable="false"> تقارير الحركات اليومية  </string>
 
     <!-- TODO: Text For Title App and Text Empity RecycleView and ListView -->
-    <string name="title_daily_movements" translatable="false">  الحركات اليومية</string>
     <string name="title_report_first_balance" translatable="false">  تقرير ترصيدالمستودع</string>
     <string name="title_report_daily_movements" translatable="false">  تقرير الحركات اليومية</string>
     <string name="title_all_fragments" translatable="false">  تكويد المستودع</string>
@@ -36,11 +35,16 @@
 
 
     <!-- TODO: Text For Title Frgments -->
-    <string name="add_category" translatable="false">إضافة الأصناف</string>
-    <string name="add_store" translatable="false">إضافة المخازن</string>
+
+    <string name="add_category">Add categories</string>
+    <string name="title_add">Adds </string>
+    <string name="title_profile">Profile</string>
+    <string name="title_daily_movements"> Daily</string>
+
+    <string name="add_store">Add Stores</string>
     <string name="add_store_convert" translatable="false">إضافة المخازن المحولة</string>
 
-    <string name="add_permission" translatable="false">إضافة الإذن</string>
+    <string name="add_permission">Add Permissions</string>
     <string name="title_add_category" translatable="false">إضافة الأصناف</string>
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text" translatable="false">It\'s a bit lonely here...</string>
@@ -180,11 +184,10 @@
     <string name="data_store" translatable="false">اخر تعديل</string>
     <string name="m_store" translatable="false"> م</string>
     <string name="data_created" translatable="false"> تاريخ الإنشاء</string>
-
-    <!-- TODO: Splach Activity -->
-
     <dimen name="title_text_size">20dp</dimen>
+    <string name="add_floating_button">Floating button</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image">Image</string>
 
 </resources>

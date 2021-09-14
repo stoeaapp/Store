@@ -1,18 +1,22 @@
 package com.imagine.mohamedtaha.store.ui.fragments.permissions;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 
 import com.imagine.mohamedtaha.store.Constant;
 import com.imagine.mohamedtaha.store.R;
+import com.imagine.mohamedtaha.store.ResultCallback;
 import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddPermission;
 import com.imagine.mohamedtaha.store.databinding.FragmentAddPremissionBinding;
@@ -20,11 +24,17 @@ import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.Permissions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
+
 public class PermissionsFragment extends Fragment {
-    private StoreViewModel viewModel;
+    @Inject
+    StoreViewModel viewModel;
     public static AdapterAddPermission adapterAddPermission;
     ArrayList<Permissions> itemsPermissions = new ArrayList<>();
 
@@ -41,10 +51,11 @@ public class PermissionsFragment extends Fragment {
         FragmentAddPremissionBinding binding = FragmentAddPremissionBinding.inflate(getLayoutInflater(), container, false);
         final Observer<List<Permissions>> permissionsObserver = itemsPermissions -> {
             if (itemsPermissions.size() > 0) {
+                Log.d("iddd"," " +itemsPermissions.size() );
                 binding.progressBarPermission.setVisibility(View.GONE);
                 binding.listViewAddPermission.setVisibility(View.VISIBLE);
                 adapterAddPermission.swapData(itemsPermissions);
-            }else {
+            } else {
                 binding.listViewAddPermission.setVisibility(View.GONE);
                 binding.emptyViewPermission.setVisibility(View.VISIBLE);
 
@@ -66,9 +77,28 @@ public class PermissionsFragment extends Fragment {
             f.setArguments(bundle);
             f.show(getChildFragmentManager(), Constant.DIALOG_PERMISSION);
         });
-        binding.fabAddPermission.setOnClickListener(view -> new EditPermissionFragment().show(getChildFragmentManager(), Constant.DIALOG_PERMISSION));
+        binding.fabAddPermission.setOnClickListener(view ->
+        //        getContent.launch("next act"));
+        new EditPermissionFragment().show(getChildFragmentManager(), Constant.DIALOG_PERMISSION));
+
+        getChildFragmentManager().setFragmentResultListener(Constant.DIALOG_PERMISSION, getActivity(),
+                       (requestKey, result) ->{
+                           if (result != null) {
+                               Permissions permissions = (Permissions) result.getSerializable("taha");
+                               Log.d("iddd", requestKey + " " + result.toString());
+                               viewModel.insertPermissions(permissions);
+
+
+
+                           //    viewModel.updatePermissions(intent.getLong(Constant.ID_PERMISSION), namePermission, notes, getDate());
+
+                           }
+                           });
         return binding.getRoot();
     }
+
+    private final ActivityResultLauncher<String> getContent = registerForActivityResult(new ResultCallback(), result -> Log.d("iddd", result));
+
 
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {

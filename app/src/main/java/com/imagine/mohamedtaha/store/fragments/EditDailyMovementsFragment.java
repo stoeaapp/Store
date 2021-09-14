@@ -25,11 +25,14 @@ import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.DailyMovements;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
+import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getTime;
 import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.CONVERT_TO_DAILY;
 import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.IDDaily;
 import static com.imagine.mohamedtaha.store.ui.activity.MainActivity.INCOMING_DAILY;
@@ -253,63 +256,61 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
         }
 
         if (intentDailyMovement == null) {
-            ItemsStore itemSaveDaily = new ItemsStore();
-            itemSaveDaily.setId_permission_id(idSpinnerPermission);
-            itemSaveDaily.setId_code_store(idSpinnerStore);
-            itemSaveDaily.setId_code_category(idSpinnerCategory);
             int incomings = 0;
             if (!TextUtils.isEmpty(incoming)) {
                 incomings = Integer.parseInt(incoming);
             }
-            itemSaveDaily.setIncoming(Integer.valueOf(incomings));
             int issueds = 0;
             if (!TextUtils.isEmpty(issued)) {
                 issueds = Integer.parseInt(issued);
             }
-            itemSaveDaily.setIssued(Integer.valueOf(issueds));
-
             if (idSpinnerStore == idSpinnerConvertTo) {
                 SPConvertToDaily.requestFocus();
                 SPConvertToDaily.setError(getString(R.string.error_same_store));
                 return;
             }
-            itemSaveDaily.setId_convert_to(idSpinnerConvertTo);
-
-
+            DailyMovements itemSaveDaily = new DailyMovements(idSpinnerCategory,idSpinnerStore,idSpinnerPermission,incomings,issueds);
+            itemSaveDaily.setCreatedAt(getDate());
+            itemSaveDaily.setTime(getTime());
+            if (idSpinnerConvertTo > 0)
+            itemSaveDaily.setConvertTo(idSpinnerConvertTo);
             if (itemSaveDaily == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_daily), Toast.LENGTH_LONG).show();
             } else {
-                dbHelperDailyMovement.addDailyMovements(itemSaveDaily);
+                viewModel.insertDailyMovement(itemSaveDaily);
+               // dbHelperDailyMovement.addDailyMovements(itemSaveDaily);
                 Toast.makeText(getContext(), getString(R.string.save_daily), Toast.LENGTH_LONG).show();
                 dialogDailyMovement.dismiss();
             }
         } else {
-            ItemsStore itemUpdateDialy = new ItemsStore();
-            itemUpdateDialy.setId(intentDailyMovement.getInt(IDDaily));
-            itemUpdateDialy.setId_permission_id(idSpinnerPermission);
-            itemUpdateDialy.setId_code_store(idSpinnerStore);
-            itemUpdateDialy.setId_code_category(idSpinnerCategory);
+//            DailyMovements itemUpdateDialy = new DailyMovements();
+//            itemUpdateDialy.setId(intentDailyMovement.getInt(IDDaily));
+//            itemUpdateDialy.setId_permission_id(idSpinnerPermission);
+//            itemUpdateDialy.setId_code_store(idSpinnerStore);
+//            itemUpdateDialy.setId_code_category(idSpinnerCategory);
 
             int incomings = 0;
             if (!TextUtils.isEmpty(incoming)) {
                 incomings = Integer.parseInt(incoming);
             }
-            itemUpdateDialy.setIncoming(Integer.valueOf(incomings));
+           // itemUpdateDialy.setIncoming(Integer.valueOf(incomings));
             int issueds = 0;
             if (!TextUtils.isEmpty(issued)) {
                 issueds = Integer.parseInt(issued);
             }
-            itemUpdateDialy.setIssued(Integer.valueOf(issueds));
-            itemUpdateDialy.setId_convert_to(idSpinnerConvertTo);
-
-            if (itemUpdateDialy != null) {
-                dbHelperDailyMovement.updateDailyMovements(itemUpdateDialy);
+//            itemUpdateDialy.setIssued(Integer.valueOf(issueds));
+//            itemUpdateDialy.setId_convert_to(idSpinnerConvertTo);
+//
+//            if (itemUpdateDialy != null) {
+                viewModel.updateDailyMovement(intentDailyMovement.getInt(IDDaily),idSpinnerPermission,idSpinnerCategory,idSpinnerStore,idSpinnerConvertTo
+                ,incomings,issueds,getDate());
+              //  dbHelperDailyMovement.updateDailyMovements(itemUpdateDialy);
                 Toast.makeText(getContext(), getString(R.string.update_daily), Toast.LENGTH_LONG).show();
                 dialogDailyMovement.dismiss();
-
-            } else {
-                Toast.makeText(getContext(), getString(R.string.error_update_daily), Toast.LENGTH_LONG).show();
-            }
+//
+//            } else {
+//                Toast.makeText(getContext(), getString(R.string.error_update_daily), Toast.LENGTH_LONG).show();
+//            }
         }
     }
 
@@ -341,7 +342,8 @@ public class EditDailyMovementsFragment extends DialogFragment implements Dialog
             }
 
             if (itemDeleteDaily != null) {
-                dbHelperDailyMovement.deleteDailyMovements(itemDeleteDaily);
+                viewModel.deleteDailyMovement(intentDailyMovement.getInt(IDDaily));
+                //dbHelperDailyMovement.deleteDailyMovements(itemDeleteDaily);
                 Toast.makeText(getContext(), getString(R.string.delete_daily), Toast.LENGTH_LONG).show();
                 dialogDailyMovement.dismiss();
                 dialogDeleteDailyMovement.dismiss();

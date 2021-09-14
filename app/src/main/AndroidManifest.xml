@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.HomeActivity"></activity>
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_daily_movements"
@@ -103,13 +104,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.ReportesActivity" />
         </activity>
-        <activity android:name=".ReportStores"
+        <activity
+            android:name=".ReportStores"
             android:label="@string/title_report_store"
             android:parentActivityName=".ui.activity.ReportesActivity"
             android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.ReportesActivity" /></activity>
+                android:value=".ui.activity.ReportesActivity" />
+        </activity>
     </application>
 
 </manifest>

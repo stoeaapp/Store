@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/home"
-    android:icon="@color/Abit_Black"
-    android:title="@string/app_name"/>
+<item android:id="@+id/daily_movements"
+    android:icon="@android:drawable/ic_dialog_map"
+    android:title="@string/title_daily_movements"/>
     <item android:id="@+id/stockingWarehouse"
         android:title="@string/add_stocking_warehouse"
-        android:icon="@color/AliceBlue"/>
+        android:icon="@drawable/ic_home"/>
     <item  android:id="@+id/adds"
-        android:icon="@color/AntiqueWhite"
-        android:title="@string/add_category"/>
+        android:icon="@drawable/ic_action_add"
+        android:title="@string/title_add"/>
+    <item  android:id="@+id/profile"
+        android:icon="@drawable/ic_user"
+        android:title="@string/title_profile"/>
+
 </menu>

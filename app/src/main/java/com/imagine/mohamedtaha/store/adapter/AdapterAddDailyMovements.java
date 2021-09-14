@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.StoreDiffCallback;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
+import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +25,7 @@ import java.util.Collection;
  */
 
 public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDailyMovements.DailyMovementsViewHolder>{
-   private   ArrayList<ItemsStore> itemsDailyMovement ;
+   private   ArrayList<ShowDailyMovements> itemsDailyMovement ;
    //  final LayoutInflater inflater;
     private showDetial mListener;
     Cursor cursor;
@@ -34,7 +35,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
     public AdapterAddDailyMovements( showDetial mListener){
         this.mListener =mListener;
     }
-    public AdapterAddDailyMovements(Context context, ArrayList<ItemsStore>itemsDailyMovement) {
+    public AdapterAddDailyMovements(Context context, ArrayList<ShowDailyMovements>itemsDailyMovement) {
         //  super(context, itemStore/*flags*/);
        // this.inflater= LayoutInflater.from(context);
         this.itemsDailyMovement = itemsDailyMovement;
@@ -55,7 +56,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
         });
         return holder;
     }
-    public void swapData(Collection<ItemsStore> itemsStoreCollections){
+    public void swapData(Collection<ShowDailyMovements> itemsStoreCollections){
         this.itemsDailyMovement.clear();
         this.itemsDailyMovement.addAll(itemsStoreCollections);
         if (itemsDailyMovement != null){
@@ -68,12 +69,12 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
     }
     @Override
     public void onBindViewHolder(DailyMovementsViewHolder holder, int position) {
-        ItemsStore data = itemsDailyMovement.get(position);
-        holder.namePermessionView.setText(data.getNamePermission());
+        ShowDailyMovements data = itemsDailyMovement.get(position);
+        holder.namePermessionView.setText(data.getPermissionName());
         holder.typeStoreView.setText(data.getTypeStore());
-        holder.nameCategoryView.setText(data.getNameGategory());
+        holder.nameCategoryView.setText(data.getCategoryName());
         holder.convertView.setText(data.getConvertTo());
-        holder.dateView.setText(data.getCreatedDate());
+        holder.dateView.setText(data.getCreatedAt());
 
 
     }
@@ -148,7 +149,7 @@ public class AdapterAddDailyMovements extends RecyclerView.Adapter<AdapterAddDai
 
         }
     }
-    public void setFilter(ArrayList<ItemsStore> itemStoke){
+    public void setFilter(ArrayList<ShowDailyMovements> itemStoke){
         itemsDailyMovement = new ArrayList<>();
         itemsDailyMovement.addAll(itemStoke);
         notifyDataSetChanged();

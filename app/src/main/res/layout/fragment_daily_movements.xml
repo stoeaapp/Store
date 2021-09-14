@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.DailyMovementsFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewDailyMovements"
+            style="@style/StyleRecycleView"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/empty_view_main_activity_relative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/empty_image"
+                style="@style/EmptyViewImage"
+                android:contentDescription="@string/image" />
+
+            <TextView
+                android:id="@+id/empty_text_first"
+                style="@style/EmptyViewTextViewMain"
+                android:layout_below="@+id/empty_image"
+                android:text="@string/title_empty_daily_movements" />
+
+            <TextView
+                android:id="@+id/empty_subtitle_text"
+                style="@style/EmptyViewTextViewSecond"
+                android:layout_below="@+id/empty_text_first"
+                android:text="@string/title_empty_view_daily_movements" />
+
+            <TextView
+                android:id="@+id/empty1_subtitle_text"
+                style="@style/EmptyViewTextViewSecond"
+                android:layout_below="@+id/empty_subtitle_text"
+                android:text="@string/title_empty_view_daily_movements1" />
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarDaily"
+            style="@style/ProgressBarStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDaily"
+            style="@style/FloatingButtonFragment"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/add_floating_button"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="auto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_action_add" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

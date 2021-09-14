@@ -1,0 +1,548 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 9,
+    "identityHash": "350971c80bc567a43e96c771b4740aaf",
+    "entities": [
+      {
+        "tableName": "daily_movement",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`category_id` INTEGER NOT NULL, `store_id` INTEGER NOT NULL, `permission_id` INTEGER NOT NULL, `incoming` INTEGER NOT NULL, `issued` INTEGER NOT NULL, `convert_to` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT, `user_id` TEXT, FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`store_id`) REFERENCES `type_store`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`convert_to`) REFERENCES `type_store`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`permission_id`) REFERENCES `permissions`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "categoryId",
+            "columnName": "category_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storeId",
+            "columnName": "store_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "permissionId",
+            "columnName": "permission_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "incoming",
+            "columnName": "incoming",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "issued",
+            "columnName": "issued",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "convertTo",
+            "columnName": "convert_to",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "user_id",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_daily_movement_category_id",
+            "unique": false,
+            "columnNames": [
+              "category_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_movement_category_id` ON `${TABLE_NAME}` (`category_id`)"
+          },
+          {
+            "name": "index_daily_movement_store_id",
+            "unique": false,
+            "columnNames": [
+              "store_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_movement_store_id` ON `${TABLE_NAME}` (`store_id`)"
+          },
+          {
+            "name": "index_daily_movement_permission_id",
+            "unique": false,
+            "columnNames": [
+              "permission_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_movement_permission_id` ON `${TABLE_NAME}` (`permission_id`)"
+          },
+          {
+            "name": "index_daily_movement_convert_to",
+            "unique": false,
+            "columnNames": [
+              "convert_to"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_movement_convert_to` ON `${TABLE_NAME}` (`convert_to`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "categories",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "category_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "type_store",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "store_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "type_store",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "convert_to"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "permissions",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "permission_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "stocking_ware_house",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`category_id` INTEGER NOT NULL, `store_id` INTEGER NOT NULL, `first_balance` TEXT NOT NULL, `user_id` TEXT NOT NULL, `notes` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT, FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT , FOREIGN KEY(`store_id`) REFERENCES `type_store`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "fields": [
+          {
+            "fieldPath": "categoryId",
+            "columnName": "category_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storeId",
+            "columnName": "store_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstBalance",
+            "columnName": "first_balance",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "user_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_stocking_ware_house_category_id",
+            "unique": false,
+            "columnNames": [
+              "category_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_stocking_ware_house_category_id` ON `${TABLE_NAME}` (`category_id`)"
+          },
+          {
+            "name": "index_stocking_ware_house_store_id",
+            "unique": false,
+            "columnNames": [
+              "store_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_stocking_ware_house_store_id` ON `${TABLE_NAME}` (`store_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "categories",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "category_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "type_store",
+            "onDelete": "RESTRICT",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "store_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`category_name` TEXT NOT NULL, `natural_category` TEXT NOT NULL, `notes` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "categoryName",
+            "columnName": "category_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "naturalCategory",
+            "columnName": "natural_category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "permissions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`permission_name` TEXT NOT NULL, `notes` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "permissionName",
+            "columnName": "permission_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "type_store",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`type_store` TEXT NOT NULL, `notes` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "typeStore",
+            "columnName": "type_store",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_name` TEXT NOT NULL, `password` TEXT NOT NULL, `retry_password` TEXT NOT NULL, `email` TEXT NOT NULL, `notes` TEXT NOT NULL, `created_at` TEXT NOT NULL, `time` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT)",
+        "fields": [
+          {
+            "fieldPath": "userName",
+            "columnName": "user_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "retryPassword",
+            "columnName": "retry_password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "convert_store",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`convert_store` TEXT NOT NULL, `notes` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT, `created_at` TEXT, `time` TEXT, `updated_at` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "typeStore",
+            "columnName": "convert_store",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '350971c80bc567a43e96c771b4740aaf')"
+    ]
+  }
+}

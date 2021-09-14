@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class EditStockingWarehouseFragment extends DialogFragment {
             binding.TVTitleStokeWearhouse.setText(getString(R.string.update_stoke_titile));
             binding.SPCodeCategoryStock.setText(intentStokeWearehouse.getString(CODE_NAME_CATEGORY));
             binding.SPCodeStoreStock.setText(intentStokeWearehouse.getString(CODE_TYPE_STORE));
-            binding.ETFirstBalanceStoke.setText(String.valueOf(intentStokeWearehouse.getInt(FIRST_BALANCE)));
+            binding.ETFirstBalanceStoke.setText(intentStokeWearehouse.getString(FIRST_BALANCE));
             binding.ETNotesStoke.setText(intentStokeWearehouse.getString(NOTES));
 
         }
@@ -102,7 +103,7 @@ public class EditStockingWarehouseFragment extends DialogFragment {
             return;
         }
         if (intentStokeWearehouse == null) {
-            StockingHouse itemsSaveStoke = new StockingHouse(idSpinnerCategory, idSpinnerStore, firstBalance, "", noteStoke, "", "");
+            StockingHouse itemsSaveStoke = new StockingHouse(idSpinnerCategory, idSpinnerStore, firstBalance, "", noteStoke);
 //            itemsSaveStoke.setId_code_category(idSpinnerCategory);
 //            itemsSaveStoke.setId_code_store(idSpinnerStore);
 //            itemsSaveStoke.setFirst_balanse(Integer.valueOf(firstBalance));
