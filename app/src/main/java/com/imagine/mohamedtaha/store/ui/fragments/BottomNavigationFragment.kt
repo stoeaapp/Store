@@ -15,12 +15,13 @@ import com.imagine.mohamedtaha.store.data.BackupData
 import com.imagine.mohamedtaha.store.data.BackupData.OnBackupListener
 import com.imagine.mohamedtaha.store.data.TaskDbHelper
 import com.imagine.mohamedtaha.store.databinding.FragmentBottomNavigationBinding
+import com.imagine.mohamedtaha.store.manager.base.BaseFragment
 import com.imagine.mohamedtaha.store.ui.activity.ActivityForIncludeFragments
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity
 import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse
 
-class BottomNavigationFragment : Fragment(), SearchView.OnQueryTextListener, OnBackupListener {
+class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener, OnBackupListener {
     private lateinit var binding: FragmentBottomNavigationBinding
     var dbHelper: TaskDbHelper? = null
 

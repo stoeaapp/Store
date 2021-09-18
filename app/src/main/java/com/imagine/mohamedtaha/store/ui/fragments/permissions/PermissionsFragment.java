@@ -24,11 +24,18 @@ import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.Permissions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlinx.coroutines.flow.FlowCollector;
 
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
 
@@ -81,18 +88,11 @@ public class PermissionsFragment extends Fragment {
         //        getContent.launch("next act"));
         new EditPermissionFragment().show(getChildFragmentManager(), Constant.DIALOG_PERMISSION));
 
-        getChildFragmentManager().setFragmentResultListener(Constant.DIALOG_PERMISSION, getActivity(),
-                       (requestKey, result) ->{
-                           if (result != null) {
-                               Permissions permissions = (Permissions) result.getSerializable("taha");
+        getChildFragmentManager().setFragmentResultListener(Constant.DIALOG_PERMISSION, requireActivity(),
+                       (requestKey, result) ->{             Permissions permissions = (Permissions) result.getSerializable("taha");
                                Log.d("iddd", requestKey + " " + result.toString());
                                viewModel.insertPermissions(permissions);
-
-
-
                            //    viewModel.updatePermissions(intent.getLong(Constant.ID_PERMISSION), namePermission, notes, getDate());
-
-                           }
                            });
         return binding.getRoot();
     }

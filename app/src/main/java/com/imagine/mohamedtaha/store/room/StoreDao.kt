@@ -125,6 +125,9 @@ interface StoreDao {
     //___________________________________Get Daily movements____________________________
     @Query("SELECT DISTINCT tdm.id , tdm.incoming, tdm.issued , tdm.convert_to,ts.type_store , tc.category_name , tp.permission_name FROM permissions tp,type_store ts , categories tc,daily_movement tdm INNER JOIN type_store ON ts.id = tdm.store_id  INNER JOIN categories ON tc.id = tdm.category_id  INNER JOIN permissions ON tp.id = tdm.permission_id  GROUP BY tdm.id")
     fun getAllDailyMovement(): Flow<List<ShowDailyMovements>>
+//@Transaction
+// @Query("SELECT DISTINCT tdm.id , tdm.incoming, tdm.issued , tdm.convert_to,ts.type_store , tc.category_name , tp.permission_name FROM permissions tp,type_store ts , categories tc,daily_movement tdm INNER JOIN type_store ON ts.id = tdm.store_id  INNER JOIN categories ON tc.id = tdm.category_id  INNER JOIN permissions ON tp.id = tdm.permission_id  GROUP BY tdm.id")
+//    fun getAllDailyMovementNew(): Flow<List<ShowDailyMovements>>
 
 
 }

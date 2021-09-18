@@ -7,108 +7,15 @@
     android:layout_height="match_parent"
     tools:context="com.imagine.mohamedtaha.store.ui.activity.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/toolbar"
-        style="@style/HeaderBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
     <FrameLayout
-            android:id="@+id/frameLayout"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/BottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleViewDailyMovements"
-            style="@style/StyleRecycleView"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintBottom_toTopOf="@id/BottomNavigationView"
-            android:layout_below="@+id/toolbar"
-            />
-
-    <RelativeLayout
-        android:id="@+id/empty_view_main_activity_relative"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/empty_image"
-            style="@style/EmptyViewImage"
-
-            />
-        <TextView
-            android:id="@+id/empty_text_first"
-            android:layout_below="@+id/empty_image"
-            style="@style/EmptyViewTextViewMain"
-            android:text="@string/title_empty_daily_movements"
-            />
-
-        <TextView
-            android:id="@+id/empty_subtitle_text"
-            style="@style/EmptyViewTextViewSecond"
-            android:layout_below="@+id/empty_text_first"
-            android:text="@string/title_empty_view_daily_movements"
-            />
-
-        <TextView
-            android:id="@+id/empty1_subtitle_text"
-            style="@style/EmptyViewTextViewSecond"
-            android:layout_below="@+id/empty_subtitle_text"
-            android:text="@string/title_empty_view_daily_movements1"
-            />
-
-    </RelativeLayout>
-
-    <ProgressBar
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/progressBarDaily"
-        style="@style/ProgressBarStyle"
-        />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabDaily"
-        style="@style/FloatingButtonFragment"
-        app:layout_constraintBottom_toTopOf="@+id/BottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="0dp"
-        app:srcCompat="@drawable/ic_action_add"
-        android:layout_marginEnd="20dp"
-        app:fabSize="auto"
-        app:backgroundTint="@color/colorAccent"
-        android:layout_marginBottom="30dp"
-        />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BottomNavigationView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        app:itemBackground="@drawable/bg_tab_selector"
-        app:itemIconTint="@drawable/tab_icon_selector"
-        app:menu="@menu/navigation"
-        app:itemHorizontalTranslationEnabled="true"
-        app:labelVisibilityMode="labeled"/>
-
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 <!--        <com.imagine.mohamedtaha.store.CurvedBottomNavigationView1-->
 <!--            android:id="@+id/curvedBottomNavigation"-->

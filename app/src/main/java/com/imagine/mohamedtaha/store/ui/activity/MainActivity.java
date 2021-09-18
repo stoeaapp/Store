@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -38,20 +39,26 @@ import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
+import com.imagine.mohamedtaha.store.manager.ActivityStarter;
+import com.imagine.mohamedtaha.store.manager.FragmentHandler;
+import com.imagine.mohamedtaha.store.manager.FragmentNavigationFactory;
+import com.imagine.mohamedtaha.store.manager.base.BaseActivity;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
+import com.imagine.mohamedtaha.store.ui.fragments.BottomNavigationFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.ProfileFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import tourguide.tourguide.TourGuide;
 
 //import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
-
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
+public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
     private ActivityMainBinding binding;
     private StoreViewModel viewModel;
     private static final int Daily_LOADER = 4;
@@ -91,108 +98,124 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
-        viewModel.getAllDailyMovement().observe(this, new Observer<List<ShowDailyMovements>>() {
-            @Override
-            public void onChanged(List<ShowDailyMovements> showDailyMovements) {
-                if (showDailyMovements.size() > 0) {
-                    recyclerViewDailyMovements.setVisibility(View.VISIBLE);
-                    adapterAddDailyMovements.swapData(showDailyMovements);
-                    progressBarDaily.setVisibility(View.GONE);
-                    emptView.setVisibility(View.GONE);
+//        navigator(this);
+//        activityStarter = new ActivityStarter(this);
+      //  handler(this);
 
-                } else {
-                    recyclerViewDailyMovements.setVisibility(View.GONE);
-                    progressBarDaily.setVisibility(View.GONE);
-                    emptView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        binding.BottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.daily_movements: {
-                        FragmentManager manager = getSupportFragmentManager();
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        transaction.replace(R.id.frameLayout, new PermissionsFragment()).commit();
-                        transaction.addToBackStack(null);
-                        transaction.commit();
+        load(BottomNavigationFragment.class).add(true,"");
 
-
-                    }
-                    case R.id.stockingWarehouse: {
-
-                    }
-                    case R.id.adds: {
-                        FragmentManager manager = getSupportFragmentManager();
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        transaction.replace(R.id.frameLayout, new PermissionsFragment());
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    }
-                    case R.id.profile: {
-
-                    }
-                }
-                return false;
-            }
-        });
-
-     /*   if (!showInformation){
-            showInformation();
-            showInformation = true;
-        }*/
-        dbHelper = new TaskDbHelper(this);
-        backupData = new BackupData(this);
-        backupData.setOnBackListener(this);
-        recyclerViewDailyMovements = (RecyclerView) findViewById(R.id.recycleViewDailyMovements);
-        progressBarDaily = (ProgressBar) findViewById(R.id.progressBarDaily);
-        recyclerViewDailyMovements.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapterAddDailyMovements = new AdapterAddDailyMovements(getApplicationContext(), itemsDaily);
-        emptView = findViewById(R.id.empty_view_main_activity_relative);
-        //  emptView = (TextView)findViewById(R.id.empty_view_category);
-
-
-        convertTo = (TextView) findViewById(R.id.TVConvertTo);
-        TVConvertToShow = (TextView) findViewById(R.id.TVConvertToShow);
-
-
-        recyclerViewDailyMovements.addOnItemTouchListener(new AdapterAddDailyMovements.RecycleTouchListener(getApplicationContext(),
-                recyclerViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ShowDailyMovements itemsStore = itemsDaily.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(IDDaily, itemsStore.getId());
-                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
-                bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
-                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
-                bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
-                bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
-                bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
-                EditDailyMovementsFragment f = new EditDailyMovementsFragment();
-                f.setArguments(bundle);
-                f.show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-        recyclerViewDailyMovements.setAdapter(adapterAddDailyMovements);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabDaily);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new EditDailyMovementsFragment().show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
-            }
-        });
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // toolbar.inflateMenu(R.menu.menu_main);
+//        viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
+//        viewModel.getAllDailyMovement().observe(this, new Observer<List<ShowDailyMovements>>() {
+//            @Override
+//            public void onChanged(List<ShowDailyMovements> showDailyMovements) {
+//                if (showDailyMovements.size() > 0) {
+//                    recyclerViewDailyMovements.setVisibility(View.VISIBLE);
+//                    adapterAddDailyMovements.swapData(showDailyMovements);
+//                    progressBarDaily.setVisibility(View.GONE);
+//                    emptView.setVisibility(View.GONE);
+//
+//                } else {
+//                    recyclerViewDailyMovements.setVisibility(View.GONE);
+//                    progressBarDaily.setVisibility(View.GONE);
+//                    emptView.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
+//        binding.BottomNavigationView.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.daily_movements: {
+//                    FragmentManager manager = getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.frameLayoutMainActivity, new PermissionsFragment());
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                    break;
+//
+//
+//                }
+//                case R.id.stockingWarehouse: {
+//                    FragmentManager manager = getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.frameLayoutMainActivity, new StockingWarehouse());
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                    break;
+//                }
+//                case R.id.adds: {
+//                    FragmentManager manager = getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.frameLayoutMainActivity, new ActivityForIncludeFragments());
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                    break;
+//
+//                }
+//                case R.id.profile: {
+//                    FragmentManager manager = getSupportFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.frameLayoutMainActivity, new ProfileFragment());
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//                    break;
+//                }
+//            }
+//            return false;
+//        });
+//
+//     /*   if (!showInformation){
+//            showInformation();
+//            showInformation = true;
+//        }*/
+//        dbHelper = new TaskDbHelper(this);
+//        backupData = new BackupData(this);
+//        backupData.setOnBackListener(this);
+//        recyclerViewDailyMovements = (RecyclerView) findViewById(R.id.recycleViewDailyMovements);
+//        progressBarDaily = (ProgressBar) findViewById(R.id.progressBarDaily);
+//        recyclerViewDailyMovements.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//        adapterAddDailyMovements = new AdapterAddDailyMovements(getApplicationContext(), itemsDaily);
+//        emptView = findViewById(R.id.empty_view_main_activity_relative);
+//        //  emptView = (TextView)findViewById(R.id.empty_view_category);
+//
+//
+//        convertTo = (TextView) findViewById(R.id.TVConvertTo);
+//        TVConvertToShow = (TextView) findViewById(R.id.TVConvertToShow);
+//
+//
+//        recyclerViewDailyMovements.addOnItemTouchListener(new AdapterAddDailyMovements.RecycleTouchListener(getApplicationContext(),
+//                recyclerViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                ShowDailyMovements itemsStore = itemsDaily.get(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(IDDaily, itemsStore.getId());
+//                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
+//                bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
+//                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
+//                bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
+//                bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
+//                bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
+//                EditDailyMovementsFragment f = new EditDailyMovementsFragment();
+//                f.setArguments(bundle);
+//                f.show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//
+//            }
+//        }));
+//        recyclerViewDailyMovements.setAdapter(adapterAddDailyMovements);
+//
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabDaily);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                new EditDailyMovementsFragment().show(getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
+//            }
+//        });
+//        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        // toolbar.inflateMenu(R.menu.menu_main);
 
 
     }
@@ -431,6 +454,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         //  updateListNote();
 
     }
+
+    @Override
+    public int findFragmentPlaceHolder() {
+        return R.id.frameLayout;
+    }
+
 
     /**
      * select all note from database and set to ls

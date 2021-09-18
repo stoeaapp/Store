@@ -3,16 +3,20 @@ package com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.imagine.mohamedtaha.store.R;
@@ -31,19 +35,25 @@ import static com.imagine.mohamedtaha.store.Constant.DIALOG_STOKE_WEAR_HOUSE;
 import static com.imagine.mohamedtaha.store.Constant.FIRST_BALANCE;
 import static com.imagine.mohamedtaha.store.Constant.NOTES;
 
-public class StockingWarehouse extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class StockingWarehouse extends Fragment implements SearchView.OnQueryTextListener {
     private StockingWarehouseBinding binding;
     public static AdapterAddStokeHouse adapterAddStokeHouse;
     public static ArrayList<ShowStockWare> itemStokeHouses = new ArrayList<>();
 
+    //    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_editor, menu);
+//        MenuItem menuItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+//        searchView.setOnQueryTextListener(this);
+//        return true;
+//    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = StockingWarehouseBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        StoreViewModel viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
+        StoreViewModel viewModel = new StoreViewModelFactory(((StoreApplication) requireActivity().getApplication()).getRepository()).create(StoreViewModel.class);
         viewModel.getAllStokeWareHouseWitCategoriesAndStoresShow().observe(this, categories -> {
-            Log.d("iddd" ," " +categories.size());
+            Log.d("iddd", " " + categories.size());
             if (categories.size() > 0) {
                 adapterAddStokeHouse.swapData(categories);
                 binding.emptyViewStokeWearehouse.setVisibility(View.GONE);
@@ -56,11 +66,18 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
             }
         });
 
-        binding.recycleViewAddStokeWarehouse.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapterAddStokeHouse = new AdapterAddStokeHouse(this, itemStokeHouses);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = StockingWarehouseBinding.inflate(getLayoutInflater(), container, false);
+        binding.recycleViewAddStokeWarehouse.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
+        adapterAddStokeHouse = new AdapterAddStokeHouse(requireActivity(), itemStokeHouses);
         binding.recycleViewAddStokeWarehouse.setAdapter(adapterAddStokeHouse);
 
-        binding.recycleViewAddStokeWarehouse.addOnItemTouchListener(new AdapterAddStokeHouse.RecycleTouchListener(getApplicationContext(),
+        binding.recycleViewAddStokeWarehouse.addOnItemTouchListener(new AdapterAddStokeHouse.RecycleTouchListener(requireActivity().getApplicationContext(),
                 binding.recycleViewAddStokeWarehouse, new AdapterAddStokeHouse.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -73,7 +90,7 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
                 bundle.putString(NOTES, itemStoke.getNotes());
                 EditStockingWarehouseFragment f = new EditStockingWarehouseFragment();
                 f.setArguments(bundle);
-                f.show(getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
+                f.show(requireActivity().getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
             }
 
 
@@ -85,18 +102,18 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
         binding.fabAddStockWarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EditStockingWarehouseFragment().show(getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
+                new EditStockingWarehouseFragment().show(requireActivity().getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
             }
         });
+        return binding.getRoot();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_editor, menu);
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_editor, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
-        return true;
     }
 
     @Override
@@ -117,7 +134,7 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
 
     private void showPopupMenu(View view) {
         //inflate Menu
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        PopupMenu popupMenu = new PopupMenu(requireActivity(), view);
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.menu_store_category_permission, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -125,7 +142,7 @@ public class StockingWarehouse extends AppCompatActivity implements SearchView.O
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_settings:
-                        Toast.makeText(StockingWarehouse.this, "Edit", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireActivity(), "Edit", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
