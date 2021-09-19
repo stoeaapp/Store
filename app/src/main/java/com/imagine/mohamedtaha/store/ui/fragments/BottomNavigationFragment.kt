@@ -7,18 +7,16 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.navigation.NavigationBarView
 import com.imagine.mohamedtaha.store.R
 import com.imagine.mohamedtaha.store.data.BackupData
 import com.imagine.mohamedtaha.store.data.BackupData.OnBackupListener
 import com.imagine.mohamedtaha.store.data.TaskDbHelper
 import com.imagine.mohamedtaha.store.databinding.FragmentBottomNavigationBinding
 import com.imagine.mohamedtaha.store.manager.base.BaseFragment
-import com.imagine.mohamedtaha.store.ui.activity.ActivityForIncludeFragments
+import com.imagine.mohamedtaha.store.ui.activity.AddsFragment
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity
-import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment
+import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.DailyMovementsFragment
+import com.imagine.mohamedtaha.store.ui.fragments.profile.ProfileFragment
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse
 
 class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener, OnBackupListener {
@@ -31,57 +29,31 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
     private val showInformation = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        childFragmentManager.beginTransaction().replace(R.id.frameLayout, DailyMovementsFragment(),"").commit()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentBottomNavigationBinding.inflate(layoutInflater, container, false);
-//inflater.inflate(R.layout.fragment_bottom_navigation, container, false)
-
-        binding.BottomNavigationView.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.daily_movements -> {
-                        run {
-                            val manager: FragmentManager = requireActivity().getSupportFragmentManager()
-                            val transaction = manager.beginTransaction()
-                            transaction.replace(R.id.frameLayout, PermissionsFragment()).commit()
-                            transaction.addToBackStack(null)
-                            transaction.commit()
-                        }
-                        run {
-                            val manager: FragmentManager = requireActivity().getSupportFragmentManager()
-                            val transaction = manager.beginTransaction()
-                            transaction.replace(R.id.frameLayout, PermissionsFragment())
-                            transaction.addToBackStack(null)
-                            transaction.commit()
-                        }
-                    }
-                    R.id.stockingWarehouse -> {
-                        run {
-                            val manager: FragmentManager = requireActivity().getSupportFragmentManager()
-                            val transaction = manager.beginTransaction()
-                            transaction.replace(R.id.frameLayout, PermissionsFragment())
-                            transaction.addToBackStack(null)
-                            transaction.commit()
-                        }
-                    }
-                    R.id.adds -> {
-                        run {
-                            val manager: FragmentManager = requireActivity().getSupportFragmentManager()
-                            val transaction = manager.beginTransaction()
-                            transaction.replace(R.id.frameLayout, PermissionsFragment())
-                            transaction.addToBackStack(null)
-                            transaction.commit()
-                        }
-                    }
-                    R.id.profile -> {
-                    }
+        binding.BottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.daily_movements -> {
+                    childFragmentManager.beginTransaction().replace(R.id.frameLayout, DailyMovementsFragment(), "").commit()
                 }
-                return false
+                R.id.stockingWarehouse -> {
+                    childFragmentManager.beginTransaction().replace(R.id.frameLayout, StockingWarehouse(), "").commit()
+                }
+                R.id.adds -> {
+                    childFragmentManager.beginTransaction().replace(R.id.frameLayout, AddsFragment(), "").commit()
+
+                }
+                R.id.profile -> {
+                    childFragmentManager.beginTransaction().replace(R.id.frameLayout,ProfileFragment(),"").commit()
+                }
             }
-        })
+            return@setOnItemSelectedListener true
+        }
         return binding.root
     }
 
@@ -222,7 +194,7 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
             return true
         }
         if (id == R.id.add_data) {
-            val intent = Intent(requireActivity(), ActivityForIncludeFragments::class.java)
+            val intent = Intent(requireActivity(), AddsFragment::class.java)
             startActivity(intent)
         }
         if (id == R.id.add_stocking_warehouse) {

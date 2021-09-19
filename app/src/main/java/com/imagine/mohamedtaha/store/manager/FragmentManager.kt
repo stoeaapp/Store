@@ -6,8 +6,8 @@ import com.imagine.mohamedtaha.store.manager.base.BaseFragment
 import javax.inject.Inject
 import javax.inject.Named
 
-class FragmentManager @Inject constructor(private val fragmentManager: FragmentManager,
-@param:Named("placeholder")private val placeholder: Int):FragmentHandler {
+class FragmentManager @Inject
+constructor(private val fragmentManager: FragmentManager, @param:Named("placeholder")private val placeholder: Int):FragmentHandler {
     override fun openFragment(baseFragment: BaseFragment, option: FragmentHandler.Option, isToBaskStack: Boolean, tag: String, sharedElements: List<Pair<View, String>>?) {
         val fragmentTransaction = fragmentManager.beginTransaction()
         when(option){

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.imagine.mohamedtaha.store.room.data.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -76,5 +77,9 @@ class StoreViewModel @Inject constructor(private val repository: StoreRepository
     }
 
     fun deleteDailyMovement(id: Long) = viewModelScope.launch { repository.deleteDailyMovement(id) }
+    fun getFirstBalanceString(category_id: Long,store_id: Long) = repository.getFirstBalanceString(category_id, store_id).asLiveData()
+    fun getIncomingString(category_id: Long,store_id: Long) = repository.getIncomingString(category_id, store_id).asLiveData()
+    fun getIssuedString(category_id: Long,store_id: Long) = repository.getIssuedString(category_id, store_id).asLiveData()
+    fun getIssuedConvertToString(category_id: Long,convert_to: Long) = repository.getIssuedConvertToString(category_id, convert_to).asLiveData()
 
 }

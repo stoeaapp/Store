@@ -27,7 +27,7 @@
                 android:value=".ui.activity.ReportesActivity" />
         </activity>
         <activity
-            android:name=".ui.activity.ActivityForIncludeFragments"
+            android:name=".ui.activity.AddsFragment"
             android:label="@string/title_all_fragments"
             android:parentActivityName=".ui.activity.MainActivity">
             <meta-data
@@ -46,18 +46,18 @@
 
         <activity
             android:name=".ui.activity.EditCategory"
-            android:parentActivityName=".ui.activity.ActivityForIncludeFragments">
+            android:parentActivityName=".ui.activity.AddsFragment">
 
             <!-- PArent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.ActivityForIncludeFragments" />
+                android:value=".ui.activity.AddsFragment" />
         </activity>
         <activity android:name=".ui.activity.EditStore" />
         <activity
             android:name=".ui.fragments.stockingwarehouse.StockingWarehouse"
             android:label="@string/add_stocking_warehouse"
-            android:parentActivityName=".ui.activity.ActivityForIncludeFragments">
+            android:parentActivityName=".ui.activity.AddsFragment">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />

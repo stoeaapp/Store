@@ -11,18 +11,19 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.adapter.CategoryAdapter;
-import com.imagine.mohamedtaha.store.databinding.ActivityForIncludeFragmentsBinding;
+import com.imagine.mohamedtaha.store.databinding.AddsFragmentBinding;
+import com.imagine.mohamedtaha.store.manager.base.BaseFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
-public class ActivityForIncludeFragments extends Fragment {
+public class AddsFragment extends BaseFragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        com.imagine.mohamedtaha.store.databinding.ActivityForIncludeFragmentsBinding binding = ActivityForIncludeFragmentsBinding.inflate(inflater, container, false);
+        AddsFragmentBinding binding = AddsFragmentBinding.inflate(inflater, container, false);
         CategoryAdapter adapter = new CategoryAdapter(requireActivity(), requireActivity().getSupportFragmentManager());
         binding.viewPager.setAdapter(adapter);
 

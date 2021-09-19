@@ -2,6 +2,7 @@ package com.imagine.mohamedtaha.store.manager.base
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -24,13 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), Navigator {
     lateinit var navigationFactory: FragmentNavigationFactory
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        // handler(this)
-        // navigationFactory = FragmentNavigationFactory(handler)
     }
-
-//    fun navigator(navigator: Navigator) {
-//        this.navigator = navigator
-//    }
 
     fun <F : BaseFragment> getCurrentFragment(): Fragment? {
         return if (findFragmentPlaceHolder() == 0) null else supportFragmentManager.findFragmentById(findFragmentPlaceHolder())
@@ -52,17 +47,16 @@ abstract class BaseActivity : AppCompatActivity(), Navigator {
 
     override fun <T : BaseFragment> load(tClass: Class<T>): FragmentActionPerformer<T> {
         return navigationFactory.make(tClass)
-        // TODO("Not yet implemented")
     }
 
     override fun loadActivity(aClass: Class<out BaseActivity>): ActivityBuilder {
+        Log.d("iddd", "Base activity first")
         return activityStarter.make(aClass)
-        // TODO("Not yet implemented")
     }
 
     override fun <T : BaseFragment> loadActivity(aClass: Class<out BaseActivity>, pageTClass: Class<T>): ActivityBuilder {
+        Log.d("iddd", "Base activity")
         return activityStarter.make(aClass).setPage(pageTClass)
-        //  TODO("Not yet implemented")
     }
 
 

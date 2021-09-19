@@ -122,7 +122,22 @@ class StoreRepository @Inject constructor(private val storeDao: StoreDao) {
     }
 //Add daily movement
 
-    val getAllDailyMovement: kotlinx.coroutines.flow.Flow<List<ShowDailyMovements>> = storeDao.getAllDailyMovement()
+    val getAllDailyMovement: Flow<List<ShowDailyMovements>> = storeDao.getAllDailyMovement()
 
+    fun getFirstBalanceString(category_id: Long,store_id: Long):Flow<Int>{
+       return storeDao.getFirstBalanceString(category_id,store_id)
+    }
+
+    fun getIncomingString(category_id: Long,store_id: Long):Flow<Int>{
+        return storeDao.getIncomingString(category_id,store_id)
+    }
+
+    fun getIssuedString(category_id: Long,store_id: Long):Flow<Int>{
+        return storeDao.getIssuedString(category_id,store_id)
+    }
+
+    fun getIssuedConvertToString(category_id: Long,convert_to: Long):Flow<Int>{
+        return storeDao.getIssuedConvertToString(category_id,convert_to)
+    }
 
 }

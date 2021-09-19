@@ -25,5 +25,12 @@ object Constant {
     const val FIRST_BALANCE = "firstBalance"
     const val DIALOG_STOKE_WEAR_HOUSE = "dialogStokeWearHouse"
 
+// Fragment Dailies Movement
+    const val IDDaily = "id"
+    const val CONVERT_TO_DAILY = "convert_to"
+    const val INCOMING_DAILY = "incoming"
+    const val ISSUED_DAILY = "issued"
+    const val DIALOG_DAILY_MOVEMENTS = "dialogDaliy"
+
 
 }

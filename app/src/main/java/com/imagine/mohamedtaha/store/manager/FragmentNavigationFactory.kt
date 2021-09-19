@@ -10,7 +10,7 @@ class FragmentNavigationFactory @Inject constructor(val fragmentHandler: Fragmen
     private var tag: String? = null
 
     fun <T : BaseFragment> make(aClass: Class<T>): FragmentActionPerformer<T> {
-        return make(com.imagine.mohamedtaha.store.manager.FragmentFactory.getFragment(aClass))
+        return make(FragmentFactory.getFragment(aClass))
     }
 
     private fun <T : BaseFragment> make(fragment: T?): FragmentActionPerformer<T> {
@@ -19,8 +19,7 @@ class FragmentNavigationFactory @Inject constructor(val fragmentHandler: Fragmen
         return Provider(fragment!!, this)
     }
 
-    private inner class Provider<T : BaseFragment>
-    (private val fragment: T, private val navigationFactory: FragmentNavigationFactory) : FragmentActionPerformer<T> {
+    private inner class Provider<T : BaseFragment>(private val fragment: T, private val navigationFactory: FragmentNavigationFactory) : FragmentActionPerformer<T> {
         var sharedElements: List<Pair<View, String>>? = null
         override fun add(toBackStack: Boolean) {
             navigationFactory.fragmentHandler.openFragment(fragment, FragmentHandler.Option.ADD, toBackStack, tag.toString(), sharedElements)
@@ -47,6 +46,5 @@ class FragmentNavigationFactory @Inject constructor(val fragmentHandler: Fragmen
             navigationFactory.fragmentHandler.clearFragmentHistory(tag)
             return this
         }
-
     }
 }

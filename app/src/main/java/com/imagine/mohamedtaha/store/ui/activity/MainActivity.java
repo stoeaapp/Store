@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -16,79 +15,33 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.ActivityMainBinding;
-import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
-import com.imagine.mohamedtaha.store.manager.ActivityStarter;
-import com.imagine.mohamedtaha.store.manager.FragmentHandler;
-import com.imagine.mohamedtaha.store.manager.FragmentNavigationFactory;
 import com.imagine.mohamedtaha.store.manager.base.BaseActivity;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
-import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
 import com.imagine.mohamedtaha.store.ui.fragments.BottomNavigationFragment;
-import com.imagine.mohamedtaha.store.ui.fragments.ProfileFragment;
-import com.imagine.mohamedtaha.store.ui.fragments.permissions.PermissionsFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import dagger.hilt.android.AndroidEntryPoint;
 import tourguide.tourguide.TourGuide;
 
 //import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
 public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
     private ActivityMainBinding binding;
-    private StoreViewModel viewModel;
-    private static final int Daily_LOADER = 4;
-    TaskDbHelper dbHelper;
-    ArrayList<ShowDailyMovements> itemsDaily = new ArrayList<>();
-    private ProgressBar progressBarDaily;
-    //private AdapterAddDailyMovements adapterAddDailyMovements;
-
-    private AdapterAddDailyMovements adapterAddDailyMovements;
-
-    private RecyclerView recyclerViewDailyMovements;
-    public static final String IDDaily = "id";
-    public static final String NAME_PERMISSION_DAILY = "namePermission";
-    public static final String TYPE_STORE_DAILY = "typeStore";
-    public static final String NAME_CATEGORY_DAILY = "nameCategory";
-    public static final String CONVERT_TO_DAILY = "convert_to";
-    public static final String INCOMING_DAILY = "incoming";
-    public static final String ISSUED_DAILY = "issued";
-
-    public static final String DIALOG_DALIY_MOVEMENTS = "dialogDaliy";
-
     private BackupData backupData;
-
-    View emptView;
-
-    TextView convertTo;
-    TextView TVConvertToShow;
-    TourGuide tourGuide;
-    View homeButton;
-    public Activity mActivity;
     Toolbar toolbar;
 
     private static boolean showInformation = false;
@@ -98,11 +51,12 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        navigator(this);
-//        activityStarter = new ActivityStarter(this);
-      //  handler(this);
 
-        load(BottomNavigationFragment.class).add(true,"");
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+//        toolbar.inflateMenu(R.menu.menu_main);
+        load(BottomNavigationFragment.class).add(true, "");
 
 //        viewModel = new StoreViewModelFactory(((StoreApplication) getApplication()).getRepository()).create(StoreViewModel.class);
 //        viewModel.getAllDailyMovement().observe(this, new Observer<List<ShowDailyMovements>>() {
@@ -383,7 +337,7 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
             return true;
         }
         if (id == R.id.add_data) {
-            Intent intent = new Intent(MainActivity.this, ActivityForIncludeFragments.class);
+            Intent intent = new Intent(MainActivity.this, AddsFragment.class);
             startActivity(intent);
 
         }

@@ -7,7 +7,6 @@ import com.imagine.mohamedtaha.store.manager.base.BaseFragment
 @UiThread
 interface FragmentHandler {
     fun openFragment(baseFragment: BaseFragment, option:Option, isToBaskStack:Boolean, tag:String, sharedElements:List<Pair<View,String>>?)
-
     /**
      * @param fragmentToShow Fragment to show
      * @param fragmentToHide array of fragments to hide

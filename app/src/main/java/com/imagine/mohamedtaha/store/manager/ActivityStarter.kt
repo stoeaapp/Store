@@ -2,6 +2,7 @@ package com.imagine.mohamedtaha.store.manager
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.imagine.mohamedtaha.store.di.scopes.PerActivity
 import com.imagine.mohamedtaha.store.manager.base.BaseActivity
@@ -11,6 +12,7 @@ class ActivityStarter @Inject internal constructor(private val baseActivity: Bas
     private var intent:Intent? = null
     private var activity:Class<out AppCompatActivity>? = null
     fun make(activityClass: Class<out BaseActivity>):ActivityBuilder{
+        Log.d("Base", "make")
         activity = activityClass
         intent = Intent(baseActivity,activityClass)
         return Builder()
@@ -21,10 +23,15 @@ class ActivityStarter @Inject internal constructor(private val baseActivity: Bas
        private var isToFinishCurrent :Boolean = false
        private var requestCode:Int = 0
        override fun start() {
-          if (bundle != null)intent?.putExtras(bundle!!)
+           Log.d("iddd", "start")
+           if (bundle != null)intent?.putExtras(bundle!!)
            if (requestCode == 0){
+               Log.d("iddd", "bundle" + bundle)
                if (activityOptionsBundle == null)baseActivity.startActivity(intent) else baseActivity.startActivity(intent,activityOptionsBundle)
            }else {
+               Log.d("iddd", "start")
+               Log.d("iddd", " not bundle" + bundle)
+
                val currentFragment = baseActivity.getCurrentFragment<BaseFragment>()
                if (currentFragment != null)
                    currentFragment.startActivityForResult(intent,requestCode)

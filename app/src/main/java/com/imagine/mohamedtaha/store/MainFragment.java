@@ -23,15 +23,13 @@ import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.FragmentMainBinding;
-import com.imagine.mohamedtaha.store.fragments.EditDailyMovementsFragment;
-import com.imagine.mohamedtaha.store.loaders.LoaderDailyMovements;
+import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
-import com.imagine.mohamedtaha.store.ui.activity.ActivityForIncludeFragments;
+import com.imagine.mohamedtaha.store.ui.activity.AddsFragment;
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<ItemsStore>>
         , SearchView.OnQueryTextListener, BackupData.OnBackupListener {
@@ -281,7 +279,7 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
             return true;
         }
         if (id == R.id.add_data) {
-            Intent intent = new Intent(getActivity(), ActivityForIncludeFragments.class);
+            Intent intent = new Intent(getActivity(), AddsFragment.class);
             startActivity(intent);
 
         }

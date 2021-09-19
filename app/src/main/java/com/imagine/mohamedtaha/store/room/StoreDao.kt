@@ -129,5 +129,17 @@ interface StoreDao {
 // @Query("SELECT DISTINCT tdm.id , tdm.incoming, tdm.issued , tdm.convert_to,ts.type_store , tc.category_name , tp.permission_name FROM permissions tp,type_store ts , categories tc,daily_movement tdm INNER JOIN type_store ON ts.id = tdm.store_id  INNER JOIN categories ON tc.id = tdm.category_id  INNER JOIN permissions ON tp.id = tdm.permission_id  GROUP BY tdm.id")
 //    fun getAllDailyMovementNew(): Flow<List<ShowDailyMovements>>
 
+    @Query("SELECT SUM(first_balance) FROM stocking_ware_house WHERE category_id =:category_id ANd store_id =:store_id ")
+     fun getFirstBalanceString(category_id: Long,store_id: Long): Flow<Int>
 
+    @Query("SELECT SUM(issued) FROM daily_movement WHERE category_id =:category_id ANd store_id =:store_id ")
+    fun getIssuedString(category_id: Long,store_id: Long): Flow<Int>
+
+
+    @Query("SELECT SUM(incoming) FROM daily_movement WHERE category_id =:category_id ANd store_id =:store_id ")
+    fun getIncomingString(category_id: Long,store_id: Long): Flow<Int>
+
+
+    @Query("SELECT SUM(issued) FROM daily_movement WHERE category_id =:category_id ANd convert_to =:convert_to ")
+    fun getIssuedConvertToString(category_id: Long,convert_to: Long): Flow<Int>
 }
