@@ -18,28 +18,30 @@
     <string name="title_all_fragments" translatable="false">"  تكويد المستودع"</string>
     <string name="title_report_category" translatable="false">"  تقرير الأصناف"</string>
     <string name="title_report_store" translatable="false">"  تقرير المخازن"</string>
-    <string name="title_empty_daily_movements" translatable="false">"  لا توجد بيانات ..."</string>
-    <string name="title_empty_view_daily_movements" translatable="false">" قم أولاً بإضافة الأصناف والمخازن والأذونات"</string>
-    <string name="title_empty_view_daily_movements1" translatable="false">حتى تتمكن من إضافة الحركات اليومية</string>
+    <string name="title_empty_daily_movements" >  لا توجد بيانات …</string>
+    <string name="title_empty_view_daily_movements" > قم أولاً بإضافة الأصناف والمخازن والأذونات</string>
+    <string name="title_empty_view_daily_movements1" >حتى تتمكن من إضافة الحركات اليومية</string>
     <string name="title_empty_view_store" translatable="false">ابدأ بإضافة المخازن</string>
     <string name="title_empty_view_permission" translatable="false">ابدأ بإضافة انواع الإذونات</string>
-    <string name="title_empty_view_category" translatable="false">"ابدأ بإضافة الأصناف "</string>
-    <string name="title_empty_view_stoke_wearehouse" translatable="false">" حتى تستطيع ترصيد المستودع  "</string>
+    <string name="title_empty_view_category">ابدأ بإضافة الأصناف </string>
+    <string name="title_empty_view_stoke_wearehouse" translatable="false"> حتى تستطيع ترصيد المستودع  </string>
     <string name="add_category" >إضافة الأصناف</string>
 
     <string name="add_store">إضافة المخازن</string>
 
     <string name="add_store_convert" translatable="false">إضافة المخازن المحولة</string>
     <string name="title_add_category" translatable="false">إضافة الأصناف</string>
-    <string name="add_permission">إضافة الإذونات</string>
+    <string name="add_permissions">إضافة الإذونات</string>
+    <string name="add_permission">إضافة أذن</string>
     <string name="empty_view_title_text" translatable="false">It\'s a bit lonely here...</string>
     <string name="empty_view_subtitle_text" translatable="false">Get started by adding a Category</string>
-    <string name="name_category" translatable="false">"اسم الصنف "</string>
+    <string name="name_category">"اسم الصنف "</string>
     <string name="number_stoke" translatable="false">"رقم الترصيد  "</string>
     <string name="number" translatable="false">"الكمية  "</string>
     <string name="name_user" translatable="false">"اسم المستخدم "</string>
-    <string name="natural_category" translatable="false">طبيعة الصنف</string>
+    <string name="natural_category">طبيعة الصنف</string>
     <string name="notes">"ملاحظات "</string>
+    <string name="add_category_title">اضافة الصنف </string>
     <string name="add_category_titile">"اضافة الصنف "</string>
     <string name="edit_category_titile">"تعديل الصنف "</string>
     <string name="search">"ابحث في "</string>
@@ -47,7 +49,9 @@
     <string name="BtAdd">"إضافة "</string>
     <string name="BTDelete">"حذف "</string>
     <string name="action_edit" translatable="false">تعديل</string>
-    <string name="add_store_titile" translatable="false">إضافة مخزن</string>
+    <string name="add_store_title">إضافة مخزن</string>
+    <string name="delete_dialog_msg" >هل تريد مسح هذا الصنف ؟ </string>
+
     <string name="update_store_titile" translatable="false">تعديل مخزن</string>
     <string name="error_save_store" translatable="false">"  لم يتم حفظ المخزن "</string>
     <string name="save_store" translatable="false">"  تم حفظ المخزن بنجاح "</string>
@@ -55,15 +59,16 @@
     <string name="update_store" translatable="false">"  تم تعديل المخزن بنجاح "</string>
     <string name="error_delete_store" translatable="false">"  لم يتم حذف المخزن "</string>
     <string name="delete_store" translatable="false">"  تم حذف المخزن بنجاح "</string>
-    <string name="add_permission_titile" translatable="false">إضافة أذن</string>
-    <string name="update_permission_titile" translatable="false">تعديل أذن</string>
-    <string name="type_permission" translatable="false">" نوع الأذن"</string>
+    <string name="update_permission_title" translatable="false">تعديل أذن</string>
     <string name="error_save_permission" translatable="false">"  لم يتم حفظ الأذن "</string>
     <string name="save_permission" translatable="false">"  تم حفظ الأذن بنجاح "</string>
     <string name="error_update_permission" translatable="false">"  لم يتم تعديل الأذن "</string>
     <string name="update_permission" translatable="false">"  تم تعديل الأذن بنجاح "</string>
     <string name="error_delete_permission" translatable="false">"  لم يتم حذف الأذن "</string>
     <string name="delete_permission" translatable="false">"  تم حذف الأذن بنجاح "</string>
+    <string name="title_delete_permission">حذف الأذن </string>
+    <string name="title_delete_Item">حذف العنصر </string>
+
     <string name="first_balance" translatable="false">"الرصيد الأول "</string>
     <string name="add_stoke_titile" translatable="false">"إضافة ترصيد المستودع "</string>
     <string name="error_first_balance" translatable="false">"يجب اختيار الرصيد الأول "</string>
@@ -76,19 +81,21 @@
     <string name="update_category" translatable="false">"  تم تعديل الصنف بنجاح "</string>
     <string name="error_delete_category" translatable="false">"  لم يتم حذف الصنف "</string>
     <string name="delete_category" translatable="false">"  تم حذف الصنف بنجاح "</string>
-    <string name="add_daily_movement_titile" translatable="false">إضافة الحركات اليومية</string>
+    <string name="add_daily_movement_title" >إضافة الحركات اليومية</string>
     <string name="update_daily_movement_titile" translatable="false">تعديل الحركات اليومية</string>
     <string name="name_permission" translatable="false">نوع الإذن</string>
+    <string name="type_permission">نوع الأذن </string>
+
     <string name="incoming" translatable="false">" الوارد"</string>
     <string name="all_store" translatable="false">" كل المخازن"</string>
     <string name="select_type_store" translatable="false">" اسم المخزن"</string>
-    <string name="issued" translatable="false">" الصادر"</string>
+    <string name="issued" >" الصادر"</string>
     <string name="convert_to">" محول إلى"</string>
     <string name="current_Balance">" الرصيد الحالي"</string>
     <string name="show_current_Balance">" إظهار الرصيد الحالي"</string>
     <string name="error_empty_permission">" اختر الإذن"</string>
     <string name="error_save_daily">" لم يتم حفظ الحركة"</string>
-    <string name="save_daily">" تم حفظ الحركة بنجاح "</string>
+    <string name="save_daily">" تم الحفظ بنجاح "</string>
     <string name="error_update_daily">" لم يتم تعديل الحركة"</string>
     <string name="update_daily">" تم تعديل الحركة بنجاح "</string>
     <string name="error_delete_daily">" لم يتم مسح الحركة"</string>
@@ -107,7 +114,7 @@
     <string name="error_same_store">"لا يمكن تحويل الصنف لنفس المخزن "</string>
     <string name="error_convert_to">يجب اختيار المخزن المحول له الصنف</string>
     <string name="error_issued_balance">الرصيد الصادر أكبر من الرصيد المتاح</string>
-    <string name="delete_dialog_msg">"هل تريد مسح هذا الصنف ؟ "</string>
+    <string name="delete_dialog_msg_permission">"هل تريد مسح هذا الأذن ؟ "</string>
     <string name="cancel">لا</string>
     <string name="editor_activity_title_new_category">إضافة صنف</string>
     <string name="editor_activity_title_edit_category">تعديل صنف</string>
@@ -128,4 +135,8 @@
     <string name="data_created">" تاريخ الإنشاء"</string>
     <string name="add_floating_button">Floating button</string>
     <string name="image">Image</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="fab_button">FloatingActionButton</string>
+
 </resources>

@@ -5,7 +5,7 @@
     <corners android:radius="5dp"/>
     <padding android:bottom="10dp" android:left="10dp"
         android:right="10dp" android:top="10dp"/>
-    <gradient android:startColor="@color/icons"
-        android:endColor="@color/icons" />
+    <gradient android:startColor="@color/colorWhite"
+        android:endColor="@color/colorWhite" />
 
 </shape>

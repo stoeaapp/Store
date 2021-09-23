@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.utli
+package com.imagine.mohamedtaha.store.util
 
 import java.text.SimpleDateFormat
 import java.util.*

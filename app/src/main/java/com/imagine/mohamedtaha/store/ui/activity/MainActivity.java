@@ -38,7 +38,6 @@ import java.util.ArrayList;
 
 import tourguide.tourguide.TourGuide;
 
-//import com.imagine.mohamedtaha.store.fragments.EditStoreFragment;
 public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
     private ActivityMainBinding binding;
     private BackupData backupData;

@@ -32,13 +32,13 @@ class DailyMovementsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = StoreViewModelFactory((requireActivity().application as StoreApplication).repository).create(StoreViewModel::class.java)
-        viewModel.allDailyMovement.observe(this,{dailyMovement->
+        viewModel.allDailyMovement.observe(this, { dailyMovement ->
             binding.progressBarDaily.visibility = View.GONE
-            if ( dailyMovement.isNotEmpty()){
+            if (dailyMovement.isNotEmpty()) {
                 binding.recycleViewDailyMovements.visibility = View.VISIBLE
                 binding.emptyViewMainActivityRelative.visibility = View.GONE
                 adapterAddDailyMovements?.swapData(dailyMovement)
-            }else{
+            } else {
                 binding.recycleViewDailyMovements.visibility = View.GONE
                 binding.emptyViewMainActivityRelative.visibility = View.VISIBLE
             }
@@ -47,12 +47,12 @@ class DailyMovementsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        binding = FragmentDailyMovementsBinding.inflate(inflater,container,false)
+        binding = FragmentDailyMovementsBinding.inflate(inflater, container, false)
         binding.recycleViewDailyMovements.layoutManager = LinearLayoutManager(requireActivity())
         adapterAddDailyMovements = AdapterAddDailyMovements(requireActivity(), itemsDaily)
         binding.recycleViewDailyMovements.adapter = adapterAddDailyMovements
 
-        binding.recycleViewDailyMovements.addOnItemTouchListener(AdapterAddDailyMovements.RecycleTouchListener(activity,
+        binding.recycleViewDailyMovements.addOnItemTouchListener(AdapterAddDailyMovements.RecycleTouchListener(requireActivity(),
                 binding.recycleViewDailyMovements, object : AdapterAddDailyMovements.ClickListener {
             override fun onClick(view: View, position: Int) {
                 val (id, categoryName, permissionName, typeStore, incoming, issued, convertTo) = itemsDaily[position]
@@ -71,7 +71,7 @@ class DailyMovementsFragment : BaseFragment() {
 
             override fun onLongClick(view: View, position: Int) {}
         }))
-        binding.recycleViewDailyMovements.setAdapter(adapterAddDailyMovements)
+        binding.recycleViewDailyMovements.adapter = adapterAddDailyMovements
         binding.fabDaily.setOnClickListener { EditDailyMovementsFragment().show(requireActivity().supportFragmentManager, MainFragment.DIALOG_DALIY_MOVEMENTS) }
         return binding.root
     }

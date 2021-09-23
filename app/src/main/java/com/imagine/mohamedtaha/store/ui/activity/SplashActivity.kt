@@ -21,9 +21,6 @@ class SplashActivity : BaseActivity(), ViewSplash {
 
     override fun goToMainActivity() {
         navigator.loadActivity(MainActivity::class.java).byFinishAll().start()
-//        val goToMainActivity = Intent(this@SplashActivity, MainActivity::class.java)
-//        startActivity(goToMainActivity)
-//        finish()
     }
 
     override fun startAnimation(animation: Animation) {

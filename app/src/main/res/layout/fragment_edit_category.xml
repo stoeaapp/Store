@@ -1,19 +1,20 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context="com.imagine.mohamedtaha.store.ui.fragments.categories.EditFragmentCategory">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutTitle"
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_5dp"
-            android:paddingTop="@dimen/_5dp"
             android:background="@drawable/shape_title"
+            android:paddingTop="@dimen/_5dp"
+            android:paddingBottom="@dimen/_5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -26,73 +27,74 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/TVTitleStore"
+                android:id="@+id/TVTitleCategory"
                 style="@style/TextViewTitle"
-                android:text="@string/add_store_title"
+                android:text="@string/add_category_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageTitle"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ETTypeStoreMaterial"
+            android:id="@+id/TInputNameCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutTitle">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <EditText
-                android:id="@+id/ETTypeStoreStore"
+                android:id="@+id/ETNameCategory"
                 style="@style/EditTextFragmentTextFirst"
-                android:autofillHints="@string/add_permission"
-                android:hint="@string/add_permission" />
+                android:hint="@string/name_category" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ETNotesMaterial"
+            android:id="@+id/TInputNature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETTypeStoreMaterial">
+            app:layout_constraintTop_toBottomOf="@+id/TInputNameCategory">
 
             <EditText
-                android:id="@+id/EtNotesStore"
+                android:id="@+id/ETNaturalCategory"
                 style="@style/EditTextFragmentTextFirst"
-                android:autofillHints="@string/notes"
+                android:hint="@string/natural_category" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TInputNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TInputNature">
+
+            <EditText
+                android:id="@+id/EtNotes"
+                style="@style/EditTextFragmentTextFirst"
                 android:hint="@string/notes" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/BTDeleteStore"
+            android:id="@+id/BTDeleteCategory"
             style="@style/ButtonFragment"
             android:text="@string/BTDelete"
             android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/BTAddStore"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/BTAddCategory"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETNotesMaterial" />
+            app:layout_constraintTop_toBottomOf="@+id/TInputNotes" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/BTAddStore"
+            android:id="@+id/BTAddCategory"
             style="@style/ButtonFragment"
             android:text="@string/BtAdd"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toEndOf="@+id/BTDeleteStore"
-            app:layout_constraintTop_toBottomOf="@+id/ETNotesMaterial" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BTAddStore"
-            android:layout_marginTop="@dimen/_50dp"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+            app:layout_constraintStart_toEndOf="@+id/BTDeleteCategory"
+            app:layout_constraintTop_toBottomOf="@+id/TInputNotes" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,48 +1,59 @@
-<layout>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imagine.mohamedtaha.store.ui.fragments.categories.addCategoryFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleViewAddCategory"
-        style="@style/ListViewAndRecycleView"
-        android:visibility="gone"
-        />
-    <RelativeLayout
-        android:id="@+id/empty_view_category"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/empty_image"
-            style="@style/EmptyViewImage"
-            />
-        <TextView
-            android:id="@+id/empty_text_first"
-            android:layout_below="@+id/empty_image"
-            android:text="@string/title_empty_daily_movements"
-            style="@style/EmptyViewTextViewMain"
-            />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.imagine.mohamedtaha.store.ui.fragments.categories.addCategoryFragment">
 
-        <TextView
-            android:id="@+id/empty_subtitle_text"
-            android:layout_below="@+id/empty_text_first"
-            android:text="@string/title_empty_view_category"
-            style="@style/EmptyViewTextViewSecond"
-            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewAddCategory"
+            style="@style/ListViewAndRecycleView"
+            android:visibility="gone"
+            fab:layout_constraintBottom_toBottomOf="parent"
+            fab:layout_constraintEnd_toEndOf="parent"
+            fab:layout_constraintStart_toStartOf="parent"
+            fab:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/empty_view_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            fab:layout_constraintBottom_toBottomOf="parent"
+            fab:layout_constraintEnd_toEndOf="parent"
+            fab:layout_constraintStart_toStartOf="parent"
+            fab:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/empty_image"
+                style="@style/EmptyViewImage"
+                android:contentDescription="@string/image" />
+
+            <TextView
+                android:id="@+id/empty_text_first"
+                style="@style/EmptyViewTextViewMain"
+                android:layout_below="@+id/empty_image"
+                android:text="@string/title_empty_daily_movements" />
+
+            <TextView
+                android:id="@+id/empty_subtitle_text"
+                style="@style/EmptyViewTextViewSecond"
+                android:layout_below="@+id/empty_text_first"
+                android:text="@string/title_empty_view_category" />
 
 
-    </RelativeLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_category"
-        style="@style/FloatingButtonFragment"
-        app:srcCompat="@drawable/ic_action_add"
-        app:fabSize="auto"
-      />
+        </RelativeLayout>
 
-</RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_category"
+            style="@style/FloatingButtonFragment"
+            android:contentDescription="@string/fab_button"
+            app:fabSize="auto"
+            app:srcCompat="@drawable/ic_action_add"
+            fab:layout_constraintBottom_toBottomOf="parent"
+            fab:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

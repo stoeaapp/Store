@@ -25,6 +25,7 @@
             app:itemBackground="@drawable/bg_tab_selector"
             app:itemHorizontalTranslationEnabled="true"
             app:itemIconTint="@drawable/tab_icon_selector"
+            app:itemTextColor="@drawable/tab_icon_selector"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

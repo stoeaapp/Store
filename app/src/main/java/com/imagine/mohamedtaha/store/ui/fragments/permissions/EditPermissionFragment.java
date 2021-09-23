@@ -1,22 +1,18 @@
 package com.imagine.mohamedtaha.store.ui.fragments.permissions;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.content.res.Resources;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.imagine.mohamedtaha.store.Constant;
 import com.imagine.mohamedtaha.store.R;
@@ -26,6 +22,7 @@ import com.imagine.mohamedtaha.store.databinding.FragmentEditStoreBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.Permissions;
+import com.imagine.mohamedtaha.store.util.DialogUtils;
 
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getTime;
@@ -35,8 +32,6 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
     private StoreViewModel viewModel;
     Bundle intent;
     TaskDbHelper dbHelper;
-    AlertDialog alertDialogDelete;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,37 +42,27 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentEditStoreBinding.inflate(getLayoutInflater(), container, false);
-//        BottomSheetDialog bottomSheetDialog = (BottomSheetDialog)super.onCreateDialog(savedInstanceState);
-//        bottomSheetDialog.setOnShowListener(dialog ->{
-//            BottomSheetDialog dialogc = (BottomSheetDialog)dialog;
-//            FrameLayout bottomSheet = dialogc.findViewById(android.support.design.R.id.design_bottom_sheet);
-//            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-//            bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
-//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//
-//        });
         dbHelper = new TaskDbHelper(getContext());
         intent = getArguments();
-        binding.TVTitleStore.setText(getString(R.string.add_permission_titile));
-        binding.ETTypeStoreMaterial.setHint(getString(R.string.type_permission));
-
         if (intent != null) {
             binding.BTAddStore.setText(getString(R.string.action_edit));
-            binding.TVTitleStore.setText(getString(R.string.update_permission_titile));
+            binding.TVTitleStore.setText(getString(R.string.update_permission_title));
 
             binding.BTDeleteStore.setVisibility(View.VISIBLE);
             binding.ETTypeStoreStore.setText(intent.getString(Constant.NAME_PERMISSION));
             binding.EtNotesStore.setText(intent.getString(Constant.NOTES));
         }
         binding.BTAddStore.setOnClickListener(v -> saveStore());
-        binding.BTDeleteStore.setOnClickListener(v -> showDeleteConfirmationDialog());
+        binding.BTDeleteStore.setOnClickListener(v -> DialogUtils.showMessageWithYesNoMaterialDesign(requireContext(), getString(R.string.title_delete_permission), getString(R.string.delete_dialog_msg_permission), (dialog, which) -> {
+            deleteStore();
+            dismiss();
+        }));
         return binding.getRoot();
     }
 
     public void saveStore() {
         String namePermission = binding.ETTypeStoreStore.getText().toString().trim();
         String notes = binding.EtNotesStore.getText().toString().trim();
-        boolean isExist = dbHelper.isExistNamePErmission(namePermission);
 
         if (intent == null && TextUtils.isEmpty(namePermission) || TextUtils.isEmpty(namePermission)) {
             binding.ETTypeStoreStore.requestFocus();
@@ -96,13 +81,14 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
             if (itemSavePermission == null) {
                 Toast.makeText(getContext(), getString(R.string.error_save_permission), Toast.LENGTH_LONG).show();
             } else {
-          //  viewModel.insertPermissions(itemSavePermission);
+                //  viewModel.insertPermissions(itemSavePermission);
                 Toast.makeText(getContext(), getString(R.string.save_permission), Toast.LENGTH_LONG).show();
 
-              //  requireActivity().finish();
+                //  requireActivity().finish();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("taha",itemSavePermission);
-                getParentFragmentManager().setFragmentResult(Constant.DIALOG_PERMISSION,bundle);
+                bundle.putSerializable("taha", itemSavePermission);
+                getParentFragmentManager().setFragmentResult(Constant.DIALOG_PERMISSION, bundle);
+                dismiss();
             }
         } else {
 
@@ -119,6 +105,7 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
                 viewModel.updatePermissions(intent.getLong(Constant.ID_PERMISSION), namePermission, notes, getDate());
                 //dbHelper.updatePermission(itemUpdatePermision);
                 Toast.makeText(getContext(), getString(R.string.update_permission), Toast.LENGTH_LONG).show();
+                dismiss();
                 //  dialog.dismiss();
 //                Bundle bundle = new Bundle();
 //                bundle.putSerializable("taha",itemUpdatePermision);
@@ -143,28 +130,6 @@ public class EditPermissionFragment extends BottomSheetDialogFragment {
             }
             viewModel.deletePermissions(intent.getLong(Constant.ID_PERMISSION));
             Toast.makeText(getContext(), getString(R.string.delete_permission), Toast.LENGTH_LONG).show();
-            alertDialogDelete.dismiss();
         }
-    }
-
-    private void showDeleteConfirmationDialog() {
-        //Create an AlertDialog.Builder and set the message,and click listeners
-        //for the positive and negative buttons on the dialog.
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(R.string.delete_dialog_msg);
-        builder.setPositiveButton(R.string.BTDelete, (dialog, which) -> {
-            //User clicked the "Delete" button,so delete the Category
-            deleteStore();
-
-        });
-        builder.setNegativeButton(R.string.cancel, (dialog, which) -> {
-            //User clicked the "cancel" button ,so dismiss the dialog and continue editing the category
-            if (dialog != null) {
-                dialog.dismiss();
-            }
-        });
-        //Create and show the AlertDialog
-        alertDialogDelete = builder.create();
-        alertDialogDelete.show();
     }
 }

@@ -26,12 +26,10 @@ import static com.imagine.mohamedtaha.store.Constant.NAME_CATEGORY;
 import static com.imagine.mohamedtaha.store.Constant.NATURAL_CATEGORY;
 import static com.imagine.mohamedtaha.store.Constant.NOTES;
 
-
 public class addCategoryFragment extends Fragment {
     private FragmentCategoryBinding binding;
     AdapterAddCategory adapterAddCategory;
     private List<Categories> itemCategory = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

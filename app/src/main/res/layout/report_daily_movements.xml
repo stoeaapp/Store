@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:text="@string/select_type_store"
             android:gravity="center"
             android:onClick="checkSpinner"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="12sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:text="@string/all_store"
             android:gravity="center"
             android:onClick="checkSpinner"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:text="@string/issued"
             android:gravity="center"
             android:onClick="checkSpinner"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:text="@string/incoming"
             android:gravity="center"
             android:onClick="checkSpinner"
@@ -114,7 +114,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:onClick="checkSpinner"
 
             />
@@ -126,7 +126,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="14sp"
-            android:textColor="@color/icons"
+            android:textColor="@color/colorWhite"
             android:onClick="checkSpinner"
 
             />
@@ -152,7 +152,7 @@
         android:layout_marginStart="30dp"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:textColor="@color/icons"
+        android:textColor="@color/colorWhite"
         android:visibility="gone"
         />
     <CheckBox
@@ -163,7 +163,7 @@
         android:gravity="center"
         android:textSize="12dp"
         android:textStyle="bold"
-        android:textColor="@color/icons"
+        android:textColor="@color/colorWhite"
         android:layout_marginStart="10dp"
         android:onClick="checkCheckBoxDaily"
         android:visibility="gone"
