@@ -7,16 +7,28 @@ object Constant {
     const val ID_PERMISSION = "id"
     const val NAME_PERMISSION = "namePermission"
     const val DIALOG_PERMISSION = "dialogPermission"
-//Fragment Stores
+    const val PERMISSION = "permission"
+    const val ADD_PERMISSION = "add_permission"
+    const val UPDATE_PERMISSION = "update_permission"
+    const val DELETE_PERMISSION = "delete_permission"
+
+    //Fragment Stores
     const val DIALOG_STORE = "dialogStore"
     const val ID_STORE = "id"
     const val TYPE_STORE = "typeStore"
-
+    const val STORES = "Stores"
+    const val ADD_STORES = "add_Stores"
+    const val UPDATE_STORES = "updateStores"
+    const val DELETE_STORES = "deleteStores"
     //Fragment Categories
-    const val DIALOG_CATEGORY = "dialogCategory"
-    const val ID_CATEGORY = "id"
-    const val NAME_CATEGORY = "name_category"
-    const val NATURAL_CATEGORY = "natural_category"
+    const val DIALOG_ITEMS = "dialogItems"
+    const val ID_ITEM = "id"
+    const val NAME_ITEM = "nameItem"
+    const val NATURAL_ITEM = "naturalItem"
+    const val ITEMS = "items"
+    const val ADD_ITEMS = "add_items"
+    const val UPDATE_ITEMS = "updateItems"
+    const val DELETE_ITEMS = "deleteItems"
 
 // Fragment StockingWarehouse
     const val ID_STOKE = "id"

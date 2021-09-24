@@ -1,42 +1,34 @@
-package com.imagine.mohamedtaha.store.ui.fragments.permissions;
+package com.imagine.mohamedtaha.store.ui.fragments.add.permissions;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.Constant;
-import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.ResultCallback;
 import com.imagine.mohamedtaha.store.StoreApplication;
-import com.imagine.mohamedtaha.store.adapter.AdapterAddPermission;
+import com.imagine.mohamedtaha.store.ui.fragments.add.permissions.adapter.AdapterAddPermission;
 import com.imagine.mohamedtaha.store.databinding.FragmentAddPremissionBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.Permissions;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import kotlin.Unit;
-import kotlin.coroutines.Continuation;
-import kotlin.coroutines.CoroutineContext;
-import kotlinx.coroutines.flow.FlowCollector;
-
+import static com.imagine.mohamedtaha.store.Constant.ADD_PERMISSION;
+import static com.imagine.mohamedtaha.store.Constant.DELETE_PERMISSION;
+import static com.imagine.mohamedtaha.store.Constant.PERMISSION;
+import static com.imagine.mohamedtaha.store.Constant.UPDATE_PERMISSION;
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
 
 public class PermissionsFragment extends Fragment {
@@ -58,52 +50,51 @@ public class PermissionsFragment extends Fragment {
         FragmentAddPremissionBinding binding = FragmentAddPremissionBinding.inflate(getLayoutInflater(), container, false);
         final Observer<List<Permissions>> permissionsObserver = itemsPermissions -> {
             if (itemsPermissions.size() > 0) {
-                Log.d("iddd"," " +itemsPermissions.size() );
                 binding.progressBarPermission.setVisibility(View.GONE);
                 binding.listViewAddPermission.setVisibility(View.VISIBLE);
                 adapterAddPermission.swapData(itemsPermissions);
+                binding.emptyViewPermission.setVisibility(View.GONE);
             } else {
                 binding.listViewAddPermission.setVisibility(View.GONE);
                 binding.emptyViewPermission.setVisibility(View.VISIBLE);
-
             }
         };
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        binding.listViewAddPermission.setLayoutManager(layoutManager);
         viewModel.getAllPermissionsLiveData().observe(requireActivity(), permissionsObserver);
-        adapterAddPermission = new AdapterAddPermission(getContext(), itemsPermissions);
-        binding.listViewAddPermission.setEmptyView(binding.emptyViewPermission);
-        binding.listViewAddPermission.setAdapter(adapterAddPermission);
-        binding.progressBarPermission.setVisibility(View.GONE);
-        binding.listViewAddPermission.setOnItemClickListener((parent, view, position, id) -> {
-            Permissions itemPermission = itemsPermissions.get(position);
+        adapterAddPermission = new AdapterAddPermission((permissions, view) -> {
             Bundle bundle = new Bundle();
-            if (itemPermission.getId() != null)
-                bundle.putLong(Constant.ID_PERMISSION, itemPermission.getId());
-            bundle.putString(Constant.NAME_PERMISSION, itemPermission.getPermissionName());
-            bundle.putString(Constant.NOTES, itemPermission.getNotes());
+            if (permissions.getId() != null)
+                bundle.putLong(Constant.ID_PERMISSION, permissions.getId());
+            bundle.putString(Constant.NAME_PERMISSION, permissions.getPermissionName());
+            bundle.putString(Constant.NOTES, permissions.getNotes());
             EditPermissionFragment f = new EditPermissionFragment();
             f.setArguments(bundle);
             f.show(getChildFragmentManager(), Constant.DIALOG_PERMISSION);
-        });
+        }, itemsPermissions);
+        binding.listViewAddPermission.setAdapter(adapterAddPermission);
+        binding.progressBarPermission.setVisibility(View.GONE);
         binding.fabAddPermission.setOnClickListener(view ->
-        //        getContent.launch("next act"));
-        new EditPermissionFragment().show(getChildFragmentManager(), Constant.DIALOG_PERMISSION));
+                new EditPermissionFragment().show(getChildFragmentManager(), Constant.DIALOG_PERMISSION));
 
         getChildFragmentManager().setFragmentResultListener(Constant.DIALOG_PERMISSION, requireActivity(),
-                       (requestKey, result) ->{             Permissions permissions = (Permissions) result.getSerializable("taha");
-                               Log.d("iddd", requestKey + " " + result.toString());
-                               viewModel.insertPermissions(permissions);
-                           //    viewModel.updatePermissions(intent.getLong(Constant.ID_PERMISSION), namePermission, notes, getDate());
-                           });
+                (requestKey, result) -> {
+                    String getKey = result.getString(PERMISSION);
+                    switch (getKey) {
+                        case ADD_PERMISSION:
+                            Permissions addPermissions = (Permissions) result.getSerializable(ADD_PERMISSION);
+                            viewModel.insertPermissions(addPermissions);
+                            break;
+                        case UPDATE_PERMISSION:
+                            Permissions updatePermissions = (Permissions) result.getSerializable(UPDATE_PERMISSION);
+                            viewModel.updatePermissions(updatePermissions.getId(), updatePermissions.getPermissionName(), updatePermissions.getNotes(), getDate());
+                            break;
+                        case DELETE_PERMISSION:
+                            long id = result.getLong(DELETE_PERMISSION);
+                            viewModel.deletePermissions(id);
+                            break;
+                    }
+                });
         return binding.getRoot();
-    }
-
-    private final ActivityResultLauncher<String> getContent = registerForActivityResult(new ResultCallback(), result -> Log.d("iddd", result));
-
-
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        requireActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
-        super.onCreateContextMenu(menu, v, menuInfo);
     }
 }

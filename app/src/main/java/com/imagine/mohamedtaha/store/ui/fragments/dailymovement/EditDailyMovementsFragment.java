@@ -32,7 +32,7 @@ import static com.imagine.mohamedtaha.store.Constant.CONVERT_TO_DAILY;
 import static com.imagine.mohamedtaha.store.Constant.IDDaily;
 import static com.imagine.mohamedtaha.store.Constant.INCOMING_DAILY;
 import static com.imagine.mohamedtaha.store.Constant.ISSUED_DAILY;
-import static com.imagine.mohamedtaha.store.Constant.NAME_CATEGORY;
+import static com.imagine.mohamedtaha.store.Constant.NAME_ITEM;
 import static com.imagine.mohamedtaha.store.Constant.NAME_PERMISSION;
 import static com.imagine.mohamedtaha.store.Constant.TYPE_STORE;
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
@@ -69,7 +69,7 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             binding.TVTitleDailyMovement.setText(getString(R.string.update_daily_movement_titile));
             binding.SPermissionDaily.setText(intentDailyMovement.getString(NAME_PERMISSION));
             binding.SPStoreDaily.setText(intentDailyMovement.getString(TYPE_STORE));
-            binding.SPCategoryDaily.setText(intentDailyMovement.getString(NAME_CATEGORY));
+            binding.SPCategoryDaily.setText(intentDailyMovement.getString(NAME_ITEM));
             if (intentDailyMovement.getInt(INCOMING_DAILY) != 0) {
                 binding.ETIncoming.setVisibility(View.VISIBLE);
             }

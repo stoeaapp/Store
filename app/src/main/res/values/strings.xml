@@ -28,8 +28,8 @@
     <string name="title_empty_daily_movements"> No Data…</string>
     <string name="title_empty_view_daily_movements">First add items, stores, and permissions</string>
     <string name="title_empty_view_daily_movements1">So you can add daily movements</string>
-    <string name="title_empty_view_store" translatable="false">ابدأ بإضافة المخازن</string>
-    <string name="title_empty_view_permission" translatable="false">ابدأ بإضافة انواع الإذونات</string>
+    <string name="title_empty_view_store">Start add the stores</string>
+    <string name="title_empty_view_permission" >Start add types of permissions</string>
     <string name="title_empty_view_category" >Start add category</string>
     <string name="title_empty_view_stoke_wearehouse" translatable="false"> حتى تستطيع ترصيد المستودع  </string>
 
@@ -54,7 +54,8 @@
     <string name="empty_view_subtitle_text" translatable="false">Get started by adding a Category</string>
 
     <!-- TODO: Page dialog Add Category -->
-    <string name="name_category">Name Category </string>
+    <string name="name_category">Name Item :</string>
+    <string name="name_category_hint">Name Item </string>
     <string name="number_stoke">رقم الترصيد  </string>
     <string name="number">الكمية  </string>
     <string name="name_user">اسم المستخدم </string>
@@ -73,7 +74,7 @@
 
     <!-- TODO: Page dialog Add Store -->
     <string name="add_store_title">Add store</string>
-    <string name="update_store_titile" translatable="false">تعديل مخزن</string>
+    <string name="update_store_title">Edit Store</string>
     <string name="error_save_store" translatable="false">  لم يتم حفظ المخزن </string>
     <string name="save_store" translatable="false">  تم حفظ المخزن بنجاح </string>
     <string name="error_update_store" translatable="false">  لم يتم تعديل المخزن </string>
@@ -109,6 +110,7 @@
 
     <string name="name_permission">نوع الإذن</string>
     <string name="type_permission">Type Permissions </string>
+    <string name="type_permission_">Type Permissions :</string>
     <string name="incoming" > Incoming</string>
     <string name="all_store" translatable="false"> كل المخازن</string>
     <string name="select_type_store" translatable="false"> اسم المخزن</string>
@@ -126,6 +128,7 @@
     <string name="update_daily" > Edited successfully </string>
     <string name="error_delete_daily" translatable="false"> لم يتم مسح الحركة</string>
     <string name="delete_daily" > Deleted successfully  </string>
+    <string name="error_empty_edit_text" >You can not leave that filed empty</string>
     <string name="error_empty_text" >You can not leave that filed empty or the value is 0 </string>
     <string name="error_exist_name" translatable="false">تم تسجيل اسم المخزن من قبل </string>
     <string name="error_exist_permission" translatable="false">تم تسجيل اسم الإذن من قبل </string>
@@ -146,6 +149,7 @@
     <string name="delete_dialog_msg" >Are you sure you want delete this item ? </string>
     <string name="delete_dialog_msg_permission">Do you want delete this permission ?</string>
     <string name="title_delete_permission">Delete Permission </string>
+    <string name="title_delete_item">Delete Item </string>
     <string name="title_delete_Item">Delete Item </string>
     <!-- Dialog button text for the option to cancel deletion of the current category [CHAR LIMIT=20] -->
     <string name="cancel" translatable="false">لا</string>
@@ -181,11 +185,13 @@
     <string name="keep_editing" translatable="false">Keep Editing</string>
 
     <!-- TODO: Page custom_store_listview -->
-    <string name="type_store"> Store </string>
+    <string name="type_store_"> Store : </string>
+    <string name="type_store"> Store  </string>
     <string name="name_type_store" translatable="false"> اسم المخزن</string>
+    <string name="last_edit">Last edit :</string>
 
     <string name="data_store" translatable="false">اخر تعديل</string>
-    <string name="m_store" translatable="false"> م</string>
+    <string name="m_store" > M :</string>
     <string name="data_created" translatable="false"> تاريخ الإنشاء</string>
     <dimen name="title_text_size">20dp</dimen>
     <string name="add_floating_button">Floating button</string>

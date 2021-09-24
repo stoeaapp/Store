@@ -44,7 +44,7 @@ public class AdapterAddCategoryContentProvider extends RecyclerView.Adapter<Adap
         //Inflate the task_layout to a view
         //  View view = LayoutInflater.from(mContext).inflate(R.layout.custom_category,parent,false);
         //return new CategoryViewHolder(view);
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_category, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_item, parent, false);
         final CategoryViewHolder categoryViewHolder = new CategoryViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

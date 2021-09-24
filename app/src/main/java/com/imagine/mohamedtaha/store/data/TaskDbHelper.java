@@ -135,6 +135,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         Date time=new Date();
         return dateFormat.format(time);
     }
+
     //_____________________________Methods Category____________________________
 
     //_____________________________Insert Table Category____________________________

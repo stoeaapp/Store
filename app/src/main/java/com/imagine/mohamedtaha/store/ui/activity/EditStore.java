@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,7 +29,7 @@ public class EditStore extends AppCompatActivity {
        // TextView showTypeStore = (TextView)findViewById(R.id.ETNameCategory);
        // TextView showNotes = (TextView)findViewById(R.id.EtNotes);
 
-          ETTypeStore = (EditText)findViewById(R.id.ETNameCategory);
+          ETTypeStore = (EditText)findViewById(R.id.ETNameItem);
            ETNotes = (EditText)findViewById(R.id.EtNotes);
 
         if (intent == null){

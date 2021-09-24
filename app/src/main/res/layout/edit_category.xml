@@ -9,7 +9,7 @@
         tools:context="com.imagine.mohamedtaha.store.ui.activity.EditCategory">
 
         <EditText
-            android:id="@+id/ETNameCategory"
+            android:id="@+id/ETNameItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_18dp"
@@ -33,7 +33,7 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETNameCategory" />
+            app:layout_constraintTop_toBottomOf="@+id/ETNameItem" />
 
         <EditText
             android:id="@+id/EtNotes"

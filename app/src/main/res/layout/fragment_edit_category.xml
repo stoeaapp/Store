@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical"
-        tools:context="com.imagine.mohamedtaha.store.ui.fragments.categories.EditFragmentCategory">
+        tools:context=".ui.fragments.add.items.EditFragmentItems">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -44,9 +44,9 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <EditText
-                android:id="@+id/ETNameCategory"
+                android:id="@+id/ETNameItem"
                 style="@style/EditTextFragmentTextFirst"
-                android:hint="@string/name_category" />
+                android:hint="@string/name_category_hint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

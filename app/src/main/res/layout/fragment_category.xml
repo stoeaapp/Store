@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.imagine.mohamedtaha.store.ui.fragments.categories.addCategoryFragment">
+        tools:context=".ui.fragments.add.items.ItemsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewAddCategory"

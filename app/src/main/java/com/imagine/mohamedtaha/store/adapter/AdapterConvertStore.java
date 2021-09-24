@@ -51,12 +51,12 @@ public class AdapterConvertStore extends BaseAdapter  {
         public View getView(int position, View convertView, ViewGroup parent) {
             View listItemView = convertView;
             if (listItemView == null) {
-                listItemView = inflater.inflate(R.layout.custom_store_listview, parent, false);
+                listItemView = inflater.inflate(R.layout.custom_store, parent, false);
             }
             //Find individual views that we want to modify in the list item layout
-            TextView TVTypeConvertStore = (TextView) listItemView.findViewById(R.id.TVType_store);
-            TextView TVDateStore = (TextView) listItemView.findViewById(R.id.TVDdate_store);
-            TextView TVTimeStore = (TextView) listItemView.findViewById(R.id.TVTime_store);
+            TextView TVTypeConvertStore = (TextView) listItemView.findViewById(R.id.TVTypeStore);
+            TextView TVDateStore = (TextView) listItemView.findViewById(R.id.TVDateStore);
+            TextView TVTimeStore = (TextView) listItemView.findViewById(R.id.TVTimeStore);
 
             TextView TVID = (TextView) listItemView.findViewById(R.id.TVID);
 

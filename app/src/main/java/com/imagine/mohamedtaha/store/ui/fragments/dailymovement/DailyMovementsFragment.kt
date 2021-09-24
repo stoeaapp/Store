@@ -10,7 +10,7 @@ import com.imagine.mohamedtaha.store.Constant.DIALOG_DAILY_MOVEMENTS
 import com.imagine.mohamedtaha.store.Constant.IDDaily
 import com.imagine.mohamedtaha.store.Constant.INCOMING_DAILY
 import com.imagine.mohamedtaha.store.Constant.ISSUED_DAILY
-import com.imagine.mohamedtaha.store.Constant.NAME_CATEGORY
+import com.imagine.mohamedtaha.store.Constant.NAME_ITEM
 import com.imagine.mohamedtaha.store.Constant.NAME_PERMISSION
 import com.imagine.mohamedtaha.store.Constant.TYPE_STORE
 import com.imagine.mohamedtaha.store.MainFragment
@@ -60,7 +60,7 @@ class DailyMovementsFragment : BaseFragment() {
                 bundle.putString(IDDaily, id)
                 bundle.putString(NAME_PERMISSION, permissionName)
                 bundle.putString(TYPE_STORE, typeStore)
-                bundle.putString(NAME_CATEGORY, categoryName)
+                bundle.putString(NAME_ITEM, categoryName)
                 bundle.putInt(INCOMING_DAILY, incoming!!)
                 bundle.putInt(ISSUED_DAILY, issued!!)
                 bundle.putString(CONVERT_TO_DAILY, convertTo)

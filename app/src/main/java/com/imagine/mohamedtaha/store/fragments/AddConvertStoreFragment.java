@@ -32,7 +32,7 @@ import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderConvertStore;
-import com.imagine.mohamedtaha.store.ui.fragments.stores.EditStoreFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.add.stores.EditStoreFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,7 +72,7 @@ public class AddConvertStoreFragment extends Fragment {
 
             dbHelper = new TaskDbHelper(getActivity());
             //Set the RecycleView to its corresponding view
-            mListView = (ListView) view.findViewById(R.id.listViewAddStore);
+            mListView = (ListView) view.findViewById(R.id.RecyclerViewAddStore);
             progressBar =(ProgressBar)view.findViewById(R.id.progressBar);
             adapterConvertStore = new AdapterConvertStore(getContext(),itemsStores);
             View emptyView = view.findViewById(R.id.empty_view_store);
@@ -197,7 +197,7 @@ public class AddConvertStoreFragment extends Fragment {
                 if (intent != null ){
                     saveState = false;
                     BTAddOrUpdate.setText(getString(R.string.action_edit));
-                    TVTitleStore.setText(getString(R.string.update_store_titile));
+                    TVTitleStore.setText(getString(R.string.update_store_title));
                     BTDelete.setVisibility(View.VISIBLE);
                     ETTypeStore.setText(intent.getString(TYPE_CONVERT_STORE));
                     ETNotes.setText(intent.getString(NOTES_STORE));

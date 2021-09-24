@@ -21,8 +21,8 @@
     <string name="title_empty_daily_movements" >  لا توجد بيانات …</string>
     <string name="title_empty_view_daily_movements" > قم أولاً بإضافة الأصناف والمخازن والأذونات</string>
     <string name="title_empty_view_daily_movements1" >حتى تتمكن من إضافة الحركات اليومية</string>
-    <string name="title_empty_view_store" translatable="false">ابدأ بإضافة المخازن</string>
-    <string name="title_empty_view_permission" translatable="false">ابدأ بإضافة انواع الإذونات</string>
+    <string name="title_empty_view_store">ابدأ بإضافة المخازن</string>
+    <string name="title_empty_view_permission">ابدأ بإضافة انواع الإذونات</string>
     <string name="title_empty_view_category">ابدأ بإضافة الأصناف </string>
     <string name="title_empty_view_stoke_wearehouse" translatable="false"> حتى تستطيع ترصيد المستودع  </string>
     <string name="add_category" >إضافة الأصناف</string>
@@ -35,7 +35,8 @@
     <string name="add_permission">إضافة أذن</string>
     <string name="empty_view_title_text" translatable="false">It\'s a bit lonely here...</string>
     <string name="empty_view_subtitle_text" translatable="false">Get started by adding a Category</string>
-    <string name="name_category">"اسم الصنف "</string>
+    <string name="name_category">اسم الصنف :</string>
+    <string name="name_category_hint">اسم الصنف </string>
     <string name="number_stoke" translatable="false">"رقم الترصيد  "</string>
     <string name="number" translatable="false">"الكمية  "</string>
     <string name="name_user" translatable="false">"اسم المستخدم "</string>
@@ -51,8 +52,7 @@
     <string name="action_edit" translatable="false">تعديل</string>
     <string name="add_store_title">إضافة مخزن</string>
     <string name="delete_dialog_msg" >هل تريد مسح هذا الصنف ؟ </string>
-
-    <string name="update_store_titile" translatable="false">تعديل مخزن</string>
+    <string name="update_store_title">تعديل مخزن</string>
     <string name="error_save_store" translatable="false">"  لم يتم حفظ المخزن "</string>
     <string name="save_store" translatable="false">"  تم حفظ المخزن بنجاح "</string>
     <string name="error_update_store" translatable="false">"  لم يتم تعديل المخزن "</string>
@@ -67,6 +67,8 @@
     <string name="error_delete_permission" translatable="false">"  لم يتم حذف الأذن "</string>
     <string name="delete_permission" translatable="false">"  تم حذف الأذن بنجاح "</string>
     <string name="title_delete_permission">حذف الأذن </string>
+    <string name="title_delete_item">حذف العنصر</string>
+
     <string name="title_delete_Item">حذف العنصر </string>
 
     <string name="first_balance" translatable="false">"الرصيد الأول "</string>
@@ -85,10 +87,11 @@
     <string name="update_daily_movement_titile" translatable="false">تعديل الحركات اليومية</string>
     <string name="name_permission" translatable="false">نوع الإذن</string>
     <string name="type_permission">نوع الأذن </string>
+    <string name="type_permission_">نوع الأذن :</string>
 
     <string name="incoming" translatable="false">" الوارد"</string>
     <string name="all_store" translatable="false">" كل المخازن"</string>
-    <string name="select_type_store" translatable="false">" اسم المخزن"</string>
+    <string name="select_type_store"> اسم المخزن</string>
     <string name="issued" >" الصادر"</string>
     <string name="convert_to">" محول إلى"</string>
     <string name="current_Balance">" الرصيد الحالي"</string>
@@ -100,7 +103,8 @@
     <string name="update_daily">" تم تعديل الحركة بنجاح "</string>
     <string name="error_delete_daily">" لم يتم مسح الحركة"</string>
     <string name="delete_daily">" تم مسح الحركة بنجاح "</string>
-    <string name="error_empty_text">"لا يمكن ترك الحقل فارغ أو تكون قمته 0 "</string>
+    <string name="error_empty_edit_text">لا يمكن ترك الحقل فارغ </string>
+    <string name="error_empty_text">لا يمكن ترك الحقل فارغ أو تكون قمته 0</string>
     <string name="error_exist_name">"تم تسجيل اسم المخزن من قبل "</string>
     <string name="error_exist_permission">"تم تسجيل اسم الإذن من قبل "</string>
     <string name="error_exist_category">"تم تسجيل اسم الصنف من قبل "</string>
@@ -127,10 +131,13 @@
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
     <string name="discard">Discard</string>
     <string name="keep_editing">Keep Editing</string>
-    <string name="type_store">" المخزن"</string>
-    <string name="name_type_store">" اسم المخزن"</string>
+    <string name="type_store">المخزن</string>
+    <string name="type_store_">المخزن :</string>
+    <string name="name_type_store"> اسم المخزن</string>
+    <string name="last_edit">اخر تعديل :</string>
+
     <string name="data_store">اخر تعديل</string>
-    <string name="m_store">" م"</string>
+    <string name="m_store">م :</string>
     <string name="text_splash"> مخزنك في جوالك</string>
     <string name="data_created">" تاريخ الإنشاء"</string>
     <string name="add_floating_button">Floating button</string>

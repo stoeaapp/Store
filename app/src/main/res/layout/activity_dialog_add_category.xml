@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/name_category"
-        android:id="@+id/ETNameCategory"
+        android:id="@+id/ETNameItem"
         android:layout_marginEnd="@dimen/margingRight"
         app:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toRightOf="@+id/ETNaturalGategory"
@@ -43,7 +43,7 @@
       />
     <EditText
         app:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toTopOf="@+id/ETNameCategory"
+        app:layout_constraintTop_toTopOf="@+id/ETNameItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/natural_category"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/notes"
         app:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@+id/ETNameCategory"
+        app:layout_constraintTop_toBottomOf="@+id/ETNameItem"
         android:layout_marginTop="@dimen/marginTop"
         android:id="@+id/EtNotes"
         app:layout_constraintLeft_creator="1"

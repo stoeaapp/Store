@@ -73,7 +73,7 @@ public class EditCategory extends AppCompatActivity implements LoaderManager.Loa
 
         }
 //Find all relevant views that we will need to read user input from
-        ETNameCategory = (EditText) findViewById(R.id.ETNameCategory);
+        ETNameCategory = (EditText) findViewById(R.id.ETNameItem);
         ETNaturalCategory = (EditText) findViewById(R.id.ETNaturalGategory);
         ETNotes = (EditText) findViewById(R.id.EtNotes);
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
