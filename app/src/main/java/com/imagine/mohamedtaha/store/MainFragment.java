@@ -18,14 +18,14 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
+import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.FragmentMainBinding;
 import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.EditDailyMovementsFragment;
 import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
-import com.imagine.mohamedtaha.store.ui.activity.AddsFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment;
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
@@ -75,33 +75,33 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         backupData = new BackupData(getActivity());
         backupData.setOnBackListener(this);
         binding.recycleViewDailyMovements.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterAddDailyMovements = new AdapterAddDailyMovements(getActivity(), itemsDaily);
+   //     adapterAddDailyMovements = new AdapterAddDailyMovements(getActivity(), itemsDaily);
         //  emptView = (TextView)findViewById(R.id.empty_view_category);
 
-
-        binding.recycleViewDailyMovements.addOnItemTouchListener(new AdapterAddDailyMovements.RecycleTouchListener(getActivity(),
-                binding.recycleViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ShowDailyMovements itemsStore = itemsDaily.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString(IDDaily, itemsStore.getId());
-                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
-                bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
-                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
-                bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
-                bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
-                bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
-                EditDailyMovementsFragment f = new EditDailyMovementsFragment();
-                f.setArguments(bundle);
-                f.show(getActivity().getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+//
+//        binding.recycleViewDailyMovements.addOnItemTouchListener(new AdapterAddDailyMovements.RecycleTouchListener(getActivity(),
+//                binding.recycleViewDailyMovements, new AdapterAddDailyMovements.ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                ShowDailyMovements itemsStore = itemsDaily.get(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putString(IDDaily, itemsStore.getId());
+//                bundle.putString(NAME_PERMISSION_DAILY, itemsStore.getPermissionName());
+//                bundle.putString(TYPE_STORE_DAILY, itemsStore.getTypeStore());
+//                bundle.putString(NAME_CATEGORY_DAILY, itemsStore.getCategoryName());
+//                bundle.putInt(INCOMING_DAILY, itemsStore.getIncoming());
+//                bundle.putInt(ISSUED_DAILY, itemsStore.getIssued());
+//                bundle.putString(CONVERT_TO_DAILY, itemsStore.getConvertTo());
+//                EditDailyMovementsFragment f = new EditDailyMovementsFragment();
+//                f.setArguments(bundle);
+//                f.show(getActivity().getSupportFragmentManager(), DIALOG_DALIY_MOVEMENTS);
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//
+//            }
+//        }));
         binding.recycleViewDailyMovements.setAdapter(adapterAddDailyMovements);
 
         binding.fabDaily.setOnClickListener(new View.OnClickListener() {

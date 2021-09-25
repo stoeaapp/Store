@@ -1,18 +1,18 @@
-package com.imagine.mohamedtaha.store.adapter;
+package com.imagine.mohamedtaha.store.ui.fragments.adds;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.imagine.mohamedtaha.store.ui.fragments.add.items.ItemsFragment;
-import com.imagine.mohamedtaha.store.ui.fragments.add.permissions.PermissionsFragment;
-import com.imagine.mohamedtaha.store.ui.fragments.add.stores.StoresFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.items.ItemsFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.permissions.PermissionsFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.stores.StoresFragment;
 /**
  * Created by Mohamed Taha on 25/11/17.
  */
 
-public class CategoryAdapter extends FragmentStateAdapter {
-    public CategoryAdapter(@NonNull Fragment fragment) {
+public class AddsAdapter extends FragmentStateAdapter {
+    public AddsAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
 

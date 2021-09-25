@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.stores;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.stores;
 
 import android.os.Bundle;
 import android.text.TextUtils;

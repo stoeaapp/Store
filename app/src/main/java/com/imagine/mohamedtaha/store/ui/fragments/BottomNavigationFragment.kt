@@ -13,7 +13,7 @@ import com.imagine.mohamedtaha.store.data.BackupData.OnBackupListener
 import com.imagine.mohamedtaha.store.data.TaskDbHelper
 import com.imagine.mohamedtaha.store.databinding.FragmentBottomNavigationBinding
 import com.imagine.mohamedtaha.store.manager.base.BaseFragment
-import com.imagine.mohamedtaha.store.ui.activity.AddsFragment
+import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity
 import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.DailyMovementsFragment
 import com.imagine.mohamedtaha.store.ui.fragments.profile.ProfileFragment

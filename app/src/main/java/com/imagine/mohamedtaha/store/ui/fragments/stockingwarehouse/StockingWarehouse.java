@@ -18,25 +18,33 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.StoreApplication;
-import com.imagine.mohamedtaha.store.adapter.AdapterAddStokeHouse;
 import com.imagine.mohamedtaha.store.databinding.StockingWarehouseBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.ShowStockWare;
+import com.imagine.mohamedtaha.store.room.data.StockingHouse;
+import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.adapter.AdapterAddStokeHouse;
 
 import java.util.ArrayList;
 
+import static com.imagine.mohamedtaha.store.Constant.ADD_STOKE_WEAR_HOUSES;
 import static com.imagine.mohamedtaha.store.Constant.CODE_NAME_CATEGORY;
 import static com.imagine.mohamedtaha.store.Constant.CODE_TYPE_STORE;
+import static com.imagine.mohamedtaha.store.Constant.DELETE_STOKE_WEAR_HOUSES;
 import static com.imagine.mohamedtaha.store.Constant.DIALOG_STOKE_WEAR_HOUSE;
 import static com.imagine.mohamedtaha.store.Constant.FIRST_BALANCE;
+import static com.imagine.mohamedtaha.store.Constant.ID_STOCK_WAREHOUSE;
 import static com.imagine.mohamedtaha.store.Constant.NOTES;
+import static com.imagine.mohamedtaha.store.Constant.STOKE_WEAR_HOUSES;
+import static com.imagine.mohamedtaha.store.Constant.UPDATE_STOKE_WEAR_HOUSES;
 
 public class StockingWarehouse extends Fragment implements SearchView.OnQueryTextListener {
     private StockingWarehouseBinding binding;
+    private StoreViewModel viewModel;
     public static AdapterAddStokeHouse adapterAddStokeHouse;
     public static ArrayList<ShowStockWare> itemStokeHouses = new ArrayList<>();
 
@@ -51,10 +59,10 @@ public class StockingWarehouse extends Fragment implements SearchView.OnQueryTex
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StoreViewModel viewModel = new StoreViewModelFactory(((StoreApplication) requireActivity().getApplication()).getRepository()).create(StoreViewModel.class);
+        viewModel = new StoreViewModelFactory(((StoreApplication) requireActivity().getApplication()).getRepository()).create(StoreViewModel.class);
         viewModel.getAllStokeWareHouseWitCategoriesAndStoresShow().observe(this, categories -> {
-            Log.d("iddd", " " + categories.size());
             if (categories.size() > 0) {
+                Log.d("iddd", "categories : " + categories.size());
                 adapterAddStokeHouse.swapData(categories);
                 binding.emptyViewStokeWearehouse.setVisibility(View.GONE);
                 binding.progressBarStoke.setVisibility(View.GONE);
@@ -66,7 +74,6 @@ public class StockingWarehouse extends Fragment implements SearchView.OnQueryTex
             }
         });
 
-
     }
 
     @Nullable
@@ -74,35 +81,41 @@ public class StockingWarehouse extends Fragment implements SearchView.OnQueryTex
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = StockingWarehouseBinding.inflate(getLayoutInflater(), container, false);
         binding.recycleViewAddStokeWarehouse.setLayoutManager(new LinearLayoutManager(requireActivity().getApplicationContext()));
-        adapterAddStokeHouse = new AdapterAddStokeHouse(requireActivity(), itemStokeHouses);
+        adapterAddStokeHouse = new AdapterAddStokeHouse((showStockWare, view) -> {
+            Bundle bundle = new Bundle();
+            if (showStockWare.getId() != null)
+                bundle.putLong(ID_STOCK_WAREHOUSE, showStockWare.getId());
+            bundle.putString(CODE_NAME_CATEGORY, showStockWare.getCategoryName());
+            bundle.putString(CODE_TYPE_STORE, showStockWare.getTypeStore());
+            bundle.putString(FIRST_BALANCE, showStockWare.getFirstBalance());
+            bundle.putString(NOTES, showStockWare.getNotes());
+            EditStockingWarehouseFragment f = new EditStockingWarehouseFragment();
+            f.setArguments(bundle);
+            f.show(getChildFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
+
+        }, itemStokeHouses);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity());
+        binding.recycleViewAddStokeWarehouse.setLayoutManager(layoutManager);
         binding.recycleViewAddStokeWarehouse.setAdapter(adapterAddStokeHouse);
+        binding.fabAddStockWarehouse.setOnClickListener(v -> new EditStockingWarehouseFragment().show(getChildFragmentManager(), DIALOG_STOKE_WEAR_HOUSE));
 
-        binding.recycleViewAddStokeWarehouse.addOnItemTouchListener(new AdapterAddStokeHouse.RecycleTouchListener(requireActivity().getApplicationContext(),
-                binding.recycleViewAddStokeWarehouse, new AdapterAddStokeHouse.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                ShowStockWare itemStoke = itemStokeHouses.get(position);
-                Bundle bundle = new Bundle();
-                //bundle.putInt(ID_STOKE, itemStoke.getId());
-                bundle.putString(CODE_NAME_CATEGORY, itemStoke.getCategoryName());
-                bundle.putString(CODE_TYPE_STORE, itemStoke.getTypeStore());
-                bundle.putString(FIRST_BALANCE, itemStoke.getFirstBalance());
-                bundle.putString(NOTES, itemStoke.getNotes());
-                EditStockingWarehouseFragment f = new EditStockingWarehouseFragment();
-                f.setArguments(bundle);
-                f.show(requireActivity().getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
-            }
-
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-        binding.fabAddStockWarehouse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new EditStockingWarehouseFragment().show(requireActivity().getSupportFragmentManager(), DIALOG_STOKE_WEAR_HOUSE);
+        //Callback from edit fragment
+        getChildFragmentManager().setFragmentResultListener(DIALOG_STOKE_WEAR_HOUSE, requireActivity(), (requestKey, result) -> {
+            String getKey = result.getString(STOKE_WEAR_HOUSES);
+            Log.d("iddd", "getKey : " + getKey);
+            switch (getKey) {
+                case ADD_STOKE_WEAR_HOUSES:
+                    StockingHouse addStockWarehouse = (StockingHouse) result.getSerializable(ADD_STOKE_WEAR_HOUSES);
+                    viewModel.insertStokeWarehouse(addStockWarehouse);
+                    break;
+                case UPDATE_STOKE_WEAR_HOUSES:
+                    StockingHouse updateStockWarehouse = (StockingHouse) result.getSerializable(UPDATE_STOKE_WEAR_HOUSES);
+                    viewModel.updateStockWarehouse(updateStockWarehouse.getId(), updateStockWarehouse.getStoreId(), updateStockWarehouse.getFirstBalance(), updateStockWarehouse.getNotes());
+                    break;
+                case DELETE_STOKE_WEAR_HOUSES:
+                    long id = result.getLong(DELETE_STOKE_WEAR_HOUSES);
+                    viewModel.deleteStokeWarehouse(id);
+                    break;
             }
         });
         return binding.getRoot();

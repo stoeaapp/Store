@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.stores.adapter;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.stores.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

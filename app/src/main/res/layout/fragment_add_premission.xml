@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.add.permissions.PermissionsFragment">
+        tools:context=".ui.fragments.adds.permissions.PermissionsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listViewAddPermission"
@@ -49,6 +49,7 @@
             style="@style/FloatingButtonFragment"
             android:contentDescription="@string/add_floating_button"
             app:fabSize="auto"
+            app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_action_add" />

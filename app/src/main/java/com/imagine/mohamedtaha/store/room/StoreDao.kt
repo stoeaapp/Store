@@ -90,7 +90,7 @@ interface StoreDao {
 
     //___________________________________Update StokeWareHouse____________________________
     @Query("UPDATE stocking_ware_house SET  category_id =:category_id,store_id =:store_id,first_balance =:first_balance ,notes =:notes")
-    suspend fun updateStockWareHouse(category_id: Long, store_id: Long, first_balance: Long, notes: String)
+    suspend fun updateStockWareHouse(category_id: Long, store_id: Long, first_balance: String, notes: String)
 
     //___________________________________Delete StokeWareHouse____________________________
     @Query("DELETE FROM stocking_ware_house WHERE id =:id")
@@ -102,10 +102,10 @@ interface StoreDao {
 
     //____________________getting all StokeWareHouse under Store and Category____________________________
     @Query("SELECT * FROM stocking_ware_house")
-    fun getAllStokeWareHouse(): kotlinx.coroutines.flow.Flow<List<StockingHouse>>
+    fun getAllStokeWareHouse(): Flow<List<StockingHouse>>
 
     @Query("SELECT DISTINCT tswh.id ,ts.type_store , tc.category_name , tswh.first_balance FROM type_store ts , categories tc,stocking_ware_house tswh INNER JOIN type_store ON ts.id = tswh.store_id  INNER JOIN categories ON tc.id = tswh.category_id  GROUP BY tswh.id")
-    fun getAllStokeWareHouseWitCategoriesAndStores(): kotlinx.coroutines.flow.Flow<List<ShowStockWare>>
+    fun getAllStokeWareHouseWitCategoriesAndStores(): Flow<List<ShowStockWare>>
 //    @Query("SELECT * FROM categories  inner join stocking_ware_house on categories.id = stocking_ware_house.category_id ")
 //    fun getAllStokeWareHouseWitCategories(): kotlinx.coroutines.flow.Flow<List<StockWareWithCategoriesAndStores>>
 

@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.add.items.ItemsFragment">
+        tools:context=".ui.fragments.adds.items.ItemsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleViewAddCategory"
@@ -50,6 +50,7 @@
             android:id="@+id/fab_add_category"
             style="@style/FloatingButtonFragment"
             android:contentDescription="@string/fab_button"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="auto"
             app:srcCompat="@drawable/ic_action_add"
             fab:layout_constraintBottom_toBottomOf="parent"

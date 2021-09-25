@@ -1,117 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    android:layout_gravity="center"
-    app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="8dp"
-    app:contentPadding="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-    <TableLayout
-        android:layout_width="wrap_content"
+<layout>
+
+    <data>
+        <variable
+            name="daily_movement"
+            type="com.imagine.mohamedtaha.store.room.data.ShowDailyMovements" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*"
-        android:shrinkColumns="*"
-        >
-        <TableRow>
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TVNamePermission"
+                style="@style/CardViewStyleMain"
+                android:text="@string/name_permission"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/TVNamePermissionDaily"
                 style="@style/CardViewStyleData"
-                />
-            <TextView
-                android:text="@string/name_permission"
-                style="@style/CardViewStyleMain"
-                />
-        </TableRow>
+                android:text="@{daily_movement.permissionName}"
+                app:layout_constraintStart_toEndOf="@+id/TVNamePermission"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow>
             <TextView
+                android:id="@+id/TVTypeStore"
+                style="@style/CardViewStyleMain"
+                android:text="@string/name_type_store"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVNamePermission" />
+
+            <TextView
+
                 android:id="@+id/TVNameStoreDaily"
                 style="@style/CardViewStyleData"
-                />
-            <TextView
-                style="@style/CardViewStyleMain"
-                android:text="@string/name_type_store" />
-        </TableRow>
+                android:text="@{daily_movement.typeStore}"
+                app:layout_constraintStart_toEndOf="@+id/TVTypeStore"
+                app:layout_constraintTop_toBottomOf="@+id/TVNamePermission" />
 
-        <TableRow>
+            <TextView
+                android:id="@+id/TVNameCategory"
+                style="@style/CardViewStyleMain"
+                android:text="@string/name_category"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVTypeStore" />
+
             <TextView
                 android:id="@+id/TVNameCategoryDaily"
                 style="@style/CardViewStyleData"
-                />
-            <TextView
-                style="@style/CardViewStyleMain"
-                android:text="@string/name_category" />
-        </TableRow>
+                android:text="@{daily_movement.categoryName}"
+                app:layout_constraintStart_toEndOf="@+id/TVNameCategory"
+                app:layout_constraintTop_toBottomOf="@+id/TVTypeStore" />
 
-        <TableRow>
+            <TextView
+                android:id="@+id/TVLastEdit"
+                style="@style/CardViewStyleMain"
+                android:text="@string/last_edit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVNameCategory" />
+
             <TextView
                 android:id="@+id/TVDateDaily"
                 style="@style/CardViewStyleData"
-                />
-
-            <TextView
-                style="@style/CardViewStyleMain"
-                android:text="@string/data_store"
-                />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:id="@+id/TVConvertTo"
-                style="@style/CardViewStyleData"
-                android:visibility="gone"
-
-                />
+                android:text="@{daily_movement.createdAt}"
+                app:layout_constraintStart_toEndOf="@+id/TVLastEdit"
+                app:layout_constraintTop_toBottomOf="@+id/TVNameCategory" />
 
             <TextView
                 android:id="@+id/TVConvertToShow"
                 style="@style/CardViewStyleMain"
                 android:text="@string/convert_to"
-                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVLastEdit"
+                android:visibility="gone" />
 
-                />
-        </TableRow>
-        <TableRow>
+            <TextView
+                android:id="@+id/TVConvertTo"
+                style="@style/CardViewStyleData"
+                android:text="@{daily_movement.convertTo}"
+                app:layout_constraintStart_toEndOf="@+id/TVConvertToShow"
+                app:layout_constraintTop_toBottomOf="@+id/TVLastEdit"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/TVIncoming"
+                style="@style/CardViewStyleMain"
+                android:text="@string/incoming"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVConvertToShow"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/TVIncomingShow"
                 style="@style/CardViewStyleData"
-                android:visibility="gone"
-
-                />
+                android:text="@{daily_movement.incoming.toString()}"
+                app:layout_constraintStart_toEndOf="@+id/TVIncoming"
+                app:layout_constraintTop_toBottomOf="@+id/TVConvertToShow"
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/TVIssued"
                 style="@style/CardViewStyleMain"
-                android:text="@string/incoming"
+                android:text="@string/issued"
+                app:layout_constraintStart_toStartOf="parent"
                 android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/TVIncoming" />
 
-                />
-        </TableRow><TableRow>
-        <TextView
-            android:id="@+id/TVIssuedShow"
-            style="@style/CardViewStyleData"
-            android:visibility="gone"
-            />
+            <TextView
+                android:id="@+id/TVIssuedShow"
+                style="@style/CardViewStyleData"
+                android:text="@{daily_movement.issued.toString()}"
+                app:layout_constraintStart_toEndOf="@+id/TVIssued"
+                app:layout_constraintTop_toBottomOf="@+id/TVIncoming"
+                android:visibility="gone" />
 
-        <TextView
-            style="@style/CardViewStyleMain"
-            android:text="@string/issued"
-            android:visibility="gone"
 
-            />
-    </TableRow>
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/Image_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_action_more_vert" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </TableLayout>
-    <ImageView
-        android:id="@+id/Image_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_more_vert"
-        android:contentDescription="@string/title_empty_daily_movements"
+    </androidx.cardview.widget.CardView>
 
-        />
-</androidx.cardview.widget.CardView>
+</layout>

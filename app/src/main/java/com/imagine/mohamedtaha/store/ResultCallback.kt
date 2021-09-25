@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
-import com.imagine.mohamedtaha.store.ui.fragments.add.permissions.EditPermissionFragment
+import com.imagine.mohamedtaha.store.ui.fragments.adds.permissions.EditPermissionFragment
 
 class ResultCallback : ActivityResultContract<String,String>() {
     override fun createIntent(context: Context, input: String?): Intent = Intent(context,EditPermissionFragment::class.java).apply {

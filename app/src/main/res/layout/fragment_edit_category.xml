@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical"
-        tools:context=".ui.fragments.add.items.EditFragmentItems">
+        tools:context=".ui.fragments.adds.items.EditFragmentItems">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

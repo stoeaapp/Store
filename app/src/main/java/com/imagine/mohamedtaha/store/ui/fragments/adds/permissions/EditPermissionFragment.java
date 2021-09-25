@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.permissions;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.permissions;
 
 import android.os.Bundle;
 import android.text.TextUtils;

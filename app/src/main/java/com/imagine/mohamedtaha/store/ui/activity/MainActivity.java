@@ -1,6 +1,5 @@
 package com.imagine.mohamedtaha.store.ui.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,33 +9,22 @@ import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.adapter.AdapterAddDailyMovements;
 import com.imagine.mohamedtaha.store.data.BackupData;
-import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.databinding.ActivityMainBinding;
 import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
 import com.imagine.mohamedtaha.store.manager.base.BaseActivity;
-import com.imagine.mohamedtaha.store.room.StoreViewModel;
-import com.imagine.mohamedtaha.store.room.data.ShowDailyMovements;
 import com.imagine.mohamedtaha.store.ui.fragments.BottomNavigationFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
-
-import java.util.ArrayList;
-
-import tourguide.tourguide.TourGuide;
 
 public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
     private ActivityMainBinding binding;

@@ -37,7 +37,7 @@
     <string name="empty_view_subtitle_text" translatable="false">Get started by adding a Category</string>
     <string name="name_category">اسم الصنف :</string>
     <string name="name_category_hint">اسم الصنف </string>
-    <string name="number_stoke" translatable="false">"رقم الترصيد  "</string>
+    <string name="number_stoke">رقم الترصيد :</string>
     <string name="number" translatable="false">"الكمية  "</string>
     <string name="name_user" translatable="false">"اسم المستخدم "</string>
     <string name="natural_category">طبيعة الصنف</string>
@@ -67,15 +67,16 @@
     <string name="error_delete_permission" translatable="false">"  لم يتم حذف الأذن "</string>
     <string name="delete_permission" translatable="false">"  تم حذف الأذن بنجاح "</string>
     <string name="title_delete_permission">حذف الأذن </string>
+
     <string name="title_delete_item">حذف العنصر</string>
 
     <string name="title_delete_Item">حذف العنصر </string>
 
-    <string name="first_balance" translatable="false">"الرصيد الأول "</string>
-    <string name="add_stoke_titile" translatable="false">"إضافة ترصيد المستودع "</string>
-    <string name="error_first_balance" translatable="false">"يجب اختيار الرصيد الأول "</string>
-    <string name="update_stoke_titile" translatable="false">" تعديل ترصيد المستودع "</string>
-    <string name="error_empty_category" translatable="false">" اختر الصنف  "</string>
+    <string name="first_balance">الرصيد الأول </string>
+    <string name="add_stoke_title" >إضافة ترصيد المستودع </string>
+    <string name="error_first_balance">يجب اختيار الرصيد الأول </string>
+    <string name="update_stoke_title"> تعديل ترصيد المستودع </string>
+    <string name="error_empty_category" translatable="false"> اختر الصنف  </string>
     <string name="error_empty_store" translatable="false">" اختر المخزن "</string>
     <string name="error_save_category" translatable="false">"  لم يتم حفظ الصنف "</string>
     <string name="save_category" translatable="false">"  تم حفظ الصنف بنجاح "</string>
@@ -84,8 +85,8 @@
     <string name="error_delete_category" translatable="false">"  لم يتم حذف الصنف "</string>
     <string name="delete_category" translatable="false">"  تم حذف الصنف بنجاح "</string>
     <string name="add_daily_movement_title" >إضافة الحركات اليومية</string>
-    <string name="update_daily_movement_titile" translatable="false">تعديل الحركات اليومية</string>
-    <string name="name_permission" translatable="false">نوع الإذن</string>
+    <string name="update_daily_movement_title">تعديل الحركات اليومية</string>
+    <string name="name_permission" >نوع الإذن :</string>
     <string name="type_permission">نوع الأذن </string>
     <string name="type_permission_">نوع الأذن :</string>
 
@@ -98,11 +99,11 @@
     <string name="show_current_Balance">" إظهار الرصيد الحالي"</string>
     <string name="error_empty_permission">" اختر الإذن"</string>
     <string name="error_save_daily">" لم يتم حفظ الحركة"</string>
-    <string name="save_daily">" تم الحفظ بنجاح "</string>
+    <string name="save_successfully">" تم الحفظ بنجاح "</string>
     <string name="error_update_daily">" لم يتم تعديل الحركة"</string>
-    <string name="update_daily">" تم تعديل الحركة بنجاح "</string>
+    <string name="update_successfully">" تم تعديل الحركة بنجاح "</string>
     <string name="error_delete_daily">" لم يتم مسح الحركة"</string>
-    <string name="delete_daily">" تم مسح الحركة بنجاح "</string>
+    <string name="delete_successfully">" تم مسح الحركة بنجاح "</string>
     <string name="error_empty_edit_text">لا يمكن ترك الحقل فارغ </string>
     <string name="error_empty_text">لا يمكن ترك الحقل فارغ أو تكون قمته 0</string>
     <string name="error_exist_name">"تم تسجيل اسم المخزن من قبل "</string>
@@ -133,7 +134,7 @@
     <string name="keep_editing">Keep Editing</string>
     <string name="type_store">المخزن</string>
     <string name="type_store_">المخزن :</string>
-    <string name="name_type_store"> اسم المخزن</string>
+    <string name="name_type_store"> اسم المخزن :</string>
     <string name="last_edit">اخر تعديل :</string>
 
     <string name="data_store">اخر تعديل</string>

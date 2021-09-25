@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.activity;
+package com.imagine.mohamedtaha.store.ui.fragments.adds;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.imagine.mohamedtaha.store.R;
-import com.imagine.mohamedtaha.store.adapter.CategoryAdapter;
 import com.imagine.mohamedtaha.store.databinding.AddsFragmentBinding;
 import com.imagine.mohamedtaha.store.manager.base.BaseFragment;
 
@@ -23,7 +22,7 @@ public class AddsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         AddsFragmentBinding binding = AddsFragmentBinding.inflate(inflater, container, false);
-        CategoryAdapter adapter = new CategoryAdapter(this);
+        AddsAdapter adapter = new AddsAdapter(this);
         titles.add(getString(R.string.add_category));
         titles.add(getString(R.string.add_store));
         titles.add(getString(R.string.add_permission));

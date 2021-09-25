@@ -32,7 +32,7 @@ import com.imagine.mohamedtaha.store.R;
 import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.data.TaskDbHelper;
 import com.imagine.mohamedtaha.store.loaders.LoaderConvertStore;
-import com.imagine.mohamedtaha.store.ui.fragments.add.stores.EditStoreFragment;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.stores.EditStoreFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;

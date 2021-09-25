@@ -31,18 +31,25 @@ object Constant {
     const val DELETE_ITEMS = "deleteItems"
 
 // Fragment StockingWarehouse
-    const val ID_STOKE = "id"
+    const val ID_STOCK_WAREHOUSE = "idStockWarehouse"
     const val CODE_NAME_CATEGORY = "codeNameCategory"
     const val CODE_TYPE_STORE = "codeTypeStore"
     const val FIRST_BALANCE = "firstBalance"
     const val DIALOG_STOKE_WEAR_HOUSE = "dialogStokeWearHouse"
-
+    const val STOKE_WEAR_HOUSES = "StokeWearHouses"
+    const val ADD_STOKE_WEAR_HOUSES = "addStokeWearHouse"
+    const val UPDATE_STOKE_WEAR_HOUSES = "updateStokeWearHouse"
+    const val DELETE_STOKE_WEAR_HOUSES = "deleteStokeWearHouse"
 // Fragment Dailies Movement
-    const val IDDaily = "id"
+    const val ID_Daily_MOVEMENT = "idDailyMovement"
     const val CONVERT_TO_DAILY = "convert_to"
     const val INCOMING_DAILY = "incoming"
     const val ISSUED_DAILY = "issued"
-    const val DIALOG_DAILY_MOVEMENTS = "dialogDaliy"
+    const val DAILY_MOVEMENTS = "dailyMovements"
+    const val DIALOG_DAILY_MOVEMENTS = "dialogDailyMovements"
+    const val ADD_DAILY_MOVEMENT = "addDailyMovement"
+    const val UPDATE_DAILY_MOVEMENT = "updateDailyMovement"
+    const val DELETE_DAILY_MOVEMENT = "deleteDailyMovement"
 
 
 }

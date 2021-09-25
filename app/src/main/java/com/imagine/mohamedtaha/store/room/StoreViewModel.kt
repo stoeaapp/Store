@@ -68,6 +68,10 @@ class StoreViewModel @Inject constructor(private val repository: StoreRepository
     fun insertStokeWarehouse(stockingHouse: StockingHouse) = viewModelScope.launch {
         repository.insertStokeWarehouse(stockingHouse)
     }
+    fun updateStockWarehouse(id:Long,store_id:Long,first_balance:String,notes:String) = viewModelScope.launch {
+        repository.updateStockWarehouse(id,store_id, first_balance, notes)
+    }
+    fun deleteStokeWarehouse(id: Long) = viewModelScope.launch { repository.deleteStockWarehouse(id) }
 
     //__________________________________Method Daily Movement
     fun insertDailyMovement(movements: DailyMovements) = viewModelScope.launch { repository.insertDailyMovement(movements) }

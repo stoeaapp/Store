@@ -1,6 +1,7 @@
 package com.imagine.mohamedtaha.store.room.data
 
 import androidx.room.*
+import java.io.Serializable
 
 //@Entity(tableName = "daily_movement")
 //data class DailyMovements(@ColumnInfo(name = "category_id") val categoryId: Long, @ColumnInfo(name = "store_id") val storeId: Long,
@@ -23,7 +24,7 @@ import androidx.room.*
         indices = [Index(value = ["category_id"]), Index(value = ["store_id"]), Index(value = ["permission_id"]), Index(value = ["convert_to"])])
 data class DailyMovements(@ColumnInfo(name = "category_id") val categoryId: Long, @ColumnInfo(name = "store_id") val storeId: Long,
                           @ColumnInfo(name = "permission_id") val permissionId: Long, @ColumnInfo(name = "incoming") val incoming: Int,
-                          @ColumnInfo(name = "issued") val issued: Int) {
+                          @ColumnInfo(name = "issued") val issued: Int):Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
     @ColumnInfo(name = "convert_to") var convertTo: Long? =null

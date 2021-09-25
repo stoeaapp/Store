@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.stores;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.stores;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import com.imagine.mohamedtaha.store.databinding.FragmentAddStoreBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
 import com.imagine.mohamedtaha.store.room.data.Stores;
-import com.imagine.mohamedtaha.store.ui.fragments.add.stores.adapter.AdapterAddStore;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.stores.adapter.AdapterAddStore;
 
 import java.util.ArrayList;
 import java.util.List;

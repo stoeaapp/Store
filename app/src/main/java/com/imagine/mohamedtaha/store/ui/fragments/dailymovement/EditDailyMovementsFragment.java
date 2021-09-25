@@ -1,6 +1,5 @@
 package com.imagine.mohamedtaha.store.ui.fragments.dailymovement;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -28,13 +27,18 @@ import com.imagine.mohamedtaha.store.util.DialogUtils;
 
 import java.util.List;
 
+import static com.imagine.mohamedtaha.store.Constant.ADD_DAILY_MOVEMENT;
 import static com.imagine.mohamedtaha.store.Constant.CONVERT_TO_DAILY;
-import static com.imagine.mohamedtaha.store.Constant.IDDaily;
+import static com.imagine.mohamedtaha.store.Constant.DAILY_MOVEMENTS;
+import static com.imagine.mohamedtaha.store.Constant.DELETE_DAILY_MOVEMENT;
+import static com.imagine.mohamedtaha.store.Constant.DIALOG_DAILY_MOVEMENTS;
+import static com.imagine.mohamedtaha.store.Constant.ID_Daily_MOVEMENT;
 import static com.imagine.mohamedtaha.store.Constant.INCOMING_DAILY;
 import static com.imagine.mohamedtaha.store.Constant.ISSUED_DAILY;
 import static com.imagine.mohamedtaha.store.Constant.NAME_ITEM;
 import static com.imagine.mohamedtaha.store.Constant.NAME_PERMISSION;
 import static com.imagine.mohamedtaha.store.Constant.TYPE_STORE;
+import static com.imagine.mohamedtaha.store.Constant.UPDATE_DAILY_MOVEMENT;
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getDate;
 import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getTime;
 
@@ -42,7 +46,6 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
     private FragmentEditDailyMovementsBinding binding;
     private StoreViewModel viewModel;
     Bundle intentDailyMovement;
-    AlertDialog dialogDeleteDailyMovement;
     long idSpinnerCategory, idSpinnerStore, idSpinnerPermission, idSpinnerConvertTo;
     int mFirstBalance = 0;
     int mSumIncoming = 0;
@@ -66,7 +69,7 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
         if (intentDailyMovement != null) {
             binding.BTDeleteDailyMovement.setVisibility(View.VISIBLE);
             binding.BTAddDailyMovement.setText(getString(R.string.action_edit));
-            binding.TVTitleDailyMovement.setText(getString(R.string.update_daily_movement_titile));
+            binding.TVTitleDailyMovement.setText(getString(R.string.update_daily_movement_title));
             binding.SPermissionDaily.setText(intentDailyMovement.getString(NAME_PERMISSION));
             binding.SPStoreDaily.setText(intentDailyMovement.getString(TYPE_STORE));
             binding.SPCategoryDaily.setText(intentDailyMovement.getString(NAME_ITEM));
@@ -233,10 +236,13 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             DailyMovements itemSaveDaily = new DailyMovements(idSpinnerCategory, idSpinnerStore, idSpinnerPermission, incomings, issueds);
             itemSaveDaily.setCreatedAt(getDate());
             itemSaveDaily.setTime(getTime());
-            if (idSpinnerConvertTo > 0)
-                itemSaveDaily.setConvertTo(idSpinnerConvertTo);
-            viewModel.insertDailyMovement(itemSaveDaily);
-            Toast.makeText(getContext(), getString(R.string.save_daily), Toast.LENGTH_LONG).show();
+            if (idSpinnerConvertTo > 0) itemSaveDaily.setConvertTo(idSpinnerConvertTo);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(ADD_DAILY_MOVEMENT, itemSaveDaily);
+            bundle.putString(DAILY_MOVEMENTS, ADD_DAILY_MOVEMENT);
+            getParentFragmentManager().setFragmentResult(DIALOG_DAILY_MOVEMENTS, bundle);
+            // viewModel.insertDailyMovement(itemSaveDaily);
+            Toast.makeText(getContext(), getString(R.string.save_successfully), Toast.LENGTH_LONG).show();
             dismiss();
         } else {
             int incomings = 0;
@@ -247,9 +253,16 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             if (!TextUtils.isEmpty(issued)) {
                 issueds = Integer.parseInt(issued);
             }
-            viewModel.updateDailyMovement(intentDailyMovement.getInt(IDDaily), idSpinnerPermission, idSpinnerCategory, idSpinnerStore, idSpinnerConvertTo
-                    , incomings, issueds, getDate());
-            Toast.makeText(getContext(), getString(R.string.update_daily), Toast.LENGTH_LONG).show();
+            DailyMovements itemDailyMovements = new DailyMovements(idSpinnerCategory, idSpinnerStore, idSpinnerPermission, incomings, issueds);
+            itemDailyMovements.setId(intentDailyMovement.getLong(ID_Daily_MOVEMENT));
+            if (idSpinnerConvertTo > 0) itemDailyMovements.setConvertTo(idSpinnerConvertTo);
+            itemDailyMovements.setUpdatedAt(getDate());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(UPDATE_DAILY_MOVEMENT, itemDailyMovements);
+            bundle.putString(DAILY_MOVEMENTS, UPDATE_DAILY_MOVEMENT);
+//            viewModel.updateDailyMovement(intentDailyMovement.getInt(ID_Daily_MOVEMENT), idSpinnerPermission, idSpinnerCategory, idSpinnerStore, idSpinnerConvertTo
+//                    , incomings, issueds, getDate());
+            Toast.makeText(getContext(), getString(R.string.update_successfully), Toast.LENGTH_LONG).show();
             dismiss();
         }
     }
@@ -259,7 +272,7 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             String incoming = binding.ETIncoming.getText().toString();
             String issued = binding.ETIssued.getText().toString();
             ItemsStore itemDeleteDaily = new ItemsStore();
-            itemDeleteDaily.setId(intentDailyMovement.getInt(IDDaily));
+            itemDeleteDaily.setId(intentDailyMovement.getInt(ID_Daily_MOVEMENT));
             int incomings = 0;
             if (!TextUtils.isEmpty(incoming)) {
                 incomings = Integer.parseInt(incoming);
@@ -271,14 +284,16 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
                 issueds = Integer.parseInt(issued);
             }
             itemDeleteDaily.setIssued(issueds);
-            if (isLastRow != intentDailyMovement.getInt(IDDaily)) {
+            if (isLastRow != intentDailyMovement.getInt(ID_Daily_MOVEMENT)) {
                 Toast.makeText(getContext(), getString(R.string.this_movement_not_allow), Toast.LENGTH_SHORT).show();
                 return;
             }
-            viewModel.deleteDailyMovement(intentDailyMovement.getInt(IDDaily));
-            Toast.makeText(getContext(), getString(R.string.delete_daily), Toast.LENGTH_LONG).show();
-            dismiss();
-            dialogDeleteDailyMovement.dismiss();
+            Bundle bundle = new Bundle();
+            bundle.putLong(DELETE_DAILY_MOVEMENT, intentDailyMovement.getInt(ID_Daily_MOVEMENT));
+            bundle.putString(DAILY_MOVEMENTS, DELETE_DAILY_MOVEMENT);
+            getParentFragmentManager().setFragmentResult(DIALOG_DAILY_MOVEMENTS, bundle);
+            // viewModel.deleteDailyMovement(intentDailyMovement.getInt(ID_Daily_MOVEMENT));
+            Toast.makeText(getContext(), getString(R.string.delete_successfully), Toast.LENGTH_LONG).show();
         }
     }
 

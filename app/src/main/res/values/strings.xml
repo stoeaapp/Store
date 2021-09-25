@@ -36,7 +36,7 @@
 
     <!-- TODO: Text For Title Frgments -->
 
-    <string name="add_category">Add categories</string>
+    <string name="add_category">Add Items</string>
     <string name="title_add">Adds </string>
     <string name="title_profile">Profile</string>
     <string name="title_daily_movements"> Daily</string>
@@ -56,7 +56,7 @@
     <!-- TODO: Page dialog Add Category -->
     <string name="name_category">Name Item :</string>
     <string name="name_category_hint">Name Item </string>
-    <string name="number_stoke">رقم الترصيد  </string>
+    <string name="number_stoke">Number : </string>
     <string name="number">الكمية  </string>
     <string name="name_user">اسم المستخدم </string>
 
@@ -90,11 +90,11 @@
     <string name="error_delete_permission" translatable="false">  لم يتم حذف الأذن </string>
     <string name="delete_permission" translatable="false">  تم حذف الأذن بنجاح </string>
     <!-- TODO: Page dialog Add StokeWearehouse -->
-    <string name="first_balance" translatable="false">الرصيد الأول </string>
-    <string name="error_first_balance" translatable="false">يجب اختيار الرصيد الأول </string>
+    <string name="first_balance">First balance </string>
+    <string name="error_first_balance">Must select the first balance </string>
 
-    <string name="add_stoke_titile" translatable="false">إضافة ترصيد المستودع </string>
-    <string name="update_stoke_titile" translatable="false"> تعديل ترصيد المستودع </string>
+    <string name="add_stoke_title" >Add Stock warehouse </string>
+    <string name="update_stoke_title">Edit Stock warehouse </string>
     <string name="error_empty_category" > Select Category  </string>
     <string name="error_empty_store">Select Store </string>
 
@@ -106,9 +106,9 @@
     <string name="delete_category" translatable="false">  تم حذف الصنف بنجاح </string>
     <!-- TODO: Page dialog Add Daily Movements -->
     <string name="add_daily_movement_title">Add Daily Movements</string>
-    <string name="update_daily_movement_titile" translatable="false">تعديل الحركات اليومية</string>
+    <string name="update_daily_movement_title" >Edit Daily movements</string>
 
-    <string name="name_permission">نوع الإذن</string>
+    <string name="name_permission">Type Permission : </string>
     <string name="type_permission">Type Permissions </string>
     <string name="type_permission_">Type Permissions :</string>
     <string name="incoming" > Incoming</string>
@@ -123,11 +123,11 @@
 
     <string name="error_empty_permission"> Select Permission</string>
     <string name="error_save_daily" >Does not saved successfully</string>
-    <string name="save_daily" >Saved successfully </string>
+    <string name="save_successfully" >Saved successfully </string>
     <string name="error_update_daily" translatable="false"> لم يتم تعديل الحركة</string>
-    <string name="update_daily" > Edited successfully </string>
+    <string name="update_successfully" > Edited successfully </string>
     <string name="error_delete_daily" translatable="false"> لم يتم مسح الحركة</string>
-    <string name="delete_daily" > Deleted successfully  </string>
+    <string name="delete_successfully" > Deleted successfully  </string>
     <string name="error_empty_edit_text" >You can not leave that filed empty</string>
     <string name="error_empty_text" >You can not leave that filed empty or the value is 0 </string>
     <string name="error_exist_name" translatable="false">تم تسجيل اسم المخزن من قبل </string>
@@ -187,7 +187,7 @@
     <!-- TODO: Page custom_store_listview -->
     <string name="type_store_"> Store : </string>
     <string name="type_store"> Store  </string>
-    <string name="name_type_store" translatable="false"> اسم المخزن</string>
+    <string name="name_type_store">Name store :</string>
     <string name="last_edit">Last edit :</string>
 
     <string name="data_store" translatable="false">اخر تعديل</string>

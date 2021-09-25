@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.permissions;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.permissions;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.imagine.mohamedtaha.store.Constant;
 import com.imagine.mohamedtaha.store.StoreApplication;
-import com.imagine.mohamedtaha.store.ui.fragments.add.permissions.adapter.AdapterAddPermission;
+import com.imagine.mohamedtaha.store.ui.fragments.adds.permissions.adapter.AdapterAddPermission;
 import com.imagine.mohamedtaha.store.databinding.FragmentAddPremissionBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;

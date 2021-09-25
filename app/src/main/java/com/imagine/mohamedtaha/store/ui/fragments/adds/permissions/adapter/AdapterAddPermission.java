@@ -1,4 +1,4 @@
-package com.imagine.mohamedtaha.store.ui.fragments.add.permissions.adapter;
+package com.imagine.mohamedtaha.store.ui.fragments.adds.permissions.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

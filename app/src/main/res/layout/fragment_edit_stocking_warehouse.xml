@@ -1,6 +1,6 @@
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -9,39 +9,59 @@
         android:orientation="vertical"
         tools:context="com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.EditStockingWarehouseFragment">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_title">
+            android:background="@drawable/shape_title"
+            android:paddingTop="@dimen/_5dp"
+            android:paddingBottom="@dimen/_5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/image_titile"
-                style="@style/ImageViewTitle" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageTitle"
+                style="@style/ImageViewTitle"
+                android:layout_marginStart="@dimen/_18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/TVTitleStokeWearhouse"
                 style="@style/TextViewTitle"
-                android:text="@string/add_stoke_titile"
-
-                />
-        </RelativeLayout>
+                android:text="@string/add_stoke_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:id="@+id/SPCodeCategoryStock"
             style="@style/SpinnerForFragment"
             android:layout_marginTop="16dp"
-            android:hint="@string/name_category"
+            android:hint="@string/name_category_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTitle"
             app:met_floatingLabel="highlight" />
 
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:id="@+id/SPCodeStoreStock"
             style="@style/SpinnerForFragment"
             android:hint="@string/type_store"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SPCodeCategoryStock"
             app:met_floatingLabel="highlight" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TInputFirstBalance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SPCodeStoreStock">
 
             <EditText
                 android:id="@+id/ETFirstBalanceStoke"
@@ -51,8 +71,12 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TInputNotes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TInputFirstBalance">
 
             <EditText
                 android:id="@+id/ETNotesStoke"
@@ -60,19 +84,22 @@
                 android:hint="@string/notes" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout style="@style/LayoutButtonFragment">
+        <Button
+            android:id="@+id/BTDeleteStokeWarehouse"
+            style="@style/ButtonFragment"
+            android:text="@string/BTDelete"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/BTAddStokeWarehouse"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TInputNotes" />
 
-            <Button
-                android:id="@+id/BTDeleteStokeWarehouse"
-                style="@style/ButtonFragment"
-                android:text="@string/BTDelete"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/BTAddStokeWarehouse"
-                style="@style/ButtonFragment"
-                android:text="@string/BtAdd" />
-        </LinearLayout>
-
-    </LinearLayout>
+        <Button
+            android:id="@+id/BTAddStokeWarehouse"
+            style="@style/ButtonFragment"
+            android:text="@string/BtAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/BTDeleteStokeWarehouse"
+            app:layout_constraintTop_toBottomOf="@+id/TInputNotes" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
