@@ -11,4 +11,7 @@ data class Stores(@ColumnInfo(name = "type_store")var typeStore:String, @ColumnI
     @ColumnInfo(name = "created_at")var createdAt:String?=null
     @ColumnInfo(name = "time")var time:String?=null
     @ColumnInfo(name = "updated_at")var updatedAt:String?= null
+    override fun toString(): String {
+        return typeStore
+    }
 }

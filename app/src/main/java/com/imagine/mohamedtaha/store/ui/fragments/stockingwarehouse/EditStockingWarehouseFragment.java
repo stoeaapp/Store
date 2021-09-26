@@ -20,7 +20,9 @@ import com.imagine.mohamedtaha.store.StoreApplication;
 import com.imagine.mohamedtaha.store.databinding.FragmentEditStockingWarehouseBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.Categories;
 import com.imagine.mohamedtaha.store.room.data.StockingHouse;
+import com.imagine.mohamedtaha.store.room.data.Stores;
 import com.imagine.mohamedtaha.store.util.DialogUtils;
 
 import static com.imagine.mohamedtaha.store.Constant.ADD_STOKE_WEAR_HOUSES;
@@ -39,9 +41,11 @@ import static com.imagine.mohamedtaha.store.data.TaskDbHelper.getTime;
 public class EditStockingWarehouseFragment extends BottomSheetDialogFragment {
     private StoreViewModel viewModel;
     private FragmentEditStockingWarehouseBinding binding;
-    String SpinnerCategory, SpinnerStore;
     Bundle intentStokeWearehouse;
     long idSpinnerCategory, idSpinnerStore;
+    // SpinAdapter arrayAdapter;
+    ArrayAdapter<Categories> arrayAdapterCategoryName;
+    ArrayAdapter<Stores> arrayAdapterTypeStore;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,12 +69,12 @@ public class EditStockingWarehouseFragment extends BottomSheetDialogFragment {
             binding.ETNotesStoke.setText(intentStokeWearehouse.getString(NOTES));
         }
         binding.SPCodeCategoryStock.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerCategory = parent.getItemAtPosition(position).toString();
-            idSpinnerCategory = parent.getItemIdAtPosition(position + 1);
+            Categories categoryItem = arrayAdapterCategoryName.getItem(position);
+            idSpinnerCategory = categoryItem.getId();
         });
         binding.SPCodeStoreStock.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerStore = parent.getItemAtPosition(position).toString();
-            idSpinnerStore = parent.getItemIdAtPosition(position + 1);
+            Stores stores = arrayAdapterTypeStore.getItem(position);
+            idSpinnerStore = stores.getId();
         });
         loadSpinnerDataForCategory();
         loadSpinnerDataForStore();
@@ -150,16 +154,31 @@ public class EditStockingWarehouseFragment extends BottomSheetDialogFragment {
     }
 
     public void loadSpinnerDataForCategory() {
-        viewModel.getAllNameCategoriesLiveData().observe(this, nameCategory -> {
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, nameCategory);
-            binding.SPCodeCategoryStock.setAdapter(arrayAdapter);
+//        viewModel.getAllNameCategoriesLiveData().observe(this, nameCategory -> {
+//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, nameCategory);
+//            binding.SPCodeCategoryStock.setAdapter(arrayAdapter);
+//        });
+
+        viewModel.getAllCategoriesLiveData().observe(this, nameCategory -> {
+            arrayAdapterCategoryName = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, nameCategory);
+            binding.SPCodeCategoryStock.setAdapter(arrayAdapterCategoryName);
         });
     }
 
+//    public void loadSpinnerDataForStore() {
+//        viewModel.getAllNameStoresLiveData().observe(this, nameStore -> {
+//            arrayAdapterTypeStore = new ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, nameStore);
+//
+//            //  ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, nameStore);
+//            binding.SPCodeStoreStock.setAdapter(arrayAdapterTypeStore);
+//
+//        });
+//    }
+
     public void loadSpinnerDataForStore() {
-        viewModel.getAllNameStoresLiveData().observe(this, nameStore -> {
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, nameStore);
-            binding.SPCodeStoreStock.setAdapter(arrayAdapter);
+        viewModel.getAllStoresLiveData().observe(this, nameStore -> {
+            arrayAdapterTypeStore = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, nameStore);
+            binding.SPCodeStoreStock.setAdapter(arrayAdapterTypeStore);
 
         });
     }

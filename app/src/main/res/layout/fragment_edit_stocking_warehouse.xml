@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SPCodeStoreStock">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/ETFirstBalanceStoke"
                 style="@style/EditTextFragmentNumber"
                 android:hint="@string/first_balance" />
@@ -78,7 +78,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TInputFirstBalance">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/ETNotesStoke"
                 style="@style/EditTextFragmentTextSecond"
                 android:hint="@string/notes" />

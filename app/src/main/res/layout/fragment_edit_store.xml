@@ -42,10 +42,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutTitle">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/ETTypeStoreStore"
                 style="@style/EditTextFragmentTextFirst"
-                android:autofillHints="@string/add_permission"
                 android:hint="@string/add_permission" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,10 +57,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ETTypeStoreMaterial">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/EtNotesStore"
                 style="@style/EditTextFragmentTextFirst"
-                android:autofillHints="@string/notes"
                 android:hint="@string/notes" />
         </com.google.android.material.textfield.TextInputLayout>
 

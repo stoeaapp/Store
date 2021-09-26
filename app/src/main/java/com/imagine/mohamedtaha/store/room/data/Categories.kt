@@ -11,4 +11,9 @@ data class Categories(@ColumnInfo(name = "category_name")var categoryName:String
     @PrimaryKey(autoGenerate = true)var id:Long? = null
     @ColumnInfo(name = "created_at")var createdAt:String?=null
     @ColumnInfo(name = "time")var time:String?=null
-    @ColumnInfo(name = "updated_at")var updatedAt:String?= null}
+    @ColumnInfo(name = "updated_at")var updatedAt:String?= null
+
+    override fun toString(): String {
+        return categoryName
+    }
+}

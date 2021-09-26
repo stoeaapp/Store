@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/ETNameItem"
                 style="@style/EditTextFragmentTextFirst"
                 android:hint="@string/name_category_hint" />
@@ -58,7 +58,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TInputNameCategory">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/ETNaturalCategory"
                 style="@style/EditTextFragmentTextFirst"
                 android:hint="@string/natural_category" />
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TInputNature">
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/EtNotes"
                 style="@style/EditTextFragmentTextFirst"
                 android:hint="@string/notes" />

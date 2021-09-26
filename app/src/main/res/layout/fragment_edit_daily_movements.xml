@@ -1,157 +1,159 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:orientation="vertical"
-        tools:context="com.imagine.mohamedtaha.store.ui.fragments.dailymovement.EditDailyMovementsFragment">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_title"
-            android:paddingTop="@dimen/_5dp"
-            android:paddingBottom="@dimen/_5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            tools:context="com.imagine.mohamedtaha.store.ui.fragments.dailymovement.EditDailyMovementsFragment">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageTitle"
-                style="@style/ImageViewTitle"
-                android:layout_marginStart="@dimen/_18dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_title"
+                android:paddingTop="@dimen/_5dp"
+                android:paddingBottom="@dimen/_5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/TVTitleDailyMovement"
-                style="@style/TextViewTitle"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageTitle"
+                    style="@style/ImageViewTitle"
+                    android:layout_marginStart="@dimen/_18dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                android:text="@string/add_daily_movement_title"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageTitle"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/TVTitleDailyMovement"
+                    style="@style/TextViewTitle"
+
+                    android:text="@string/add_daily_movement_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageTitle"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/SPermissionDaily"
+                style="@style/SpinnerForFragment"
+                android:hint="@string/type_permission"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                app:met_floatingLabel="highlight" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/SPStoreDaily"
+                style="@style/SpinnerForFragment"
+                android:hint="@string/type_store"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SPermissionDaily"
+                app:met_floatingLabel="highlight" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/SPCategoryDaily"
+                style="@style/SpinnerForFragment"
+                android:hint="@string/name_category_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SPStoreDaily"
+                app:met_floatingLabel="highlight" />
+
+            <TextView
+                android:id="@+id/ETShowText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_18dp"
+                android:layout_marginStart="26dp"
+                android:text="@string/current_Balance"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SPCategoryDaily" />
+
+            <TextView
+                android:id="@+id/ETCurentBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_18dp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ETShowText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ETIncomingMaterial"
+                android:layout_width="@dimen/_100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18dp"
+                android:layout_marginEnd="@dimen/_18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ETShowText">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/ETIncoming"
+                    style="@style/EditTextForFragmentIncomingandIssued"
+                    android:hint="@string/incoming" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ETIssuedMaterial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_18dp"
+                android:layout_marginEnd="@dimen/_18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ETShowText">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/ETIssued"
+                    style="@style/EditTextForFragmentIncomingandIssued"
+                    android:autofillHints="@string/issued"
+                    android:importantForAutofill="yes"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/SPCovertToDaily"
+                style="@style/SpinnerForFragment"
+                android:hint="@string/convert_to"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ETIssuedMaterial"
+                app:met_floatingLabel="normal" />
+
+            <Button
+                android:id="@+id/BTDeleteDailyMovement"
+                style="@style/ButtonFragment"
+                android:text="@string/BTDelete"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/BTAddDailyMovement"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SPCovertToDaily" />
+
+            <Button
+                android:id="@+id/BTAddDailyMovement"
+                style="@style/ButtonFragment"
+                android:text="@string/BtAdd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/BTDeleteDailyMovement"
+                app:layout_constraintTop_toBottomOf="@+id/SPCovertToDaily" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/SPermissionDaily"
-            style="@style/SpinnerForFragment"
-            android:hint="@string/type_permission"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:met_floatingLabel="highlight" />
-
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/SPStoreDaily"
-            style="@style/SpinnerForFragment"
-            android:hint="@string/type_store"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SPermissionDaily"
-            app:met_floatingLabel="highlight" />
-
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/SPCategoryDaily"
-            style="@style/SpinnerForFragment"
-            android:hint="@string/name_category_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SPStoreDaily"
-            app:met_floatingLabel="highlight" />
-
-        <TextView
-            android:id="@+id/ETShowText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/_18dp"
-            android:layout_marginStart="26dp"
-            android:text="@string/current_Balance"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SPCategoryDaily" />
-
-        <TextView
-            android:id="@+id/ETCurentBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/_18dp"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETShowText" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ETIncomingMaterial"
-            android:layout_width="@dimen/_100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_18dp"
-            android:layout_marginEnd="@dimen/_18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETShowText">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/ETIncoming"
-                style="@style/EditTextForFragmentIncomingandIssued"
-                android:hint="@string/incoming" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ETIssuedMaterial"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_18dp"
-            android:layout_marginEnd="@dimen/_18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETShowText">
-
-            <EditText
-                android:id="@+id/ETIssued"
-                style="@style/EditTextForFragmentIncomingandIssued"
-                android:hint="@string/issued" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-            android:id="@+id/SPCovertToDaily"
-            style="@style/SpinnerForFragment"
-            android:hint="@string/convert_to"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ETIssuedMaterial"
-            app:met_floatingLabel="normal" />
-
-        <Button
-            android:id="@+id/BTDeleteDailyMovement"
-            style="@style/ButtonFragment"
-            android:text="@string/BTDelete"
-            app:layout_constraintEnd_toStartOf="@+id/BTAddDailyMovement"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/SPCovertToDaily" />
-
-        <Button
-            android:id="@+id/BTAddDailyMovement"
-            style="@style/ButtonFragment"
-            android:text="@string/BtAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/BTDeleteDailyMovement"
-            app:layout_constraintTop_toBottomOf="@+id/SPCovertToDaily" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
 </layout>

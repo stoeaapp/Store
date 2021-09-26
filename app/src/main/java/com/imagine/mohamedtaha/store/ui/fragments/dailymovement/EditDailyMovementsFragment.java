@@ -22,7 +22,10 @@ import com.imagine.mohamedtaha.store.data.ItemsStore;
 import com.imagine.mohamedtaha.store.databinding.FragmentEditDailyMovementsBinding;
 import com.imagine.mohamedtaha.store.room.StoreViewModel;
 import com.imagine.mohamedtaha.store.room.StoreViewModelFactory;
+import com.imagine.mohamedtaha.store.room.data.Categories;
 import com.imagine.mohamedtaha.store.room.data.DailyMovements;
+import com.imagine.mohamedtaha.store.room.data.Permissions;
+import com.imagine.mohamedtaha.store.room.data.Stores;
 import com.imagine.mohamedtaha.store.util.DialogUtils;
 
 import java.util.List;
@@ -53,8 +56,10 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
     int mSumConvertTo = 0;
     int currentBalance = 0;
     int isLastRow;
-    String SpinnerCategory, SpinnerStore, SpinnerPermission;
-    String SpinnerConvertTo = null;
+    //String SpinnerCategory, SpinnerStore, SpinnerPermission;
+    ArrayAdapter<Permissions> arrayAdapterPermission;
+    ArrayAdapter<Stores> arrayAdapterStore;
+    ArrayAdapter<Categories> arrayAdapterNameCategory;
 
     @Nullable
     @Override
@@ -94,11 +99,10 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             dismiss();
         }));
         binding.SPermissionDaily.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerPermission = parent.getItemAtPosition(position).toString();
-            idSpinnerPermission = parent.getItemIdAtPosition(position + 1);
+            Permissions permissionItem = arrayAdapterPermission.getItem(position);
+            idSpinnerPermission = permissionItem.getId();
             showStateVisibility();
             binding.SPCategoryDaily.setText(" ");
-            SpinnerCategory = "";
             idSpinnerCategory = 0;
             binding.ETCurentBalance.setText("");
             binding.ETShowText.setVisibility(View.INVISIBLE);
@@ -107,8 +111,8 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
 
         });
         binding.SPCategoryDaily.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerCategory = parent.getItemAtPosition(position).toString();
-            idSpinnerCategory = parent.getItemIdAtPosition(position + 1);
+            Categories categoryItem = arrayAdapterNameCategory.getItem(position);
+            idSpinnerCategory = categoryItem.getId();
             viewModel.getFirstBalanceString(idSpinnerCategory, idSpinnerStore).observe(requireActivity(), firstBalance -> {
                 if (firstBalance != null)
                     mFirstBalance = firstBalance;
@@ -117,17 +121,16 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
             });
         });
         binding.SPStoreDaily.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerStore = parent.getItemAtPosition(position).toString();
-            idSpinnerStore = parent.getItemIdAtPosition(position + 1);
+            Stores storeItem = arrayAdapterStore.getItem(position);
+            idSpinnerStore = storeItem.getId();
             binding.SPCategoryDaily.setText("");
-            SpinnerCategory = "";
             idSpinnerCategory = 0;
             binding.ETCurentBalance.setText("");
             binding.ETShowText.setVisibility(View.INVISIBLE);
         });
         binding.SPCovertToDaily.setOnItemClickListener((parent, view, position, id) -> {
-            SpinnerConvertTo = parent.getItemAtPosition(position).toString();
-            idSpinnerConvertTo = parent.getItemIdAtPosition(position + 1);
+            Stores storeItem = arrayAdapterStore.getItem(position);
+            idSpinnerConvertTo = storeItem.getId();
         });
         loadSpinnerDataForCategory();
         loadSpinnerDataForStores();
@@ -322,29 +325,29 @@ public class EditDailyMovementsFragment extends BottomSheetDialogFragment {
     }
 
     public void loadSpinnerDataForCategory() {
-        final Observer<List<String>> categoryName = itemCategory -> {
-            ArrayAdapter<String> arrayAdapterNameCategory = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemCategory);
+        final Observer<List<Categories>> categoryName = itemCategory -> {
+            arrayAdapterNameCategory = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemCategory);
             binding.SPCategoryDaily.setAdapter(arrayAdapterNameCategory);
         };
-        viewModel.getAllNameCategoriesLiveData().observe(this, categoryName);
+        viewModel.getAllCategoriesLiveData().observe(this, categoryName);
     }
 
     public void loadSpinnerDataForStores() {
-        final Observer<List<String>> nameStores = itemStores -> {
-            ArrayAdapter<String> arrayAdapterStore = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemStores);
+        final Observer<List<Stores>> nameStores = itemStores -> {
+            arrayAdapterStore = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemStores);
             binding.SPStoreDaily.setAdapter(arrayAdapterStore);
             binding.SPCovertToDaily.setAdapter(arrayAdapterStore);
         };
-        viewModel.getAllNameStoresLiveData().observe(this, nameStores);
+        viewModel.getAllStoresLiveData().observe(this, nameStores);
     }
 
     public void loadSpinnerDataForNamePermissions() {
-        final Observer<List<String>> permissionObserver = itemsPermissions -> {
+        final Observer<List<Permissions>> permissionObserver = itemsPermissions -> {
             if (itemsPermissions.size() > 0) {
-                ArrayAdapter<String> arrayAdapterPermission = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemsPermissions);
+                arrayAdapterPermission = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, itemsPermissions);
                 binding.SPermissionDaily.setAdapter(arrayAdapterPermission);
             }
         };
-        viewModel.getAllNamePermissionsLiveData().observe(this, permissionObserver);
+        viewModel.getAllPermissionsLiveData().observe(this, permissionObserver);
     }
 }

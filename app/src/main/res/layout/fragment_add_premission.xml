@@ -28,7 +28,6 @@
             <ImageView
                 android:id="@+id/empty_image"
                 style="@style/EmptyViewImage"
-
                 android:contentDescription="@string/image" />
 
             <TextView
