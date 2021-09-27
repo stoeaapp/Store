@@ -2,10 +2,10 @@ package com.imagine.mohamedtaha.store.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuItemCompat
 import com.imagine.mohamedtaha.store.R
 import com.imagine.mohamedtaha.store.data.BackupData
@@ -13,8 +13,8 @@ import com.imagine.mohamedtaha.store.data.BackupData.OnBackupListener
 import com.imagine.mohamedtaha.store.data.TaskDbHelper
 import com.imagine.mohamedtaha.store.databinding.FragmentBottomNavigationBinding
 import com.imagine.mohamedtaha.store.manager.base.BaseFragment
-import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment
 import com.imagine.mohamedtaha.store.ui.activity.ReportesActivity
+import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment
 import com.imagine.mohamedtaha.store.ui.fragments.dailymovement.DailyMovementsFragment
 import com.imagine.mohamedtaha.store.ui.fragments.profile.ProfileFragment
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse
@@ -24,12 +24,15 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
     var dbHelper: TaskDbHelper? = null
 
     private var backupData: BackupData? = null
-    var toolbar: Toolbar? = null
+    //  var toolbar: Toolbar? = null
 
     private val showInformation = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        childFragmentManager.beginTransaction().replace(R.id.frameLayout, DailyMovementsFragment(),"").commit()
+        childFragmentManager.beginTransaction().replace(R.id.frameLayout, DailyMovementsFragment(), "").commit()
+        Log.d("iddd", "onCreate")
+
+     //   toolbar.showToolbar(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +52,7 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
 
                 }
                 R.id.profile -> {
-                    childFragmentManager.beginTransaction().replace(R.id.frameLayout,ProfileFragment(),"").commit()
+                    childFragmentManager.beginTransaction().replace(R.id.frameLayout, ProfileFragment(), "").commit()
                 }
             }
             return@setOnItemSelectedListener true
@@ -176,13 +179,18 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
 //        })
 //    }
 
-    fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        layoutInflater.inflate(R.menu.menu_main, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        requireActivity().menuInflater.inflate(R.menu.menu_main, menu);
+       // val menuItem = menu.findItem(R.id.action_search);
+
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+//        searchView.setOnQueryTextListener(this)
+
         val menuItem = menu.findItem(R.id.action_search)
         val searchView = MenuItemCompat.getActionView(menuItem) as SearchView
         searchView.setOnQueryTextListener(this)
-        return true
+        Log.d("iddd", "NNNN")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -193,14 +201,14 @@ class BottomNavigationFragment : BaseFragment(), SearchView.OnQueryTextListener,
         if (id == R.id.action_settings) {
             return true
         }
-        if (id == R.id.add_data) {
-            val intent = Intent(requireActivity(), AddsFragment::class.java)
-            startActivity(intent)
-        }
-        if (id == R.id.add_stocking_warehouse) {
-            val intent = Intent(requireActivity(), StockingWarehouse::class.java)
-            startActivity(intent)
-        }
+//        if (id == R.id.add_data) {
+//            val intent = Intent(requireActivity(), AddsFragment::class.java)
+//            startActivity(intent)
+//        }
+//        if (id == R.id.add_stocking_warehouse) {
+//            val intent = Intent(requireActivity(), StockingWarehouse::class.java)
+//            startActivity(intent)
+//        }
         if (id == R.id.reportes) {
             val intent = Intent(requireActivity(), ReportesActivity::class.java)
             startActivity(intent)

@@ -154,5 +154,12 @@ class StoreRepository @Inject constructor(private val storeDao: StoreDao) {
     fun getIssuedConvertToString(category_id: Long, convert_to: Long): Flow<Int> {
         return storeDao.getIssuedConvertToString(category_id, convert_to)
     }
+ suspend fun isExistsInStockWarehouse(id:Long):Boolean{
+     return storeDao.isExistsInStockWarehouse(id)
+ }
+    fun isExistsInDailyMovements(id:Long):Boolean{
+        return storeDao.isExistsInDailyMovements(id)
+    }
+
 
 }

@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 
 import com.imagine.mohamedtaha.store.R;
@@ -22,14 +24,19 @@ import com.imagine.mohamedtaha.store.informationInrto.TapTarget;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetSequence;
 import com.imagine.mohamedtaha.store.informationInrto.TapTargetView;
 import com.imagine.mohamedtaha.store.manager.base.BaseActivity;
+import com.imagine.mohamedtaha.store.manager.base.HasToolbar;
 import com.imagine.mohamedtaha.store.ui.fragments.BottomNavigationFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.adds.AddsFragment;
 import com.imagine.mohamedtaha.store.ui.fragments.stockingwarehouse.StockingWarehouse;
 
-public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener {
-    private ActivityMainBinding binding;
+import org.jetbrains.annotations.NotNull;
+
+public class MainActivity extends BaseActivity implements SearchView.OnQueryTextListener, BackupData.OnBackupListener,HasToolbar {
     private BackupData backupData;
     Toolbar toolbar;
+    private ActionBar mSupportActionBar;
+    private ActivityMainBinding binding;
+
 
     private static boolean showInformation = false;
 
@@ -38,10 +45,8 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        //setSupportActionBar(binding.toolbar);
+        setToolbar(binding.toolbar);
 //        toolbar.inflateMenu(R.menu.menu_main);
         load(BottomNavigationFragment.class).add(true, "");
 
@@ -161,142 +166,143 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     }
 
-    public void showInformation() {
+//    public void showInformation() {
+//
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        toolbar.inflateMenu(R.menu.menu_main);
+//
+//               /* toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_back));
+//
+//        // We load a drawable and create a location to show a tap target here
+//        // We need the display to get the width and height at this point in time
+//        final Display display = getWindowManager().getDefaultDisplay();
+//        // Load our little droid guy
+//        final Drawable droid = ContextCompat.getDrawable(this, R.drawable.ic_action_back);
+//        // Tell our droid buddy where we want him to appear
+//        final Rect droidTarget = new Rect(0, 0, droid.getIntrinsicWidth() * 2, droid.getIntrinsicHeight() * 2);
+//        // Using deprecated methods makes you look way cool
+//        droidTarget.offset(display.getWidth() / 2, display.getHeight() / 2);
+//*/
+//        // final SpannableString sassyDesc = new SpannableString("هذا الزر يقوم بالرجوع للصفحة السابقة");
+//
+//        final TapTargetSequence sequence = new TapTargetSequence(this)
+//                .targets(
+//                        // This tap target will target the back button, we just need to pass its containing toolbar
+//                        //  TapTarget.forToolbarNavigationIcon(toolbar, "", sassyDesc).id(1).outerCircleColor(R.color.colorAccent),
+//                        // Likewise, this tap target will target the search button
+//                        TapTarget.forToolbarMenuItem(toolbar, R.id.action_search, "هذا زر يستخدم في البحث السريع ", "في صفحة الحركات اليومية وايضاً في صفحة ترصيد المستودع")
+//                                .dimColor(android.R.color.black)
+//                                .outerCircleColor(R.color.colorAccent)
+//                                .targetCircleColor(android.R.color.black)
+//                                .transparentTarget(true)
+//                                .textColor(android.R.color.black)
+//                                // .descriptionTextColor(R.color.backgroundCardView2)
+//                                .titleTextSize(18)
+//                                .id(2),
+//                        //Note Add Store and Permission and Category
+//                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_data, "هذا الزر يقوم بالإضافة", "وهو يقوم بإضافة الأصناف والمخازن والإذونات")
+//                                .dimColor(android.R.color.black)
+//                                .outerCircleColor(R.color.colorAccent)
+//                                .targetCircleColor(android.R.color.black)
+//                                .transparentTarget(true)
+//                                .textColor(android.R.color.black).id(3),
+//                        //Note Add StkoeWearhouse
+//                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_stocking_warehouse, "هذا الزر يقوم بترصيد المستودع", "وعن طريقه يتم إضافة جميع الأصناف والكميات الموجودة في المستودع داخل التطبيق")
+//                                .dimColor(android.R.color.black)
+//                                .outerCircleColor(R.color.colorAccent)
+//                                .targetCircleColor(android.R.color.black)
+//                                .transparentTarget(true)
+//                                .textColor(android.R.color.black).id(4),
+//
+//                        // You can also target the overflow button in your toolbar
+//                        TapTarget.forToolbarOverflow(toolbar, "  هذا الزر به تفاصيل منها", "      التقارير والتي عن طريقها يتم معرفة \n      الأصناف الموجودة داخل المستودع \n     والحركات التي تمت خلال فتره محددة \n     وغيرها من التقارير")
+//                                .dimColor(android.R.color.black)
+//                                .outerCircleColor(R.color.colorAccent)
+//                                .targetCircleColor(android.R.color.black)
+//                                .transparentTarget(true)
+//                                .textColor(android.R.color.black).id(5)
+//                        // This tap target will target our droid buddy at the given target rect
+//                      /*  TapTarget.forBounds(droidTarget, "Oh look!", "You can point to any part of the screen. You also can't cancel this one!")
+//                                .cancelable(false)
+//                                .icon(droid)
+//                                .dimColor(android.R.color.black)
+//                                .outerCircleColor(R.color.colorAccent)
+//                                .targetCircleColor(android.R.color.black)
+//                                .transparentTarget(true)
+//                                .textColor(android.R.color.black).id(5)*/
+//                        //.id(4)
+//                )
+//                .listener(new TapTargetSequence.Listener() {
+//                    // This listener will tell us when interesting(tm) events happen in regards
+//                    // to the sequence
+//                    @Override
+//                    public void onSequenceFinish() {
+//                        //   ((TextView) findViewById(R.id.educated)).setText("Congratulations! You're educated now!");
+//                    }
+//
+//                    @Override
+//                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+//                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+//                    }
+//
+//                    @Override
+//                    public void onSequenceCanceled(TapTarget lastTarget) {
+//                        final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+//                                //   .setTitle("انتهاء")
+//                                //   .setMessage("لقد قمت بإخفاء التعليمات")
+//                                .setPositiveButton("للأسف", null).show();
+//                        TapTargetView.showFor(dialog,
+//                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "إنتهاء", "لقد قمت بإلغاء التعليمات التي تستعرض شرح التطبيق " /*+ lastTarget.id()*/)
+//                                        .cancelable(false)
+//                                        .dimColor(android.R.color.black)
+//                                        .outerCircleColor(R.color.colorAccent)
+//                                        .targetCircleColor(android.R.color.black)
+//                                        .transparentTarget(true)
+//                                        .textColor(android.R.color.black)
+//                                        .tintTarget(false), new TapTargetView.Listener() {
+//                                    @Override
+//                                    public void onTargetClick(TapTargetView view) {
+//                                        super.onTargetClick(view);
+//                                        dialog.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
+//
+//        // You don't always need a sequence, and for that there's a single time tap target
+//        final SpannableString spannedDesc = new SpannableString("يقوم بإضافة البيانات في جميع الصفحات ");
+//        spannedDesc.setSpan(new UnderlineSpan(), spannedDesc.length() - "TapTargetView".length(), spannedDesc.length(), 0);
+//        TapTargetView.showFor(this, TapTarget.forView(findViewById(R.id.fabDaily), "هذا الزر ", spannedDesc)
+//                .cancelable(false)
+//                .drawShadow(true)
+//                .outerCircleColor(R.color.colorPrimaryDark)
+//                .titleTextDimen(R.dimen.title_text_size)
+//                .descriptionTextColor(android.R.color.white)
+//                .textColor(android.R.color.white)
+//                //.descriptionTextDimen(R.dimen.title_text_size)
+//                .tintTarget(false), new TapTargetView.Listener() {
+//            @Override
+//            public void onTargetClick(TapTargetView view) {
+//                super.onTargetClick(view);
+//                // .. which evidently starts the sequence we defined earlier
+//                sequence.start();
+//            }
+//
+//            @Override
+//            public void onOuterCircleClick(TapTargetView view) {
+//                super.onOuterCircleClick(view);
+//                //  Toast.makeText(view.getContext(), "You clicked the outer circle!", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onTargetDismissed(TapTargetView view, boolean userInitiated) {
+//                Log.d("TapTargetViewSample", "You dismissed me :(");
+//            }
+//        });
+//    }
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        toolbar.inflateMenu(R.menu.menu_main);
-
-               /* toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_back));
-
-        // We load a drawable and create a location to show a tap target here
-        // We need the display to get the width and height at this point in time
-        final Display display = getWindowManager().getDefaultDisplay();
-        // Load our little droid guy
-        final Drawable droid = ContextCompat.getDrawable(this, R.drawable.ic_action_back);
-        // Tell our droid buddy where we want him to appear
-        final Rect droidTarget = new Rect(0, 0, droid.getIntrinsicWidth() * 2, droid.getIntrinsicHeight() * 2);
-        // Using deprecated methods makes you look way cool
-        droidTarget.offset(display.getWidth() / 2, display.getHeight() / 2);
-*/
-        // final SpannableString sassyDesc = new SpannableString("هذا الزر يقوم بالرجوع للصفحة السابقة");
-
-        final TapTargetSequence sequence = new TapTargetSequence(this)
-                .targets(
-                        // This tap target will target the back button, we just need to pass its containing toolbar
-                        //  TapTarget.forToolbarNavigationIcon(toolbar, "", sassyDesc).id(1).outerCircleColor(R.color.colorAccent),
-                        // Likewise, this tap target will target the search button
-                        TapTarget.forToolbarMenuItem(toolbar, R.id.action_search, "هذا زر يستخدم في البحث السريع ", "في صفحة الحركات اليومية وايضاً في صفحة ترصيد المستودع")
-                                .dimColor(android.R.color.black)
-                                .outerCircleColor(R.color.colorAccent)
-                                .targetCircleColor(android.R.color.black)
-                                .transparentTarget(true)
-                                .textColor(android.R.color.black)
-                                // .descriptionTextColor(R.color.backgroundCardView2)
-                                .titleTextSize(18)
-                                .id(2),
-                        //Note Add Store and Permission and Category
-                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_data, "هذا الزر يقوم بالإضافة", "وهو يقوم بإضافة الأصناف والمخازن والإذونات")
-                                .dimColor(android.R.color.black)
-                                .outerCircleColor(R.color.colorAccent)
-                                .targetCircleColor(android.R.color.black)
-                                .transparentTarget(true)
-                                .textColor(android.R.color.black).id(3),
-                        //Note Add StkoeWearhouse
-                        TapTarget.forToolbarMenuItem(toolbar, R.id.add_stocking_warehouse, "هذا الزر يقوم بترصيد المستودع", "وعن طريقه يتم إضافة جميع الأصناف والكميات الموجودة في المستودع داخل التطبيق")
-                                .dimColor(android.R.color.black)
-                                .outerCircleColor(R.color.colorAccent)
-                                .targetCircleColor(android.R.color.black)
-                                .transparentTarget(true)
-                                .textColor(android.R.color.black).id(4),
-
-                        // You can also target the overflow button in your toolbar
-                        TapTarget.forToolbarOverflow(toolbar, "  هذا الزر به تفاصيل منها", "      التقارير والتي عن طريقها يتم معرفة \n      الأصناف الموجودة داخل المستودع \n     والحركات التي تمت خلال فتره محددة \n     وغيرها من التقارير")
-                                .dimColor(android.R.color.black)
-                                .outerCircleColor(R.color.colorAccent)
-                                .targetCircleColor(android.R.color.black)
-                                .transparentTarget(true)
-                                .textColor(android.R.color.black).id(5)
-                        // This tap target will target our droid buddy at the given target rect
-                      /*  TapTarget.forBounds(droidTarget, "Oh look!", "You can point to any part of the screen. You also can't cancel this one!")
-                                .cancelable(false)
-                                .icon(droid)
-                                .dimColor(android.R.color.black)
-                                .outerCircleColor(R.color.colorAccent)
-                                .targetCircleColor(android.R.color.black)
-                                .transparentTarget(true)
-                                .textColor(android.R.color.black).id(5)*/
-                        //.id(4)
-                )
-                .listener(new TapTargetSequence.Listener() {
-                    // This listener will tell us when interesting(tm) events happen in regards
-                    // to the sequence
-                    @Override
-                    public void onSequenceFinish() {
-                        //   ((TextView) findViewById(R.id.educated)).setText("Congratulations! You're educated now!");
-                    }
-
-                    @Override
-                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
-                    }
-
-                    @Override
-                    public void onSequenceCanceled(TapTarget lastTarget) {
-                        final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                                //   .setTitle("انتهاء")
-                                //   .setMessage("لقد قمت بإخفاء التعليمات")
-                                .setPositiveButton("للأسف", null).show();
-                        TapTargetView.showFor(dialog,
-                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "إنتهاء", "لقد قمت بإلغاء التعليمات التي تستعرض شرح التطبيق " /*+ lastTarget.id()*/)
-                                        .cancelable(false)
-                                        .dimColor(android.R.color.black)
-                                        .outerCircleColor(R.color.colorAccent)
-                                        .targetCircleColor(android.R.color.black)
-                                        .transparentTarget(true)
-                                        .textColor(android.R.color.black)
-                                        .tintTarget(false), new TapTargetView.Listener() {
-                                    @Override
-                                    public void onTargetClick(TapTargetView view) {
-                                        super.onTargetClick(view);
-                                        dialog.dismiss();
-                                    }
-                                });
-                    }
-                });
-
-        // You don't always need a sequence, and for that there's a single time tap target
-        final SpannableString spannedDesc = new SpannableString("يقوم بإضافة البيانات في جميع الصفحات ");
-        spannedDesc.setSpan(new UnderlineSpan(), spannedDesc.length() - "TapTargetView".length(), spannedDesc.length(), 0);
-        TapTargetView.showFor(this, TapTarget.forView(findViewById(R.id.fabDaily), "هذا الزر ", spannedDesc)
-                .cancelable(false)
-                .drawShadow(true)
-                .outerCircleColor(R.color.colorPrimaryDark)
-                .titleTextDimen(R.dimen.title_text_size)
-                .descriptionTextColor(android.R.color.white)
-                .textColor(android.R.color.white)
-                //.descriptionTextDimen(R.dimen.title_text_size)
-                .tintTarget(false), new TapTargetView.Listener() {
-            @Override
-            public void onTargetClick(TapTargetView view) {
-                super.onTargetClick(view);
-                // .. which evidently starts the sequence we defined earlier
-                sequence.start();
-            }
-
-            @Override
-            public void onOuterCircleClick(TapTargetView view) {
-                super.onOuterCircleClick(view);
-                //  Toast.makeText(view.getContext(), "You clicked the outer circle!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onTargetDismissed(TapTargetView view, boolean userInitiated) {
-                Log.d("TapTargetViewSample", "You dismissed me :(");
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -307,51 +313,52 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
 
-
+        Log.d("iddd", "NNNN");
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            return true;
-        }
-        if (id == R.id.add_data) {
-            Intent intent = new Intent(MainActivity.this, AddsFragment.class);
-            startActivity(intent);
-
-        }
-        if (id == R.id.add_stocking_warehouse) {
-            Intent intent = new Intent(MainActivity.this, StockingWarehouse.class);
-            startActivity(intent);
-
-        }
-        if (id == R.id.reportes) {
-            Intent intent = new Intent(MainActivity.this, ReportesActivity.class);
-            startActivity(intent);
-          /*  ReportStokeFragment fragment = new ReportStokeFragment();
-            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contaner,fragment);
-            transaction.commit();*/
-        }
-        if (id == R.id.backup) {
-            backupData.exportToSD();
-            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
-        }
-        if (id == R.id.import_backup) {
-            backupData.importFromSD();
-            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//
+//            return true;
+//        }
+////        if (id == R.id.add_data) {
+////            Intent intent = new Intent(MainActivity.this, AddsFragment.class);
+////            startActivity(intent);
+////
+////        }
+////        if (id == R.id.add_stocking_warehouse) {
+////            Intent intent = new Intent(MainActivity.this, StockingWarehouse.class);
+////            startActivity(intent);
+////
+////        }
+//        if (id == R.id.reportes) {
+//            Intent intent = new Intent(MainActivity.this, ReportesActivity.class);
+//            startActivity(intent);
+//          /*  ReportStokeFragment fragment = new ReportStokeFragment();
+//            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.contaner,fragment);
+//            transaction.commit();*/
+//        }
+//        if (id == R.id.backup) {
+//            backupData.exportToSD();
+//            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
+//        }
+//        if (id == R.id.import_backup) {
+//            backupData.importFromSD();
+//            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -399,6 +406,73 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
     @Override
     public int findFragmentPlaceHolder() {
         return R.id.frameLayout;
+    }
+
+    @Override
+    public void showToolbar(boolean b) {
+//        mSupportActionBar.setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar() != null) if (b){
+            mSupportActionBar.show();
+            binding.toolbar.inflateMenu(R.menu.menu_main);
+            Log.d("iddd", "toolbar");
+
+        }
+        else mSupportActionBar.hide();
+
+    }
+
+    @Override
+    public void setToolbarTitle(@NotNull CharSequence title) {
+        mSupportActionBar.setDisplayShowTitleEnabled(false);
+
+
+    }
+
+    @Override
+    public void setToolbarTitle(int title) {
+
+    }
+
+    @Override
+    public void showBackButton(boolean b) {
+        if (b) {
+            mSupportActionBar.setDisplayHomeAsUpEnabled(b);
+            binding.toolbar.setNavigationIcon(ContextCompat.getDrawable(this, R.drawable.ic_back_24));
+            binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
+            {
+            }
+            ;
+
+        } else {
+            binding.toolbar.setNavigationIcon(null);
+        }
+
+    }
+
+    @Override
+    public void showHomeLogo(boolean b) {
+
+    }
+
+    @Override
+    public void showHomeTitle() {
+
+    }
+
+    @Override
+    public void setToolbarColor(int color) {
+
+    }
+
+    @Override
+    public void setToolbarMenuIcon() {
+
+    }
+
+    @Override
+    public void setToolbar(@NotNull Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        mSupportActionBar = getSupportActionBar();
     }
 
 

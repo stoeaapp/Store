@@ -142,4 +142,11 @@ interface StoreDao {
 
     @Query("SELECT SUM(issued) FROM daily_movement WHERE category_id =:category_id ANd convert_to =:convert_to ")
     fun getIssuedConvertToString(category_id: Long,convert_to: Long): Flow<Int>
+
+    //___________________________________Check Is category name is there in stock Warehouse table or not ____________________________
+    @Query("SELECT   EXISTS (SELECT * FROM stocking_ware_house WHERE id =:id)")
+    suspend fun isExistsInStockWarehouse(id:Long):Boolean
+    @Query("SELECT EXISTS(SELECT * FROM daily_movement WHERE id =:id)")
+    fun isExistsInDailyMovements(id: Long):Boolean
+
 }

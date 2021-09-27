@@ -278,16 +278,16 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
 
             return true;
         }
-        if (id == R.id.add_data) {
-            Intent intent = new Intent(getActivity(), AddsFragment.class);
-            startActivity(intent);
-
-        }
-        if (id == R.id.add_stocking_warehouse) {
-            Intent intent = new Intent(getActivity(), StockingWarehouse.class);
-            startActivity(intent);
-
-        }
+//        if (id == R.id.add_data) {
+//            Intent intent = new Intent(getActivity(), AddsFragment.class);
+//            startActivity(intent);
+//
+//        }
+//        if (id == R.id.add_stocking_warehouse) {
+//            Intent intent = new Intent(getActivity(), StockingWarehouse.class);
+//            startActivity(intent);
+//
+//        }
         if (id == R.id.reportes) {
             Intent intent = new Intent(getActivity(), ReportesActivity.class);
             startActivity(intent);

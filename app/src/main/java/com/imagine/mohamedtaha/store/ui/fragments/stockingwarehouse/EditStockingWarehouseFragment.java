@@ -25,6 +25,12 @@ import com.imagine.mohamedtaha.store.room.data.StockingHouse;
 import com.imagine.mohamedtaha.store.room.data.Stores;
 import com.imagine.mohamedtaha.store.util.DialogUtils;
 
+import org.jetbrains.annotations.NotNull;
+
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlinx.coroutines.Job;
+
 import static com.imagine.mohamedtaha.store.Constant.ADD_STOKE_WEAR_HOUSES;
 import static com.imagine.mohamedtaha.store.Constant.CODE_NAME_CATEGORY;
 import static com.imagine.mohamedtaha.store.Constant.CODE_TYPE_STORE;
@@ -70,10 +76,12 @@ public class EditStockingWarehouseFragment extends BottomSheetDialogFragment {
         }
         binding.SPCodeCategoryStock.setOnItemClickListener((parent, view, position, id) -> {
             Categories categoryItem = arrayAdapterCategoryName.getItem(position);
+            if (categoryItem.getId() != null)
             idSpinnerCategory = categoryItem.getId();
         });
         binding.SPCodeStoreStock.setOnItemClickListener((parent, view, position, id) -> {
             Stores stores = arrayAdapterTypeStore.getItem(position);
+            if (stores.getId() != null)
             idSpinnerStore = stores.getId();
         });
         loadSpinnerDataForCategory();
@@ -125,8 +133,23 @@ public class EditStockingWarehouseFragment extends BottomSheetDialogFragment {
             StockingHouse itemUpdateStoke = new StockingHouse(idSpinnerCategory, idSpinnerStore, firstBalance, "", noteStoke);
             itemUpdateStoke.setId(intentStokeWearehouse.getLong(ID_STOCK_WAREHOUSE));
             itemUpdateStoke.setUpdatedAt(getDate());
-            //    boolean isExistConvertDailyMovements = dbHelperStokeWearehouse.isFirstBalanceUsedStokewearhouse(intentStokeWearehouse.getInt(ID_STOKE));
-//            if (isExistConvertDailyMovements ==true){
+
+//               viewModel.isExistsInStockWarehouse(intentStokeWearehouse.getInt(ID_STOCK_WAREHOUSE), new Continuation<Boolean>() {
+//
+//                   @NotNull
+//                    @Override
+//                    public CoroutineContext getContext() {
+//                        return getContext();
+//                    }
+//
+//                    @Override
+//                    public void resumeWith(@NotNull Object o) {
+//
+//                    }
+//                });
+
+//           Log.d("iddd", " isExist" + isExistConvertDailyMovements + "isExist");
+//            if (isExistConvertDailyMovements){
 //                Toast.makeText(getContext(), getString(R.string.this_category_not_updated), Toast.LENGTH_SHORT).show();
 //                return;
 //            }

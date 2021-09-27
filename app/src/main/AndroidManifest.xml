@@ -16,8 +16,7 @@
         <activity android:name=".ui.activity.HomeActivity"/>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/title_daily_movements"
-            android:theme="@style/NoActionBar" />
+            android:label="@string/title_daily_movements" />
         <activity
             android:name=".ui.activity.ReportStokeFragment"
             android:label="@string/title_report_first_balance"
@@ -51,8 +50,7 @@
             android:name=".ui.activity.TableDaliyMovmentes"
             android:label="@string/title_report_daily_movements" />
         <activity
-            android:name=".ui.activity.SplashActivity"
-            android:theme="@style/NoActionBar">
+            android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
