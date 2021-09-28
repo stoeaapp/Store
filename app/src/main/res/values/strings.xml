@@ -10,7 +10,7 @@
     <string name="action_edit" translatable="false">Edit</string>
 
     <string name="add_data" translatable="false">إضافة البيانات</string>
-    <string name="add_stocking_warehouse" translatable="false">ترصيد المستودع</string>
+    <string name="add_stocking_warehouse">Stack Warehouse</string>
     <string name="add_reportes" translatable="false"> تقارير الرصيد الأول  </string>
     <string name="reportes" translatable="false"> التقارير  </string>
     <string name="backup" translatable="false"> نسخةاحتياطية  </string>

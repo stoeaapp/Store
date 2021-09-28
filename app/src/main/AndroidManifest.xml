@@ -15,8 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.HomeActivity"/>
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:label="@string/title_daily_movements" />
+            android:name=".ui.activity.MainActivity" />
         <activity
             android:name=".ui.activity.ReportStokeFragment"
             android:label="@string/title_report_first_balance"

@@ -153,10 +153,10 @@ public class StockingWarehouse extends Fragment implements SearchView.OnQueryTex
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_settings:
-                        Toast.makeText(requireActivity(), "Edit", Toast.LENGTH_SHORT).show();
-                }
+//                switch (item.getItemId()) {
+//                    case R.id.action_settings:
+//                        Toast.makeText(requireActivity(), "Edit", Toast.LENGTH_SHORT).show();
+//                }
                 return true;
             }
         });

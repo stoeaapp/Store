@@ -272,38 +272,38 @@ public class MainFragment extends Fragment implements LoaderManager.LoaderCallba
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            return true;
-        }
-//        if (id == R.id.add_data) {
-//            Intent intent = new Intent(getActivity(), AddsFragment.class);
-//            startActivity(intent);
 //
-//        }
-//        if (id == R.id.add_stocking_warehouse) {
-//            Intent intent = new Intent(getActivity(), StockingWarehouse.class);
-//            startActivity(intent);
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
 //
+//            return true;
 //        }
-        if (id == R.id.reportes) {
-            Intent intent = new Intent(getActivity(), ReportesActivity.class);
-            startActivity(intent);
-          /*  ReportStokeFragment fragment = new ReportStokeFragment();
-            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contaner,fragment);
-            transaction.commit();*/
-        }
-        if (id == R.id.backup) {
-            backupData.exportToSD();
-            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
-        }
-        if (id == R.id.import_backup) {
-            backupData.importFromSD();
-            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
-        }
+////        if (id == R.id.add_data) {
+////            Intent intent = new Intent(getActivity(), AddsFragment.class);
+////            startActivity(intent);
+////
+////        }
+////        if (id == R.id.add_stocking_warehouse) {
+////            Intent intent = new Intent(getActivity(), StockingWarehouse.class);
+////            startActivity(intent);
+////
+////        }
+//        if (id == R.id.reportes) {
+//            Intent intent = new Intent(getActivity(), ReportesActivity.class);
+//            startActivity(intent);
+//          /*  ReportStokeFragment fragment = new ReportStokeFragment();
+//            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.contaner,fragment);
+//            transaction.commit();*/
+//        }
+//        if (id == R.id.backup) {
+//            backupData.exportToSD();
+//            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
+//        }
+//        if (id == R.id.import_backup) {
+//            backupData.importFromSD();
+//            // Toast.makeText(MainActivity.this, "Exoprotdata", Toast.LENGTH_SHORT).show();
+//        }
 
         return super.onOptionsItemSelected(item);
     }

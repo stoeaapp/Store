@@ -3,18 +3,27 @@ package com.imagine.mohamedtaha.store.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.BlendModeColorFilterCompat;
+import androidx.core.graphics.BlendModeCompat;
 import androidx.core.view.MenuItemCompat;
 
 import com.imagine.mohamedtaha.store.R;
@@ -308,12 +317,18 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
 
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        Drawable dr = searchItem.getIcon();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+            dr.setColorFilter(new BlendModeColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), BlendMode.SRC_ATOP));
+        }else{
+            dr.setColorFilter(ContextCompat.getColor(this,R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
+
+        }
         searchView.setOnQueryTextListener(this);
 
-        Log.d("iddd", "NNNN");
         return true;
     }
 //
@@ -412,8 +427,12 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
     public void showToolbar(boolean b) {
 //        mSupportActionBar.setDisplayShowTitleEnabled(false);
         if (getSupportActionBar() != null) if (b){
+
+//            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_action_back);
+//            upArrow.setColorFilter(new BlendModeColorFilter(ContextCompat.getColor(this,R.color.colorPrimary), BlendMode.SRC_ATOP));
+//            getSupportActionBar().setHomeAsUpIndicator(upArrow);
             mSupportActionBar.show();
-            binding.toolbar.inflateMenu(R.menu.menu_main);
+           // binding.toolbar.inflateMenu(R.menu.menu_main);
             Log.d("iddd", "toolbar");
 
         }
@@ -471,7 +490,11 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     @Override
     public void setToolbar(@NotNull Toolbar toolbar) {
+//        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+
+        //  toolbar.getOverflowIcon().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
         setSupportActionBar(toolbar);
+
         mSupportActionBar = getSupportActionBar();
     }
 
